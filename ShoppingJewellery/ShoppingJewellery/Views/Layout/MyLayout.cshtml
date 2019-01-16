@@ -8,6 +8,8 @@
     <title>@Page.Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
     <link rel="stylesheet" media="all" href=@Url.Content("/Content/css/style.css")>
+    <script src="~/Content/bootstrap-4.0.0-dist/js/bootstrap.min.js"></script>
+    <link href="~/Content/bootstrap-4.0.0-dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="~/Content/bootstrap-4.0.0-dist/css/bootstrap-grid.css" rel="stylesheet" />
     @RenderSection("head", required: false)
     <!--[if lt IE 9]>
@@ -17,16 +19,30 @@
 <body>
     <header id="header">
         <div class="container">
-            <a href="index.html" id="logo" title="Diana’s jewelry">Diana’s jewelry</a>
+            <a href="index.html" id="logo" title="Diana’s jewelry">Yash Gems & Jewelleries</a>
             <div class="right-links">
                 <ul>
-                    <li><a href="cart.html"><span class="ico-products"></span>3 products, $4 500.00</a></li>
-                    <li><a href="#"><span class="ico-account"></span>Account</a></li>
-                    <li><a href="#"><span class="ico-signout"></span>Sign out</a></li>
+                    <li><a href="cart.html"></li>
+                    @{ if (Session["user"] == null)
+                        {
+                            <li>
+                                @Html.ActionLink("Login", "Login", "User")
+                            </li>
+                            <li>
+                                @Html.ActionLink("Register", "Register", "User")
+                            </li>
+                        }
+                        else
+                        {
+                            <li>
+                                @Html.ActionLink("Account", "Details", "User")
+                            </li>
+                            <li>@Html.ActionLink("Log out", "Login", "User")</li>
+                        }
+                    }
                 </ul>
             </div>
         </div>
-        <!-- / container -->
     </header>
     <!-- / header -->
     <nav id="menu">

@@ -5,6 +5,14 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="JewelleryShopping_dbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AdminLoginMst">
+          <Key>
+            <PropertyRef Name="Username" />
+          </Key>
+          <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="role" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityType Name="DisplayCommonPro">
           <Key>
             <PropertyRef Name="Name_Pro" />
@@ -12,6 +20,19 @@
           <Property Name="Name_Pro" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Img" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Prod_ID" Type="nchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserRegMst">
+          <Key>
+            <PropertyRef Name="userID" />
+          </Key>
+          <Property Name="userID" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="userFname" Type="text" Nullable="false" />
+          <Property Name="userLname" Type="text" Nullable="false" />
+          <Property Name="mobNo" Type="text" Nullable="false" />
+          <Property Name="emailID" Type="text" Nullable="false" />
+          <Property Name="dob" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="cdate" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'JewelleryShopping_db.dbo.GoldView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -135,7 +156,9 @@ warning 6002: The table/view 'JewelleryShopping_db.dbo.ViewFullItem' does not ha
           <Property Name="total_brand" Type="numeric" Precision="38" Scale="2" />
         </EntityType>
         <EntityContainer Name="JewelleryShopping_dbModelStoreContainer">
+          <EntitySet Name="AdminLoginMst" EntityType="Self.AdminLoginMst" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DisplayCommonPro" EntityType="Self.DisplayCommonPro" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserRegMst" EntityType="Self.UserRegMst" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GoldView" EntityType="Self.GoldView" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [GoldView].[No] AS [No], 
@@ -329,6 +352,8 @@ warning 6002: The table/view 'JewelleryShopping_db.dbo.ViewFullItem' does not ha
           <EntitySet Name="ViewFullItems" EntityType="Self.ViewFullItem" />
           <EntitySet Name="DisplayCommonProes" EntityType="JewelleryShopping_dbModel.DisplayCommonPro" />
           <EntitySet Name="ViewDisplayItems" EntityType="JewelleryShopping_dbModel.ViewDisplayItem" />
+          <EntitySet Name="AdminLoginMsts" EntityType="JewelleryShopping_dbModel.AdminLoginMst" />
+          <EntitySet Name="UserRegMsts" EntityType="JewelleryShopping_dbModel.UserRegMst" />
         </EntityContainer>
         <EntityType Name="DisplayCommonPro">
           <Key>
@@ -355,6 +380,27 @@ warning 6002: The table/view 'JewelleryShopping_db.dbo.ViewFullItem' does not ha
           <Property Name="StoneQlty_ID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="GoldType_ID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="total_brand" Type="Decimal" Precision="38" Scale="2" />
+        </EntityType>
+        <EntityType Name="AdminLoginMst">
+          <Key>
+            <PropertyRef Name="Username" />
+          </Key>
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="role" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserRegMst">
+          <Key>
+            <PropertyRef Name="userID" />
+          </Key>
+          <Property Name="userID" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="userFname" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="userLname" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="mobNo" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="emailID" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="dob" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="cdate" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -460,6 +506,29 @@ warning 6002: The table/view 'JewelleryShopping_db.dbo.ViewFullItem' does not ha
                 <ScalarProperty Name="image" ColumnName="image" />
                 <ScalarProperty Name="Img" ColumnName="Img" />
                 <ScalarProperty Name="Style_Code" ColumnName="Style_Code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AdminLoginMsts">
+            <EntityTypeMapping TypeName="JewelleryShopping_dbModel.AdminLoginMst">
+              <MappingFragment StoreEntitySet="AdminLoginMst">
+                <ScalarProperty Name="role" ColumnName="role" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserRegMsts">
+            <EntityTypeMapping TypeName="JewelleryShopping_dbModel.UserRegMst">
+              <MappingFragment StoreEntitySet="UserRegMst">
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="cdate" ColumnName="cdate" />
+                <ScalarProperty Name="dob" ColumnName="dob" />
+                <ScalarProperty Name="emailID" ColumnName="emailID" />
+                <ScalarProperty Name="mobNo" ColumnName="mobNo" />
+                <ScalarProperty Name="userLname" ColumnName="userLname" />
+                <ScalarProperty Name="userFname" ColumnName="userFname" />
+                <ScalarProperty Name="userID" ColumnName="userID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
