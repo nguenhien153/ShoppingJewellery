@@ -26,7 +26,8 @@ namespace ShoppingJewellery.Models
         }
     
         public virtual DbSet<GoldView> GoldViews { get; set; }
-        public virtual DbSet<ViewDisplayItem> ViewDisplayItems { get; set; }
         public virtual DbSet<ViewFullItem> ViewFullItems { get; set; }
+        public virtual DbSet<DisplayCommonPro> DisplayCommonProes { get; set; }
+        public virtual DbSet<ViewDisplayItem> ViewDisplayItems { get; set; }
     }
 }

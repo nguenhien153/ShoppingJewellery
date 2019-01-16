@@ -1,0 +1,38 @@
+﻿@model IEnumerable<ShoppingJewellery.Models.ViewDisplayItem>
+@{
+    ViewBag.Title = "ProductList";
+    Layout = "~/Views/Layout/MyLayout.cshtml";
+    Page.Title = "Jewellery";
+}
+
+
+<div id="breadcrumbs">
+    <div class="container">
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li>Product results</li>
+        </ul>
+    </div>
+    <!-- / container -->
+</div>
+
+<div class="row" style="margin:10px">
+    
+   <div class="col-2" style="background-color:#808080">
+       
+   </div>
+    <div class="col-10" >
+        <div class="row">
+            
+           @foreach (var item in Model)
+            { 
+                <div class="col-3">
+                    <image src="~/Content/images/Product_Image/ImageDisplayToProductList/@Html.DisplayFor(itemmodel=>item.Img)" style="width:200px;"></image>
+                    <p><strong>@Html.DisplayFor(itemmodel => item.Style_Code)</strong></p>
+                    <p>Rs: @Html.DisplayFor(itemodel => item.total_brand) ₹</p>
+                </div>
+            }
+
+        </div>
+    </div>
+</div>

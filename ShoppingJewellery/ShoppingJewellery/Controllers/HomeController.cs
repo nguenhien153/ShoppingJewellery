@@ -8,11 +8,11 @@ namespace ShoppingJewellery.Controllers
 {
     public class HomeController : Controller
     {
-        JewelleryShopping_dbEntities db = new JewelleryShopping_dbEntities();
+        eProjectDAO dao = new eProjectDAO();
         // GET: Home
         public ActionResult Index()
         {
-            return View(db.ViewDisplayItems);
+            return View(dao.GetProCommon());
         }
     }
 }

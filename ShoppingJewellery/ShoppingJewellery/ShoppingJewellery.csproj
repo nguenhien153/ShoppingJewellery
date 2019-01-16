@@ -96,6 +96,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap-4.0.0-dist\css\bootstrap-grid.css" />
+    <Content Include="Content\bootstrap-4.0.0-dist\css\bootstrap-grid.min.css" />
+    <Content Include="Content\bootstrap-4.0.0-dist\css\bootstrap-reboot.css" />
+    <Content Include="Content\bootstrap-4.0.0-dist\css\bootstrap-reboot.min.css" />
+    <Content Include="Content\bootstrap-4.0.0-dist\css\bootstrap.css" />
+    <Content Include="Content\bootstrap-4.0.0-dist\css\bootstrap.min.css" />
+    <Content Include="Content\bootstrap-4.0.0-dist\js\bootstrap.bundle.js" />
+    <Content Include="Content\bootstrap-4.0.0-dist\js\bootstrap.bundle.min.js" />
+    <Content Include="Content\bootstrap-4.0.0-dist\js\bootstrap.js" />
+    <Content Include="Content\bootstrap-4.0.0-dist\js\bootstrap.min.js" />
     <Content Include="Content\css\style.css" />
     <Content Include="Content\fonts\Novecentowide-Bold.svg" />
     <Content Include="Content\fonts\Novecentowide-Book.svg" />
@@ -106,21 +116,9 @@
     <Content Include="Content\images\0.jpg" />
     <Content Include="Content\images\01.jpg" />
     <Content Include="Content\images\02.jpg" />
-    <Content Include="Content\images\1.jpg" />
-    <Content Include="Content\images\11.jpg" />
-    <Content Include="Content\images\12.jpg" />
-    <Content Include="Content\images\13.jpg" />
-    <Content Include="Content\images\14.jpg" />
-    <Content Include="Content\images\15.jpg" />
-    <Content Include="Content\images\16.jpg" />
-    <Content Include="Content\images\17.jpg" />
     <Content Include="Content\images\2.jpg" />
     <Content Include="Content\images\3.jpg" />
     <Content Include="Content\images\4.jpg" />
-    <Content Include="Content\images\5.jpg" />
-    <Content Include="Content\images\6.jpg" />
-    <Content Include="Content\images\61.jpg" />
-    <Content Include="Content\images\62.jpg" />
     <Content Include="Content\images\bg_footer%402x.png" />
     <Content Include="Content\images\bg_footer.png" />
     <Content Include="Content\images\btn_mobile_menu.png" />
@@ -144,11 +142,26 @@
     <Content Include="Content\images\ico_plus.png" />
     <Content Include="Content\images\logo%402x.png" />
     <Content Include="Content\images\logo.png" />
+    <Content Include="Content\images\ProductType\BanglesBracelets.jpg" />
+    <Content Include="Content\images\ProductType\Butterfly.jpg" />
+    <Content Include="Content\images\ProductType\Earring.jpg" />
+    <Content Include="Content\images\ProductType\Goldlace.jpg" />
+    <Content Include="Content\images\ProductType\Mangalsuthras.jpg" />
+    <Content Include="Content\images\ProductType\Pendants.jpg" />
+    <Content Include="Content\images\ProductType\RINGS.jpg" />
+    <Content Include="Content\images\Product_Image\ImageDisplayToProductList\EllaClassicSolitaireRing.jpg" />
+    <Content Include="Content\images\Product_Image\ImageDisplayToProductList\HaloRoundSolitaireRing.jpg" />
+    <Content Include="Content\images\Product_Image\ImageDisplayToProductList\LuminousSolitaireBridalRingSet.jpg" />
+    <Content Include="Content\images\Product_Image\ImageDisplayToProductList\LustreSolitaireRing.jpg" />
+    <Content Include="Content\images\Product_Image\ImageDisplayToProductList\MarvelSolitaireRing.jpg" />
+    <Content Include="Content\images\Product_Image\ImageDisplayToProductList\PromiseSolitaireRing.jpg" />
+    <Content Include="Content\images\Product_Image\ImageDisplayToProductList\TwinkleBridalRingSet.jpg" />
+    <Content Include="Content\images\Product_Image\ImageDisplayToProductList\VibranceBridalRingSet.jpg" />
     <Content Include="Content\index.html" />
     <Content Include="Content\js\jquery-1.11.1.min.js" />
     <Content Include="Content\js\main.js" />
     <Content Include="Content\js\plugins.js" />
-    <Content Include="Content\product.html" />
+    <Content Include="Content\products.html" />
     <Content Include="Global.asax" />
     <Content Include="Models\JewelleryShopping.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -160,6 +173,24 @@
       <DependentUpon>JewelleryShopping.edmx</DependentUpon>
       <LastGenOutput>JewelleryShopping.cs</LastGenOutput>
     </Content>
+    <Content Include="Content\bootstrap-4.0.0-dist\css\bootstrap-grid.css.map" />
+    <Content Include="Content\bootstrap-4.0.0-dist\css\bootstrap-grid.min.css.map" />
+    <Content Include="Content\bootstrap-4.0.0-dist\css\bootstrap-reboot.css.map" />
+    <Content Include="Content\bootstrap-4.0.0-dist\css\bootstrap-reboot.min.css.map" />
+    <Content Include="Content\bootstrap-4.0.0-dist\css\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-4.0.0-dist\css\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap-4.0.0-dist\js\bootstrap.bundle.js.map" />
+    <Content Include="Content\bootstrap-4.0.0-dist\js\bootstrap.bundle.min.js.map" />
+    <Content Include="Content\bootstrap-4.0.0-dist\js\bootstrap.js.map" />
+    <Content Include="Content\bootstrap-4.0.0-dist\js\bootstrap.min.js.map" />
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -169,6 +200,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\DisplayCommonPro.cs">
+      <DependentUpon>JewelleryShopping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\eProjectDAO.cs" />
     <Compile Include="Models\GoldView.cs">
       <DependentUpon>JewelleryShopping.tt</DependentUpon>
     </Compile>
@@ -224,9 +259,12 @@
     </Content>
     <None Include="packages.config" />
     <Content Include="Views\Layout\MyLayout.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Layout\LayoutProduct.cshtml" />
     <Content Include="Views\Product\Product.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Views\Layout\_Layout1.cshtml" />
+    <Content Include="Views\Product\ProductList.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

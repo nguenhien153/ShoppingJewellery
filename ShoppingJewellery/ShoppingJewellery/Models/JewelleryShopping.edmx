@@ -4,7 +4,15 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="JewelleryShopping_dbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="JewelleryShopping_dbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="DisplayCommonPro">
+          <Key>
+            <PropertyRef Name="Name_Pro" />
+          </Key>
+          <Property Name="Name_Pro" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Img" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Prod_ID" Type="nchar" MaxLength="10" Nullable="false" />
+        </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'JewelleryShopping_db.dbo.GoldView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="GoldView">
@@ -35,10 +43,19 @@ warning 6002: The table/view 'JewelleryShopping_db.dbo.ViewDisplayItem' does not
         <EntityType Name="ViewDisplayItem">
           <Key>
             <PropertyRef Name="Style_Code" />
+            <PropertyRef Name="Img" />
+            <PropertyRef Name="Tot_Gross_Wt" />
           </Key>
           <Property Name="Style_Code" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="img" Type="varchar" MaxLength="50" />
+          <Property Name="Img" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="image" Type="varchar" MaxLength="50" />
+          <Property Name="Prod_Type" Type="varchar" MaxLength="50" />
+          <Property Name="Cat_Name" Type="varchar" MaxLength="50" />
+          <Property Name="Jewellery_Type" Type="varchar" MaxLength="50" />
+          <Property Name="Tot_Gross_Wt" Type="numeric" Precision="10" Scale="3" Nullable="false" />
+          <Property Name="DimQlty_ID" Type="nchar" MaxLength="10" />
+          <Property Name="StoneQlty_ID" Type="nchar" MaxLength="10" />
+          <Property Name="GoldType_ID" Type="nchar" MaxLength="10" />
           <Property Name="total_brand" Type="numeric" Precision="38" Scale="2" />
         </EntityType>
         <!--Errors Found During Generation:
@@ -46,6 +63,7 @@ warning 6002: The table/view 'JewelleryShopping_db.dbo.ViewFullItem' does not ha
         <EntityType Name="ViewFullItem">
           <Key>
             <PropertyRef Name="Style_Code" />
+            <PropertyRef Name="Img" />
             <PropertyRef Name="Pairs" />
             <PropertyRef Name="Cat_ID" />
             <PropertyRef Name="Prod_ID" />
@@ -64,7 +82,7 @@ warning 6002: The table/view 'JewelleryShopping_db.dbo.ViewFullItem' does not ha
             <PropertyRef Name="MRP" />
           </Key>
           <Property Name="Style_Code" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="image" Type="varchar" MaxLength="50" />
+          <Property Name="Img" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Pairs" Type="numeric" Precision="3" Scale="0" Nullable="false" />
           <Property Name="Cat_ID" Type="nchar" MaxLength="10" Nullable="false" />
           <Property Name="Prod_ID" Type="nchar" MaxLength="10" Nullable="false" />
@@ -82,6 +100,7 @@ warning 6002: The table/view 'JewelleryShopping_db.dbo.ViewFullItem' does not ha
           <Property Name="size" Type="int" Nullable="false" />
           <Property Name="MRP" Type="numeric" Precision="10" Scale="2" Nullable="false" />
           <Property Name="No_Image" Type="int" />
+          <Property Name="image" Type="varchar" MaxLength="50" />
           <Property Name="No_Gold" Type="int" />
           <Property Name="GoldType_ID" Type="nchar" MaxLength="10" />
           <Property Name="Gold_Rate" Type="numeric" Precision="10" Scale="2" />
@@ -91,13 +110,20 @@ warning 6002: The table/view 'JewelleryShopping_db.dbo.ViewFullItem' does not ha
           <Property Name="Total_weight" Type="numeric" Precision="10" Scale="3" />
           <Property Name="No_Diamond" Type="int" />
           <Property Name="DimQlty_ID" Type="nchar" MaxLength="10" />
-          <Property Name="DimSubType_ID" Type="nchar" MaxLength="10" />
           <Property Name="Dim_Crt" Type="numeric" Precision="10" Scale="2" />
           <Property Name="Dim_Pcs" Type="numeric" Precision="10" Scale="2" />
           <Property Name="Dim_Gm" Type="numeric" Precision="10" Scale="2" />
           <Property Name="Dim_Size" Type="numeric" Precision="10" Scale="2" />
           <Property Name="Dim_Rate" Type="numeric" Precision="10" Scale="2" />
           <Property Name="Dim_Amt" Type="numeric" Precision="10" Scale="2" />
+          <Property Name="DimSubType_ID" Type="nchar" MaxLength="10" />
+          <Property Name="Dim_CrtSub" Type="numeric" Precision="10" Scale="2" />
+          <Property Name="Dim_PcsSub" Type="numeric" Precision="10" Scale="2" />
+          <Property Name="Dim_GmSub" Type="numeric" Precision="10" Scale="2" />
+          <Property Name="Dim_SizeSub" Type="numeric" Precision="10" Scale="2" />
+          <Property Name="Dim_RateSub" Type="numeric" Precision="10" Scale="2" />
+          <Property Name="Dim_AmtSub" Type="numeric" Precision="10" Scale="2" />
+          <Property Name="Total_AmtAll" Type="numeric" Precision="10" Scale="2" />
           <Property Name="No_Stone" Type="int" />
           <Property Name="StoneQlty_ID" Type="nchar" MaxLength="10" />
           <Property Name="Stone_Gm" Type="numeric" Precision="10" Scale="2" />
@@ -109,6 +135,7 @@ warning 6002: The table/view 'JewelleryShopping_db.dbo.ViewFullItem' does not ha
           <Property Name="total_brand" Type="numeric" Precision="38" Scale="2" />
         </EntityType>
         <EntityContainer Name="JewelleryShopping_dbModelStoreContainer">
+          <EntitySet Name="DisplayCommonPro" EntityType="Self.DisplayCommonPro" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GoldView" EntityType="Self.GoldView" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [GoldView].[No] AS [No], 
@@ -127,15 +154,22 @@ warning 6002: The table/view 'JewelleryShopping_db.dbo.ViewFullItem' does not ha
           <EntitySet Name="ViewDisplayItem" EntityType="Self.ViewDisplayItem" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [ViewDisplayItem].[Style_Code] AS [Style_Code], 
-    [ViewDisplayItem].[img] AS [img], 
+    [ViewDisplayItem].[Img] AS [Img], 
     [ViewDisplayItem].[image] AS [image], 
+    [ViewDisplayItem].[Prod_Type] AS [Prod_Type], 
+    [ViewDisplayItem].[Cat_Name] AS [Cat_Name], 
+    [ViewDisplayItem].[Jewellery_Type] AS [Jewellery_Type], 
+    [ViewDisplayItem].[Tot_Gross_Wt] AS [Tot_Gross_Wt], 
+    [ViewDisplayItem].[DimQlty_ID] AS [DimQlty_ID], 
+    [ViewDisplayItem].[StoneQlty_ID] AS [StoneQlty_ID], 
+    [ViewDisplayItem].[GoldType_ID] AS [GoldType_ID], 
     [ViewDisplayItem].[total_brand] AS [total_brand]
     FROM [dbo].[ViewDisplayItem] AS [ViewDisplayItem]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="ViewFullItem" EntityType="Self.ViewFullItem" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [ViewFullItem].[Style_Code] AS [Style_Code], 
-    [ViewFullItem].[image] AS [image], 
+    [ViewFullItem].[Img] AS [Img], 
     [ViewFullItem].[Pairs] AS [Pairs], 
     [ViewFullItem].[Cat_ID] AS [Cat_ID], 
     [ViewFullItem].[Prod_ID] AS [Prod_ID], 
@@ -153,6 +187,7 @@ warning 6002: The table/view 'JewelleryShopping_db.dbo.ViewFullItem' does not ha
     [ViewFullItem].[size] AS [size], 
     [ViewFullItem].[MRP] AS [MRP], 
     [ViewFullItem].[No_Image] AS [No_Image], 
+    [ViewFullItem].[image] AS [image], 
     [ViewFullItem].[No_Gold] AS [No_Gold], 
     [ViewFullItem].[GoldType_ID] AS [GoldType_ID], 
     [ViewFullItem].[Gold_Rate] AS [Gold_Rate], 
@@ -162,13 +197,20 @@ warning 6002: The table/view 'JewelleryShopping_db.dbo.ViewFullItem' does not ha
     [ViewFullItem].[Total_weight] AS [Total_weight], 
     [ViewFullItem].[No_Diamond] AS [No_Diamond], 
     [ViewFullItem].[DimQlty_ID] AS [DimQlty_ID], 
-    [ViewFullItem].[DimSubType_ID] AS [DimSubType_ID], 
     [ViewFullItem].[Dim_Crt] AS [Dim_Crt], 
     [ViewFullItem].[Dim_Pcs] AS [Dim_Pcs], 
     [ViewFullItem].[Dim_Gm] AS [Dim_Gm], 
     [ViewFullItem].[Dim_Size] AS [Dim_Size], 
     [ViewFullItem].[Dim_Rate] AS [Dim_Rate], 
     [ViewFullItem].[Dim_Amt] AS [Dim_Amt], 
+    [ViewFullItem].[DimSubType_ID] AS [DimSubType_ID], 
+    [ViewFullItem].[Dim_CrtSub] AS [Dim_CrtSub], 
+    [ViewFullItem].[Dim_PcsSub] AS [Dim_PcsSub], 
+    [ViewFullItem].[Dim_GmSub] AS [Dim_GmSub], 
+    [ViewFullItem].[Dim_SizeSub] AS [Dim_SizeSub], 
+    [ViewFullItem].[Dim_RateSub] AS [Dim_RateSub], 
+    [ViewFullItem].[Dim_AmtSub] AS [Dim_AmtSub], 
+    [ViewFullItem].[Total_AmtAll] AS [Total_AmtAll], 
     [ViewFullItem].[No_Stone] AS [No_Stone], 
     [ViewFullItem].[StoneQlty_ID] AS [StoneQlty_ID], 
     [ViewFullItem].[Stone_Gm] AS [Stone_Gm], 
@@ -181,8 +223,7 @@ warning 6002: The table/view 'JewelleryShopping_db.dbo.ViewFullItem' does not ha
     FROM [dbo].[ViewFullItem] AS [ViewFullItem]</DefiningQuery>
           </EntitySet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="JewelleryShopping_dbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -209,15 +250,6 @@ warning 6002: The table/view 'JewelleryShopping_db.dbo.ViewFullItem' does not ha
           <Property Name="PriceOnGram" Type="Decimal" Precision="10" Scale="2" />
           <Property Name="Total_Amount" Type="Decimal" Precision="10" Scale="2" />
         </EntityType>
-        <EntityType Name="ViewDisplayItem">
-          <Key>
-            <PropertyRef Name="Style_Code" />
-          </Key>
-          <Property Name="Style_Code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="img" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="image" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="total_brand" Type="Decimal" Precision="38" Scale="2" />
-        </EntityType>
         <EntityType Name="ViewFullItem">
           <Key>
             <PropertyRef Name="Style_Code" />
@@ -237,6 +269,7 @@ warning 6002: The table/view 'JewelleryShopping_db.dbo.ViewFullItem' does not ha
             <PropertyRef Name="Tot_Making" />
             <PropertyRef Name="size" />
             <PropertyRef Name="MRP" />
+            <PropertyRef Name="Img" />
           </Key>
           <Property Name="Style_Code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="image" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -282,12 +315,47 @@ warning 6002: The table/view 'JewelleryShopping_db.dbo.ViewFullItem' does not ha
           <Property Name="Stone_Wt" Type="Decimal" Precision="10" Scale="2" />
           <Property Name="Stone_Amt" Type="Decimal" Precision="10" Scale="2" />
           <Property Name="total_brand" Type="Decimal" Precision="38" Scale="2" />
+          <Property Name="Img" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Dim_CrtSub" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Dim_PcsSub" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Dim_GmSub" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Dim_SizeSub" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Dim_RateSub" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Dim_AmtSub" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Total_AmtAll" Type="Decimal" Precision="10" Scale="2" />
         </EntityType>
         <EntityContainer Name="JewelleryShopping_dbEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="GoldViews" EntityType="Self.GoldView" />
-          <EntitySet Name="ViewDisplayItems" EntityType="Self.ViewDisplayItem" />
           <EntitySet Name="ViewFullItems" EntityType="Self.ViewFullItem" />
+          <EntitySet Name="DisplayCommonProes" EntityType="JewelleryShopping_dbModel.DisplayCommonPro" />
+          <EntitySet Name="ViewDisplayItems" EntityType="JewelleryShopping_dbModel.ViewDisplayItem" />
         </EntityContainer>
+        <EntityType Name="DisplayCommonPro">
+          <Key>
+            <PropertyRef Name="Name_Pro" />
+          </Key>
+          <Property Name="Name_Pro" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Img" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Prod_ID" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ViewDisplayItem">
+          <Key>
+            <PropertyRef Name="Style_Code" />
+            <PropertyRef Name="Img" />
+            <PropertyRef Name="Tot_Gross_Wt" />
+          </Key>
+          <Property Name="Style_Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Img" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="image" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Prod_Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Cat_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Jewellery_Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Tot_Gross_Wt" Type="Decimal" Nullable="false" Precision="10" Scale="3" />
+          <Property Name="DimQlty_ID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="StoneQlty_ID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="GoldType_ID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="total_brand" Type="Decimal" Precision="38" Scale="2" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -311,19 +379,17 @@ warning 6002: The table/view 'JewelleryShopping_db.dbo.ViewFullItem' does not ha
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ViewDisplayItems">
-            <EntityTypeMapping TypeName="JewelleryShopping_dbModel.ViewDisplayItem">
-              <MappingFragment StoreEntitySet="ViewDisplayItem">
-                <ScalarProperty Name="Style_Code" ColumnName="Style_Code" />
-                <ScalarProperty Name="img" ColumnName="img" />
-                <ScalarProperty Name="image" ColumnName="image" />
-                <ScalarProperty Name="total_brand" ColumnName="total_brand" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="ViewFullItems">
             <EntityTypeMapping TypeName="JewelleryShopping_dbModel.ViewFullItem">
               <MappingFragment StoreEntitySet="ViewFullItem">
+                <ScalarProperty Name="Total_AmtAll" ColumnName="Total_AmtAll" />
+                <ScalarProperty Name="Dim_AmtSub" ColumnName="Dim_AmtSub" />
+                <ScalarProperty Name="Dim_RateSub" ColumnName="Dim_RateSub" />
+                <ScalarProperty Name="Dim_SizeSub" ColumnName="Dim_SizeSub" />
+                <ScalarProperty Name="Dim_GmSub" ColumnName="Dim_GmSub" />
+                <ScalarProperty Name="Dim_PcsSub" ColumnName="Dim_PcsSub" />
+                <ScalarProperty Name="Dim_CrtSub" ColumnName="Dim_CrtSub" />
+                <ScalarProperty Name="Img" ColumnName="Img" />
                 <ScalarProperty Name="Style_Code" ColumnName="Style_Code" />
                 <ScalarProperty Name="image" ColumnName="image" />
                 <ScalarProperty Name="Pairs" ColumnName="Pairs" />
@@ -368,6 +434,32 @@ warning 6002: The table/view 'JewelleryShopping_db.dbo.ViewFullItem' does not ha
                 <ScalarProperty Name="Stone_Wt" ColumnName="Stone_Wt" />
                 <ScalarProperty Name="Stone_Amt" ColumnName="Stone_Amt" />
                 <ScalarProperty Name="total_brand" ColumnName="total_brand" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DisplayCommonProes">
+            <EntityTypeMapping TypeName="JewelleryShopping_dbModel.DisplayCommonPro">
+              <MappingFragment StoreEntitySet="DisplayCommonPro">
+                <ScalarProperty Name="Prod_ID" ColumnName="Prod_ID" />
+                <ScalarProperty Name="Img" ColumnName="Img" />
+                <ScalarProperty Name="Name_Pro" ColumnName="Name_Pro" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ViewDisplayItems">
+            <EntityTypeMapping TypeName="JewelleryShopping_dbModel.ViewDisplayItem">
+              <MappingFragment StoreEntitySet="ViewDisplayItem">
+                <ScalarProperty Name="total_brand" ColumnName="total_brand" />
+                <ScalarProperty Name="GoldType_ID" ColumnName="GoldType_ID" />
+                <ScalarProperty Name="StoneQlty_ID" ColumnName="StoneQlty_ID" />
+                <ScalarProperty Name="DimQlty_ID" ColumnName="DimQlty_ID" />
+                <ScalarProperty Name="Tot_Gross_Wt" ColumnName="Tot_Gross_Wt" />
+                <ScalarProperty Name="Jewellery_Type" ColumnName="Jewellery_Type" />
+                <ScalarProperty Name="Cat_Name" ColumnName="Cat_Name" />
+                <ScalarProperty Name="Prod_Type" ColumnName="Prod_Type" />
+                <ScalarProperty Name="image" ColumnName="image" />
+                <ScalarProperty Name="Img" ColumnName="Img" />
+                <ScalarProperty Name="Style_Code" ColumnName="Style_Code" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

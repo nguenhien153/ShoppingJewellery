@@ -58,5 +58,13 @@ namespace ShoppingJewellery.Models
         public Nullable<decimal> Stone_Wt { get; set; }
         public Nullable<decimal> Stone_Amt { get; set; }
         public Nullable<decimal> total_brand { get; set; }
+        public string Img { get; set; }
+        public Nullable<decimal> Dim_CrtSub { get; set; }
+        public Nullable<decimal> Dim_PcsSub { get; set; }
+        public Nullable<decimal> Dim_GmSub { get; set; }
+        public Nullable<decimal> Dim_SizeSub { get; set; }
+        public Nullable<decimal> Dim_RateSub { get; set; }
+        public Nullable<decimal> Dim_AmtSub { get; set; }
+        public Nullable<decimal> Total_AmtAll { get; set; }
     }
 }

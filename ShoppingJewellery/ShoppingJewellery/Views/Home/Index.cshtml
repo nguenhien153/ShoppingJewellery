@@ -1,45 +1,41 @@
-﻿@model IEnumerable<ShoppingJewellery.Models.ViewDisplayItem>
-
-<p>
-    @Html.ActionLink("Create New", "Product","Product")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Style_Code)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.img)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.image)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.total_brand)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Style_Code)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.img)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.image)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.total_brand)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            <a href="@Url.Action("Product","Product",new { Style_Code=item.Style_Code},null)" @*class="Show-Details"*@>Details</a>   
-               @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
-    </tr>
+﻿@model IEnumerable<ShoppingJewellery.Models.DisplayCommonPro> 
+@{
+    Layout = "~/Views/Layout/MyLayout.cshtml";
+    Page.Title = "Home Page";
 }
 
-</table>
+
+<div id="slider">
+    <ul>
+        <li style="background-image: url(images/0.jpg)">
+            <h3>Make your life better</h3>
+            <h2>Genuine diamonds</h2>
+            <a href="#" class="btn-more">Read more</a>
+        </li>
+        <li class="purple" style="background-image: url(images/01.jpg)">
+            <h3>She will say “yes”</h3>
+            <h2>engagement ring</h2>
+            <a href="#" class="btn-more">Read more</a>
+        </li>
+        <li class="yellow" style="background-image: url(images/02.jpg)">
+            <h3>You deserve to be beauty</h3>
+            <h2>golden bracelets</h2>
+            <a href="#" class="btn-more">Read more</a>
+        </li>
+    </ul>
+</div>
+@* Body *@
+<div id="body">
+    <div class="container">
+        <div class="row" id="product_Type">
+            @foreach (var item in Model)
+            {
+                <div class="col-3" style="margin-bottom:5px;">
+                    <a href="@Html.DisplayFor(itemmodel=>item.Prod_ID)"> <img src="~/Content/images/ProductType/@Html.DisplayFor(itemmodel => item.Img)" alt="@Html.DisplayFor(itemmodel => item.Name_Pro)" style="width:280px" /></a>
+                </div>
+            }
+            
+        </div>
+    </div>
+</div>
+

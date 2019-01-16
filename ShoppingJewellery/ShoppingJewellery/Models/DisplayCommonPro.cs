@@ -12,18 +12,10 @@ namespace ShoppingJewellery.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class ViewDisplayItem
+    public partial class DisplayCommonPro
     {
-        public string Style_Code { get; set; }
+        public string Name_Pro { get; set; }
         public string Img { get; set; }
-        public string image { get; set; }
-        public string Prod_Type { get; set; }
-        public string Cat_Name { get; set; }
-        public string Jewellery_Type { get; set; }
-        public decimal Tot_Gross_Wt { get; set; }
-        public string DimQlty_ID { get; set; }
-        public string StoneQlty_ID { get; set; }
-        public string GoldType_ID { get; set; }
-        public Nullable<decimal> total_brand { get; set; }
+        public string Prod_ID { get; set; }
     }
 }
