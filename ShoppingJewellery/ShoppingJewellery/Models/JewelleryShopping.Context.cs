@@ -28,8 +28,12 @@ namespace ShoppingJewellery.Models
         public virtual DbSet<GoldView> GoldViews { get; set; }
         public virtual DbSet<ViewFullItem> ViewFullItems { get; set; }
         public virtual DbSet<DisplayCommonPro> DisplayCommonProes { get; set; }
-        public virtual DbSet<ViewDisplayItem> ViewDisplayItems { get; set; }
         public virtual DbSet<AdminLoginMst> AdminLoginMsts { get; set; }
         public virtual DbSet<UserRegMst> UserRegMsts { get; set; }
+        public virtual DbSet<CatMst> CatMsts { get; set; }
+        public virtual DbSet<JewelTypeMst> JewelTypeMsts { get; set; }
+        public virtual DbSet<ProdMst> ProdMsts { get; set; }
+        public virtual DbSet<ViewDisplayItem> ViewDisplayItems { get; set; }
+        public virtual DbSet<Image> Images { get; set; }
     }
 }

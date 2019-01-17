@@ -1,54 +1,76 @@
 ﻿@model ShoppingJewellery.Models.ViewFullItem
 @{
+
     ViewBag.Title = "Product";
-    Layout = "~/Views/Layout/LayoutProduct.cshtml";
+    Layout = "~/Views/Layout/Product/LayoutListProduct.cshtml";
+    Page.title = "Product Details";
+
 }
 
-<h2>Product</h2>
 
+<div id="breadcrumbs">
+    <div class="container" ">
+        <ul style="margin:0px">
+            <li><a href="#">Home</a></li>
+            <li>Product results</li>
+        </ul>
+    </div>
+    <!-- / container -->
+</div>
 <div id="body">
     <div class="container">
-        <div id="content" class="full">
-            <div class="product">
-                <div class="image">
-                    <img src="@Html.DisplayFor(item=>item.image)" alt="Item">
 
-                </div>
-                <div class="details">
-                    <h1>@Html.DisplayFor(item => item.Style_Code)</h1>
-                    <h4>@Html.DisplayFor(item => item.total_brand) ₹</h4>
-                    <div class="entry">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
-                        <div class="tabs">
-                            <div class="nav">
-                                <ul>
-                                    <li class="active"><a href="#desc">Description</a></li>
-                                    <li><a href="#spec">Specification</a></li>
-                                    <li><a href="#ret">Returns</a></li>
-                                </ul>
-                            </div>
-                            <div class="tab-content active" id="desc">
-                                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
-                            </div>
-                            <div class="tab-content" id="spec">
-                                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
-                            </div>
-                            <div class="tab-content" id="ret">
-                                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
-                            </div>
-                        </div>
+        <div class="row">
+            <div class="col-5" >
+                <div class="col-12">
+                    <div class="mySlides imagee">
+                        <img src="/Content/images/Product_Image/RINGS/Image/654a7e458a1710bf9a51b31f407ddd1d.png" style="width:100%">
                     </div>
-                    <div class="actions">
-                        <label>Quantity:</label>
-                        <select><option>1</option></select>
-                        <a href="#" class="btn-grey">Add to cart</a>
+                    <div class="mySlides imagee">
+                        <img src="/Content/images/Product_Image/RINGS/Image/RingfromtheButterfly.jpg" style="width:100%">
+                    </div>
+                    <div class="mySlides imagee">
+                        <img src="/Content/images/Product_Image/RINGS/Image/RingfromtheButterfly.jpg" style="width:100%">
+                    </div>
+                    <div class="mySlides imagee">
+                        <img src="/Content/images/Product_Image/RINGS/Image/RingfromtheButterfly.jpg" style="width:100%">
+                    </div>
+                    <div class="mySlides imagee">
+                        <img src="/Content/images/Product_Image/RINGS/Image/RingfromtheButterfly.jpg" style="width:100%">
+                    </div>
+                    <div class="mySlides imagee">
+                        <img src="/Content/images/Product_Image/RINGS/Img/HaloRoundSolitaireRing.jpg" style="width:100%">
+                    </div>
+
+
+                    <a class="prevy next" onclick="plusSlides(-1)">❮</a>
+                    <a class="nextt prev" onclick="plusSlides(1)">❯</a>
+                </div>
+
+                <div class="col-12">
+                    <div class="column col-3">
+                        <img class="demo cursor" src="/Content/images/Product_Image/RINGS/Img/HaloRoundSolitaireRing.jpg" style="width:100%;" onclick="currentSlide(1)" alt="The Woods">
+                    </div>
+                    <div class="column col-3 ">
+                        <img class="demo cursor" src="/Content/images/Product_Image/RINGS/Img/LuminousSolitaireBridalRingSet.jpg" style="width:100%" onclick="currentSlide(2)" alt="Cinque Terre">
+                    </div>
+                    <div class="column col-3">
+                        <img class="demo cursor" src="/Content/images/Product_Image/RINGS/Img/LustreSolitaireRing.jpg" style="width:100%" onclick="currentSlide(3)" alt="Mountains and fjords">
+                    </div>
+                    <div class="column col-3">
+                        <img class="demo cursor" src="/Content/images/Product_Image/RINGS/Img/MarvelSolitaireRing.jpg" style="width:100%" onclick="currentSlide(4)" alt="Northern Lights">
+                    </div>
+                    <div class="column col-3">
+                        <img class="demo cursor" src="/Content/images/Product_Image/RINGS/Img/PromiseSolitaireRing.jpg" style="width:100%" onclick="currentSlide(5)" alt="Nature and sunrise">
+                    </div>
+                    <div class="column col-3">
+                        <img class="demo cursor" src="/Content/images/Product_Image/RINGS/Img/TwinkleBridalRingSet.jpg" style="width:100%" onclick="currentSlide(6)" alt="Snowy Mountains">
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- / content -->
-    </div>
-    <!-- / container -->
+            <div class="col-7" ></div>
 
-    
+        </div>
+    </div>
 </div>
+<script src="~/Content/js/Product/ProductDetails.js"></script>

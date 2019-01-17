@@ -1,0 +1,31 @@
+﻿* {
+    box-sizing: border-box;
+}
+
+.containerr {
+    position: relative;
+   
+}
+
+.imagee {
+    display: block;
+}
+
+.overlayy {
+    position: static;
+    bottom: 0;
+    
+    color: #f1f1f1;
+    
+    transition: .5s ease;
+    opacity: 0;
+    color: white;
+    font-size: 10px;
+    padding: 5px;
+    
+    
+}
+
+.containerr:hover .overlayy {
+    opacity: 1;
+}

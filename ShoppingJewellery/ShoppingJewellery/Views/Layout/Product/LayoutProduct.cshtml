@@ -1,50 +1,30 @@
 ﻿<!DOCTYPE html>
-<!--[if IE 8]> <html class="ie8 oldie" lang="en"> <![endif]-->
-<!--[if gt IE 8]><!-->
-<html lang="en">
-<!--<![endif]-->
+<html>
 <head>
     <meta charset="utf-8">
-    <title>@Page.Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
-    <link rel="stylesheet" media="all" href=@Url.Content("/Content/css/style.css")>
-    <script src="~/Content/bootstrap-4.0.0-dist/js/bootstrap.min.js"></script>
-    <link href="~/Content/bootstrap-4.0.0-dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="~/Content/bootstrap-4.0.0-dist/css/bootstrap-grid.css" rel="stylesheet" />
-    @RenderSection("head", required: false)
+    <link rel="stylesheet" media="all" href=@Url.Content("~/Content/css/style.css")>
+  
     <!--[if lt IE 9]>
         <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+    <title>@Page.Title</title>
+    @RenderSection("head", required: false)
 </head>
 <body>
+
     <header id="header">
         <div class="container">
-            <a href="~/Home/index" id="logo" title="Diana’s jewelry">Yash Gems & Jewelleries</a>
+            <a href="index.html" id="logo" title="Diana’s jewelry">Diana’s jewelry</a>
             <div class="right-links">
                 <ul>
                     <li><a href="cart.html"><span class="ico-products"></span>3 products, $4 500.00</a></li>
-                    <li><a href="cart.html"></li>
-                    <li><a href="cart.html"></li>
-                    @{ if (Session["user"] == null)
-                        {
-                            <li>
-                                @Html.ActionLink("Login", "Login", "User")
-                            </li>
-                            <li>
-                                @Html.ActionLink("Register", "Register", "User")
-                            </li>
-                        }
-                        else
-                        {
-                            <li>
-                                @Html.ActionLink("Account", "Details", "User")
-                            </li>
-                            <li>@Html.ActionLink("Log out", "Login", "User")</li>
-                        }
-                    }
+                    <li><a href="#"><span class="ico-account"></span>Account</a></li>
+                    <li><a href="#"><span class="ico-signout"></span>Sign out</a></li>
                 </ul>
             </div>
         </div>
+        <!-- / container -->
     </header>
     <!-- / header -->
     <nav id="menu">
@@ -62,11 +42,18 @@
         <!-- / container -->
     </nav>
     <!-- / navigation -->
+    <div id="breadcrumbs">
+        <div class="container">
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li>Product page</li>
+            </ul>
+        </div>
+        <!-- / container -->
+    </div>
     <!-- / body -->
-
-
-    @RenderBody();
-
+    @RenderBody()
+    <!-- / body -->
     <footer id="footer">
         <div class="container">
             <div class="cols">
@@ -110,10 +97,7 @@
     </footer>
     <!-- / footer -->
 
-    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-    <script>window.jQuery || document.write("<script src='~/Content/js/jquery-1.11.1.min.js'>\x3C/script>")</script>
-    <script src="~/Content/js/plugins.js"></script>
-    <script src="~/Content/js/main.js"></script>
-
+  
 </body>
 </html>
+

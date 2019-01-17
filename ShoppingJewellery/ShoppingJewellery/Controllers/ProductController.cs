@@ -12,11 +12,15 @@ namespace ShoppingJewellery.Controllers
         public ActionResult Product(string Style_Code)
         {
             var item = dao.GetDetailsProduct(Style_Code);
-            if(item==null)
+            var img = dao.GetImageProduct(Style_Code);
+            if(item==null || img==null)
             {
                 return RedirectToAction("Index","Home");
             }else
             {
+                ViewModelItem_Imgage Item_Img = new ViewModelItem_Imgage();
+                Item_Img.Images = img;
+                Item_Img.ViewFullItems = item;
                 return View(item);
             }
            
@@ -25,6 +29,10 @@ namespace ShoppingJewellery.Controllers
         public ActionResult ProductList()
         {
             return View(dao.GetListProductToDisplay());
+        }
+        public ActionResult Index()
+        {
+            return View();
         }
     }
 }

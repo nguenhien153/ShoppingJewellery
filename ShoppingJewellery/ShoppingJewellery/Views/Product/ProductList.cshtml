@@ -1,38 +1,192 @@
 ﻿@model IEnumerable<ShoppingJewellery.Models.ViewDisplayItem>
 @{
     ViewBag.Title = "ProductList";
-    Layout = "~/Views/Layout/MyLayout.cshtml";
+    Layout = "~/Views/Layout/Product/LayoutListProduct.cshtml";
     Page.Title = "Jewellery";
 }
 
 
 <div id="breadcrumbs">
-    <div class="container">
-        <ul>
+    <div class="container" ">
+        <ul style="margin:0px">
             <li><a href="#">Home</a></li>
             <li>Product results</li>
         </ul>
     </div>
     <!-- / container -->
 </div>
+<div id="body">
+    <div class="row" style="border-bottom:1px solid #e0e0e0; margin:0px;">
+        <div class="col-11">
+            <h5>attributes</h5>           
+        </div>
+        <div class="col-1">
+            <h5>Clear All</h5>           
+        </div>
+    </div>
+    <div class="row" style="margin:0px;border-bottom:1px solid #e0e0e0;padding-bottom:5px;padding-top:5px">
+        <div class="col-3">
+            <h5>Filter By</h5>
+        </div>
+        <div class="col-9">
+            <h5>Hien</h5>
+        </div>     
+    </div>
+    <div class="row" style="margin:0px">
 
-<div class="row" style="margin:10px">
-    
-   <div class="col-2" style="background-color:#808080">
-       
-   </div>
-    <div class="col-10" >
-        <div class="row">
-            
-           @foreach (var item in Model)
-            { 
-                <div class="col-3">
-                    <image src="~/Content/images/Product_Image/ImageDisplayToProductList/@Html.DisplayFor(itemmodel=>item.Img)" style="width:200px;"></image>
-                    <p><strong>@Html.DisplayFor(itemmodel => item.Style_Code)</strong></p>
+        <div class="col-3">
+            <label class="col-form-label" for="SearchAllowPrice"><strong>Price</strong></label>
+            <ul id="SearchAllowPrice" class="list-group">
+                <li class="list-group-item">
+                    <input name="FilterPrice" type="checkbox" class="form-check-inline" value="<5000" />
+                    <label class="form-check-label">Under Rs.5000</label> <span class="badge">12</span><span>(12)</span><br />
+                    <input name="FilterPrice" type="checkbox" class="form-check-inline" value="5001-10000" />
+                    <label class="form-check-label">Rs.5001 To Rs.10000</label><br />
+                    <input name="FilterPrice" type="checkbox" class="form-check-inline" value="10001-15000" />
+                    <label class="form-check-label">Rs.10001 To Rs.15000</label><br />
+                    <input name="FilterPrice" type="checkbox" class="form-check-inline" value="10001-15000" />
+                    <label class="form-check-label">Rs.15001 To Rs.20000</label><br />
+                    <input name="FilterPrice" type="checkbox" class="form-check-inline" value="10001-15000" />
+                    <label class="form-check-label">Rs.20001 To Rs.30000</label><br />
+                    <input name="FilterPrice" type="checkbox" class="form-check-inline" value="10001-15000" />
+                    <label class="form-check-label">Rs.30001 To Rs.40000</label><br />
+                    <input name="FilterPrice" type="checkbox" class="form-check-inline" value="10001-15000" />
+                    <label class="form-check-label">Rs.40001 To Rs.50000</label><br />
+                    <input name="FilterPrice" type="checkbox" class="form-check-inline" value="10001-15000" />
+                    <label class="form-check-label">Rs.50001 To Rs.60000</label><br />
+                    <input name="FilterPrice" type="checkbox" class="form-check-inline" value="10001-15000" />
+                    <label class="form-check-label">Rs.70001 To Rs.80000</label><br />
+                    <input id="hien" name="FilterPrice" type="checkbox" class="form-check-inline" value="10001-15000" />
+                    <label class="form-check-label" for="hien">Rs.90001 To Rs.100000</label><br />
+                </li>
+            </ul>
+            <label class="col-form-label" for="SearchProductType"><strong>Product Type</strong></label>
+            <ul id="SearchProductType" class="list-group">
+                <li class="list-group-item">
+                    @{ string ProductType = null;
+                        string ProductID = null;
+                    }
+                    @foreach (var item in Model)
+                    {
+                        if (item.Prod_ID.Equals(ProductID) || item.Prod_Type.Equals(ProductType))
+                        {
+                            continue;
+                        }
+                        ProductID = item.Prod_ID;
+                        ProductType = item.Prod_Type;
+                        <input name="@item.Prod_ID" type="checkbox" class="form-check-inline" value="@item.Prod_Type" />
+                        <label class="form-check-label" for="@item.Prod_ID">@item.Prod_Type</label><br />
+                    }
+                </li>
+            </ul>
+            <label class="col-form-label" for="SearchProductType"><strong>Jewellery Type</strong></label>
+            <ul id="SearchCategory" class="list-group">
+                <li class="list-group-item">
+                    @{ string JewType = null;
+                        string JewID = null;
+                    }
+                    @foreach (var item in Model)
+                    {
+                        if (item.JewelleryType_ID.Equals(JewID) || item.Jewellery_Type.Equals(JewType))
+                        {
+                            continue;
+                        }
+                        JewID = item.JewelleryType_ID;
+                        JewType = item.Jewellery_Type;
+                        <input name="@item.JewelleryType_ID" type="checkbox" class="form-check-inline" value="@item.Jewellery_Type" />
+                        <label class="form-check-label" for="@item.JewelleryType_ID">@item.Jewellery_Type</label><br />
+                    }
+                </li>
+            </ul>
+            <label class="col-form-label" for="SearchProductType"><strong>Category</strong></label>
+            <ul id="SearchCategory" class="list-group">
+                <li class="list-group-item">
+                    @{ string CatType = null;
+                        string CatID = null;
+                    }
+                    @foreach (var item in Model)
+                    {
+                        if (item.Cat_ID.Equals(CatID) || item.Cat_Name.Equals(CatType))
+                        {
+                            continue;
+                        }
+                        CatID = item.Cat_ID;
+                        CatType = item.Cat_Name;
+                        <input name="@item.Cat_ID" type="checkbox" class="form-check-inline" value="@item.Cat_Name" />
+                        <label class="form-check-label" for="@item.Cat_ID">@item.Cat_Name</label><br />
+                    }
+                </li>
+            </ul>
+            <label class="col-form-label" for="SearchProductType"><strong>Brand</strong></label>
+            <ul id="SearchCategory" class="list-group">
+                <li class="list-group-item">
+                    @{ string BraType = null;
+                        string BraID = null;
+                    }
+                    @foreach (var item in Model)
+                    {
+                        if (item.Brand_ID.Equals(BraID) || item.Brand_Type.Equals(BraType))
+                        {
+                            continue;
+                        }
+                        BraID = item.Brand_ID;
+                        BraType = item.Brand_Type;
+                        <input name="@item.Brand_ID" type="checkbox" class="form-check-inline" value="@item.Brand_Type" />
+                        <label class="form-check-label" for="@item.Brand_ID">@item.Brand_Type</label><br />
+                    }
+                </li>
+            </ul>
+            <label class="col-form-label" for="SearchProductType"><strong>Brand</strong></label>
+            <ul id="SearchCategory" class="list-group">
+                <li class="list-group-item">
+                    @{ string GoldType = null;
+                        string GoldID = null;
+                    }
+                    @foreach (var item in Model)
+                    {
+                      
+                        if (item.GoldType_ID.Equals(GoldID) || item.Gold_Crt.Equals(GoldType))
+                        {
+                            continue;
+                        }
+                        GoldID = item.GoldType_ID;
+                        GoldType = item.Gold_Crt;
+                        <input id="@item.GoldType_ID" type="checkbox" class="form-check-inline" value="@item.GoldType_ID" />
+                        <label class="form-check-label" for="@item.GoldType_ID">@item.Gold_Crt</label><br />
+                    }
+                </li>
+            </ul>
+
+
+
+        </div>
+        <div class="col-9">
+            <div class="row">
+
+                @foreach (var item in Model)
+                {
+                <div class="col-3 containerr">
+
+                    <img class="imagee col-12" src="~/Content/images/Product_Image/@item.Prod_Type/Img/@item.Img"
+                         onmouseover="this.src ='/Content/images/Product_Image/@item.Prod_Type/Image/@item.image'"
+                         onmouseout="this.src ='/Content/images/Product_Image/@item.Prod_Type/Img/@item.Img'" style="width:100%" />
+                    <div class="row">
+
+                        <a href="@Url.Action("Product","Product",new { Style_Code=item.Style_Code})" class="overlayy col-5 btn btn-dark">Details</a> <div class="col-1"></div>
+                        <button class="overlayy col-5 btn btn-dark">Add to Cart</button>
+
+                    </div>
+                    <span><strong>@Html.DisplayFor(itemmodel => item.Style_Code)</strong></span><br />
                     <p>Rs: @Html.DisplayFor(itemodel => item.total_brand) ₹</p>
                 </div>
-            }
+                }
 
+
+            </div>
         </div>
     </div>
 </div>
+
+ 
+ 
+ 

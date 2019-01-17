@@ -16,14 +16,19 @@ namespace ShoppingJewellery.Models
     {
         public string Style_Code { get; set; }
         public string Img { get; set; }
+        public Nullable<decimal> Total_weight { get; set; }
         public string image { get; set; }
+        public decimal Tot_Gross_Wt { get; set; }
+        public string GoldType_ID { get; set; }
+        public string Gold_Crt { get; set; }
+        public string Prod_ID { get; set; }
         public string Prod_Type { get; set; }
+        public string Brand_ID { get; set; }
+        public string Cat_ID { get; set; }
         public string Cat_Name { get; set; }
         public string Jewellery_Type { get; set; }
-        public decimal Tot_Gross_Wt { get; set; }
-        public string DimQlty_ID { get; set; }
-        public string StoneQlty_ID { get; set; }
-        public string GoldType_ID { get; set; }
+        public string JewelleryType_ID { get; set; }
+        public string Brand_Type { get; set; }
         public Nullable<decimal> total_brand { get; set; }
     }
 }

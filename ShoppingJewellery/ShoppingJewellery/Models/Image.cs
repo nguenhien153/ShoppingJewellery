@@ -12,12 +12,10 @@ namespace ShoppingJewellery.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class DisplayCommonPro
+    public partial class Image
     {
-        public string Name_Pro { get; set; }
-        public string Img { get; set; }
-        public string Prod_ID { get; set; }
-    
-        public virtual ProdMst ProdMst { get; set; }
+        public string Style_Colde { get; set; }
+        public string image1 { get; set; }
+        public int No { get; set; }
     }
 }

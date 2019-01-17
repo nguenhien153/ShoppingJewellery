@@ -314,6 +314,8 @@
     <Content Include="Content\bootstrap-4.0.0-dist\js\bootstrap.min.js" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\css\Product.css" />
+    <Content Include="Content\css\ProductDetails.css" />
     <Content Include="Content\css\style.css" />
     <Content Include="Content\fonts\Novecentowide-Bold.svg" />
     <Content Include="Content\fonts\Novecentowide-Book.svg" />
@@ -357,18 +359,22 @@
     <Content Include="Content\images\ProductType\Mangalsuthras.jpg" />
     <Content Include="Content\images\ProductType\Pendants.jpg" />
     <Content Include="Content\images\ProductType\RINGS.jpg" />
-    <Content Include="Content\images\Product_Image\ImageDisplayToProductList\EllaClassicSolitaireRing.jpg" />
-    <Content Include="Content\images\Product_Image\ImageDisplayToProductList\HaloRoundSolitaireRing.jpg" />
-    <Content Include="Content\images\Product_Image\ImageDisplayToProductList\LuminousSolitaireBridalRingSet.jpg" />
-    <Content Include="Content\images\Product_Image\ImageDisplayToProductList\LustreSolitaireRing.jpg" />
-    <Content Include="Content\images\Product_Image\ImageDisplayToProductList\MarvelSolitaireRing.jpg" />
-    <Content Include="Content\images\Product_Image\ImageDisplayToProductList\PromiseSolitaireRing.jpg" />
-    <Content Include="Content\images\Product_Image\ImageDisplayToProductList\TwinkleBridalRingSet.jpg" />
-    <Content Include="Content\images\Product_Image\ImageDisplayToProductList\VibranceBridalRingSet.jpg" />
-    <Content Include="Content\index.html" />
+    <Content Include="Content\images\Product_Image\RINGS\Image\654a7e458a1710bf9a51b31f407ddd1d.png" />
+    <Content Include="Content\images\Product_Image\RINGS\Image\RingfromtheButterfly.jpg" />
+    <Content Include="Content\images\Product_Image\RINGS\Image\RingfromtheButterfly.png" />
+    <Content Include="Content\images\Product_Image\RINGS\Img\EllaClassicSolitaireRing.jpg" />
+    <Content Include="Content\images\Product_Image\RINGS\Img\HaloRoundSolitaireRing.jpg" />
+    <Content Include="Content\images\Product_Image\RINGS\Img\LuminousSolitaireBridalRingSet.jpg" />
+    <Content Include="Content\images\Product_Image\RINGS\Img\LustreSolitaireRing.jpg" />
+    <Content Include="Content\images\Product_Image\RINGS\Img\MarvelSolitaireRing.jpg" />
+    <Content Include="Content\images\Product_Image\RINGS\Img\PromiseSolitaireRing.jpg" />
+    <Content Include="Content\images\Product_Image\RINGS\Img\TwinkleBridalRingSet.jpg" />
+    <Content Include="Content\images\Product_Image\RINGS\Img\VibranceBridalRingSet.jpg" />
+    <Content Include="Content\JQuery\jquery-3.3.1.min.js" />
     <Content Include="Content\js\jquery-1.11.1.min.js" />
     <Content Include="Content\js\main.js" />
     <Content Include="Content\js\plugins.js" />
+    <Content Include="Content\js\Product\ProductDetails.js" />
     <Content Include="Content\Login_v6\css\main.css" />
     <Content Include="Content\Login_v6\css\util.css" />
     <Content Include="Content\Login_v6\fonts\font-awesome-4.7.0\css\font-awesome.css" />
@@ -411,7 +417,6 @@
     <Content Include="Content\Login_v6\vendor\select2\select2.js" />
     <Content Include="Content\Login_v6\vendor\select2\select2.min.css" />
     <Content Include="Content\Login_v6\vendor\select2\select2.min.js" />
-    <Content Include="Content\products.html" />
     <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -534,6 +539,7 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -542,11 +548,17 @@
     <Compile Include="Models\AdminLoginMst.cs">
       <DependentUpon>JewelleryShopping.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CatMst.cs">
+      <DependentUpon>JewelleryShopping.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\DisplayCommonPro.cs">
       <DependentUpon>JewelleryShopping.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\eProjectDAO.cs" />
     <Compile Include="Models\GoldView.cs">
+      <DependentUpon>JewelleryShopping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Image.cs">
       <DependentUpon>JewelleryShopping.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\JewelleryShopping.Context.cs">
@@ -563,6 +575,12 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>JewelleryShopping.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\JewelTypeMst.cs">
+      <DependentUpon>JewelleryShopping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProdMst.cs">
+      <DependentUpon>JewelleryShopping.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UserRegMst.cs">
       <DependentUpon>JewelleryShopping.tt</DependentUpon>
@@ -605,12 +623,11 @@
     </Content>
     <None Include="packages.config" />
     <Content Include="Views\Layout\MyLayout.cshtml" />
-    <Content Include="Views\Layout\LayoutProduct.cshtml" />
+    <Content Include="Views\Layout\Product\LayoutProduct.cshtml" />
     <Content Include="Views\Product\Product.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Layout\_Layout1.cshtml" />
-    <Content Include="Views\Product\ProductList.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
@@ -625,6 +642,10 @@
     <Content Include="Views\User\ChangePass.cshtml" />
     <Content Include="Views\User\Details.cshtml" />
     <Content Include="Views\Admin\ManageAdmin.cshtml" />
+    <Content Include="Views\Product\ProductList.cshtml" />
+    <Content Include="Views\Layout\Product\LayoutListProduct.cshtml" />
+    <Content Include="Views\Test\Index.cshtml" />
+    <Content Include="Views\Test\Index2.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
