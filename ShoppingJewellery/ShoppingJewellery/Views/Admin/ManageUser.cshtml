@@ -29,10 +29,7 @@
         <th>
             @Html.DisplayNameFor(model => model.cdate)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.password)
-        </th>
-        <th></th>
+        <th>Action</th>
     </tr>
 
     @foreach (var item in Model)
@@ -61,10 +58,7 @@
                 @Html.DisplayFor(modelItem => item.cdate)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.password)
-            </td>
-            <td>
-                @Html.ActionLink("Details", "Details", new { id = item.userID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.userID })
             </td>
         </tr>
     }

@@ -4,27 +4,25 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Layout/_LayoutHomeAdmin.cshtml";
 }
-<h2>Hello, @Session["adName"]</h2>
-<div>
-    <dl class="dl-horizontal">
-        <dt>
-            User Name :
-        </dt>
+<h2>Hello, @Session["admin"] @Session["SuperAd"]</h2>
 
-        <dd>
-            @Html.DisplayFor(model => model.Username)
-        </dd>
-        <dt>
-            Password :
-        </dt>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-push-4 col-md-4">
+                <div class="form-group">
+                    <p>User Name :<p>
+                        @Html.TextBoxFor(model => model.Username, new { @class = "form-control",@readonly="readonly" })
+                </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Password)
-        </dd>
+            <div class="form-group">
+                <p>Password :</p>
+                @Html.TextBoxFor(model => model.Password, new { @class = "form-control", @type = "password", @readonly = "readonly" })
+            </div>
 
+            <p>
+                @Html.ActionLink("ChangePass", "ChangePass", "Admin", new { id = Model.Username })
+            </p>
+             </div>
+        </div>
+    </div>
 
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("ChangePass", "ChangePass", "Admin", new { id = Model.Username })
-</p>

@@ -17,13 +17,15 @@ namespace ShoppingJewellery.Controllers
             if (Session["admin"] != null)
             {
                 
-                return View(sv.Get(Session["admin"].ToString()));
+                return View(sv.GetAd(Session["admin"].ToString()));
             }
             return View("Login");
         }
 
         public ActionResult Login()
         {
+            Session["admin"] = null;
+            Session["SuperAd"] = null;
             return View("Login");
         }
         [HttpPost]
@@ -32,7 +34,7 @@ namespace ShoppingJewellery.Controllers
             var result = db.AdminLoginMsts.Count(i => i.Username.Equals(username) && i.Password.Equals(password));
             if (result != 0)
             {
-                var role = sv.Get(username);
+                var role = sv.GetAd(username);
                 if (role.role == false) {
                     Session["admin"] = username;
                     return RedirectToAction("Index");
@@ -52,7 +54,7 @@ namespace ShoppingJewellery.Controllers
             {
                 return View("Login");
             }
-            AdminLoginMst r = sv.Get(Session["admin"].ToString());
+            AdminLoginMst r = sv.GetAd(Session["admin"].ToString());
             return View(r);
         }
         [HttpPost]
@@ -60,7 +62,8 @@ namespace ShoppingJewellery.Controllers
         {
             if (ModelState.IsValid)
             {
-                var edAD = sv.Get(Session["admin"].ToString());
+                string username = Session["admin"].ToString();
+                AdminLoginMst edAD = db.AdminLoginMsts.Single(i => i.Username.Equals(username));
                 if (!edAD.Password.Equals(OldPass))
                 {
                     Session["check"] = "FOld";

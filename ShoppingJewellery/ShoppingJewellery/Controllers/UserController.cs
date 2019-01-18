@@ -9,7 +9,7 @@ namespace ShoppingJewellery.Controllers
     public class UserController : Controller
     {
         JewelleryShopping_dbEntities db = new JewelleryShopping_dbEntities();
-
+        Account service = new Account();
         // GET: User
         public ActionResult Index()
         {
@@ -39,10 +39,11 @@ namespace ShoppingJewellery.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Register(UserRegMst User)
+        public ActionResult Register(UserRegMst User, string cdate)
         {
             if (ModelState.IsValid)
             {
+                User.cdate = cdate;
                 db.UserRegMsts.Add(User);
                 db.SaveChanges();
                 return RedirectToAction("Index","Home");
@@ -53,15 +54,14 @@ namespace ShoppingJewellery.Controllers
 
         public ActionResult UpdateUser()
         {
-            var r = db.UserRegMsts.Single(i => i.userID.Equals(Session["user"]));
-            return View(r);
+            return View(service.GetUser(Session["user"].ToString()));
         }
         [HttpPost]
         public ActionResult UpdateUser(UserRegMst User)
         {
             if (ModelState.IsValid)
             {
-                var edUser = db.UserRegMsts.Single(i => i.userID.Equals(Session["user"]));
+                UserRegMst edUser = db.UserRegMsts.Single(i => i.userID.Equals(User.userID));
                 edUser.mobNo = User.mobNo;
                 edUser.emailID = User.emailID;
                 db.SaveChanges();
@@ -74,7 +74,7 @@ namespace ShoppingJewellery.Controllers
 
         public ActionResult ChangePass()
         {
-            var r = db.UserRegMsts.Single(i => i.userID.Equals(Session["user"]));
+            var r = service.GetUser(Session["user"].ToString());
             return View(r);
         }
         [HttpPost]
@@ -83,7 +83,7 @@ namespace ShoppingJewellery.Controllers
 
             if (ModelState.IsValid)
             {
-                var edUser = db.UserRegMsts.Single(i => i.userID.Equals(Session["user"]));
+                var edUser = service.GetUser(Session["user"].ToString());
                 if (oldpass.Equals(edUser.password) && NewPass.Equals(cNewPass))
                 {
                     edUser.password = NewPass;
@@ -98,8 +98,7 @@ namespace ShoppingJewellery.Controllers
 
         public ActionResult Details()
         {
-            var r = db.UserRegMsts.Single(i => i.userID.Equals(Session["user"]));
-            return View(r);
+            return View(service.GetUser(Session["user"].ToString()));
         }
     }
 }
