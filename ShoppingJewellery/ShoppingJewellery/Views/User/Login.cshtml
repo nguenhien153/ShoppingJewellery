@@ -15,21 +15,23 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-lg-4"></div>
-            <div class="col-lg-6">
-                <h2 style="color: yellow;font-size: 20px;text-align:center">Login</h2>
+            <div class="col-lg-5"></div>
+            <div class="col-lg-4">
+                <h2 style="color: lightskyblue;font-size: 20px;text-align:center">Login</h2>
                 <div class="form-group">
                     <label>User Name:</label>
-                    <input type="text" class="form-control" id="email" placeholder="Enter user name" name="username" value="nguyen99">
+                    <input type="text" style="border-radius: 5%" class="form-control" id="email" placeholder="Enter user name" name="username" value="nguyen99">
                 </div>
                 <div class="form-group">
                     <label>Password:</label>
-                    <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="password" value="123456789">
+                    <input type="password" style="border-radius: 5%" class="form-control" id="pwd" placeholder="Enter password" name="password" value="123456789">
                 </div>
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-                        <button type="submit" class="btn btn-default">Submit</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                        @Html.ActionLink("Register", "Register", "User", new { @class = "btn btn-primary" })
                     </div>
+
                 </div>
             </div>
         </div>

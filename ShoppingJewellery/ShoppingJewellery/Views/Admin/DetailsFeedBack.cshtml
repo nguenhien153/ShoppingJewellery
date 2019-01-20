@@ -1,0 +1,66 @@
+﻿@model ShoppingJewellery.Models.Feedback
+
+@{
+    ViewBag.Title = "DetailsFeedBack";
+    Layout = "~/Views/Layout/_LayoutHomeAdmin.cshtml";
+}
+
+<h2>DetailsFeedBack</h2>
+
+<div>
+    <h4>Feedback</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Comment)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Comment)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReComment)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReComment)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>

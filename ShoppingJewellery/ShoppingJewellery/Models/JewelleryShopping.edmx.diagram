@@ -11,6 +11,8 @@
         <EntityTypeShape EntityType="JewelleryShopping_dbModel.ViewDisplayItem" Width="1.5" PointX="2.625" PointY="0.75" />
         <EntityTypeShape EntityType="JewelleryShopping_dbModel.AdminLoginMst" Width="1.5" PointX="0.75" PointY="4.75" />
         <EntityTypeShape EntityType="JewelleryShopping_dbModel.UserRegMst" Width="1.5" PointX="7.75" PointY="0.75" />
+        <EntityTypeShape EntityType="JewelleryShopping_dbModel.Feedback" Width="1.5" PointX="10" PointY="1" />
+        <AssociationConnector Association="JewelleryShopping_dbModel.FK_Feedback_UserRegMst" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

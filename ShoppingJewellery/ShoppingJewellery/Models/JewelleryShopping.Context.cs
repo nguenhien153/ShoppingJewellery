@@ -31,5 +31,6 @@ namespace ShoppingJewellery.Models
         public virtual DbSet<ViewDisplayItem> ViewDisplayItems { get; set; }
         public virtual DbSet<AdminLoginMst> AdminLoginMsts { get; set; }
         public virtual DbSet<UserRegMst> UserRegMsts { get; set; }
+        public virtual DbSet<Feedback> Feedbacks { get; set; }
     }
 }

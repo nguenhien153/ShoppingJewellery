@@ -12,59 +12,48 @@
     Session["check"] = null;
 }
 <div>
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.userFname)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.userFname, new { @class = "form-control" })
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.userLname)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.userLname, new { @class = "form-control" })
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.mobNo)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.mobNo, new { @class = "form-control" })
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.emailID)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.emailID, new { @class = "form-control" })
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.dob)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.dob, new { @class = "form-control" })
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.cdate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.cdate, new { @class = "form-control" })
-        </dd>
-
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "UpdateUser", "User", new { id = Model.userID }) |
-    @Html.ActionLink("change Pass", "ChangePass", "User", new { id = Model.userID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-md-2 col-md-3 col-md-3"></div>
+            <div class="col-md-4 col-md-4 col-md-3 col-md-3">
+                <table class="table">
+                    <h3 style="text-align: center">Profile</h3>
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.cdate)</td>
+                        <td>@Html.DisplayFor(model => model.cdate)</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.userFname)</td>
+                        <td>@Html.DisplayFor(model => model.userFname)</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.userLname)</td>
+                        <td>@Html.DisplayFor(model => model.userLname)</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.userID)</td>
+                        <td>@Html.DisplayFor(model => model.userID)</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.mobNo)</td>
+                        <td>@Html.DisplayFor(model => model.mobNo)</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.emailID)</td>
+                        <td>@Html.DisplayFor(model => model.emailID)</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.dob)</td>
+                        <td>@Html.DisplayFor(model => model.dob)</td>
+                    </tr>
+                </table>
+                <p>
+                    @Html.ActionLink("Edit", "UpdateUser", "User", new { id = Model.userID }) |
+                    @Html.ActionLink("change Pass", "ChangePass", "User", new { id = Model.userID })|
+                    @Html.ActionLink("Back to List", "Index")
+                </p>
+            </div>
+        </div>
+    </div>
+    </div>
+    

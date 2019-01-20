@@ -9,7 +9,7 @@ namespace ShoppingJewellery.Controllers
     public class UserController : Controller
     {
         JewelleryShopping_dbEntities db = new JewelleryShopping_dbEntities();
-        Account service = new Account();
+        Control service = new Control();
         // GET: User
         public ActionResult Index()
         {
@@ -100,5 +100,29 @@ namespace ShoppingJewellery.Controllers
         {
             return View(service.GetUser(Session["user"].ToString()));
         }
+
+        public ActionResult SendFb()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult SendFb(Feedback Fb,string cdate)
+        {
+            Fb.cDate = cdate;
+            Fb.Name = Session["user"].ToString();
+            if (ModelState.IsValid) {  
+                
+                db.Feedbacks.Add(Fb);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            ModelState.AddModelError("", "Invalid");
+            return View();
+        }
+        public ActionResult DetailsFb()
+        {
+            return View(service.GetByName(Session["user"].ToString()));
+        }
+
     }
 }

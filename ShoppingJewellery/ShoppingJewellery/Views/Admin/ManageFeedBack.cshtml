@@ -1,0 +1,63 @@
+﻿@model IEnumerable<ShoppingJewellery.Models.Feedback>
+
+@{
+    ViewBag.Title = "ManageFeedBack";
+    Layout = "~/Views/Layout/_LayoutHomeAdmin.cshtml";
+}
+
+<h2>ManageFeedBack</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Comment)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReComment)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.FId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.cDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Comment)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReComment)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "ReplyFeedBack", new {id=item.FId}) |
+            @Html.ActionLink("Details", "DetailsFeedBack", new {  id=item.FId }) 
+        </td>
+    </tr>
+}
+
+</table>

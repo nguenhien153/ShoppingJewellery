@@ -10,14 +10,14 @@ namespace ShoppingJewellery.Controllers
     public class AdminController : Controller
     {
         JewelleryShopping_dbEntities db = new JewelleryShopping_dbEntities();
-        Account sv = new Account();
+        Control service = new Control();
         // GET: Admin
         public ActionResult Index()
         {
             if (Session["admin"] != null)
             {
                 
-                return View(sv.GetAd(Session["admin"].ToString()));
+                return View(service.GetAd(Session["admin"].ToString()));
             }
             return View("Login");
         }
@@ -34,7 +34,7 @@ namespace ShoppingJewellery.Controllers
             var result = db.AdminLoginMsts.Count(i => i.Username.Equals(username) && i.Password.Equals(password));
             if (result != 0)
             {
-                var role = sv.GetAd(username);
+                var role = service.GetAd(username);
                 if (role.role == false) {
                     Session["admin"] = username;
                     return RedirectToAction("Index");
@@ -54,7 +54,7 @@ namespace ShoppingJewellery.Controllers
             {
                 return View("Login");
             }
-            AdminLoginMst r = sv.GetAd(Session["admin"].ToString());
+            AdminLoginMst r = service.GetAd(Session["admin"].ToString());
             return View(r);
         }
         [HttpPost]
@@ -91,15 +91,6 @@ namespace ShoppingJewellery.Controllers
             return View("Login");
         }
 
-        public ActionResult ManageFeedback()
-        {
-            if (Session["admin"] != null)
-            {
-                return View(db.UserRegMsts.ToList());
-            }
-            return View("Login");
-        }
-
         public ActionResult ManageAdmin()
         {
             if (Session["SuperAd"] != null)
@@ -107,6 +98,50 @@ namespace ShoppingJewellery.Controllers
                 return View(db.AdminLoginMsts.ToList());
             }
             return RedirectToAction("Index");
+        }
+
+        public ActionResult ManageFeedBack()
+        {
+            if (Session["admin"] != null)
+            {
+                return View(db.Feedbacks.ToList());
+            }
+            return View("Login");
+        }
+
+        public ActionResult ReplyFeedBack(int id)
+        {
+            if (Session["admin"] != null)
+            {
+                return View(service.GetByID(id));
+            }
+            return View("Login");
+        }
+        [HttpPost]
+        public ActionResult ReplyFeedBack(Feedback Fb, string Redate)
+        {
+            if (Session["admin"] != null)
+            {
+                Feedback edFb = db.Feedbacks.Single(i => i.FId == Fb.FId);
+                edFb.ReDate = Redate;
+                edFb.ReComment = Fb.ReComment;
+                if (ModelState.IsValid) {                
+                    db.SaveChanges();
+                    return RedirectToAction("ManageFeedback");
+                }
+                ModelState.AddModelError("", "Invalid");
+                return View();
+            }
+            return View("Login");
+        }
+
+        public ActionResult DetailsFeedBack(int id)
+        {
+            if (Session["admin"] != null)
+            {
+                return View(service.GetByID(id));
+            }
+            return View("Login");
         }
     }
 }

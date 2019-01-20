@@ -21,6 +21,17 @@
           <Property Name="Img" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Prod_ID" Type="nchar" MaxLength="10" Nullable="false" />
         </EntityType>
+        <EntityType Name="Feedback">
+          <Key>
+            <PropertyRef Name="FId" />
+          </Key>
+          <Property Name="FId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cDate" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Comment" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ReDate" Type="nvarchar" MaxLength="50" />
+          <Property Name="ReComment" Type="nvarchar(max)" />
+        </EntityType>
         <EntityType Name="UserRegMst">
           <Key>
             <PropertyRef Name="userID" />
@@ -155,9 +166,22 @@ warning 6002: The table/view 'JewelleryShopping_db.dbo.ViewFullItem' does not ha
           <Property Name="Stone_Amt" Type="numeric" Precision="10" Scale="2" />
           <Property Name="total_brand" Type="numeric" Precision="38" Scale="2" />
         </EntityType>
+        <Association Name="FK_Feedback_UserRegMst">
+          <End Role="UserRegMst" Type="Self.UserRegMst" Multiplicity="1" />
+          <End Role="Feedback" Type="Self.Feedback" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserRegMst">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="Feedback">
+              <PropertyRef Name="Name" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="JewelleryShopping_dbModelStoreContainer">
           <EntitySet Name="AdminLoginMst" EntityType="Self.AdminLoginMst" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DisplayCommonPro" EntityType="Self.DisplayCommonPro" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Feedback" EntityType="Self.Feedback" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserRegMst" EntityType="Self.UserRegMst" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GoldView" EntityType="Self.GoldView" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -245,6 +269,10 @@ warning 6002: The table/view 'JewelleryShopping_db.dbo.ViewFullItem' does not ha
     [ViewFullItem].[total_brand] AS [total_brand]
     FROM [dbo].[ViewFullItem] AS [ViewFullItem]</DefiningQuery>
           </EntitySet>
+          <AssociationSet Name="FK_Feedback_UserRegMst" Association="Self.FK_Feedback_UserRegMst">
+            <End Role="UserRegMst" EntitySet="UserRegMst" />
+            <End Role="Feedback" EntitySet="Feedback" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -354,6 +382,11 @@ warning 6002: The table/view 'JewelleryShopping_db.dbo.ViewFullItem' does not ha
           <EntitySet Name="ViewDisplayItems" EntityType="JewelleryShopping_dbModel.ViewDisplayItem" />
           <EntitySet Name="AdminLoginMsts" EntityType="JewelleryShopping_dbModel.AdminLoginMst" />
           <EntitySet Name="UserRegMsts" EntityType="JewelleryShopping_dbModel.UserRegMst" />
+          <EntitySet Name="Feedbacks" EntityType="JewelleryShopping_dbModel.Feedback" />
+          <AssociationSet Name="FK_Feedback_UserRegMst" Association="JewelleryShopping_dbModel.FK_Feedback_UserRegMst">
+            <End Role="UserRegMst" EntitySet="UserRegMsts" />
+            <End Role="Feedback" EntitySet="Feedbacks" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="DisplayCommonPro">
           <Key>
@@ -401,7 +434,32 @@ warning 6002: The table/view 'JewelleryShopping_db.dbo.ViewFullItem' does not ha
           <Property Name="dob" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="cdate" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Feedbacks" Relationship="JewelleryShopping_dbModel.FK_Feedback_UserRegMst" FromRole="UserRegMst" ToRole="Feedback" />
         </EntityType>
+        <EntityType Name="Feedback">
+          <Key>
+            <PropertyRef Name="FId" />
+          </Key>
+          <Property Name="FId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cDate" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Comment" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ReDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ReComment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="UserRegMst" Relationship="JewelleryShopping_dbModel.FK_Feedback_UserRegMst" FromRole="Feedback" ToRole="UserRegMst" />
+        </EntityType>
+        <Association Name="FK_Feedback_UserRegMst">
+          <End Type="JewelleryShopping_dbModel.UserRegMst" Role="UserRegMst" Multiplicity="1" />
+          <End Type="JewelleryShopping_dbModel.Feedback" Role="Feedback" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserRegMst">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="Feedback">
+              <PropertyRef Name="Name" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -529,6 +587,18 @@ warning 6002: The table/view 'JewelleryShopping_db.dbo.ViewFullItem' does not ha
                 <ScalarProperty Name="userLname" ColumnName="userLname" />
                 <ScalarProperty Name="userFname" ColumnName="userFname" />
                 <ScalarProperty Name="userID" ColumnName="userID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Feedbacks">
+            <EntityTypeMapping TypeName="JewelleryShopping_dbModel.Feedback">
+              <MappingFragment StoreEntitySet="Feedback">
+                <ScalarProperty Name="ReComment" ColumnName="ReComment" />
+                <ScalarProperty Name="ReDate" ColumnName="ReDate" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="cDate" ColumnName="cDate" />
+                <ScalarProperty Name="FId" ColumnName="FId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -1,0 +1,59 @@
+﻿@model ShoppingJewellery.Models.Feedback
+
+@{
+    ViewBag.Title = "SendFb";
+    Layout = "~/Views/Layout/MyLayout.cshtml";
+}
+<div class="container">
+    <div class="row">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-9">
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+            <div class="form-horizontal">
+                <h4>Feedback</h4>
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                
+                <div class="form-inline">
+                    <div class="col-sm-3">
+                        @Html.LabelFor(model => model.cDate, htmlAttributes: new { @class = "control-label col-sm-2" })
+                    </div>
+                <div class="col-sm-9">
+                    <input type="date" class="form-control" size="30" value=@DateTime.Now.ToString("yyyy-MM-dd") name="cdate" readonly />
+                </div>
+                </div>
+                <div class="form-inline">
+                    <div class="col-sm-3">
+                    @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-sm-2" })
+                    </div>
+                        <div class="col-sm-9">
+                        <input type="text" size="17" class="form-control" value=@Session["user"] readonly/>
+                    </div>
+                </div>
+
+                <div class="form-inline">
+                    <div class="col-sm-3">
+                    @Html.LabelFor(model => model.Comment, htmlAttributes: new { @class = "control-label col-sm-2" })
+                    </div>
+                        <div class="col-sm-9">
+                        @Html.TextAreaFor(model => model.Comment, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Comment, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <button type="submit" class="btn btn-primary">Create</button>
+                    </div>
+                </div>
+            </div>
+}
+</div>
+        </div>
+    </div>
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

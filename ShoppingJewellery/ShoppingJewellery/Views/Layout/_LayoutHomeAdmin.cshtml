@@ -78,34 +78,35 @@
                             {
                                 name = Session["SuperAd"].ToString();
                             }
-                         }
-                        <li>
+                        }
+                        <div>
                             <div class="dropdown-menu-right">@Html.ActionLink(name, "Index", "Admin")</div>
-                        <div class="dropdown-item">
-                            @Html.ActionLink("Log Out", "Login", "Admin")
+                            <div class="dropdown-item">
+                                @Html.ActionLink("Log Out", "Login", "Admin")
+                            </div>
                         </div>
-                    </li>
-                    <li>@Html.ActionLink("Admin", "ManageAdmin", "Admin", null, new { @style= "font-family: Arial", @class = "mini-click-non" })</li>
-                    <li>@Html.ActionLink("User", "ManageUser", "Admin", null, new { @style = "font-family: Arial", @class= "mini-click-non" })</li>
-                    
-                    <li>
-                        <a title="Landing Page" href="events.html" aria-expanded="false"><span class="educate-icon educate-event icon-wrap sub-icon-mg" aria-hidden="true"></span> <span class="mini-click-non">Admin</span></a>
-                    </li>
-                    <li>
-                        <a title="Landing Page" href="events.html" aria-expanded="false"><span class="educate-icon educate-event icon-wrap sub-icon-mg" aria-hidden="true"></span> <span class="mini-click-non">User</span></a>
-                    </li>
-                    
-                    <li>
-                        <a title="Landing Page" href="events.html" aria-expanded="false"><span class="educate-icon educate-event icon-wrap sub-icon-mg" aria-hidden="true"></span> <span class="mini-click-non">Product</span></a>
-                    </li>
-                    <li>
-                        <a title="Landing Page" href="events.html" aria-expanded="false"><span class="educate-icon educate-event icon-wrap sub-icon-mg" aria-hidden="true"></span> <span class="mini-click-non">Brand</span></a>
-                    </li>
-                    <li>
-                        <a title="Landing Page" href="events.html" aria-expanded="false"><span class="educate-icon educate-event icon-wrap sub-icon-mg" aria-hidden="true"></span> <span class="mini-click-non">Feedback</span></a>
-                    </li>
-                    </ul>
-                        </div>
+                        <div>@Html.ActionLink("Admin", "ManageAdmin", "Admin", null, new { @style = "font-family: Arial", @class = "mini-click-non" })</div>
+                        <div>@Html.ActionLink("User", "ManageUser", "Admin", null, new { @style = "font-family: Arial", @class = "mini-click-non" })</div>
+                        <div>@Html.ActionLink("Feedback", "ManageFeedback", "Admin", null, new { @style = "font-family: Arial", @class = "mini-click-non" })</div>
+
+                        @*<li>
+                            <a title="Landing Page" href="events.html" aria-expanded="false"><span class="educate-icon educate-event icon-wrap sub-icon-mg" aria-hidden="true"></span> <span class="mini-click-non">Admin</span></a>
+                        </li>
+                        <li>
+                            <a title="Landing Page" href="events.html" aria-expanded="false"><span class="educate-icon educate-event icon-wrap sub-icon-mg" aria-hidden="true"></span> <span class="mini-click-non">User</span></a>
+                        </li>
+
+                        <li>
+                            <a title="Landing Page" href="events.html" aria-expanded="false"><span class="educate-icon educate-event icon-wrap sub-icon-mg" aria-hidden="true"></span> <span class="mini-click-non">Product</span></a>
+                        </li>
+                        <li>
+                            <a title="Landing Page" href="events.html" aria-expanded="false"><span class="educate-icon educate-event icon-wrap sub-icon-mg" aria-hidden="true"></span> <span class="mini-click-non">Brand</span></a>
+                        </li>
+                        <li>
+                            <a title="Landing Page" href="events.html" aria-expanded="false"><span class="educate-icon educate-event icon-wrap sub-icon-mg" aria-hidden="true"></span> <span class="mini-click-non">Feedback</span></a>
+                        </li>
+                        </ul>*@
+                    </div>
                 </nav>
             </div>
         </nav>
