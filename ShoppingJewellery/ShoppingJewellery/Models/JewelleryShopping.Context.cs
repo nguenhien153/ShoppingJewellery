@@ -25,8 +25,6 @@ namespace ShoppingJewellery.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<GoldView> GoldViews { get; set; }
-        public virtual DbSet<ViewFullItem> ViewFullItems { get; set; }
         public virtual DbSet<DisplayCommonPro> DisplayCommonProes { get; set; }
         public virtual DbSet<AdminLoginMst> AdminLoginMsts { get; set; }
         public virtual DbSet<UserRegMst> UserRegMsts { get; set; }
@@ -35,5 +33,9 @@ namespace ShoppingJewellery.Models
         public virtual DbSet<ProdMst> ProdMsts { get; set; }
         public virtual DbSet<ViewDisplayItem> ViewDisplayItems { get; set; }
         public virtual DbSet<Image> Images { get; set; }
+        public virtual DbSet<ViewFullItem> ViewFullItems { get; set; }
+        public virtual DbSet<DiamonView> DiamonViews { get; set; }
+        public virtual DbSet<StoneView> StoneViews { get; set; }
+        public virtual DbSet<GoldView> GoldViews { get; set; }
     }
 }

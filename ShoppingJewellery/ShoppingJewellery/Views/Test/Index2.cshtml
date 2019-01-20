@@ -1,45 +1,111 @@
-﻿<!DOCTYPE html>
-<html>
+﻿<html>
 <head>
-    <meta charset='utf-8' />
-    <title>jQuery Zoom Demo</title>
-    <style>
-        .thumbnail {
-            width: 800px;
-            height: 800px;
+    <title>My Now Amazing Webpage</title>
+    <link rel="stylesheet" type="text/css" href="~/Content/css/slick.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/css/slick-theme.css" />
+    <link href="~/Content/css/hee.css" rel="stylesheet" />
+
+    <style type="text/css">
+
+        .slider {
+            width: 50%;
+            margin: 100px auto;
         }
 
-        .image {
-            width: 100%;
-            height: 100%;
+        .slick-slide {
+            margin: 0px 20px;
         }
 
-            .image img {
-                -webkit-transition: all 1s ease; /* Safari and Chrome */
-                -moz-transition: all 1s ease; /* Firefox */
-                -ms-transition: all 1s ease; /* IE 9 */
-                -o-transition: all 1s ease; /* Opera */
-                transition: all 1s ease;
+            .slick-slide img {
+                width: 100%;
             }
 
-            .image:hover img {
-                -webkit-transform: scale(1.50); /* Safari and Chrome */
-                -moz-transform: scale(1.50); /* Firefox */
-                -ms-transform: scale(1.50); /* IE 9 */
-                -o-transform: scale(1.50); /* Opera */
-                transform: scale(1.50);
-            }
+
+        .slick-next:before {
+            content: url('../../Content/images/Icon/left-arrow (1).png');
+        }
+
+        .slick-prev:before {
+            content: url('../../Content/images/Icon/left-arrow (2).png');
+        }
+
+        .slick-slide {
+            transition: all ease-in-out .3s;
+            opacity: .2;
+        }
+
+        .slick-active {
+            opacity: 2;
+        }
+
+        .slick-current {
+            opacity: 2;
+        }
     </style>
 
 </head>
-
 <body>
+
+
+
+
     
-    <div class="thumbnail">
-        <div class="imagee">
-            <img src="/Content/images/Product_Image/RINGS/Image/RingfromtheButterfly.jpg" alt="Some awesome text" />
+        <div class="slider slider-for title">
+            <div class="tile" data-scale="3.6 data-image="http://ultraimg.com/images/bNeWGWB.jpg">
+             
+            </div>
+            <div>
+                <img  src="~/Content/images/Product_Image/RINGS/Img/EllaClassicSolitaireRing.jpg" />
+            </div>
+            <div><h3>3</h3></div>
+            <div><h3>4</h3></div>
+            <div><h3>5</h3></div>
         </div>
-    </div>
+        <div id="myresult" class="img-zoom-result"></div>
+        <div class="slider slider-nav">
+            <div>
+                <img src="~/Content/images/Product_Image/RINGS/Image/RingfromtheButterfly.jpg" />
+            </div>
+            <div>
+                <img src="~/Content/images/Product_Image/RINGS/Image/RingfromtheButterfly.jpg" />
+            </div>
+            <div><h3>3</h3></div>
+            <div><h3>4</h3></div>
+            <div><h3>5</h3></div>
+        </div>
+
+        <button type="button" class="hien">Next</button>
+        <a></a>
+
+        <script type="text/javascript" src="~/Content/JQuery/jquery-3.3.1.min.js"></script>
+        <script type="text/javascript" src="~/Content/js/Product/slick.js"></script>
+    <script src="~/Content/js/Product/hee.js"></script>
+        <script type="text/javascript">
+
+           
+           
+
+            
+
+            $('.slider-for').slick({
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                arrows: true,
+                fade: true,
+                asNavFor: '.slider-nav'
+            });
+            $('.slider-nav').slick({
+                slidesToShow: 3,
+                slidesToScroll: 1,
+                asNavFor: '.slider-for',
+                focusOnSelect: true
+
+            });
+
+
+
+
+        </script>
 
 </body>
 </html>

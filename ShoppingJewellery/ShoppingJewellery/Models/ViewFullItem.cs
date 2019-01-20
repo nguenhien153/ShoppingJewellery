@@ -15,7 +15,7 @@ namespace ShoppingJewellery.Models
     public partial class ViewFullItem
     {
         public string Style_Code { get; set; }
-        public string image { get; set; }
+        public string Img { get; set; }
         public decimal Pairs { get; set; }
         public string Cat_ID { get; set; }
         public string Prod_ID { get; set; }
@@ -32,7 +32,11 @@ namespace ShoppingJewellery.Models
         public decimal Tot_Making { get; set; }
         public int size { get; set; }
         public decimal MRP { get; set; }
-        public Nullable<int> No_Image { get; set; }
+        public string Cat_Name { get; set; }
+        public string Prod_Type { get; set; }
+        public string Brand_Type { get; set; }
+        public string Jewellery_Type { get; set; }
+        public string Certify_Type { get; set; }
         public Nullable<int> No_Gold { get; set; }
         public string GoldType_ID { get; set; }
         public Nullable<decimal> Gold_Rate { get; set; }
@@ -42,13 +46,20 @@ namespace ShoppingJewellery.Models
         public Nullable<decimal> Total_weight { get; set; }
         public Nullable<int> No_Diamond { get; set; }
         public string DimQlty_ID { get; set; }
-        public string DimSubType_ID { get; set; }
         public Nullable<decimal> Dim_Crt { get; set; }
         public Nullable<decimal> Dim_Pcs { get; set; }
         public Nullable<decimal> Dim_Gm { get; set; }
         public Nullable<decimal> Dim_Size { get; set; }
         public Nullable<decimal> Dim_Rate { get; set; }
         public Nullable<decimal> Dim_Amt { get; set; }
+        public string DimSubType_ID { get; set; }
+        public Nullable<decimal> Dim_CrtSub { get; set; }
+        public Nullable<decimal> Dim_PcsSub { get; set; }
+        public Nullable<decimal> Dim_GmSub { get; set; }
+        public Nullable<decimal> Dim_SizeSub { get; set; }
+        public Nullable<decimal> Dim_RateSub { get; set; }
+        public Nullable<decimal> Dim_AmtSub { get; set; }
+        public Nullable<decimal> Total_AmtAll { get; set; }
         public Nullable<int> No_Stone { get; set; }
         public string StoneQlty_ID { get; set; }
         public Nullable<decimal> Stone_Gm { get; set; }
@@ -58,13 +69,5 @@ namespace ShoppingJewellery.Models
         public Nullable<decimal> Stone_Wt { get; set; }
         public Nullable<decimal> Stone_Amt { get; set; }
         public Nullable<decimal> total_brand { get; set; }
-        public string Img { get; set; }
-        public Nullable<decimal> Dim_CrtSub { get; set; }
-        public Nullable<decimal> Dim_PcsSub { get; set; }
-        public Nullable<decimal> Dim_GmSub { get; set; }
-        public Nullable<decimal> Dim_SizeSub { get; set; }
-        public Nullable<decimal> Dim_RateSub { get; set; }
-        public Nullable<decimal> Dim_AmtSub { get; set; }
-        public Nullable<decimal> Total_AmtAll { get; set; }
     }
 }

@@ -22,7 +22,28 @@ namespace ShoppingJewellery.Models
 
         public List<Image> GetImageProduct(string Style_Cole)
         {
-            var pro2 = db.Images.Where(item => item.Style_Colde.Equals(Style_Cole)).ToList();
+            var pro2 = db.Images.Where(item => item.Style_Colde.Trim().Equals(Style_Cole.Trim())).ToList();
+            return pro2;
+        }
+
+        public List<GoldView> GetMetal(string Style_Cole)
+        {
+            var pro = db.GoldViews.Where(item => item.Style_code.Trim().Equals(Style_Cole.Trim()));
+            var pro2 = pro.OrderBy(item => item.No).ToList();
+            return pro2;
+        }
+
+        public List<DiamonView> GetDiamon(string Style_Cole)
+        {
+            var pro = db.DiamonViews.Where(item => item.Style_Code.Trim().Equals(Style_Cole.Trim()));
+            var pro2 = pro.OrderBy(item => item.No).ToList();
+            return pro2;
+        }
+
+        public List<StoneView> GetStone(string Style_Cole)
+        {
+            var pro = db.StoneViews.Where(item => item.Style_Code.Trim().Equals(Style_Cole.Trim()));
+            var pro2 = pro.OrderBy(item => item.No).ToList();
             return pro2;
         }
 
@@ -32,9 +53,12 @@ namespace ShoppingJewellery.Models
         }
     }
 
-    public class ViewModelItem_Imgage
+    public class ViewModel
     {
         public ViewFullItem ViewFullItems { get; set; }
         public IEnumerable<Image> Images { get; set; }
+        public IEnumerable<GoldView> GoldProduct { get; set; }
+        public IEnumerable<DiamonView> DiamonProduct  { get; set; }
+        public IEnumerable<StoneView> StoneProduct { get; set; }
     }
 }

@@ -4,9 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="eda8915db09448649033491cd83e3b2d" Name="Diagram1" ZoomLevel="82">
-        <EntityTypeShape EntityType="JewelleryShopping_dbModel.GoldView" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="JewelleryShopping_dbModel.ViewFullItem" Width="1.5" PointX="2.75" PointY="6.75" IsExpanded="true" />
+      <Diagram DiagramId="eda8915db09448649033491cd83e3b2d" Name="Diagram1" ZoomLevel="61">
         <EntityTypeShape EntityType="JewelleryShopping_dbModel.DisplayCommonPro" Width="1.5" PointX="5.25" PointY="1" />
         <EntityTypeShape EntityType="JewelleryShopping_dbModel.AdminLoginMst" Width="1.5" PointX="6.75" PointY="6.75" />
         <EntityTypeShape EntityType="JewelleryShopping_dbModel.UserRegMst" Width="1.5" PointX="7.75" PointY="0.75" />
@@ -16,8 +14,12 @@
         <AssociationConnector Association="JewelleryShopping_dbModel.FK_ProdMst_CatMst" />
         <AssociationConnector Association="JewelleryShopping_dbModel.FK_DisplayCommonPro_ProdMst" />
         <AssociationConnector Association="JewelleryShopping_dbModel.FK_JewelTypeMst_ProdMst" />
-        <EntityTypeShape EntityType="JewelleryShopping_dbModel.ViewDisplayItem" Width="1.5" PointX="11.25" PointY="2.125" />
+        <EntityTypeShape EntityType="JewelleryShopping_dbModel.ViewDisplayItem" Width="1.5" PointX="12.625" PointY="2.25" />
         <EntityTypeShape EntityType="JewelleryShopping_dbModel.Image" Width="1.5" PointX="5.375" PointY="9.75" />
+        <EntityTypeShape EntityType="JewelleryShopping_dbModel.ViewFullItem" Width="1.5" PointX="10" PointY="1.5" />
+        <EntityTypeShape EntityType="JewelleryShopping_dbModel.DiamonView" Width="1.5" PointX="0.75" PointY="9.75" />
+        <EntityTypeShape EntityType="JewelleryShopping_dbModel.StoneView" Width="1.5" PointX="2.75" PointY="9.75" />
+        <EntityTypeShape EntityType="JewelleryShopping_dbModel.GoldView" Width="1.5" PointX="0.75" PointY="5.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

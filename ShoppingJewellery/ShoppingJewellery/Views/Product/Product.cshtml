@@ -1,4 +1,6 @@
-﻿@model ShoppingJewellery.Models.ViewFullItem
+﻿
+@model ShoppingJewellery.Models.ViewModel
+
 @{
 
     ViewBag.Title = "Product";
@@ -9,7 +11,7 @@
 
 
 <div id="breadcrumbs">
-    <div class="container" ">
+    <div class="container">
         <ul style="margin:0px">
             <li><a href="#">Home</a></li>
             <li>Product results</li>
@@ -19,58 +21,344 @@
 </div>
 <div id="body">
     <div class="container">
-
         <div class="row">
-            <div class="col-5" >
-                <div class="col-12">
-                    <div class="mySlides imagee">
-                        <img src="/Content/images/Product_Image/RINGS/Image/654a7e458a1710bf9a51b31f407ddd1d.png" style="width:100%">
+            <div class="col-5">
+                @{
+                    <div class="slider slider-for" style="margin-top:0px;padding:0;">
+                        <div><img class="col-12" src="~/Content/images/Product_Image/@Html.DisplayFor(item => item.ViewFullItems.Prod_Type)/Img/@Html.DisplayFor(item => item.ViewFullItems.Img)" /></div>
+                        @foreach (var itemm in Model.Images)
+                        {
+                            <div><img class=" col-12" src="~/Content/images/Product_Image/@Html.DisplayFor(item => item.ViewFullItems.Prod_Type)/Image/@itemm.image1" /></div>
+                        }
                     </div>
-                    <div class="mySlides imagee">
-                        <img src="/Content/images/Product_Image/RINGS/Image/RingfromtheButterfly.jpg" style="width:100%">
+                }
+                @{
+                    <div class="slider slider-nav">
+                        <div><img src="~/Content/images/Product_Image/@Html.DisplayFor(item => item.ViewFullItems.Prod_Type)/Img/@Html.DisplayFor(item => item.ViewFullItems.Img)" /></div>
+                        @foreach (var itemm in Model.Images)
+                        {
+                            <div><img src="~/Content/images/Product_Image/@Html.DisplayFor(item => item.ViewFullItems.Prod_Type)/Image/@itemm.image1" /></div>
+                        }
                     </div>
-                    <div class="mySlides imagee">
-                        <img src="/Content/images/Product_Image/RINGS/Image/RingfromtheButterfly.jpg" style="width:100%">
-                    </div>
-                    <div class="mySlides imagee">
-                        <img src="/Content/images/Product_Image/RINGS/Image/RingfromtheButterfly.jpg" style="width:100%">
-                    </div>
-                    <div class="mySlides imagee">
-                        <img src="/Content/images/Product_Image/RINGS/Image/RingfromtheButterfly.jpg" style="width:100%">
-                    </div>
-                    <div class="mySlides imagee">
-                        <img src="/Content/images/Product_Image/RINGS/Img/HaloRoundSolitaireRing.jpg" style="width:100%">
-                    </div>
+                }
+            </div>
+            <div class="col-7">
+                @{
+                    <h4 class="col-12">@Html.DisplayFor(item => item.ViewFullItems.Style_Code)</h4>
+                    <p class="col-12">Rs. <span class="curentcy">@Html.DisplayFor(item => item.ViewFullItems.total_brand)</span> ₹</p>
+                }
+                <hr />
+                <p class="col-12">Choose Your Jewellery Preference:</p>
+                <div class="btn-group col-12" role="group" aria-label="Basic example">
+                    @{
+                        string disableSize = null;
+                        string Protypee = Html.DisplayFor(item => item.ViewFullItems.Prod_Type).ToString();
+                        if (!Protypee.Equals("RINGS"))
+                        {
+                            disableSize = "disabled";
+                        }
+                    }
+                    <button type="button" class="btn btn-outline-secondary col-3" @disableSize id="SelectSize">Select Size</button>
+                    <button type="button" class="btn btn-outline-secondary col-3" id="SelectMetal">Metal</button>
+                    @{
+                        string disablebutton = null;
+                        string diamond = Html.DisplayFor(item => item.ViewFullItems.DimQlty_ID).ToString();
+                        if (string.IsNullOrEmpty(diamond))
+                        {
+                            disablebutton = "disabled";
+                        }
+                    }
 
+                    <button type="button" class="btn btn-outline-secondary col-3" @disablebutton id="SelectDiamond"> Diamond</button>
 
-                    <a class="prevy next" onclick="plusSlides(-1)">❮</a>
-                    <a class="nextt prev" onclick="plusSlides(1)">❯</a>
+                    @{
+                        string disableStone = null;
+                        string stone = Html.DisplayFor(item => item.ViewFullItems.StoneQlty_ID).ToString();
+                        if (string.IsNullOrEmpty(stone))
+                        {
+                            disableStone = "disabled";
+                        }
+                    }
+
+                    <button type="button" class="btn btn-outline-secondary col-3" @disableStone id="SelectStone"> Gemstone</button>
+                </div>
+                <div id="SizeSelect" style="margin-top:20px;" class="row">
+                    <div class="col-1"></div>
+                    <select id="SelectSizeRing" class="form-control col-3" onchange="GetSize()">
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="@Html.DisplayFor(item => item.ViewFullItems.size)" selected="selected">@Html.DisplayFor(item => item.ViewFullItems.size) (Default)</option>
+                        <option value="13">13</option>
+                        <option value="14">14</option>
+                        <option value="15">15</option>
+                        <option value="16">16</option>
+                        <option value="17">17</option>
+                        <option value="18">18</option>
+                        <option value="19">19</option>
+                        <option value="20">20</option>
+                    </select>
+                    <a href="#" class="col-3" style="height:38px;line-height:30px;text-decoration:none">My Ring Size?</a>
                 </div>
 
+                <div id="MetalSelect" class="col-12 slider-for-metal" style="margin-top:20px;display:none ;">
+                    @{
+                        string checkradio = "checked";
+                    }
+                    @foreach (var item in Model.GoldProduct)
+                    {
+                        string type = item.GoldType_ID.ToString().Substring(0, 1);
+                        if (type.Equals("W"))
+                        {
+                            <div class="col-12">
+                                <img class="col-12" alt="White Gold" src="/Content/images/Icon/White_Gold_18k.png" />
+                                <p class="col-12" style="text-align:center;margin:0px;padding:0px;">@item.Gold_Crt</p>
+                                <input class="col-12 metal_select" type="radio" @checkradio name="metal" onchange="PassValueMetal()" value="@item.No" />
+                            </div>
+                        }
+                        if (type.Equals("Y"))
+                        {
+                            <div class="col-12">
+                                <img class="col-12" alt="Yellow Gold" src="/Content/images/Icon/Yellow_Gold_18K.png" />
+                                <p class="col-12" style="text-align:center;margin:0px;padding:0px;">@item.Gold_Crt</p>
+                                <input class="col-12 metal_select" type="radio" @checkradio name="metal" onchange="PassValueMetal()" value="@item.No" />
+                            </div>
+                        }
+                        if (type.Equals("R"))
+                        {
+                            <div class="col-12">
+                                <img class="col-12" alt="Rose Gold" src="/Content/images/Icon/Rose_Gold_18K.png" />
+                                <p class="col-12" style="text-align:center;margin:0px;padding:0px;">@item.Gold_Crt</p>
+                                <input class="col-12 metal_select" type="radio" @checkradio name="metal" onload="PassValueMetal()" value="@item.No" />
+                            </div>
+                        }
+                        checkradio = default(string);
+                    }
+                </div>
+                <div id="DiamondSelect" class="col-12 row" style="margin-top:20px;display:none;">
+                    <div class="col-11 slider-for-metal">
+                        @{
+                            string checkradioDiamond = "checked";
+                        }
+                        @foreach (var item in Model.DiamonProduct)
+                        {
+                            <div class="col-12">
+                                <img style="width:95%;" src="/Content/images/Icon/diamond.png" alt="Diamond" />
+                                <p class="col-12" style="text-align:center;margin:0px;padding:0px;">@item.MainType</p>
+                                <input class="col-12" name="diamond" type="radio" @checkradioDiamond onchange="PassValueDiamond()" value="@item.No" />
+                            </div>
+                            checkradioDiamond = default(string);
+                        }
+                    </div>
+                    <a style="text-decoration:none" class="col-1" href="#">Diamond guide</a>
+                </div>
+                <div class="col-12 slider-for-metal" id="StoneSelect" style="margin-top:20px;display:none;">
+                    @{
+                        string checkradioStone = "checked";
+                    }
+                    @foreach (var item in Model.StoneProduct)
+                    {
+                        <div class="col-12">
+                            <img class="col-12" src="/Content/images/Icon/gemstone.png" alt="Diamond" />
+                            <p class="col-12" style="text-align:center;margin:0px;padding:0px;">@item.StoneQlty</p>
+                            <input class="col-12" name="stone" type="radio" onchange="PassValueStone()" @checkradioStone value="@item.No" />
+                        </div>
+                        checkradioStone = default(string);
+                    }
+                </div>
+                <hr />
                 <div class="col-12">
-                    <div class="column col-3">
-                        <img class="demo cursor" src="/Content/images/Product_Image/RINGS/Img/HaloRoundSolitaireRing.jpg" style="width:100%;" onclick="currentSlide(1)" alt="The Woods">
-                    </div>
-                    <div class="column col-3 ">
-                        <img class="demo cursor" src="/Content/images/Product_Image/RINGS/Img/LuminousSolitaireBridalRingSet.jpg" style="width:100%" onclick="currentSlide(2)" alt="Cinque Terre">
-                    </div>
-                    <div class="column col-3">
-                        <img class="demo cursor" src="/Content/images/Product_Image/RINGS/Img/LustreSolitaireRing.jpg" style="width:100%" onclick="currentSlide(3)" alt="Mountains and fjords">
-                    </div>
-                    <div class="column col-3">
-                        <img class="demo cursor" src="/Content/images/Product_Image/RINGS/Img/MarvelSolitaireRing.jpg" style="width:100%" onclick="currentSlide(4)" alt="Northern Lights">
-                    </div>
-                    <div class="column col-3">
-                        <img class="demo cursor" src="/Content/images/Product_Image/RINGS/Img/PromiseSolitaireRing.jpg" style="width:100%" onclick="currentSlide(5)" alt="Nature and sunrise">
-                    </div>
-                    <div class="column col-3">
-                        <img class="demo cursor" src="/Content/images/Product_Image/RINGS/Img/TwinkleBridalRingSet.jpg" style="width:100%" onclick="currentSlide(6)" alt="Snowy Mountains">
-                    </div>
+                    <button class="col-4 btn btn-primary" style="margin-right:20px"><strong>Add To Cart</strong></button>
+                    <button class="col-4 btn btn-success"><strong>Buy Now</strong><button>
                 </div>
             </div>
-            <div class="col-7" ></div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-5"></div>
+            <div class="col-7" style="background-color:#d7d7d7">
+                <h3 class="col-12">Product Details</h3>
 
+             
+                <input id="NoMetal" type="text" value=" " />
+                <input id="NoDiamond" type="text" value="" />
+                <input id="NoStone" type="hidden" value="@Html.DisplayFor(item => item.ViewFullItems.No_Stone)" />
+                <table style="border:none" class="col-12 table">
+                    <tbody>
+                        <tr>
+                            <td>Name Produce</td>
+                            <td>@Html.DisplayFor(item => item.ViewFullItems.Style_Code)</td>
+                        </tr>
+                        <tr>
+                            <td>Product Type</td>
+                            <td>@Html.DisplayFor(item => item.ViewFullItems.Prod_Type)</td>
+                        </tr>
+                        <tr>
+                            <td>Jewellery Type</td>
+                            <td>@Html.DisplayFor(item => item.ViewFullItems.Jewellery_Type)</td>
+                        </tr>
+                        <tr>
+                            <td>Brand</td>
+                            <td>@Html.DisplayFor(item => item.ViewFullItems.Brand_Type)</td>
+                        </tr>
+                        <tr>
+                            <td>Certification</td>
+                            <td>@Html.DisplayFor(item => item.ViewFullItems.Certify_Type)</td>
+                        </tr>
+                        <tr>
+                            <div id="metall">
+                                <td>Metal</td>
+                                @{ string MetalGold = null;
+                                    foreach (var item in Model.GoldProduct)
+                                    {
+                                        if (item.No == 2)
+                                        {
+                                            MetalGold = item.Gold_Crt;
+                                            break;
+                                        }
+                                    }
+                                }
+                                <td>@MetalGold</td>
+                            </div>
+                        </tr>
+                        <tr>
+                            <td>Net Gold</td>
+                            <td>@Html.DisplayFor(item => item.ViewFullItems.Net_Gold) gms</td>
+                        </tr>
+                        <tr>
+                            <td>Total Weight</td>
+                            <td>@Html.DisplayFor(item => item.ViewFullItems.Net_Gold) gms</td>
+                        </tr>
+                        <tr>
+                            <td>Total Gross Weight</td>
+                            <td>@Html.DisplayFor(item => item.ViewFullItems.Tot_Gross_Wt) gms</td>
+                        </tr>
+                        <tr>
+                            @{
+                                if (Protypee.Equals("RINGS"))
+                                {
+                                    disableSize = "disabled";
+                                    <td>Size</td>
+                                    <td><span id="SizeRing">@Html.DisplayFor(item => item.ViewFullItems.size)</span></td>
+                                }
+                            }
+                        </tr>
+
+                    </tbody>
+                </table>
+                @{
+                    string checkgold = Html.DisplayFor(item => item.ViewFullItems.No_Gold).ToString();
+                    if (!string.IsNullOrEmpty(checkgold))
+                    {
+                        <h3 class="col-12">Diamond Details</h3>
+                    }
+                }
+                @{
+                    string checkgems = Html.DisplayFor(item => item.ViewFullItems.No_Stone).ToString();
+                    if (!string.IsNullOrEmpty(checkgems))
+                    {
+                        <h3 class="col-12">Diamond Details </h3>
+                    }
+                }
+                
+            </div>
         </div>
     </div>
 </div>
-<script src="~/Content/js/Product/ProductDetails.js"></script>
+    
+
+              
+<script type="text/javascript" src="~/Content/JQuery/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="~/Content/js/Product/slick.js"></script>
+<script type="text/javascript">
+
+    function GetSize() {
+        var size = document.getElementById("SelectSizeRing").value;
+        document.getElementById("SizeRing").innerHTML = size;
+    }
+    function GetNo() {
+        var No;
+        var MetalNo = document.getElementsByName('metal');
+        for (var i = 0, length = MetalNo.length; i < length; i++) {
+            if (MetalNo[i].checked) {
+                No=MetalNo[i].value;
+                break;
+            }
+        }
+        return No;
+    }
+    function PassValueMetal() {
+        var No = GetNo();
+        document.getElementById("HienHo").value = No;
+    }
+    function PassValueDiamond() {
+        var No = GetNo();
+        document.getElementById("NoDiamond").value = No;
+    }
+    function PassValueStone() {
+        var No = GetNo();
+        document.getElementById("NoStone").value = No;
+    }
+
+
+    function numberWithCommas(number) {
+        var parts = number.toString().split(".");
+        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        return parts.join(".");
+    }
+    $(document).ready(function () {
+
+        $(".curentcy").each(function () {
+            var num = $(this).text();
+            var commaNum = numberWithCommas(num);
+            $(this).text(commaNum);
+        });
+
+        $('.slider-for').slick({
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            arrows: true,
+            fade: true,
+            asNavFor: '.slider-nav'
+        });
+        $('.slider-nav').slick({
+            slidesToShow: 4,
+            slidesToScroll: 1,
+            asNavFor: '.slider-for',
+            focusOnSelect: true
+        });
+        $('.slider-for-metal').slick({
+            slidesToShow: 4,
+            slidesToScroll: 1,
+            arrows: true, adaptiveHeight: true
+        });
+
+        $("#SelectSize").click(function () {
+            $('#MetalSelect').hide();
+            $('#SizeSelect').show();
+            $('#DiamondSelect').hide();
+            $("#StoneSelect").hide();
+        });
+        $("#SelectMetal").click(function () {
+            $('#MetalSelect').show()
+            $('#SizeSelect').hide();
+            $('#DiamondSelect').hide();
+            $("#StoneSelect").hide();
+            $('.slider-for-metal').slick('refresh');
+        });
+        $("#SelectDiamond").click(function () {
+            $('#SizeSelect').hide();
+            $("#MetalSelect").hide();
+            $("#StoneSelect").hide();
+            $('#DiamondSelect').show();
+            $('.slider-for-metal').slick('refresh');
+        });
+        $("#SelectStone").click(function () {
+            $('#StoneSelect').show();
+            $('#SizeSelect').hide();
+            $('#DiamondSelect').hide();
+            $("#MetalSelect").hide();
+            $('.slider-for-metal').slick('refresh');
+        });
+
+    });
+</script>

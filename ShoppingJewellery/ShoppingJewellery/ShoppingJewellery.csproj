@@ -315,7 +315,9 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\css\Product.css" />
-    <Content Include="Content\css\ProductDetails.css" />
+    <Content Include="Content\css\slick-theme.css" />
+    <Content Include="Content\css\slick.css" />
+    <Content Include="Content\css\SlickProduct.css" />
     <Content Include="Content\css\style.css" />
     <Content Include="Content\fonts\Novecentowide-Bold.svg" />
     <Content Include="Content\fonts\Novecentowide-Book.svg" />
@@ -323,35 +325,48 @@
     <Content Include="Content\fonts\Novecentowide-Light.svg" />
     <Content Include="Content\fonts\Novecentowide-Medium.svg" />
     <Content Include="Content\fonts\Novecentowide-Normal.svg" />
-    <Content Include="Content\images\0.jpg" />
-    <Content Include="Content\images\01.jpg" />
-    <Content Include="Content\images\02.jpg" />
-    <Content Include="Content\images\2.jpg" />
-    <Content Include="Content\images\3.jpg" />
-    <Content Include="Content\images\4.jpg" />
-    <Content Include="Content\images\bg_footer%402x.png" />
-    <Content Include="Content\images\bg_footer.png" />
-    <Content Include="Content\images\btn_mobile_menu.png" />
-    <Content Include="Content\images\ico_arrow%402x.png" />
-    <Content Include="Content\images\ico_arrow.png" />
-    <Content Include="Content\images\ico_arrows%402x.png" />
-    <Content Include="Content\images\ico_arrows.png" />
-    <Content Include="Content\images\ico_cross%402x.png" />
-    <Content Include="Content\images\ico_cross.png" />
-    <Content Include="Content\images\ico_delete%402x.png" />
-    <Content Include="Content\images\ico_delete.png" />
-    <Content Include="Content\images\ico_down%402x.png" />
-    <Content Include="Content\images\ico_down.png" />
-    <Content Include="Content\images\ico_footer%402x.png" />
-    <Content Include="Content\images\ico_footer.png" />
-    <Content Include="Content\images\ico_header%402x.png" />
-    <Content Include="Content\images\ico_header.png" />
-    <Content Include="Content\images\ico_pagination%402x.png" />
-    <Content Include="Content\images\ico_pagination.png" />
-    <Content Include="Content\images\ico_plus%402x.png" />
-    <Content Include="Content\images\ico_plus.png" />
-    <Content Include="Content\images\logo%402x.png" />
-    <Content Include="Content\images\logo.png" />
+    <Content Include="Content\images\Icon\diamond.png" />
+    <Content Include="Content\images\Icon\gemstone.png" />
+    <Content Include="Content\images\Icon\left-arrow %281%29.png" />
+    <Content Include="Content\images\Icon\left-arrow %282%29.png" />
+    <Content Include="Content\images\Icon\Rose_Gold_10K.png" />
+    <Content Include="Content\images\Icon\Rose_Gold_14K.png" />
+    <Content Include="Content\images\Icon\Rose_Gold_18K.png" />
+    <Content Include="Content\images\Icon\White_Gold_10K.png" />
+    <Content Include="Content\images\Icon\White_Gold_14K.png" />
+    <Content Include="Content\images\Icon\White_Gold_18k.png" />
+    <Content Include="Content\images\Icon\Yellow_Gold_10K.png" />
+    <Content Include="Content\images\Icon\Yellow_Gold_18K.png" />
+    <Content Include="Content\images\Icon\Yelow_Gold_14K.png" />
+    <Content Include="Content\images\Other\0.jpg" />
+    <Content Include="Content\images\Other\01.jpg" />
+    <Content Include="Content\images\Other\02.jpg" />
+    <Content Include="Content\images\Other\2.jpg" />
+    <Content Include="Content\images\Other\3.jpg" />
+    <Content Include="Content\images\Other\4.jpg" />
+    <Content Include="Content\images\Other\bg_footer%402x.png" />
+    <Content Include="Content\images\Other\bg_footer.png" />
+    <Content Include="Content\images\Other\btn_mobile_menu.png" />
+    <Content Include="Content\images\Other\ico_arrow%402x.png" />
+    <Content Include="Content\images\Other\ico_arrow.png" />
+    <Content Include="Content\images\Other\ico_arrows%402x.png" />
+    <Content Include="Content\images\Other\ico_arrows.png" />
+    <Content Include="Content\images\Other\ico_cross%402x.png" />
+    <Content Include="Content\images\Other\ico_cross.png" />
+    <Content Include="Content\images\Other\ico_delete%402x.png" />
+    <Content Include="Content\images\Other\ico_delete.png" />
+    <Content Include="Content\images\Other\ico_down%402x.png" />
+    <Content Include="Content\images\Other\ico_down.png" />
+    <Content Include="Content\images\Other\ico_footer%402x.png" />
+    <Content Include="Content\images\Other\ico_footer.png" />
+    <Content Include="Content\images\Other\ico_header%402x.png" />
+    <Content Include="Content\images\Other\ico_header.png" />
+    <Content Include="Content\images\Other\ico_pagination%402x.png" />
+    <Content Include="Content\images\Other\ico_pagination.png" />
+    <Content Include="Content\images\Other\ico_plus%402x.png" />
+    <Content Include="Content\images\Other\ico_plus.png" />
+    <Content Include="Content\images\Other\logo%402x.png" />
+    <Content Include="Content\images\Other\logo.png" />
     <Content Include="Content\images\ProductType\BanglesBracelets.jpg" />
     <Content Include="Content\images\ProductType\Butterfly.jpg" />
     <Content Include="Content\images\ProductType\Earring.jpg" />
@@ -359,18 +374,24 @@
     <Content Include="Content\images\ProductType\Mangalsuthras.jpg" />
     <Content Include="Content\images\ProductType\Pendants.jpg" />
     <Content Include="Content\images\ProductType\RINGS.jpg" />
-    <Content Include="Content\images\Product_Image\RINGS\Image\654a7e458a1710bf9a51b31f407ddd1d.png" />
+    <Content Include="Content\images\Product_Image\RINGS\Image\HazeEleganceRing2.jpg" />
+    <Content Include="Content\images\Product_Image\RINGS\Image\HazeEleganceRing3.jpg" />
+    <Content Include="Content\images\Product_Image\RINGS\Image\HazeEleganceRing4.jpg" />
+    <Content Include="Content\images\Product_Image\RINGS\Image\HazeEleganceRing5.jpg" />
     <Content Include="Content\images\Product_Image\RINGS\Image\RingfromtheButterfly.jpg" />
-    <Content Include="Content\images\Product_Image\RINGS\Image\RingfromtheButterfly.png" />
     <Content Include="Content\images\Product_Image\RINGS\Img\EllaClassicSolitaireRing.jpg" />
     <Content Include="Content\images\Product_Image\RINGS\Img\HaloRoundSolitaireRing.jpg" />
+    <Content Include="Content\images\Product_Image\RINGS\Img\HazeEleganceRing.jpg" />
     <Content Include="Content\images\Product_Image\RINGS\Img\LuminousSolitaireBridalRingSet.jpg" />
     <Content Include="Content\images\Product_Image\RINGS\Img\LustreSolitaireRing.jpg" />
     <Content Include="Content\images\Product_Image\RINGS\Img\MarvelSolitaireRing.jpg" />
     <Content Include="Content\images\Product_Image\RINGS\Img\PromiseSolitaireRing.jpg" />
     <Content Include="Content\images\Product_Image\RINGS\Img\TwinkleBridalRingSet.jpg" />
     <Content Include="Content\images\Product_Image\RINGS\Img\VibranceBridalRingSet.jpg" />
+    <Content Include="Content\JQuery\jquery-3.3.1.js" />
     <Content Include="Content\JQuery\jquery-3.3.1.min.js" />
+    <Content Include="Content\JQuery\jquery-migrate-1.4.1.min.js" />
+    <Content Include="Content\js\Product\slick.js" />
     <Content Include="Content\js\jquery-1.11.1.min.js" />
     <Content Include="Content\js\main.js" />
     <Content Include="Content\js\plugins.js" />
@@ -551,6 +572,9 @@
     <Compile Include="Models\CatMst.cs">
       <DependentUpon>JewelleryShopping.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DiamonView.cs">
+      <DependentUpon>JewelleryShopping.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\DisplayCommonPro.cs">
       <DependentUpon>JewelleryShopping.tt</DependentUpon>
     </Compile>
@@ -580,6 +604,9 @@
       <DependentUpon>JewelleryShopping.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ProdMst.cs">
+      <DependentUpon>JewelleryShopping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\StoneView.cs">
       <DependentUpon>JewelleryShopping.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UserRegMst.cs">
@@ -644,8 +671,8 @@
     <Content Include="Views\Admin\ManageAdmin.cshtml" />
     <Content Include="Views\Product\ProductList.cshtml" />
     <Content Include="Views\Layout\Product\LayoutListProduct.cshtml" />
-    <Content Include="Views\Test\Index.cshtml" />
     <Content Include="Views\Test\Index2.cshtml" />
+    <Content Include="Views\Test\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

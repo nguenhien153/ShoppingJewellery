@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -13,15 +14,22 @@ namespace ShoppingJewellery.Controllers
         {
             var item = dao.GetDetailsProduct(Style_Code);
             var img = dao.GetImageProduct(Style_Code);
-            if(item==null || img==null)
+            var gold = dao.GetMetal(Style_Code);
+            var stone = dao.GetStone(Style_Code);
+            var diamond = dao.GetDiamon(Style_Code);
+            if(item==null || img==null || gold==null)
             {
                 return RedirectToAction("Index","Home");
             }else
             {
-                ViewModelItem_Imgage Item_Img = new ViewModelItem_Imgage();
-                Item_Img.Images = img;
-                Item_Img.ViewFullItems = item;
-                return View(item);
+               
+                ViewModel image_item = new ViewModel();
+                image_item.GoldProduct = gold;
+                image_item.StoneProduct = stone;
+                image_item.DiamonProduct = diamond;
+                image_item.Images = img;
+                image_item.ViewFullItems = item;
+                return View(image_item);
             }
            
         }

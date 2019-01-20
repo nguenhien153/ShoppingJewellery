@@ -167,14 +167,14 @@
                 {
                 <div class="col-3 containerr">
 
-                    <img class="imagee col-12" src="~/Content/images/Product_Image/@item.Prod_Type/Img/@item.Img"
+                    <img class="imagee col-12" src="/Content/images/Product_Image/@item.Prod_Type/Img/@item.Img"
                          onmouseover="this.src ='/Content/images/Product_Image/@item.Prod_Type/Image/@item.image'"
                          onmouseout="this.src ='/Content/images/Product_Image/@item.Prod_Type/Img/@item.Img'" style="width:100%" />
                     <div class="row">
 
                         <a href="@Url.Action("Product","Product",new { Style_Code=item.Style_Code})" class="overlayy col-5 btn btn-dark">Details</a> <div class="col-1"></div>
                         <button class="overlayy col-5 btn btn-dark">Add to Cart</button>
-
+                       
                     </div>
                     <span><strong>@Html.DisplayFor(itemmodel => item.Style_Code)</strong></span><br />
                     <p>Rs: @Html.DisplayFor(itemodel => item.total_brand) ₹</p>
