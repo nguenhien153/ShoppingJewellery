@@ -32,6 +32,7 @@ namespace ShoppingJewellery.Models
         public decimal Tot_Making { get; set; }
         public int size { get; set; }
         public decimal MRP { get; set; }
+        public decimal Stone_Wt { get; set; }
         public string Cat_Name { get; set; }
         public string Prod_Type { get; set; }
         public string Brand_Type { get; set; }
@@ -39,13 +40,16 @@ namespace ShoppingJewellery.Models
         public string Certify_Type { get; set; }
         public Nullable<int> No_Gold { get; set; }
         public string GoldType_ID { get; set; }
+        public string Gold_Crt { get; set; }
         public Nullable<decimal> Gold_Rate { get; set; }
         public Nullable<decimal> Gold_Wt { get; set; }
         public Nullable<decimal> Wstg_Per { get; set; }
         public Nullable<decimal> Wstq { get; set; }
         public Nullable<decimal> Total_weight { get; set; }
+        public Nullable<decimal> Total_Amount { get; set; }
         public Nullable<int> No_Diamond { get; set; }
         public string DimQlty_ID { get; set; }
+        public string MainType { get; set; }
         public Nullable<decimal> Dim_Crt { get; set; }
         public Nullable<decimal> Dim_Pcs { get; set; }
         public Nullable<decimal> Dim_Gm { get; set; }
@@ -53,6 +57,7 @@ namespace ShoppingJewellery.Models
         public Nullable<decimal> Dim_Rate { get; set; }
         public Nullable<decimal> Dim_Amt { get; set; }
         public string DimSubType_ID { get; set; }
+        public string SubTyle { get; set; }
         public Nullable<decimal> Dim_CrtSub { get; set; }
         public Nullable<decimal> Dim_PcsSub { get; set; }
         public Nullable<decimal> Dim_GmSub { get; set; }
@@ -62,11 +67,11 @@ namespace ShoppingJewellery.Models
         public Nullable<decimal> Total_AmtAll { get; set; }
         public Nullable<int> No_Stone { get; set; }
         public string StoneQlty_ID { get; set; }
+        public string StoneQlty { get; set; }
         public Nullable<decimal> Stone_Gm { get; set; }
         public Nullable<decimal> Stone_Pcs { get; set; }
         public Nullable<decimal> Stone_Crt { get; set; }
         public Nullable<decimal> Stone_Rate { get; set; }
-        public Nullable<decimal> Stone_Wt { get; set; }
         public Nullable<decimal> Stone_Amt { get; set; }
         public Nullable<decimal> total_brand { get; set; }
     }

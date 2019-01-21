@@ -1,0 +1,12 @@
+﻿@model ShoppingJewellery.Models.DiamonView
+<tr>
+    <td>@Html.DisplayFor(item => item.MainType)</td>
+    <td>@Html.DisplayFor(item => item.Dim_Crt) Crt</td>
+    <td>@Html.DisplayFor(item => item.Dim_Gm) gms</td>
+    <td>@Html.DisplayFor(item => item.Dim_Size) mm</td>
+    <td>@Html.DisplayFor(item => item.Dim_Pcs)</td>
+    <td>@Html.DisplayFor(item => item.Dim_Rate)</td>
+    <td>₹ @Html.DisplayFor(item => item.Dim_Amt)</td>
+    <input type="hidden" id="DiamondAmt" value="@Html.DisplayFor(item=>item.Dim_Amt)" />
+    <input type="hidden" id="DiamondNo" value="@Html.DisplayFor(item=>item.No)" />
+</tr>

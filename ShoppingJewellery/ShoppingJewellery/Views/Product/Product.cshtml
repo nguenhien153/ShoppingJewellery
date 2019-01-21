@@ -43,10 +43,12 @@
                 }
             </div>
             <div class="col-7">
-                @{
+                
                     <h4 class="col-12">@Html.DisplayFor(item => item.ViewFullItems.Style_Code)</h4>
-                    <p class="col-12">Rs. <span class="curentcy">@Html.DisplayFor(item => item.ViewFullItems.total_brand)</span> ₹</p>
-                }
+                    <p class="col-12">Rs. <span class="curentcy" id="Price">@Html.DisplayFor(item => item.ViewFullItems.total_brand)</span> ₹</p>
+                    <input type="hidden" id="totalBrand" value="@Html.DisplayFor(item => item.ViewFullItems.total_brand)" />
+                    <input type="hidden" id="StyleCode" value="@Html.DisplayFor(item => item.ViewFullItems.Style_Code)" />
+                
                 <hr />
                 <p class="col-12">Choose Your Jewellery Preference:</p>
                 <div class="btn-group col-12" role="group" aria-label="Basic example">
@@ -110,9 +112,9 @@
                         if (type.Equals("W"))
                         {
                             <div class="col-12">
-                                <img class="col-12" alt="White Gold" src="/Content/images/Icon/White_Gold_18k.png" />
+                                <img class="col-12 test" alt="White Gold" src="/Content/images/Icon/White_Gold_18k.png" />
                                 <p class="col-12" style="text-align:center;margin:0px;padding:0px;">@item.Gold_Crt</p>
-                                <input class="col-12 metal_select" type="radio" @checkradio name="metal" onchange="PassValueMetal()" value="@item.No" />
+                                <input class="col-12" type="radio" @checkradio name="metal" onchange="PassValueMetal()" value="@item.No" />
                             </div>
                         }
                         if (type.Equals("Y"))
@@ -120,7 +122,7 @@
                             <div class="col-12">
                                 <img class="col-12" alt="Yellow Gold" src="/Content/images/Icon/Yellow_Gold_18K.png" />
                                 <p class="col-12" style="text-align:center;margin:0px;padding:0px;">@item.Gold_Crt</p>
-                                <input class="col-12 metal_select" type="radio" @checkradio name="metal" onchange="PassValueMetal()" value="@item.No" />
+                                <input class="col-12" type="radio" @checkradio name="metal" onchange="PassValueMetal()" value="@item.No" />
                             </div>
                         }
                         if (type.Equals("R"))
@@ -128,10 +130,10 @@
                             <div class="col-12">
                                 <img class="col-12" alt="Rose Gold" src="/Content/images/Icon/Rose_Gold_18K.png" />
                                 <p class="col-12" style="text-align:center;margin:0px;padding:0px;">@item.Gold_Crt</p>
-                                <input class="col-12 metal_select" type="radio" @checkradio name="metal" onload="PassValueMetal()" value="@item.No" />
+                                <input class="col-12" type="radio" @checkradio name="metal" onchange="PassValueMetal()" value="@item.No" />
                             </div>
                         }
-                        checkradio = default(string);
+                        checkradio = " ";
                     }
                 </div>
                 <div id="DiamondSelect" class="col-12 row" style="margin-top:20px;display:none;">
@@ -146,7 +148,7 @@
                                 <p class="col-12" style="text-align:center;margin:0px;padding:0px;">@item.MainType</p>
                                 <input class="col-12" name="diamond" type="radio" @checkradioDiamond onchange="PassValueDiamond()" value="@item.No" />
                             </div>
-                            checkradioDiamond = default(string);
+                            checkradioDiamond = " ";
                         }
                     </div>
                     <a style="text-decoration:none" class="col-1" href="#">Diamond guide</a>
@@ -167,22 +169,18 @@
                 </div>
                 <hr />
                 <div class="col-12">
-                    <button class="col-4 btn btn-primary" style="margin-right:20px"><strong>Add To Cart</strong></button>
+                    <button class="col-4 btn btn-primary" style="margin-right:20px" id="addtocart"><strong>Add To Cart</strong></button>
                     <button class="col-4 btn btn-success"><strong>Buy Now</strong><button>
                 </div>
             </div>
         </div>
         <hr />
         <div class="row">
-            <div class="col-5"></div>
-            <div class="col-7" style="background-color:#d7d7d7">
+            <div class="col-4"></div>
+            <div class="col-8" style="background-color:#d7d7d7">
+                <br />
                 <h3 class="col-12">Product Details</h3>
-
-             
-                <input id="NoMetal" type="text" value=" " />
-                <input id="NoDiamond" type="text" value="" />
-                <input id="NoStone" type="hidden" value="@Html.DisplayFor(item => item.ViewFullItems.No_Stone)" />
-                <table style="border:none" class="col-12 table">
+                <table class="col-12 table">
                     <tbody>
                         <tr>
                             <td>Name Produce</td>
@@ -204,25 +202,14 @@
                             <td>Certification</td>
                             <td>@Html.DisplayFor(item => item.ViewFullItems.Certify_Type)</td>
                         </tr>
-                        <tr>
-                            <div id="metall">
-                                <td>Metal</td>
-                                @{ string MetalGold = null;
-                                    foreach (var item in Model.GoldProduct)
-                                    {
-                                        if (item.No == 2)
-                                        {
-                                            MetalGold = item.Gold_Crt;
-                                            break;
-                                        }
-                                    }
-                                }
-                                <td>@MetalGold</td>
-                            </div>
-                        </tr>
+
                         <tr>
                             <td>Net Gold</td>
                             <td>@Html.DisplayFor(item => item.ViewFullItems.Net_Gold) gms</td>
+                        </tr>
+                        <tr>
+                            <td>Stone Weight (Include Diamond & Gemstone)</td>
+                            <td>@Html.DisplayFor(item => item.ViewFullItems.Stone_Wt) gms</td>
                         </tr>
                         <tr>
                             <td>Total Weight</td>
@@ -242,24 +229,130 @@
                                 }
                             }
                         </tr>
-
                     </tbody>
                 </table>
+                <hr />
+                <br />
+                <h3 class="col-12">Metal Details</h3>
+                <table class="table col-12">
+                    <thead style="font-size:17px;">
+                        <tr>
+                            <th><strong>Metal</strong></th>
+                            <th><strong>Total Weight (Includes waste)</strong></th>
+                            <th><strong>Rate</strong></th>
+                            <th><strong>Price</strong></th>
+                        </tr>
+                    </thead>
+                    <tbody id="metalAjax">
+                        <tr>
+                            <td>@Html.DisplayFor(item => item.ViewFullItems.Gold_Crt)</td>
+                            <td>@Html.DisplayFor(item => item.ViewFullItems.Total_weight) gms</td>
+                            <td>₹ @Html.DisplayFor(item => item.ViewFullItems.Gold_Rate)/gms </td>
+                            <td>₹ @Html.DisplayFor(item => item.ViewFullItems.Total_Amount)</td>
+                            <input type="hidden" id="GoldAmt" value="@Html.DisplayFor(item=>item.ViewFullItems.Total_Amount)" />
+                            <input type="hidden" id="GoldNo" value="@Html.DisplayFor(item=>item.ViewFullItems.No_Gold)" />
+                        </tr>
+                    </tbody>
+                </table>
+                <hr />
+                <br />
                 @{
                     string checkgold = Html.DisplayFor(item => item.ViewFullItems.No_Gold).ToString();
                     if (!string.IsNullOrEmpty(checkgold))
                     {
                         <h3 class="col-12">Diamond Details</h3>
+                        <table class="col-12 table">
+                            <thead>
+                                <tr>
+                                    <th><strong>Diamond</strong></th>
+                                    <th><strong>Carat</strong></th>
+                                    <th><strong>Weight</strong></th>
+                                    <th><strong>Size</strong></th>
+                                    <th><strong>Total Pcs</strong></th>
+                                    <th><strong>Rate</strong></th>
+                                    <th><strong>Price</strong></th>
+                                </tr>
+                            </thead>
+                            <tbody id="diamonAjax">
+                                <tr>
+                                    <td>@Html.DisplayFor(item => item.ViewFullItems.MainType)</td>
+                                    <td>@Html.DisplayFor(item => item.ViewFullItems.Dim_Crt) Crt</td>
+                                    <td>@Html.DisplayFor(item => item.ViewFullItems.Dim_Gm) gms</td>
+                                    <td>@Html.DisplayFor(item => item.ViewFullItems.Dim_Size) mm</td>
+                                    <td>@Html.DisplayFor(item => item.ViewFullItems.Dim_Pcs)</td>
+                                    <td>@Html.DisplayFor(item=>item.ViewFullItems.Dim_Rate)</td>
+                                    <td>₹ @Html.DisplayFor(item => item.ViewFullItems.Dim_Amt)</td>
+                                    <input type="hidden" id="DiamondAmt" value="@Html.DisplayFor(item=>item.ViewFullItems.Dim_Amt)" />
+                                    <input type="hidden" id="DiamondNo" value="@Html.DisplayFor(item=>item.ViewFullItems.No_Diamond)" />
+                                </tr>
+                            </tbody>
+                        </table>
+                        <hr />
+                        <br />
+                    }
+                    if (!@Html.DisplayFor(item => item.ViewFullItems.DimSubType_ID).ToString().ToLower().Equals("none"))
+                    {
+                        <h3 class="col-12">Sub Diamond Details</h3>
+                        <table class="col-12 table">
+                            <thead>
+                                <tr>
+                                    <th><strong>Diamond</strong></th>
+                                    <th><strong>Carat</strong></th>
+                                    <th><strong>Weight</strong></th>
+                                    <th><strong>Size</strong></th>
+                                    <th><strong>Total Pcs</strong></th>
+                                    <th><strong>Rate</strong></th>
+                                    <th><strong>Price</strong></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>@Html.DisplayFor(item => item.ViewFullItems.SubTyle)</td>
+                                    <td>@Html.DisplayFor(item => item.ViewFullItems.Dim_CrtSub) Crt</td>
+                                    <td>@Html.DisplayFor(item => item.ViewFullItems.Dim_GmSub) gms</td>
+                                    <td>@Html.DisplayFor(item => item.ViewFullItems.Dim_SizeSub) mm</td>
+                                    <td>@Html.DisplayFor(item => item.ViewFullItems.Dim_PcsSub)</td>
+                                    <td>@Html.DisplayFor(item => item.ViewFullItems.Dim_RateSub)</td>
+                                    <td>₹ @Html.DisplayFor(item => item.ViewFullItems.Dim_AmtSub)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <hr />
+                        <br />
                     }
                 }
                 @{
                     string checkgems = Html.DisplayFor(item => item.ViewFullItems.No_Stone).ToString();
                     if (!string.IsNullOrEmpty(checkgems))
                     {
-                        <h3 class="col-12">Diamond Details </h3>
+                        <h3 class="col-12">Gemstone Details </h3>
+                        <table class="table col-12">
+                            <thead>
+                                <tr>
+                                    <th><strong>Gemstone</strong></th>
+                                    <th><strong>Carat</strong></th>
+                                    <th><strong>Weight</strong></th>
+                                    <th><strong>Total Pcs</strong></th>
+                                    <th><strong>Rate</strong></th>
+                                    <th><strong>Price</strong></th>
+                                </tr>
+                            </thead>
+                            <tbody id="stoneAjax">
+                                <tr>
+                                    <td>@Html.DisplayFor(item => item.ViewFullItems.StoneQlty)</td>
+                                    <td>@Html.DisplayFor(item => item.ViewFullItems.Stone_Crt) Crt</td>
+                                    <td>@Html.DisplayFor(item => item.ViewFullItems.Stone_Gm) gms</td>
+                                    <td>@Html.DisplayFor(item => item.ViewFullItems.Stone_Pcs)</td>
+                                    <td>@Html.DisplayFor(item => item.ViewFullItems.Stone_Rate)</td>
+                                    <td>₹ @Html.DisplayFor(item => item.ViewFullItems.Stone_Amt)</td>
+                                    <input type="hidden" id="StoneAmt" value="@Html.DisplayFor(item=>item.ViewFullItems.Stone_Amt)" />
+                                    <input type="hidden" id="StoneNo" value="@Html.DisplayFor(item=>item.ViewFullItems.No_Stone)" />
+                                </tr>
+                            </tbody>
+                        </table>
                     }
                 }
-                
+
             </div>
         </div>
     </div>
@@ -271,32 +364,93 @@
 <script type="text/javascript" src="~/Content/js/Product/slick.js"></script>
 <script type="text/javascript">
 
+    var total_brand = parseFloat(document.getElementById("totalBrand").value);
+    var GoldNo = parseInt(document.getElementById('GoldNo').value);
+    var GoldAmt = parseFloat(document.getElementById('GoldAmt').value);
+    var Stylecodee = document.getElementById('StyleCode').value;
+    var DiamondNo = parseFloat(document.getElementById('DiamondNo').value);
+    var DiamondAmt = parseFloat(document.getElementById('DiamondAmt').value);
+    var StoneNo = parseFloat(document.getElementById('StoneNo').value);
+    var StoneAmt = parseFloat(document.getElementById('StoneAmt').value);
+    var NoGold, NoDiamond, NoGem;
+    NoGold = document.getElementById('GoldNo').value;
+    NoGem = document.getElementById('StoneNo').value;
+    NoDiamond = document.getElementById('DiamondNo').value;
     function GetSize() {
         var size = document.getElementById("SelectSizeRing").value;
         document.getElementById("SizeRing").innerHTML = size;
     }
-    function GetNo() {
+
+    function GetNo(Name) {
         var No;
-        var MetalNo = document.getElementsByName('metal');
+        var MetalNo = document.getElementsByName(Name);
         for (var i = 0, length = MetalNo.length; i < length; i++) {
             if (MetalNo[i].checked) {
                 No=MetalNo[i].value;
                 break;
             }
         }
+       
         return No;
     }
-    function PassValueMetal() {
-        var No = GetNo();
-        document.getElementById("HienHo").value = No;
+
+    function CalGold() {
+        total_brand -= GoldAmt;
+        GoldNo = parseInt(document.getElementById('GoldNo').value);
+        GoldAmt = parseFloat(document.getElementById('GoldAmt').value);
+        total_brand += GoldAmt;
+        document.getElementById('Price').innerHTML = total_brand.toFixed(2);
     }
+    function CalDiamond() {
+        total_brand -= DiamondAmt;
+        DiamondNo = parseFloat(document.getElementById('DiamondNo').value);
+        DiamondAmt = parseFloat(document.getElementById('DiamondAmt').value);
+        total_brand += DiamondAmt;
+        document.getElementById('Price').innerHTML = total_brand.toFixed(2);
+    }
+    function CalStone() {
+        total_brand -= StoneAmt;
+        StoneNo = parseFloat(document.getElementById('StoneNo').value);
+        StoneAmt = parseFloat(document.getElementById('StoneAmt').value);
+        total_brand += StoneAmt;
+        document.getElementById('Price').innerHTML = total_brand.toFixed(2);
+    }
+    function AjaxtGetNo(No,style,address,functionn,local) {
+        var r = $.ajax({
+            url: "/Product/" + address,
+            data: { No: No, Style_code: style },
+            type: "get",
+            contentType: "application/json; charset=utf-8", //application/html;charset=utf-8
+            dataType: "html"
+        });
+        r.done(function (result) {
+            $(local).html(result);
+            functionn;
+        });
+        r.faile(function (xhr, status) {
+            alert("Status: " + status);
+        });
+    }
+    
+    function PassValueMetal() {
+        var No = GetNo('metal');
+        NoGold = GetNo('metal');
+        //$.get("/Product/GetNoMetal", { No: NoM }, function (data) {
+        //    $("#metalAjax").html(data);
+        //});
+        AjaxtGetNo(No, Stylecodee, 'GetNoMetal', CalGold(),'#metalAjax');
+    }
+
+   
     function PassValueDiamond() {
-        var No = GetNo();
-        document.getElementById("NoDiamond").value = No;
+        var No = GetNo('diamond');
+        NoDiamond = GetNo('diamond');
+        AjaxtGetNo(No, Stylecodee, 'GetNoDiamond', CalDiamond(),'#diamonAjax');
     }
     function PassValueStone() {
-        var No = GetNo();
-        document.getElementById("NoStone").value = No;
+        var No = GetNo('stone');
+        NoGem = GetNo('stone');
+        AjaxtGetNo(No, Stylecodee, 'GetNoStone', CalStone(), '#stoneAjax');
     }
 
 
@@ -305,13 +459,19 @@
         parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         return parts.join(".");
     }
+    
     $(document).ready(function () {
+
+        $('#addtocart').click(function () {
+            alert('Style_Code:' + Stylecodee + '\n Gold No: ' + NoGold + '\n Diamond No:' + NoDiamond + '\n Gemstone No' + NoGem);
+        });
 
         $(".curentcy").each(function () {
             var num = $(this).text();
             var commaNum = numberWithCommas(num);
             $(this).text(commaNum);
         });
+
 
         $('.slider-for').slick({
             slidesToShow: 1,
@@ -329,7 +489,7 @@
         $('.slider-for-metal').slick({
             slidesToShow: 4,
             slidesToScroll: 1,
-            arrows: true, adaptiveHeight: true
+            arrows: true, adaptiveHeight: true,
         });
 
         $("#SelectSize").click(function () {

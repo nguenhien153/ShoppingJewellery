@@ -18,12 +18,11 @@ namespace ShoppingJewellery.Models
         public string Style_code { get; set; }
         public string GoldType_ID { get; set; }
         public string Gold_Crt { get; set; }
-        public decimal Gold_Rate { get; set; }
         public decimal Gold_Wt { get; set; }
         public decimal Wstg_Per { get; set; }
         public decimal Wstq { get; set; }
         public decimal Total_weight { get; set; }
-        public Nullable<decimal> PriceOnGram { get; set; }
+        public Nullable<decimal> Gold_Rate { get; set; }
         public Nullable<decimal> Total_Amount { get; set; }
     }
 }

@@ -42,5 +42,20 @@ namespace ShoppingJewellery.Controllers
         {
             return View();
         }
+        public ActionResult GetNoMetal(int No, string Style_code)
+        {
+            var pro = dao.GetNoGold(No, Style_code);
+            return PartialView(pro);
+        }
+        public ActionResult GetNoDiamond(int No, string Style_code)
+        {
+            var pro = dao.GetNoDiamond(No, Style_code);
+            return PartialView(pro);
+        }
+        public ActionResult GetNoStone(int No, string Style_code)
+        {
+            var pro = dao.GetNoStone(No, Style_code);
+            return PartialView(pro);
+        }
     }
 }

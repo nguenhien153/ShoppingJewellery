@@ -1,0 +1,12 @@
+﻿@model ShoppingJewellery.Models.StoneView
+
+<tr>
+    <td>@Html.DisplayFor(item => item.StoneQlty)</td>
+    <td>@Html.DisplayFor(item => item.Stone_Crt) Crt</td>
+    <td>@Html.DisplayFor(item => item.Stone_Gm) gms</td>
+    <td>@Html.DisplayFor(item => item.Stone_Pcs)</td>
+    <td>@Html.DisplayFor(item => item.Stone_Rate)</td>
+    <td>₹ @Html.DisplayFor(item => item.Stone_Amt)</td>
+    <input type="hidden" id="StoneAmt" value="@Html.DisplayFor(item=>item.Stone_Amt)" />
+    <input type="hidden" id="StoneNo" value="@Html.DisplayFor(item=>item.No)" />
+</tr>

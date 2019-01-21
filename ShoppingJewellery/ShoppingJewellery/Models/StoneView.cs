@@ -23,6 +23,5 @@ namespace ShoppingJewellery.Models
         public decimal Stone_Crt { get; set; }
         public decimal Stone_Rate { get; set; }
         public decimal Stone_Amt { get; set; }
-        public decimal Stone_Wt { get; set; }
     }
 }

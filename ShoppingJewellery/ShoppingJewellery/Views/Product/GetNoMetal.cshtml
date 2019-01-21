@@ -1,0 +1,12 @@
+﻿@model ShoppingJewellery.Models.GoldView
+
+@{
+<tr>
+    <td>@Html.DisplayFor(item => item.Gold_Crt)</td>
+    <td>@Html.DisplayFor(item => item.Total_weight) gms</td>
+    <td>₹ @Html.DisplayFor(item => item.Gold_Rate)/gms </td>
+    <td>₹ @Html.DisplayFor(item => item.Total_Amount)</td>
+    <input type="hidden" value="@Html.DisplayFor(item=>item.Total_Amount)" id="GoldAmt" />
+    <input type="hidden" value="@Html.DisplayFor(item=>item.No)" id="GoldNo" />
+</tr>
+}

@@ -14,12 +14,12 @@
         <AssociationConnector Association="JewelleryShopping_dbModel.FK_ProdMst_CatMst" />
         <AssociationConnector Association="JewelleryShopping_dbModel.FK_DisplayCommonPro_ProdMst" />
         <AssociationConnector Association="JewelleryShopping_dbModel.FK_JewelTypeMst_ProdMst" />
-        <EntityTypeShape EntityType="JewelleryShopping_dbModel.ViewDisplayItem" Width="1.5" PointX="12.625" PointY="2.25" />
+        <EntityTypeShape EntityType="JewelleryShopping_dbModel.ViewDisplayItem" Width="1.5" PointX="13.375" PointY="2.375" />
         <EntityTypeShape EntityType="JewelleryShopping_dbModel.Image" Width="1.5" PointX="5.375" PointY="9.75" />
-        <EntityTypeShape EntityType="JewelleryShopping_dbModel.ViewFullItem" Width="1.5" PointX="10" PointY="1.5" />
         <EntityTypeShape EntityType="JewelleryShopping_dbModel.DiamonView" Width="1.5" PointX="0.75" PointY="9.75" />
-        <EntityTypeShape EntityType="JewelleryShopping_dbModel.StoneView" Width="1.5" PointX="2.75" PointY="9.75" />
         <EntityTypeShape EntityType="JewelleryShopping_dbModel.GoldView" Width="1.5" PointX="0.75" PointY="5.75" />
+        <EntityTypeShape EntityType="JewelleryShopping_dbModel.StoneView" Width="1.5" PointX="9.375" PointY="4.75" />
+        <EntityTypeShape EntityType="JewelleryShopping_dbModel.ViewFullItem" Width="1.5" PointX="7.375" PointY="9.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

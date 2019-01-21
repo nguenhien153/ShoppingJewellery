@@ -673,6 +673,9 @@
     <Content Include="Views\Layout\Product\LayoutListProduct.cshtml" />
     <Content Include="Views\Test\Index2.cshtml" />
     <Content Include="Views\Test\Index.cshtml" />
+    <Content Include="Views\Product\GetNoMetal.cshtml" />
+    <Content Include="Views\Product\GetNoDiamond.cshtml" />
+    <Content Include="Views\Product\GetNoStone.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

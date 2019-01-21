@@ -51,6 +51,23 @@ namespace ShoppingJewellery.Models
         {
             return db.ViewDisplayItems.ToList();
         }
+
+        public GoldView GetNoGold(int No,string Style_code)
+        {
+            var pro = db.GoldViews.First(item => item.No == No && item.Style_code.Trim().Equals(Style_code.Trim()));
+            return pro;
+        }
+        public DiamonView GetNoDiamond(int No, string Style_code)
+        {
+            var pro = db.DiamonViews.First(item => item.No == No && item.Style_Code.Trim().Equals(Style_code.Trim()));
+            return pro;
+        }
+        public StoneView GetNoStone(int No, string Style_code)
+        {
+            var pro = db.StoneViews.First(item => item.No == No && item.Style_Code.Trim().Equals(Style_code.Trim()));
+            return pro;
+        }
+
     }
 
     public class ViewModel
