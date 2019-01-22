@@ -4,8 +4,8 @@
 <tr>
     <td>@Html.DisplayFor(item => item.Gold_Crt)</td>
     <td>@Html.DisplayFor(item => item.Total_weight) gms</td>
-    <td>₹ @Html.DisplayFor(item => item.Gold_Rate)/gms </td>
-    <td>₹ @Html.DisplayFor(item => item.Total_Amount)</td>
+    <td>₹ <span id="RateMetal">@Html.DisplayFor(item => item.Gold_Rate)</span>/gms </td>
+    <td>₹ <span id="PriceMetal">@Html.DisplayFor(item => item.Total_Amount)</span></td>
     <input type="hidden" value="@Html.DisplayFor(item=>item.Total_Amount)" id="GoldAmt" />
     <input type="hidden" value="@Html.DisplayFor(item=>item.No)" id="GoldNo" />
 </tr>

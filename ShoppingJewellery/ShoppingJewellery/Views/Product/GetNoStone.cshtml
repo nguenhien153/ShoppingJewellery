@@ -5,8 +5,8 @@
     <td>@Html.DisplayFor(item => item.Stone_Crt) Crt</td>
     <td>@Html.DisplayFor(item => item.Stone_Gm) gms</td>
     <td>@Html.DisplayFor(item => item.Stone_Pcs)</td>
-    <td>@Html.DisplayFor(item => item.Stone_Rate)</td>
-    <td>₹ @Html.DisplayFor(item => item.Stone_Amt)</td>
+    <td>₹ <span id="RateGem">@Html.DisplayFor(item => item.Stone_Rate)</span></td>
+    <td>₹ <span id="PriceGem">@Html.DisplayFor(item => item.Stone_Amt)</span></td>
     <input type="hidden" id="StoneAmt" value="@Html.DisplayFor(item=>item.Stone_Amt)" />
     <input type="hidden" id="StoneNo" value="@Html.DisplayFor(item=>item.No)" />
 </tr>

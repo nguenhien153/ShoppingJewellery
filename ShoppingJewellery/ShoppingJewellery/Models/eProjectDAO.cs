@@ -16,7 +16,7 @@ namespace ShoppingJewellery.Models
 
         public ViewFullItem GetDetailsProduct(string Style_Code)
         {
-            var pro = db.ViewFullItems.First(item => item.Style_Code.Equals(Style_Code));
+            var pro = db.ViewFullItems.First(item => item.Style_Code.Trim().Equals(Style_Code.Trim()));
             return pro;
         }
 
