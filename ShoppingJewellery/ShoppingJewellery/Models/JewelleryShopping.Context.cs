@@ -37,5 +37,6 @@ namespace ShoppingJewellery.Models
         public virtual DbSet<GoldView> GoldViews { get; set; }
         public virtual DbSet<StoneView> StoneViews { get; set; }
         public virtual DbSet<ViewFullItem> ViewFullItems { get; set; }
+        public virtual DbSet<Item_Require> Item_Require { get; set; }
     }
 }

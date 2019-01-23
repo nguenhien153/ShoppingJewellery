@@ -40,6 +40,18 @@ warning 6002: The table/view 'JewelleryShopping_db.dbo.Image' does not have a pr
           <Property Name="image" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="No" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="Item_Require">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="Style_Code" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Diamon_No" Type="int" Nullable="false" />
+          <Property Name="Stone_No" Type="int" Nullable="false" />
+          <Property Name="Size" Type="int" Nullable="false" />
+          <Property Name="Total" Type="numeric" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Gold_No" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="JewelTypeMst">
           <Key>
             <PropertyRef Name="JewelTypeMst" />
@@ -311,6 +323,7 @@ warning 6002: The table/view 'JewelleryShopping_db.dbo.ViewFullItem' does not ha
           <EntitySet Name="AdminLoginMst" EntityType="Self.AdminLoginMst" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CatMst" EntityType="Self.CatMst" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DisplayCommonPro" EntityType="Self.DisplayCommonPro" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Item_Require" EntityType="Self.Item_Require" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="JewelTypeMst" EntityType="Self.JewelTypeMst" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProdMst" EntityType="Self.ProdMst" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserRegMst" EntityType="Self.UserRegMst" Schema="dbo" store:Type="Tables" />
@@ -497,6 +510,7 @@ warning 6002: The table/view 'JewelleryShopping_db.dbo.ViewFullItem' does not ha
           <EntitySet Name="GoldViews" EntityType="JewelleryShopping_dbModel.GoldView" />
           <EntitySet Name="StoneViews" EntityType="JewelleryShopping_dbModel.StoneView" />
           <EntitySet Name="ViewFullItems" EntityType="JewelleryShopping_dbModel.ViewFullItem" />
+          <EntitySet Name="Item_Require" EntityType="JewelleryShopping_dbModel.Item_Require" />
         </EntityContainer>
         <EntityType Name="DisplayCommonPro">
           <Key>
@@ -794,6 +808,18 @@ warning 6002: The table/view 'JewelleryShopping_db.dbo.ViewFullItem' does not ha
           <Property Name="Stone_Amt" Type="Decimal" Precision="10" Scale="2" />
           <Property Name="total_brand" Type="Decimal" Precision="38" Scale="2" />
         </EntityType>
+        <EntityType Name="Item_Require">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="Style_Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Diamon_No" Type="Int32" Nullable="false" />
+          <Property Name="Stone_No" Type="Int32" Nullable="false" />
+          <Property Name="Size" Type="Int32" Nullable="false" />
+          <Property Name="Total" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Gold_No" Type="Int32" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1007,6 +1033,19 @@ warning 6002: The table/view 'JewelleryShopping_db.dbo.ViewFullItem' does not ha
                 <ScalarProperty Name="Cat_ID" ColumnName="Cat_ID" />
                 <ScalarProperty Name="Pairs" ColumnName="Pairs" />
                 <ScalarProperty Name="Img" ColumnName="Img" />
+                <ScalarProperty Name="Style_Code" ColumnName="Style_Code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Item_Require">
+            <EntityTypeMapping TypeName="JewelleryShopping_dbModel.Item_Require">
+              <MappingFragment StoreEntitySet="Item_Require">
+                <ScalarProperty Name="Gold_No" ColumnName="Gold_No" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="Size" ColumnName="Size" />
+                <ScalarProperty Name="Stone_No" ColumnName="Stone_No" />
+                <ScalarProperty Name="Diamon_No" ColumnName="Diamon_No" />
                 <ScalarProperty Name="Style_Code" ColumnName="Style_Code" />
               </MappingFragment>
             </EntityTypeMapping>

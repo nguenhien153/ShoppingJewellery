@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 
@@ -8,7 +10,7 @@ namespace ShoppingJewellery.Models
     public class eProjectDAO
     {
         JewelleryShopping_dbEntities db = new JewelleryShopping_dbEntities();
-
+        eProjectDAO dao = new eProjectDAO();
         public List<DisplayCommonPro> GetProCommon()
         {
             return db.DisplayCommonProes.ToList();
@@ -68,6 +70,7 @@ namespace ShoppingJewellery.Models
             return pro;
         }
 
+       
     }
 
     public class ViewModel
@@ -78,4 +81,24 @@ namespace ShoppingJewellery.Models
         public IEnumerable<DiamonView> DiamonProduct  { get; set; }
         public IEnumerable<StoneView> StoneProduct { get; set; }
     }
-}
+    
+    //public class Cart
+    //{
+    //    [Key]
+    //    public int ID { get; set; }
+    //    public string Style_code { get; set; }
+    //    [Required]
+    //    public int size { get; set; }
+    //    [Required]
+    //    public int MetalNo { get; set; }
+    //    [Required]
+    //    public int DiamondNo { get; set; }
+    //    [Required]
+    //    public int StoneNo { get; set; }
+    //    [Required]
+    //    public double Total { get; set; }
+    //}
+    //public class CartDB : DbContext
+    //{
+
+    //}
