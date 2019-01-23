@@ -32,20 +32,20 @@ namespace ShoppingJewellery.Controllers
         public ActionResult Login(string username, string password)
         {
             var result = db.AdminLoginMsts.Count(i => i.Username.Equals(username) && i.Password.Equals(password));
-            if (result != 0)
-            {
-                var role = service.GetAd(username);
-                if (role.role == false) {
+            //if (result != 0)
+            //{
+            //    var role = service.GetAd(username);
+            //    if (role.role.Equals(0)) {
                     Session["admin"] = username;
                     return RedirectToAction("Index");
-                }
-                if (role.role == true) {
-                    Session["SuperAd"] = username;
-                    return RedirectToAction("Index");
-                }     
-            }
-            Session["check"] = "fail";
-            return View();
+            //    }
+            //    if (role.role.Equals(1)) {
+            //        Session["SuperAd"] = username;
+            //        return RedirectToAction("Index");
+            //    }     
+            //}
+            //Session["check"] = "fail";
+           // return View();
         }
 
         public ActionResult ChangePass()
@@ -93,7 +93,7 @@ namespace ShoppingJewellery.Controllers
 
         public ActionResult ManageAdmin()
         {
-            if (Session["SuperAd"] != null)
+            if (Session["admin"] != null)
             {
                 return View(db.AdminLoginMsts.ToList());
             }
