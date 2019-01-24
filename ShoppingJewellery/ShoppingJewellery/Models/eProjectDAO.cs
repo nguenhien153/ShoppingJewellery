@@ -54,7 +54,7 @@ namespace ShoppingJewellery.Models
             return db.ViewDisplayItems.ToList();
         }
 
-        public GoldView GetNoGold(int No, string Style_code)
+        public GoldView GetNoGold(int No,string Style_code)
         {
             var pro = db.GoldViews.First(item => item.No == No && item.Style_code.Trim().Equals(Style_code.Trim()));
             return pro;
@@ -70,19 +70,7 @@ namespace ShoppingJewellery.Models
             return pro;
         }
 
-        public bool CheckItem(Item_Require item)
-        {
-            var pro = db.ItemMsts.First(itemm => itemm.Style_Code.Trim().Contains(item.Style_Code.Trim()));
-            if (pro != null)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
+       
     }
 
     public class ViewModel
@@ -90,10 +78,9 @@ namespace ShoppingJewellery.Models
         public ViewFullItem ViewFullItems { get; set; }
         public IEnumerable<Image> Images { get; set; }
         public IEnumerable<GoldView> GoldProduct { get; set; }
-        public IEnumerable<DiamonView> DiamonProduct { get; set; }
+        public IEnumerable<DiamonView> DiamonProduct  { get; set; }
         public IEnumerable<StoneView> StoneProduct { get; set; }
     }
-}
     
     //public class Cart
     //{

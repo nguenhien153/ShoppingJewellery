@@ -19,7 +19,6 @@ namespace ShoppingJewellery.Models
         {
             this.DisplayCommonProes = new HashSet<DisplayCommonPro>();
             this.JewelTypeMsts = new HashSet<JewelTypeMst>();
-            this.ItemMsts = new HashSet<ItemMst>();
         }
     
         public string Prod_ID { get; set; }
@@ -31,7 +30,5 @@ namespace ShoppingJewellery.Models
         public virtual ICollection<DisplayCommonPro> DisplayCommonProes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<JewelTypeMst> JewelTypeMsts { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ItemMst> ItemMsts { get; set; }
     }
 }
