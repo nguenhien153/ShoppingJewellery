@@ -18,6 +18,7 @@ namespace ShoppingJewellery.Models
         public CatMst()
         {
             this.ProdMsts = new HashSet<ProdMst>();
+            this.ItemMsts = new HashSet<ItemMst>();
         }
     
         public string Cat_ID { get; set; }
@@ -25,5 +26,7 @@ namespace ShoppingJewellery.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProdMst> ProdMsts { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ItemMst> ItemMsts { get; set; }
     }
 }

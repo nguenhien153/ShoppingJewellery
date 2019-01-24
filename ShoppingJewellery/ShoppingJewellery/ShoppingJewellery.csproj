@@ -585,6 +585,12 @@
     <Compile Include="Models\Image.cs">
       <DependentUpon>JewelleryShopping.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ItemMst.cs">
+      <DependentUpon>JewelleryShopping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Item_Require.cs">
+      <DependentUpon>JewelleryShopping.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\JewelleryShopping.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -676,6 +682,7 @@
     <Content Include="Views\Product\GetNoMetal.cshtml" />
     <Content Include="Views\Product\GetNoDiamond.cshtml" />
     <Content Include="Views\Product\GetNoStone.cshtml" />
+    <Content Include="Views\Product\Item_required.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

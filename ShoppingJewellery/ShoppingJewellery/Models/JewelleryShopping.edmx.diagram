@@ -21,6 +21,12 @@
         <EntityTypeShape EntityType="JewelleryShopping_dbModel.StoneView" Width="1.5" PointX="9.375" PointY="4.75" />
         <EntityTypeShape EntityType="JewelleryShopping_dbModel.ViewFullItem" Width="1.5" PointX="7.375" PointY="9.75" />
         <EntityTypeShape EntityType="JewelleryShopping_dbModel.Item_Require" Width="1.5" PointX="9.375" PointY="8.75" />
+        <EntityTypeShape EntityType="JewelleryShopping_dbModel.ItemMst" Width="1.5" PointX="10.5" PointY="0.75" />
+        <AssociationConnector Association="JewelleryShopping_dbModel.FK_ItemMst_CatMst" />
+        <AssociationConnector Association="JewelleryShopping_dbModel.FK_Item_Require_ItemMst" />
+        <AssociationConnector Association="JewelleryShopping_dbModel.FK_Image_ItemMst" />
+        <AssociationConnector Association="JewelleryShopping_dbModel.FK_ItemMst_JewelTypeMst" />
+        <AssociationConnector Association="JewelleryShopping_dbModel.FK_ItemMst_ProdMst" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

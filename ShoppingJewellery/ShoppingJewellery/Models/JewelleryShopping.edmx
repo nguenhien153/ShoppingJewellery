@@ -52,6 +52,30 @@ warning 6002: The table/view 'JewelleryShopping_db.dbo.Image' does not have a pr
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Gold_No" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="ItemMst">
+          <Key>
+            <PropertyRef Name="Style_Code" />
+          </Key>
+          <Property Name="Style_Code" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Pairs" Type="numeric" Precision="3" Scale="0" Nullable="false" />
+          <Property Name="Brand_ID" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Quantity" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Cat_ID" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Prod_Quality" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Certify_ID" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Prod_ID" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="JewelleryType_ID" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Net_Gold" Type="numeric" Precision="10" Scale="3" Nullable="false" />
+          <Property Name="Tot_Gross_Wt" Type="numeric" Precision="10" Scale="3" Nullable="false" />
+          <Property Name="Stone_Making" Type="numeric" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Other_Making" Type="numeric" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Tot_Making" Type="numeric" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="MRP" Type="numeric" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="size" Type="int" Nullable="false" />
+          <Property Name="Gold_Making" Type="numeric" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Img" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Stone_Wt" Type="numeric" Precision="10" Scale="3" Nullable="false" />
+        </EntityType>
         <EntityType Name="JewelTypeMst">
           <Key>
             <PropertyRef Name="JewelTypeMst" />
@@ -295,6 +319,66 @@ warning 6002: The table/view 'JewelleryShopping_db.dbo.ViewFullItem' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Image_ItemMst">
+          <End Role="ItemMst" Type="Self.ItemMst" Multiplicity="1" />
+          <End Role="Image" Type="Self.Image" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemMst">
+              <PropertyRef Name="Style_Code" />
+            </Principal>
+            <Dependent Role="Image">
+              <PropertyRef Name="Style_Colde" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Item_Require_ItemMst">
+          <End Role="ItemMst" Type="Self.ItemMst" Multiplicity="1" />
+          <End Role="Item_Require" Type="Self.Item_Require" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemMst">
+              <PropertyRef Name="Style_Code" />
+            </Principal>
+            <Dependent Role="Item_Require">
+              <PropertyRef Name="Style_Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemMst_CatMst">
+          <End Role="CatMst" Type="Self.CatMst" Multiplicity="1" />
+          <End Role="ItemMst" Type="Self.ItemMst" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CatMst">
+              <PropertyRef Name="Cat_ID" />
+            </Principal>
+            <Dependent Role="ItemMst">
+              <PropertyRef Name="Cat_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemMst_JewelTypeMst">
+          <End Role="JewelTypeMst" Type="Self.JewelTypeMst" Multiplicity="1" />
+          <End Role="ItemMst" Type="Self.ItemMst" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JewelTypeMst">
+              <PropertyRef Name="JewelTypeMst" />
+            </Principal>
+            <Dependent Role="ItemMst">
+              <PropertyRef Name="JewelleryType_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemMst_ProdMst">
+          <End Role="ProdMst" Type="Self.ProdMst" Multiplicity="1" />
+          <End Role="ItemMst" Type="Self.ItemMst" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProdMst">
+              <PropertyRef Name="Prod_ID" />
+            </Principal>
+            <Dependent Role="ItemMst">
+              <PropertyRef Name="Prod_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_JewelTypeMst_ProdMst">
           <End Role="ProdMst" Type="Self.ProdMst" Multiplicity="1" />
           <End Role="JewelTypeMst" Type="Self.JewelTypeMst" Multiplicity="*" />
@@ -324,6 +408,7 @@ warning 6002: The table/view 'JewelleryShopping_db.dbo.ViewFullItem' does not ha
           <EntitySet Name="CatMst" EntityType="Self.CatMst" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DisplayCommonPro" EntityType="Self.DisplayCommonPro" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Item_Require" EntityType="Self.Item_Require" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ItemMst" EntityType="Self.ItemMst" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="JewelTypeMst" EntityType="Self.JewelTypeMst" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProdMst" EntityType="Self.ProdMst" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserRegMst" EntityType="Self.UserRegMst" Schema="dbo" store:Type="Tables" />
@@ -472,6 +557,26 @@ warning 6002: The table/view 'JewelleryShopping_db.dbo.ViewFullItem' does not ha
             <End Role="ProdMst" EntitySet="ProdMst" />
             <End Role="DisplayCommonPro" EntitySet="DisplayCommonPro" />
           </AssociationSet>
+          <AssociationSet Name="FK_Image_ItemMst" Association="Self.FK_Image_ItemMst">
+            <End Role="ItemMst" EntitySet="ItemMst" />
+            <End Role="Image" EntitySet="Image" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Item_Require_ItemMst" Association="Self.FK_Item_Require_ItemMst">
+            <End Role="ItemMst" EntitySet="ItemMst" />
+            <End Role="Item_Require" EntitySet="Item_Require" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemMst_CatMst" Association="Self.FK_ItemMst_CatMst">
+            <End Role="CatMst" EntitySet="CatMst" />
+            <End Role="ItemMst" EntitySet="ItemMst" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemMst_JewelTypeMst" Association="Self.FK_ItemMst_JewelTypeMst">
+            <End Role="JewelTypeMst" EntitySet="JewelTypeMst" />
+            <End Role="ItemMst" EntitySet="ItemMst" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemMst_ProdMst" Association="Self.FK_ItemMst_ProdMst">
+            <End Role="ProdMst" EntitySet="ProdMst" />
+            <End Role="ItemMst" EntitySet="ItemMst" />
+          </AssociationSet>
           <AssociationSet Name="FK_JewelTypeMst_ProdMst" Association="Self.FK_JewelTypeMst_ProdMst">
             <End Role="ProdMst" EntitySet="ProdMst" />
             <End Role="JewelTypeMst" EntitySet="JewelTypeMst" />
@@ -511,6 +616,27 @@ warning 6002: The table/view 'JewelleryShopping_db.dbo.ViewFullItem' does not ha
           <EntitySet Name="StoneViews" EntityType="JewelleryShopping_dbModel.StoneView" />
           <EntitySet Name="ViewFullItems" EntityType="JewelleryShopping_dbModel.ViewFullItem" />
           <EntitySet Name="Item_Require" EntityType="JewelleryShopping_dbModel.Item_Require" />
+          <EntitySet Name="ItemMsts" EntityType="JewelleryShopping_dbModel.ItemMst" />
+          <AssociationSet Name="FK_ItemMst_CatMst" Association="JewelleryShopping_dbModel.FK_ItemMst_CatMst">
+            <End Role="CatMst" EntitySet="CatMsts" />
+            <End Role="ItemMst" EntitySet="ItemMsts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Item_Require_ItemMst" Association="JewelleryShopping_dbModel.FK_Item_Require_ItemMst">
+            <End Role="ItemMst" EntitySet="ItemMsts" />
+            <End Role="Item_Require" EntitySet="Item_Require" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Image_ItemMst" Association="JewelleryShopping_dbModel.FK_Image_ItemMst">
+            <End Role="ItemMst" EntitySet="ItemMsts" />
+            <End Role="Image" EntitySet="Images" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemMst_JewelTypeMst" Association="JewelleryShopping_dbModel.FK_ItemMst_JewelTypeMst">
+            <End Role="JewelTypeMst" EntitySet="JewelTypeMsts" />
+            <End Role="ItemMst" EntitySet="ItemMsts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemMst_ProdMst" Association="JewelleryShopping_dbModel.FK_ItemMst_ProdMst">
+            <End Role="ProdMst" EntitySet="ProdMsts" />
+            <End Role="ItemMst" EntitySet="ItemMsts" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="DisplayCommonPro">
           <Key>
@@ -549,6 +675,7 @@ warning 6002: The table/view 'JewelleryShopping_db.dbo.ViewFullItem' does not ha
           <Property Name="Cat_ID" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="Cat_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="ProdMsts" Relationship="JewelleryShopping_dbModel.FK_ProdMst_CatMst" FromRole="CatMst" ToRole="ProdMst" />
+          <NavigationProperty Name="ItemMsts" Relationship="JewelleryShopping_dbModel.FK_ItemMst_CatMst" FromRole="CatMst" ToRole="ItemMst" />
         </EntityType>
         <EntityType Name="JewelTypeMst">
           <Key>
@@ -558,6 +685,7 @@ warning 6002: The table/view 'JewelleryShopping_db.dbo.ViewFullItem' does not ha
           <Property Name="Jewellery_Type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ID_Prod" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
           <NavigationProperty Name="ProdMst" Relationship="JewelleryShopping_dbModel.FK_JewelTypeMst_ProdMst" FromRole="JewelTypeMst" ToRole="ProdMst" />
+          <NavigationProperty Name="ItemMsts" Relationship="JewelleryShopping_dbModel.FK_ItemMst_JewelTypeMst" FromRole="JewelTypeMst" ToRole="ItemMst" />
         </EntityType>
         <EntityType Name="ProdMst">
           <Key>
@@ -569,6 +697,7 @@ warning 6002: The table/view 'JewelleryShopping_db.dbo.ViewFullItem' does not ha
           <NavigationProperty Name="CatMst" Relationship="JewelleryShopping_dbModel.FK_ProdMst_CatMst" FromRole="ProdMst" ToRole="CatMst" />
           <NavigationProperty Name="DisplayCommonProes" Relationship="JewelleryShopping_dbModel.FK_DisplayCommonPro_ProdMst" FromRole="ProdMst" ToRole="DisplayCommonPro" />
           <NavigationProperty Name="JewelTypeMsts" Relationship="JewelleryShopping_dbModel.FK_JewelTypeMst_ProdMst" FromRole="ProdMst" ToRole="JewelTypeMst" />
+          <NavigationProperty Name="ItemMsts" Relationship="JewelleryShopping_dbModel.FK_ItemMst_ProdMst" FromRole="ProdMst" ToRole="ItemMst" />
         </EntityType>
         <Association Name="FK_ProdMst_CatMst">
           <End Type="JewelleryShopping_dbModel.CatMst" Role="CatMst" Multiplicity="1" />
@@ -642,6 +771,7 @@ warning 6002: The table/view 'JewelleryShopping_db.dbo.ViewFullItem' does not ha
           <Property Name="Style_Colde" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="image1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="No" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ItemMst" Relationship="JewelleryShopping_dbModel.FK_Image_ItemMst" FromRole="Image" ToRole="ItemMst" />
         </EntityType>
         <EntityType Name="DiamonView">
           <Key>
@@ -819,7 +949,97 @@ warning 6002: The table/view 'JewelleryShopping_db.dbo.ViewFullItem' does not ha
           <Property Name="Total" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Gold_No" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ItemMst" Relationship="JewelleryShopping_dbModel.FK_Item_Require_ItemMst" FromRole="Item_Require" ToRole="ItemMst" />
         </EntityType>
+        <EntityType Name="ItemMst">
+          <Key>
+            <PropertyRef Name="Style_Code" />
+          </Key>
+          <Property Name="Style_Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Pairs" Type="Decimal" Nullable="false" Precision="3" Scale="0" />
+          <Property Name="Brand_ID" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Quantity" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Cat_ID" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Prod_Quality" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Certify_ID" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Prod_ID" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="JewelleryType_ID" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Net_Gold" Type="Decimal" Nullable="false" Precision="10" Scale="3" />
+          <Property Name="Tot_Gross_Wt" Type="Decimal" Nullable="false" Precision="10" Scale="3" />
+          <Property Name="Stone_Making" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="Other_Making" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="Tot_Making" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="MRP" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="size" Type="Int32" Nullable="false" />
+          <Property Name="Gold_Making" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="Img" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Stone_Wt" Type="Decimal" Nullable="false" Precision="10" Scale="3" />
+          <NavigationProperty Name="CatMst" Relationship="JewelleryShopping_dbModel.FK_ItemMst_CatMst" FromRole="ItemMst" ToRole="CatMst" />
+          <NavigationProperty Name="Item_Require" Relationship="JewelleryShopping_dbModel.FK_Item_Require_ItemMst" FromRole="ItemMst" ToRole="Item_Require" />
+          <NavigationProperty Name="Images" Relationship="JewelleryShopping_dbModel.FK_Image_ItemMst" FromRole="ItemMst" ToRole="Image" />
+          <NavigationProperty Name="JewelTypeMst" Relationship="JewelleryShopping_dbModel.FK_ItemMst_JewelTypeMst" FromRole="ItemMst" ToRole="JewelTypeMst" />
+          <NavigationProperty Name="ProdMst" Relationship="JewelleryShopping_dbModel.FK_ItemMst_ProdMst" FromRole="ItemMst" ToRole="ProdMst" />
+        </EntityType>
+        <Association Name="FK_ItemMst_CatMst">
+          <End Type="JewelleryShopping_dbModel.CatMst" Role="CatMst" Multiplicity="1" />
+          <End Type="JewelleryShopping_dbModel.ItemMst" Role="ItemMst" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CatMst">
+              <PropertyRef Name="Cat_ID" />
+            </Principal>
+            <Dependent Role="ItemMst">
+              <PropertyRef Name="Cat_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Item_Require_ItemMst">
+          <End Type="JewelleryShopping_dbModel.ItemMst" Role="ItemMst" Multiplicity="1" />
+          <End Type="JewelleryShopping_dbModel.Item_Require" Role="Item_Require" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemMst">
+              <PropertyRef Name="Style_Code" />
+            </Principal>
+            <Dependent Role="Item_Require">
+              <PropertyRef Name="Style_Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Image_ItemMst">
+          <End Type="JewelleryShopping_dbModel.ItemMst" Role="ItemMst" Multiplicity="1" />
+          <End Type="JewelleryShopping_dbModel.Image" Role="Image" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemMst">
+              <PropertyRef Name="Style_Code" />
+            </Principal>
+            <Dependent Role="Image">
+              <PropertyRef Name="Style_Colde" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemMst_JewelTypeMst">
+          <End Type="JewelleryShopping_dbModel.JewelTypeMst" Role="JewelTypeMst" Multiplicity="1" />
+          <End Type="JewelleryShopping_dbModel.ItemMst" Role="ItemMst" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JewelTypeMst">
+              <PropertyRef Name="JewelTypeMst1" />
+            </Principal>
+            <Dependent Role="ItemMst">
+              <PropertyRef Name="JewelleryType_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemMst_ProdMst">
+          <End Type="JewelleryShopping_dbModel.ProdMst" Role="ProdMst" Multiplicity="1" />
+          <End Type="JewelleryShopping_dbModel.ItemMst" Role="ItemMst" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProdMst">
+              <PropertyRef Name="Prod_ID" />
+            </Principal>
+            <Dependent Role="ItemMst">
+              <PropertyRef Name="Prod_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1046,6 +1266,31 @@ warning 6002: The table/view 'JewelleryShopping_db.dbo.ViewFullItem' does not ha
                 <ScalarProperty Name="Size" ColumnName="Size" />
                 <ScalarProperty Name="Stone_No" ColumnName="Stone_No" />
                 <ScalarProperty Name="Diamon_No" ColumnName="Diamon_No" />
+                <ScalarProperty Name="Style_Code" ColumnName="Style_Code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ItemMsts">
+            <EntityTypeMapping TypeName="JewelleryShopping_dbModel.ItemMst">
+              <MappingFragment StoreEntitySet="ItemMst">
+                <ScalarProperty Name="Stone_Wt" ColumnName="Stone_Wt" />
+                <ScalarProperty Name="Img" ColumnName="Img" />
+                <ScalarProperty Name="Gold_Making" ColumnName="Gold_Making" />
+                <ScalarProperty Name="size" ColumnName="size" />
+                <ScalarProperty Name="MRP" ColumnName="MRP" />
+                <ScalarProperty Name="Tot_Making" ColumnName="Tot_Making" />
+                <ScalarProperty Name="Other_Making" ColumnName="Other_Making" />
+                <ScalarProperty Name="Stone_Making" ColumnName="Stone_Making" />
+                <ScalarProperty Name="Tot_Gross_Wt" ColumnName="Tot_Gross_Wt" />
+                <ScalarProperty Name="Net_Gold" ColumnName="Net_Gold" />
+                <ScalarProperty Name="JewelleryType_ID" ColumnName="JewelleryType_ID" />
+                <ScalarProperty Name="Prod_ID" ColumnName="Prod_ID" />
+                <ScalarProperty Name="Certify_ID" ColumnName="Certify_ID" />
+                <ScalarProperty Name="Prod_Quality" ColumnName="Prod_Quality" />
+                <ScalarProperty Name="Cat_ID" ColumnName="Cat_ID" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Brand_ID" ColumnName="Brand_ID" />
+                <ScalarProperty Name="Pairs" ColumnName="Pairs" />
                 <ScalarProperty Name="Style_Code" ColumnName="Style_Code" />
               </MappingFragment>
             </EntityTypeMapping>
