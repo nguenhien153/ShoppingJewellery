@@ -1,0 +1,298 @@
+﻿@model ShoppingJewellery.Models.Order_
+
+@{
+    Page.Title = "Checkout";
+    Layout = "~/Views/Layout/Product/LayoutListProduct.cshtml";
+}
+@using ShoppingJewellery.Models;
+<link href="~/Content/bootstrap-4.0.0-dist/css/bootstrap-formhelpers.min.css" rel="stylesheet" />
+
+<div class="body" style="font-family:Arial;">
+    <div class="container ">
+
+        <form action="/OrderCart/Checkout" id="myform" method="post" class="col-10" style="margin:auto">
+            <h4>Checkout</h4>
+            <hr />
+            @Html.AntiForgeryToken()
+            <div class="form-horizontal">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    <label class="control-label col-md-2" for="FirstName">First Name</label>
+                    <div class="col-md-12">
+                        <input class="form-control text-box single-line" id="FirstName" name="FirstName" maxlength="50" type="text" value="" required>
+                        <span id="result_firstname" data-valmsg-for="FirstName" data-valmsg-replace="true"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2" for="LastName">Last Name</label>
+                    <div class="col-md-12">
+                        <input class="form-control text-box single-line" id="LastName" name="LastName" type="text" value="" maxlength="50" required>
+                        <span id="result_lastname" data-valmsg-for="LastName" data-valmsg-replace="true"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2" for="Country">Country</label>
+                    <div class="col-md-12">
+                        <select id="Country" name="Country" class="form-control bfh-countries" data-country="US" required onchange="GetValues()"></select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2" for="State_Province">State/Province</label>
+                    <div class="col-md-12">
+                        <select class="form-control bfh-states" data-country="Country" data-state="CA" id="State_Province" name="State_Province" onchange="GetValuess()" required></select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2" for="City">City</label>
+                    <div class="col-md-12">
+                        <input class="form-control text-box single-line" id="City" name="City" type="text" value="" required maxlength="50">
+                        <span id="result_city" data-valmsg-for="City" data-valmsg-replace="true"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2" for="Address">Address</label>
+                    <div class="col-md-12">
+                        <input class="form-control text-box single-line" id="Address" name="Address" type="text" value="" required maxlength="200">
+                        <span id="result_address" data-valmsg-for="Address" data-valmsg-replace="true"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2" for="Zip_Postal">Zip Postal</label>
+                    <div class="col-md-12">
+                        <input class="form-control text-box single-line" id="Zip_Postal" name="Zip_Postal" type="text" value="" required maxlength="6">
+                        <span id="result_zip_postal" data-valmsg-for="Zip_Postal" data-valmsg-replace="true"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-1" for="Phone">Phone</label>
+                    <div class="col-md-12">
+                        <input type="text" class="form-control bfh-phone" id="Phone" name="Phone" data-country="Country" required>
+                        <span id="result_phone" data-valmsg-for="Phone" data-valmsg-replace="true"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2" for="email">Email</label>
+                    <div class="col-md-12">
+                        <input class="form-control text-box single-line" id="email" maxlength="50" name="email" type="text" value="" on>
+                        <span id="result_email" data-valmsg-for="email" data-valmsg-replace="true"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-3" for="Instruction_Optional">Instruction (Optional)</label>
+                    <div class="col-md-12">
+                        <textarea class="col-12 form-control text-box" maxlength="700" id="Instruction_Optional" name="Instruction_Optional" rows="5"></textarea>
+
+                    </div>
+                    <br />
+                    <div class="col-12">
+                        <span><strong>Address Accuracy</strong></span><br />
+                        <span>
+                            Make sure you get your stuff! If the address is not entered correctly, your package may be returned as undeliverable.
+                            You would then have to place a new order. Save time and avoid frustration by entering the address information in the appropriate boxes and double-checking for typos and other errors.<br />
+                            We use Google Map to determine your address. You should check your address at <a href="https://www.google.com/maps" target="_blank" style="text-decoration:none">here</a> before making a payment.
+                        </span>
+                    </div>
+
+                </div>
+
+                <input id="Status" name="Status" type="hidden" value="Processed" required>
+
+                <input id="Date_order" name="Date_order" type="hidden" value="" required>
+
+                <input id="Total_brand" name="Total_brand" type="hidden" value="@Session["total"]" required>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-12">
+                        <a href="@Url.Action("ProductList","Product")" style="float:left" class="col-3 btn btn-success">Continue Shopping</a>
+                        <button type="submit" style="float:right" class="col-3 btn btn-success">Next</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<br /><br />
+<div class="form-group">
+    <input type="hidden" id="address" value="">
+</div>
+<form id="reesult">
+    <input name="lat" id="lat" type="hidden" readonly>
+    <input name="lng" id="lng" type="hidden" readonly>
+</form>
+<script src="~/Content/JQuery/jquery-1.11.1.min.js"></script>
+<script src="~/Content/bootstrap-4.0.0-dist/js/bootstrap-formhelpers.min.js"></script>
+<script src="~/Content/JQuery/jquery.geocomplete.min.js"></script>
+<script src='https://maps.googleapis.com/maps/api/js?key=AIzaSyDS-ue65Jx_HySaXRqnMehRbg67cMCL_xM&libraries=places'></script>
+<script src="~/Content/JQuery/jquery.session.js"></script>
+<script type="text/javascript">
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth() + 1;
+
+    var yyyy = today.getFullYear();
+    if (dd < 10) {
+        dd = '0' + dd;
+    }
+    if (mm < 10) {
+        mm = '0' + mm;
+    }
+    var today = dd + '/' + mm + '/' + yyyy;
+    document.getElementById('Date_order').value = today;
+
+    var checkmail = false;
+    var checkfirstname = false;
+    var checklastname = false;
+    var checkzip = false;
+    var checkaddress = false;
+    var checkcity = false;
+
+    var e = document.getElementById("Country");
+    var strUser = "United States";
+    var r = document.getElementById("State_Province");
+    var strUserr = "California";
+    var address;
+    var distanceee;
+
+    var re_mail = /^(([^<>()[\]\\.,;:\s@@\"]+(\.[^<>()[\]\\.,;:\s@@\"]+)*)|(\".+\"))@@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    var re_name = /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/;
+    var re_zip = /^\d{4,6}$/;
+    var re_address = /^[a-zA-Z0-9\s,'-]{4}[a-zA-Z0-9\s,'-]*$/;
+
+    function validateInput(re, email) {
+        return re.test(email);
+    }
+    function validate(inputt, resultt, re) {
+        var $result = $("#" + resultt);
+        var input = $("#" + inputt).val();
+        var inputte = $("#" + inputt);
+        var varr = false;
+        $result.text("");
+        if (validateInput(re, input)) {
+            inputte.css('border', '1px solid #ced4da');
+            varr = true;
+        } else {
+            $result.text(input + " is not valid ");
+            $result.css("color", "red");
+            inputte.css('border', '1px solid red');
+            varr = false
+        }
+        return varr;
+    }
+
+
+    function GetValues() {
+        strUser = e.options[e.selectedIndex].text;
+        if (strUser == "United States") {
+            strUserr = "California";
+        } else {
+            strUserr = "";
+        }
+        address = $("#Address").val().toString() + " , " + $("#City").val().toString() + " , " + strUserr.toString() + " , " + strUser.toString();
+        getLotutide(address);
+
+    }
+    function GetValuess() {
+        strUserr = r.options[r.selectedIndex].text;
+        address = $("#Address").val().toString() + " , " + $("#City").val().toString() + " , " + strUserr.toString() + " , " + strUser.toString();
+        getLotutide(address);
+
+    }
+
+    function distance(lat1, lon1, lat2, lon2) {
+        var R = 6371; // km (change this constant to get miles)
+        var dLat = (lat2 - lat1) * Math.PI / 180;
+        var dLon = (lon2 - lon1) * Math.PI / 180;
+        var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+            Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+            Math.sin(dLon / 2) * Math.sin(dLon / 2);
+        var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        var d = R * c;
+        if (d > 1) return Math.round(d);
+        else if (d <= 1) return Math.round(d);
+        return d;
+    }
+    function getLotutide(addresse) {
+        $("#address").val(addresse);
+        $("#address").geocomplete({ details: "form#reesult" });
+        $("#address").trigger("geocode");
+    }
+
+    $(document).ready(function () {
+        $("#address").val("California , United States");
+        $("#address").geocomplete({ details: "#reesult" });
+        $("#address").trigger("geocode");
+
+        $('#myform').submit(function (event) {
+            if (checkmail == false) {
+                event.preventDefault();
+                alert("Email Not Valid !!!");
+            }
+            if (checkfirstname == false) {
+                event.preventDefault();
+                alert("First Name Not Valid !!!");
+            }
+            if (checklastname == false) {
+                event.preventDefault();
+                alert("Last Name Not Valid !!!");
+            }
+            if (checkzip == false) {
+                event.preventDefault();
+                alert("Zip Postal Not Valid !!!");
+            }
+            if (checkaddress == false) {
+                event.preventDefault();
+                alert("Address Not Valid !!!");
+            }
+            if (checkcity == false) {
+                event.preventDefault();
+                alert("City Not Valid !!!");
+            }
+            var lat = $("#lat").val();
+            var lng = $("#lng").val();
+            if (lat == null || lng == null) {
+                event.preventDefault();
+                alert("Can't Find Your Address. Please Check Again !!!");
+            } else {
+                distanceee = distance(19.0768261, 72.9988664, lat, lng);
+              // $("#calDistance").val(distanceee);
+                $.session.set("Distance", distanceee);
+                //alert($.session.get("Distance"));
+            }
+        });
+
+
+        $("#email").bind("change", function () {
+            checkmail = validate("email", "result_email", re_mail);
+        });
+        $('#FirstName').bind("change", function () {
+            checkfirstname = validate("FirstName", "result_firstname", re_name);
+        });
+        $('#LastName').bind("change", function () {
+            checklastname = validate("LastName", "result_lastname", re_name);
+        });
+        $("#Zip_Postal").bind("change", function () {
+            checkzip = validate("Zip_Postal", "result_zip_postal", re_zip);
+        });
+        $("#City").bind("change", function () {
+            checkcity = validate("City", "result_city", re_name);
+            address = $("#Address").val().toString() + " , " + $("#City").val().toString() + " , " + strUserr.toString() + " , " + strUser.toString();
+            getLotutide(address);
+
+        });
+        $("#Address").bind("change", function () {
+            checkaddress = validate("Address", "result_address", re_address);
+            address = $("#Address").val().toString() + " , " + $("#City").val().toString() + " , " + strUserr.toString() + " , " + strUser.toString();
+            getLotutide(address);
+        });
+    });
+</script>
+

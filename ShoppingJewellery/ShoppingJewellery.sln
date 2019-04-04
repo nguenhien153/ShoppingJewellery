@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28307.168
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShoppingJewellery", "ShoppingJewellery\ShoppingJewellery.csproj", "{7A83D54C-1A49-4F00-9270-D588D2876C97}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Comon", "Comon\Comon.csproj", "{A5CFC538-8E2B-48C7-85D7-3B7835384C6B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{7A83D54C-1A49-4F00-9270-D588D2876C97}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7A83D54C-1A49-4F00-9270-D588D2876C97}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7A83D54C-1A49-4F00-9270-D588D2876C97}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A5CFC538-8E2B-48C7-85D7-3B7835384C6B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5CFC538-8E2B-48C7-85D7-3B7835384C6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5CFC538-8E2B-48C7-85D7-3B7835384C6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5CFC538-8E2B-48C7-85D7-3B7835384C6B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

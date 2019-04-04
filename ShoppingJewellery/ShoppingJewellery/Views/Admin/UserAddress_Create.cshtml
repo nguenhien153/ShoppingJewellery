@@ -1,0 +1,191 @@
+﻿
+@{
+    ViewBag.Title = "Create Address";
+    Layout = "~/Views/Layout/Admin/AdminLayout.cshtml";
+    Page.name = Session["username"];
+}
+
+<link href="~/Content/css/Admin/Boxx.css" rel="stylesheet" />
+<link href="~/Content/bootstrap-4.0.0-dist/css/bootstrap-formhelpers.min.css" rel="stylesheet" />
+<style>
+    .tooltip-inner {
+        text-align: left;
+        min-width: 22em;
+    }
+</style>
+
+<div class="form-group col-8 m-auto">
+    <div class="col-12 headerboxx">
+        <h4>Create  Address</h4>
+    </div>
+    <div class="col-12 boxx">
+        <form method="post" action="/Admin/UserAddress_Create" id="myForm" style="padding-top:15px" >
+            @{
+                if (Session["UserAddress_Create"] != null)
+                {
+                    if (Session["UserAddress_Create"].ToString().Equals("false"))
+                    {
+                        <div class="alert alert-danger">
+                            <strong>Create False.</strong> Account dosen't exist !!!
+                        </div>
+                    }
+                    if (Session["UserAddress_Create"].ToString().Equals("error"))
+                    {
+                        <div class="alert alert-danger">
+                            <strong>Create False.</strong> System Error !!!
+                        </div>
+                    }
+                    if (Session["UserAddress_Create"].ToString().Equals("success"))
+                    {
+                        <div class="alert alert-success">
+                            <strong>Create Success.</strong> Congratulation. The address created sucecss !!!
+                        </div>
+                    }
+                    Session.Remove("UserAddress_Create");
+                }
+                else
+                {
+                    <div class="" id="reportt"></div>
+                }
+
+            }
+            <div class="form-horizontal">
+
+                <div class="form-group">
+                    <label class="control-label col-12" for="UserID">User Account</label>
+                    <div class="col-12">
+                        <input class="form-control text-box single-line" id="UserID" name="UserID" type="text" value="@Request["username"]" readonly>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-12" for="Country">Country</label>
+                    <div class="col-md-12">
+                        <select id="country" name="country" class="form-control bfh-countries" data-country="" required></select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-12" for="state_province">State/Province</label>
+                    <div class="col-md-12">
+                        <select class="form-control bfh-states" data-country="country"  id="state_province" name="state_province" required disabled></select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-12" for="city">City</label>
+                    <div class="col-12">
+                        <input class="form-control text-box single-line" id="city" name="city" type="text" value="" required data-html="true">
+                        <span class="field-validation-valid text-danger" data-valmsg-for="city" data-valmsg-replace="true" id="result_city"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-12" for="Address1">Address</label>
+                    <div class="col-12">
+                        <input class="form-control text-box single-line" id="Address1" name="Address1" type="text" value="" data-html="true" required>
+                        <span class="field-validation-valid text-danger" data-valmsg-for="Address1" data-valmsg-replace="true" id="result_Address"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-12" for="Zip_Postal">Zip/Postal</label>
+                    <div class="col-12">
+                        <input class="form-control text-box single-line" id="Zip_Postal" name="Zip_Postal" type="text" value="" required data-html="true">
+                        <span class="field-validation-valid text-danger" data-valmsg-for="Zip_Postal" data-valmsg-replace="true" id="result_Zip_Postal"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-12" for="Instruction_Optional">Instruction (Optional)</label>
+                    <div class="col-12">
+                        <textarea class="form-control" maxlength="1000" rows="7" id="Instruction_Optional" name="Instruction_Optional" placeholder="Instruction can be blank"></textarea>
+                        <span class="field-validation-valid text-danger" data-valmsg-for="Instruction_Optional" data-valmsg-replace="true" id="result_Instruction_Optional"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-12">Set this address is default address:  <input class="align-middle checkbox" style="margin-left:10px;" id="default_address" name="default_address" type="checkbox" value="false"></label>
+                </div>
+
+                <div id="sumitbutton" style="padding-bottom:10px">
+                    <input type="submit" value="Create">
+                </div>
+
+            </div>
+        </form>
+    </div>
+</div>
+<script src="~/Content/js/Product/jquery.mask.min.js"></script>
+<script src="~/Content/js/Admin/Password.js?42"></script>
+<script src="~/Content/bootstrap-4.0.0-dist/js/bootstrap-formhelpers.min.js"></script>
+<script>
+
+    var count = 0;
+    var checkzip = true;
+    var checkaddress = true;
+    var checkcity = true;
+
+    var re_zip = /^\d{4,6}$/;
+    var re_address = /^[a-zA-Z0-9\s,'-.]{4}[a-zA-Z0-9\s,'-.]*$/;
+    var re_city = /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/;
+    $(document).ready(function () {
+        buttonsubmit("sumitbutton");
+        $("#country").on("change", function () {
+            $("#state_province").prop('disabled', false);
+            if ($("#country").val().toString() == "") {
+                $("#state_province").prop('disabled', true);
+            }
+        });
+
+        $("#city").on("focus", function () {
+            $(this).tooltip("show");
+        }).tooltip({
+            placement: "top",
+            trigger: "focus",
+            title: "Not contain Space and Special Characters. <br/>City Must be 4-50 characters."
+        });
+        $("#city").bind("change", function () {
+            checkcity = validateMinMax("city", "result_city", re_city, 4, 50);
+        });
+
+
+        $("#Address1").on("focus", function () {
+            $(this).tooltip("show");
+        }).tooltip({
+            placement: "top",
+            trigger: "focus",
+            title: "Not contain Space and Special Characters. <br/>Address Must be 4-50 characters."
+        });
+        $("#Address1").bind("change", function () {
+            checkaddress = validateMinMax("Address1", "result_Address", re_address, 4, 50);
+        });
+
+        $("#Zip_Postal").mask('000000');
+        $("#Zip_Postal").on("focus", function () {
+            $(this).tooltip("show");
+        }).tooltip({
+            placement: "top",
+            trigger: "focus",
+            title: "Zip / Postal Must be 4-6 digits."
+        });
+        $("#Zip_Postal").bind("change", function () {
+            checkzip = validateMinMax("Zip_Postal", "result_Zip_Postal", re_zip, 4, 6);
+        });
+
+        $(".checkbox").change(function () {
+            if (this.checked) {
+                $(this).val("true");
+            } else {
+                $(this).val("false");
+            }
+        });
+        $('#myForm').submit(function (event) {
+            if (checkzip == false || checkaddress == false || checkcity == false) {
+                event.preventDefault();
+                if (count == 0) {
+                    $("#reportt").append("<strong>Your Infor not valid. Please check against !!!</strong>");
+                    $("#reportt").addClass("alert alert-warning");
+                    count++;
+                }
+            } 
+        });
+    });
+</script>

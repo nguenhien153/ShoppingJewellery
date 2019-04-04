@@ -4,6 +4,7 @@
     Layout = "~/Views/Layout/Product/LayoutListProduct.cshtml";
     Page.Title = "Jewellery";
 }
+<link href="~/Content/css/Product.css" rel="stylesheet" />
 
 
 <div id="breadcrumbs">
@@ -18,10 +19,10 @@
 <div id="body">
     <div class="row" style="border-bottom:1px solid #e0e0e0; margin:0px;">
         <div class="col-11">
-            <h5>attributes</h5>           
+            <h5>attributes</h5>
         </div>
         <div class="col-1">
-            <h5>Clear All</h5>           
+            <h5>Clear All</h5>
         </div>
     </div>
     <div class="row" style="margin:0px;border-bottom:1px solid #e0e0e0;padding-bottom:5px;padding-top:5px">
@@ -30,10 +31,9 @@
         </div>
         <div class="col-9">
             <h5>Hien</h5>
-        </div>     
+        </div>
     </div>
     <div class="row" style="margin:0px">
-
         <div class="col-3">
             <label class="col-form-label" for="SearchAllowPrice"><strong>Price</strong></label>
             <ul id="SearchAllowPrice" class="list-group">
@@ -144,7 +144,7 @@
                     }
                     @foreach (var item in Model)
                     {
-                      
+
                         if (item.GoldType_ID.Equals(GoldID) || item.Gold_Crt.Equals(GoldType))
                         {
                             continue;
@@ -156,37 +156,27 @@
                     }
                 </li>
             </ul>
-
-
-
         </div>
         <div class="col-9">
             <div class="row">
-
                 @foreach (var item in Model)
                 {
-                <div class="col-3 containerr">
-
-                    <img class="imagee col-12" src="/Content/images/Product_Image/@item.Prod_Type/Img/@item.Img"
-                         onmouseover="this.src ='/Content/images/Product_Image/@item.Prod_Type/Image/@item.image'"
-                         onmouseout="this.src ='/Content/images/Product_Image/@item.Prod_Type/Img/@item.Img'" style="width:100%" />
-                    <div class="row">
-
-                        <a href="@Url.Action("Product","Product",new { Style_Code=item.Style_Code})" class="overlayy col-5 btn btn-dark">Details</a> <div class="col-1"></div>
-                        <button class="overlayy col-5 btn btn-dark">Add to Cart</button>
-                       
+                    <div class="col-3 containerr">
+                        <img class="imagee col-12" src="/Content/images/Product_Image/@item.Prod_Type/Img/@item.Img"
+                             onmouseover="this.src ='/Content/images/Product_Image/@item.Prod_Type/Image/@item.image'"
+                             onmouseout="this.src ='/Content/images/Product_Image/@item.Prod_Type/Img/@item.Img'" style="width:100%" />
+                        <div class="row">
+                            <a href="@Url.Action("Product","Product",new { Style_Code=item.Style_Code})" class="overlayy col-5 btn btn-dark">Details</a> <div class="col-1"></div>
+                            <button class="overlayy col-5 btn btn-dark">Add to Cart</button>
+                        </div>
+                        <span><strong>@Html.DisplayFor(itemmodel => item.Style_Code)</strong></span><br />
+                        <p>Rs: @Html.DisplayFor(itemodel => item.total_brand) ₹</p>
                     </div>
-                    <span><strong>@Html.DisplayFor(itemmodel => item.Style_Code)</strong></span><br />
-                    <p>Rs: @Html.DisplayFor(itemodel => item.total_brand) ₹</p>
-                </div>
                 }
-
-
             </div>
         </div>
     </div>
 </div>
 
- 
- 
- 
+
+

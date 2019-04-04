@@ -52,6 +52,7 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -96,242 +97,95 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\admin\css\accordions.css" />
-    <Content Include="Content\admin\css\alerts.css" />
-    <Content Include="Content\admin\css\animate.css" />
-    <Content Include="Content\admin\css\bootstrap.min.css" />
-    <Content Include="Content\admin\css\buttons.css" />
-    <Content Include="Content\admin\css\c3\c3.min.css" />
-    <Content Include="Content\admin\css\calendar\fullcalendar.min.css" />
-    <Content Include="Content\admin\css\calendar\fullcalendar.print.min.css" />
-    <Content Include="Content\admin\css\chosen\bootstrap-chosen.css" />
-    <Content Include="Content\admin\css\chosen\chosen-sprite.png" />
-    <Content Include="Content\admin\css\code-editor\ambiance.css" />
-    <Content Include="Content\admin\css\code-editor\codemirror.css" />
-    <Content Include="Content\admin\css\colorpicker\colorpicker.css" />
-    <Content Include="Content\admin\css\cropper\cropper.min.css" />
-    <Content Include="Content\admin\css\data-table\bootstrap-editable.css" />
-    <Content Include="Content\admin\css\data-table\bootstrap-table.css" />
-    <Content Include="Content\admin\css\datapicker\colorpicker.css" />
-    <Content Include="Content\admin\css\datapicker\datepicker3.css" />
-    <Content Include="Content\admin\css\dropzone\dropzone.css" />
-    <Content Include="Content\admin\css\duallistbox\bootstrap-duallistbox.min.css" />
-    <Content Include="Content\admin\css\editor\bootstrap-editable.css" />
-    <Content Include="Content\admin\css\editor\datetimepicker.css" />
-    <Content Include="Content\admin\css\editor\select2.css" />
-    <Content Include="Content\admin\css\editor\x-editor-style.css" />
-    <Content Include="Content\admin\css\educate-custon-icon.css" />
-    <Content Include="Content\admin\css\font-awesome.min.css" />
-    <Content Include="Content\admin\css\form.css" />
-    <Content Include="Content\admin\css\form\all-type-forms.css" />
-    <Content Include="Content\admin\css\form\themesaller-forms.css" />
-    <Content Include="Content\admin\css\ionRangeSlider\ion.rangeSlider.css" />
-    <Content Include="Content\admin\css\ionRangeSlider\ion.rangeSlider.skinFlat.css" />
-    <Content Include="Content\admin\css\ionRangeSlider\sprite-skin-flat.png" />
-    <Content Include="Content\admin\css\main.css" />
-    <Content Include="Content\admin\css\meanmenu.min.css" />
-    <Content Include="Content\admin\css\metisMenu\metisMenu-vertical.css" />
-    <Content Include="Content\admin\css\metisMenu\metisMenu.min.css" />
-    <Content Include="Content\admin\css\modals.css" />
-    <Content Include="Content\admin\css\morrisjs\morris.css" />
-    <Content Include="Content\admin\css\normalize.css" />
-    <Content Include="Content\admin\css\notifications\Lobibox.min.css" />
-    <Content Include="Content\admin\css\notifications\notifications.css" />
-    <Content Include="Content\admin\css\owl.carousel.css" />
-    <Content Include="Content\admin\css\owl.theme.css" />
-    <Content Include="Content\admin\css\owl.transitions.css" />
-    <Content Include="Content\admin\css\preloader\preloader-style.css" />
-    <Content Include="Content\admin\css\responsive.css" />
-    <Content Include="Content\admin\css\scrollbar\jquery.mCustomScrollbar.min.css" />
-    <Content Include="Content\admin\css\select2\select2.min.css" />
-    <Content Include="Content\admin\css\summernote\summernote.css" />
-    <Content Include="Content\admin\css\tabs.css" />
-    <Content Include="Content\admin\css\touchspin\jquery.bootstrap-touchspin.min.css" />
-    <Content Include="Content\admin\css\tree-viewer\32px.png" />
-    <Content Include="Content\admin\css\tree-viewer\throbber.gif" />
-    <Content Include="Content\admin\css\tree-viewer\tree-viewer.css" />
-    <Content Include="Content\admin\fonts\educate-icon.svg" />
-    <Content Include="Content\admin\fonts\fontawesome-webfont.svg" />
-    <Content Include="Content\admin\fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="Content\admin\img\blog-details\1.jpg" />
-    <Content Include="Content\admin\img\contact\1.jpg" />
-    <Content Include="Content\admin\img\contact\2.jpg" />
-    <Content Include="Content\admin\img\contact\3.jpg" />
-    <Content Include="Content\admin\img\contact\4.jpg" />
-    <Content Include="Content\admin\img\courses\1.jpg" />
-    <Content Include="Content\admin\img\courses\2.jpg" />
-    <Content Include="Content\admin\img\courses\3.jpg" />
-    <Content Include="Content\admin\img\cropper\1.jpg" />
-    <Content Include="Content\admin\img\favicon.ico" />
-    <Content Include="Content\admin\img\green1.png" />
-    <Content Include="Content\admin\img\logo\logo.png" />
-    <Content Include="Content\admin\img\logo\logosn.png" />
-    <Content Include="Content\admin\img\notification\1.jpg" />
-    <Content Include="Content\admin\img\notification\2.jpg" />
-    <Content Include="Content\admin\img\notification\3.jpg" />
-    <Content Include="Content\admin\img\notification\4.jpg" />
-    <Content Include="Content\admin\img\notification\5.jpg" />
-    <Content Include="Content\admin\img\notification\6.jpg" />
-    <Content Include="Content\admin\img\product\book-1.jpg" />
-    <Content Include="Content\admin\img\product\book-2.jpg" />
-    <Content Include="Content\admin\img\product\book-3.jpg" />
-    <Content Include="Content\admin\img\product\book-4.jpg" />
-    <Content Include="Content\admin\img\product\pro4.jpg" />
-    <Content Include="Content\admin\img\product\profile-bg.jpg" />
-    <Content Include="Content\admin\img\profile\1.jpg" />
-    <Content Include="Content\admin\img\student\1.jpg" />
-    <Content Include="Content\admin\img\student\2.jpg" />
-    <Content Include="Content\admin\img\student\3.jpg" />
-    <Content Include="Content\admin\img\student\4.jpg" />
-    <Content Include="Content\admin\js\bootstrap.min.js" />
-    <Content Include="Content\admin\js\c3-charts\c3-active.js" />
-    <Content Include="Content\admin\js\c3-charts\c3.min.js" />
-    <Content Include="Content\admin\js\c3-charts\d3.min.js" />
-    <Content Include="Content\admin\js\calendar\fullcalendar-active.js" />
-    <Content Include="Content\admin\js\calendar\fullcalendar.min.js" />
-    <Content Include="Content\admin\js\calendar\moment.min.js" />
-    <Content Include="Content\admin\js\card.js" />
-    <Content Include="Content\admin\js\charts\area-chart.js" />
-    <Content Include="Content\admin\js\charts\bar-chart.js" />
-    <Content Include="Content\admin\js\charts\Chart.js" />
-    <Content Include="Content\admin\js\charts\line-chart.js" />
-    <Content Include="Content\admin\js\charts\rounded-chart.js" />
-    <Content Include="Content\admin\js\chart\jquery.peity.min.js" />
-    <Content Include="Content\admin\js\chart\peity-active.js" />
-    <Content Include="Content\admin\js\chosen\chosen-active.js" />
-    <Content Include="Content\admin\js\chosen\chosen.jquery.js" />
-    <Content Include="Content\admin\js\chosen\chosen.jquery.min.js" />
-    <Content Include="Content\admin\js\code-editor\code-editor-active.js" />
-    <Content Include="Content\admin\js\code-editor\code-editor.js" />
-    <Content Include="Content\admin\js\code-editor\codemirror.js" />
-    <Content Include="Content\admin\js\colorpicker\color-picker-active.js" />
-    <Content Include="Content\admin\js\colorpicker\jquery.spectrum.min.js" />
-    <Content Include="Content\admin\js\counterup\counterup-active.js" />
-    <Content Include="Content\admin\js\counterup\jquery.counterup.min.js" />
-    <Content Include="Content\admin\js\counterup\waypoints.min.js" />
-    <Content Include="Content\admin\js\cropper\cropper-actice.js" />
-    <Content Include="Content\admin\js\cropper\cropper.min.js" />
-    <Content Include="Content\admin\js\data-map\d3.min.js" />
-    <Content Include="Content\admin\js\data-map\data-maps-active.js" />
-    <Content Include="Content\admin\js\data-map\datamaps.all.min.js" />
-    <Content Include="Content\admin\js\data-map\topojson.js" />
-    <Content Include="Content\admin\js\data-table\bootstrap-editable.js" />
-    <Content Include="Content\admin\js\data-table\bootstrap-table-editable.js" />
-    <Content Include="Content\admin\js\data-table\bootstrap-table-export.js" />
-    <Content Include="Content\admin\js\data-table\bootstrap-table-resizable.js" />
-    <Content Include="Content\admin\js\data-table\bootstrap-table.js" />
-    <Content Include="Content\admin\js\data-table\colResizable-1.5.source.js" />
-    <Content Include="Content\admin\js\data-table\data-table-active.js" />
-    <Content Include="Content\admin\js\data-table\tableExport.js" />
-    <Content Include="Content\admin\js\datapicker\bootstrap-datepicker.js" />
-    <Content Include="Content\admin\js\datapicker\bootstrap-datepicker.min.js" />
-    <Content Include="Content\admin\js\datapicker\datepicker-active.js" />
-    <Content Include="Content\admin\js\datepicker\datepicker-active.js" />
-    <Content Include="Content\admin\js\datepicker\jquery-ui.min.js" />
-    <Content Include="Content\admin\js\dropzone\dropzone.js" />
-    <Content Include="Content\admin\js\duallistbox\duallistbox.active.js" />
-    <Content Include="Content\admin\js\duallistbox\jquery.bootstrap-duallistbox.js" />
-    <Content Include="Content\admin\js\e-payment.js" />
-    <Content Include="Content\admin\js\editable\bootstrap-datetimepicker.js" />
-    <Content Include="Content\admin\js\editable\bootstrap-editable.js" />
-    <Content Include="Content\admin\js\editable\jquery.mockjax.js" />
-    <Content Include="Content\admin\js\editable\mock-active.js" />
-    <Content Include="Content\admin\js\editable\moment.min.js" />
-    <Content Include="Content\admin\js\editable\select2.js" />
-    <Content Include="Content\admin\js\editable\xediable-active.js" />
-    <Content Include="Content\admin\js\form-validation\form-active.js" />
-    <Content Include="Content\admin\js\form-validation\jquery.form.min.js" />
-    <Content Include="Content\admin\js\form-validation\jquery.validate.min.js" />
-    <Content Include="Content\admin\js\google.maps\google.maps-active.js" />
-    <Content Include="Content\admin\js\icheck\icheck-active.js" />
-    <Content Include="Content\admin\js\icheck\icheck.min.js" />
-    <Content Include="Content\admin\js\input-mask\jasny-bootstrap.min.js" />
-    <Content Include="Content\admin\js\ionRangeSlider\ion.rangeSlider.active.js" />
-    <Content Include="Content\admin\js\ionRangeSlider\ion.rangeSlider.min.js" />
-    <Content Include="Content\admin\js\jquery-price-slider.js" />
-    <Content Include="Content\admin\js\jquery.maskedinput.min.js" />
-    <Content Include="Content\admin\js\jquery.meanmenu.js" />
-    <Content Include="Content\admin\js\jquery.payform.min.js" />
-    <Content Include="Content\admin\js\jquery.scrollUp.min.js" />
-    <Content Include="Content\admin\js\jquery.sticky.js" />
-    <Content Include="Content\admin\js\knob\jquery.knob.js" />
-    <Content Include="Content\admin\js\knob\knob-active.js" />
-    <Content Include="Content\admin\js\main.js" />
-    <Content Include="Content\admin\js\masking-active.js" />
-    <Content Include="Content\admin\js\metisMenu\metisMenu-active.js" />
-    <Content Include="Content\admin\js\metisMenu\metisMenu.min.js" />
-    <Content Include="Content\admin\js\morrisjs\home3-active.js" />
-    <Content Include="Content\admin\js\morrisjs\morris-active-pro.js" />
-    <Content Include="Content\admin\js\morrisjs\morris-active.js" />
-    <Content Include="Content\admin\js\morrisjs\morris.js" />
-    <Content Include="Content\admin\js\morrisjs\raphael-min.js" />
-    <Content Include="Content\admin\js\multiple-email\multiple-email-active.js" />
-    <Content Include="Content\admin\js\notifications\Lobibox.js" />
-    <Content Include="Content\admin\js\notifications\notification-active.js" />
-    <Content Include="Content\admin\js\owl.carousel.min.js" />
-    <Content Include="Content\admin\js\password-meter\password-meter-active.js" />
-    <Content Include="Content\admin\js\password-meter\pwstrength-bootstrap.min.js" />
-    <Content Include="Content\admin\js\password-meter\zxcvbn.js" />
-    <Content Include="Content\admin\js\pdf\jquery.media.js" />
-    <Content Include="Content\admin\js\pdf\pdf-active.js" />
-    <Content Include="Content\admin\js\peity\jquery.peity.min.js" />
-    <Content Include="Content\admin\js\peity\peity-active.js" />
-    <Content Include="Content\admin\js\plugins.js" />
-    <Content Include="Content\admin\js\rangle-slider\jquery-ui-1.10.4.custom.min.js" />
-    <Content Include="Content\admin\js\rangle-slider\jquery-ui-touch-punch.min.js" />
-    <Content Include="Content\admin\js\rangle-slider\rangle-active.js" />
-    <Content Include="Content\admin\js\scrollbar\jquery.mCustomScrollbar.concat.min.js" />
-    <Content Include="Content\admin\js\scrollbar\mCustomScrollbar-active.js" />
-    <Content Include="Content\admin\js\select2\select2-active.js" />
-    <Content Include="Content\admin\js\select2\select2.full.min.js" />
-    <Content Include="Content\admin\js\sparkline\jquery.charts-sparkline.js" />
-    <Content Include="Content\admin\js\sparkline\jquery.sparkline.min.js" />
-    <Content Include="Content\admin\js\sparkline\sparkline-active.js" />
-    <Content Include="Content\admin\js\summernote\summernote-active.js" />
-    <Content Include="Content\admin\js\summernote\summernote.min.js" />
-    <Content Include="Content\admin\js\tab.js" />
-    <Content Include="Content\admin\js\tawk-chat.js" />
-    <Content Include="Content\admin\js\touchspin\jquery.bootstrap-touchspin.min.js" />
-    <Content Include="Content\admin\js\touchspin\touchspin-active.js" />
-    <Content Include="Content\admin\js\tree-line\jstree.active.js" />
-    <Content Include="Content\admin\js\tree-line\jstree.min.js" />
-    <Content Include="Content\admin\js\vendor\jquery-1.12.4.min.js" />
-    <Content Include="Content\admin\js\vendor\modernizr-2.8.3.min.js" />
-    <Content Include="Content\admin\js\vendor\modernizr-custom.js" />
-    <Content Include="Content\admin\js\wizard\jquery.steps.js" />
-    <Content Include="Content\admin\js\wizard\steps-active.js" />
-    <Content Include="Content\admin\js\wow.min.js" />
-    <Content Include="Content\admin\style.css" />
+    <Content Include="Content\bootstrap-4.0.0-dist\css\bootstrap-formhelpers.css" />
+    <Content Include="Content\bootstrap-4.0.0-dist\css\bootstrap-formhelpers.min.css" />
     <Content Include="Content\bootstrap-4.0.0-dist\css\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-4.0.0-dist\css\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-4.0.0-dist\css\bootstrap-reboot.css" />
     <Content Include="Content\bootstrap-4.0.0-dist\css\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap-4.0.0-dist\css\bootstrap.css" />
     <Content Include="Content\bootstrap-4.0.0-dist\css\bootstrap.min.css" />
+    <Content Include="Content\bootstrap-4.0.0-dist\css\datepicker.min.css" />
+    <Content Include="Content\bootstrap-4.0.0-dist\js\bootstrap-datepicker.min.js" />
+    <Content Include="Content\bootstrap-4.0.0-dist\js\bootstrap-formhelpers.js" />
+    <Content Include="Content\bootstrap-4.0.0-dist\js\bootstrap-formhelpers.min.js" />
     <Content Include="Content\bootstrap-4.0.0-dist\js\bootstrap.bundle.js" />
     <Content Include="Content\bootstrap-4.0.0-dist\js\bootstrap.bundle.min.js" />
     <Content Include="Content\bootstrap-4.0.0-dist\js\bootstrap.js" />
     <Content Include="Content\bootstrap-4.0.0-dist\js\bootstrap.min.js" />
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\bootstrap-4.0.0-dist\js\bootstrap3.3.0.min.js" />
+    <Content Include="Content\bootstrap-4.0.0-dist\js\popper.min.js" />
+    <Content Include="Content\css\Admin\Boxx.css" />
+    <Content Include="Content\css\Admin\buttons.bootstrap4.min.css" />
+    <Content Include="Content\css\Admin\buttons.dataTables.min.css" />
+    <Content Include="Content\css\Admin\forTable.css" />
+    <Content Include="Content\css\Admin\Login.css" />
+    <Content Include="Content\css\Admin\rowGroup.dataTables.min.css" />
+    <Content Include="Content\css\Admin\select.dataTables.min.css" />
+    <Content Include="Content\css\Admin\table_admin.css" />
+    <Content Include="Content\css\Admin\w3.css" />
+    <Content Include="Content\css\datepicker.css" />
     <Content Include="Content\css\Product.css" />
     <Content Include="Content\css\slick-theme.css" />
     <Content Include="Content\css\slick.css" />
     <Content Include="Content\css\SlickProduct.css" />
     <Content Include="Content\css\style.css" />
+    <Content Include="Content\css\theme.default.min.css" />
     <Content Include="Content\fonts\Novecentowide-Bold.svg" />
     <Content Include="Content\fonts\Novecentowide-Book.svg" />
     <Content Include="Content\fonts\Novecentowide-DemiBold.svg" />
     <Content Include="Content\fonts\Novecentowide-Light.svg" />
     <Content Include="Content\fonts\Novecentowide-Medium.svg" />
     <Content Include="Content\fonts\Novecentowide-Normal.svg" />
+    <Content Include="Content\images\Icon\Admin\amount_Copy_3-512.png" />
+    <Content Include="Content\images\Icon\Admin\Icon_ChangePassword.png" />
+    <Content Include="Content\images\Icon\Admin\check_Address.png" />
+    <Content Include="Content\images\Icon\Admin\ChildRow_Create.png" />
+    <Content Include="Content\images\Icon\Admin\ChildRow_Delete.png" />
+    <Content Include="Content\images\Icon\Admin\ChildRow_Edit.png" />
+    <Content Include="Content\images\Icon\Admin\Icon_Remove.png" />
+    <Content Include="Content\images\Icon\Admin\Icon_Create.png" />
+    <Content Include="Content\images\Icon\Admin\Background.jpg" />
+    <Content Include="Content\images\Icon\Admin\background2.jpg" />
+    <Content Include="Content\images\Icon\Admin\details_close.png" />
+    <Content Include="Content\images\Icon\Admin\details_open.png" />
+    <Content Include="Content\images\Icon\Admin\Hide_Password.png" />
+    <Content Include="Content\images\Icon\Admin\Icon_Edit.png" />
+    <Content Include="Content\images\Icon\Admin\Login.png" />
+    <Content Include="Content\images\Icon\Admin\Prodcut_Details.png" />
+    <Content Include="Content\images\Icon\Admin\Product_Create.png" />
+    <Content Include="Content\images\Icon\Admin\Product_Delete.png" />
+    <Content Include="Content\images\Icon\Admin\Show_Password.png" />
+    <Content Include="Content\images\Icon\Admin\sort_asc.png" />
+    <Content Include="Content\images\Icon\Admin\sort_both.png" />
+    <Content Include="Content\images\Icon\Admin\sort_desc.png" />
+    <Content Include="Content\images\Icon\Admin\Upload1.png" />
+    <Content Include="Content\images\Icon\Admin\Upload2.png" />
+    <Content Include="Content\images\Icon\asc.gif" />
+    <Content Include="Content\images\Icon\bg.gif" />
+    <Content Include="Content\images\Icon\checked.png" />
+    <Content Include="Content\images\Icon\desc.gif" />
+    <Content Include="Content\images\Icon\false.png" />
+    <Content Include="Content\images\Icon\iconfinder_basket_3387318.png" />
+    <Content Include="Content\JQuery\jquery-1.9.1.min.js" />
+    <Content Include="Content\JQuery\jquery.geocomplete.min.js" />
+    <Content Include="Content\JQuery\jquery.session.js" />
+    <Content Include="Content\images\Icon\BlackBin.png" />
+    <Content Include="Content\images\Icon\BOI.png" />
+    <Content Include="Content\images\Icon\Cart.png" />
+    <Content Include="Content\images\Icon\CVV.png" />
     <Content Include="Content\images\Icon\diamond.png" />
     <Content Include="Content\images\Icon\gemstone.png" />
+    <Content Include="Content\images\Icon\IGI.png" />
     <Content Include="Content\images\Icon\left-arrow %281%29.png" />
     <Content Include="Content\images\Icon\left-arrow %282%29.png" />
+    <Content Include="Content\images\Icon\mastercard.png" />
+    <Content Include="Content\images\Icon\RecycleBin.png" />
     <Content Include="Content\images\Icon\Rose_Gold_10K.png" />
     <Content Include="Content\images\Icon\Rose_Gold_14K.png" />
     <Content Include="Content\images\Icon\Rose_Gold_18K.png" />
+    <Content Include="Content\images\Icon\SGL.png" />
+    <Content Include="Content\images\Icon\visa.png" />
     <Content Include="Content\images\Icon\White_Gold_10K.png" />
     <Content Include="Content\images\Icon\White_Gold_14K.png" />
     <Content Include="Content\images\Icon\White_Gold_18k.png" />
@@ -388,57 +242,28 @@
     <Content Include="Content\images\Product_Image\RINGS\Img\PromiseSolitaireRing.jpg" />
     <Content Include="Content\images\Product_Image\RINGS\Img\TwinkleBridalRingSet.jpg" />
     <Content Include="Content\images\Product_Image\RINGS\Img\VibranceBridalRingSet.jpg" />
+    <Content Include="Content\JQuery\jquery-1.11.1.min.js" />
     <Content Include="Content\JQuery\jquery-3.3.1.js" />
     <Content Include="Content\JQuery\jquery-3.3.1.min.js" />
     <Content Include="Content\JQuery\jquery-migrate-1.4.1.min.js" />
+    <Content Include="Content\js\Admin\buttons.bootstrap4.min.js" />
+    <Content Include="Content\js\Admin\buttons.html5.min.js" />
+    <Content Include="Content\js\Admin\forTable.js" />
+    <Content Include="Content\js\Admin\Password.js" />
+    <Content Include="Content\js\Admin\dataTables.buttons.min.js" />
+    <Content Include="Content\js\Admin\dataTables.rowGroup.min.js" />
+    <Content Include="Content\js\Admin\dataTables.select.min.js" />
+    <Content Include="Content\js\Product\jquery-latest.js" />
+    <Content Include="Content\js\Product\jquery.creditCardValidator.js" />
+    <Content Include="Content\css\Admin\jquery.dataTables.min.css" />
+    <Content Include="Content\js\Admin\jquery.dataTables.min.js" />
+    <Content Include="Content\js\Product\jquery.mask.min.js" />
     <Content Include="Content\js\Product\slick.js" />
     <Content Include="Content\js\jquery-1.11.1.min.js" />
     <Content Include="Content\js\main.js" />
     <Content Include="Content\js\plugins.js" />
     <Content Include="Content\js\Product\ProductDetails.js" />
-    <Content Include="Content\Login_v6\css\main.css" />
-    <Content Include="Content\Login_v6\css\util.css" />
-    <Content Include="Content\Login_v6\fonts\font-awesome-4.7.0\css\font-awesome.css" />
-    <Content Include="Content\Login_v6\fonts\font-awesome-4.7.0\css\font-awesome.min.css" />
-    <Content Include="Content\Login_v6\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.svg" />
-    <Content Include="Content\Login_v6\fonts\font-awesome-4.7.0\HELP-US-OUT.txt" />
-    <Content Include="Content\Login_v6\fonts\iconic\css\material-design-iconic-font.css" />
-    <Content Include="Content\Login_v6\fonts\iconic\css\material-design-iconic-font.min.css" />
-    <Content Include="Content\Login_v6\fonts\iconic\fonts\Material-Design-Iconic-Font.svg" />
-    <Content Include="Content\Login_v6\images\asdas.jpg" />
-    <Content Include="Content\Login_v6\images\icons\favicon.ico" />
-    <Content Include="Content\Login_v6\js\main.js" />
-    <Content Include="Content\Login_v6\vendor\animate\animate.css" />
-    <Content Include="Content\Login_v6\vendor\animsition\css\animsition.css" />
-    <Content Include="Content\Login_v6\vendor\animsition\css\animsition.min.css" />
-    <Content Include="Content\Login_v6\vendor\animsition\js\animsition.js" />
-    <Content Include="Content\Login_v6\vendor\animsition\js\animsition.min.js" />
-    <Content Include="Content\Login_v6\vendor\bootstrap\css\bootstrap-grid.css" />
-    <Content Include="Content\Login_v6\vendor\bootstrap\css\bootstrap-grid.min.css" />
-    <Content Include="Content\Login_v6\vendor\bootstrap\css\bootstrap-reboot.css" />
-    <Content Include="Content\Login_v6\vendor\bootstrap\css\bootstrap-reboot.min.css" />
-    <Content Include="Content\Login_v6\vendor\bootstrap\css\bootstrap.css" />
-    <Content Include="Content\Login_v6\vendor\bootstrap\css\bootstrap.min.css" />
-    <Content Include="Content\Login_v6\vendor\bootstrap\js\bootstrap.js" />
-    <Content Include="Content\Login_v6\vendor\bootstrap\js\bootstrap.min.js" />
-    <Content Include="Content\Login_v6\vendor\bootstrap\js\popper.js" />
-    <Content Include="Content\Login_v6\vendor\bootstrap\js\popper.min.js" />
-    <Content Include="Content\Login_v6\vendor\bootstrap\js\tooltip.js" />
-    <Content Include="Content\Login_v6\vendor\countdowntime\countdowntime.js" />
-    <Content Include="Content\Login_v6\vendor\css-hamburgers\hamburgers.css" />
-    <Content Include="Content\Login_v6\vendor\css-hamburgers\hamburgers.min.css" />
-    <Content Include="Content\Login_v6\vendor\daterangepicker\daterangepicker.css" />
-    <Content Include="Content\Login_v6\vendor\daterangepicker\daterangepicker.js" />
-    <Content Include="Content\Login_v6\vendor\daterangepicker\moment.js" />
-    <Content Include="Content\Login_v6\vendor\daterangepicker\moment.min.js" />
-    <Content Include="Content\Login_v6\vendor\jquery\jquery-3.2.1.min.js" />
-    <Content Include="Content\Login_v6\vendor\perfect-scrollbar\perfect-scrollbar.css" />
-    <Content Include="Content\Login_v6\vendor\perfect-scrollbar\perfect-scrollbar.min.js" />
-    <Content Include="Content\Login_v6\vendor\select2\select2.css" />
-    <Content Include="Content\Login_v6\vendor\select2\select2.js" />
-    <Content Include="Content\Login_v6\vendor\select2\select2.min.css" />
-    <Content Include="Content\Login_v6\vendor\select2\select2.min.js" />
-    <Content Include="Content\Site.css" />
+    <Content Include="Content\js\Product\smtp.js" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Models\JewelleryShopping.Context.tt">
@@ -464,84 +289,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Content\admin\css\bootstrap.min.css.map" />
-    <Content Include="Content\admin\css\metisMenu\metisMenu.min.css.map" />
-    <Content Include="Content\admin\css\summernote\fonts\summernote.eot" />
-    <Content Include="Content\admin\css\summernote\fonts\summernote.ttf" />
-    <Content Include="Content\admin\css\summernote\fonts\summernote.woff" />
-    <Content Include="Content\admin\fonts\educate-icon.ttf" />
-    <Content Include="Content\admin\fonts\educate-icon.woff" />
-    <Content Include="Content\admin\fonts\fontawesome-webfont.eot" />
-    <Content Include="Content\admin\fonts\fontawesome-webfont.ttf" />
-    <Content Include="Content\admin\fonts\fontawesome-webfont.woff" />
-    <Content Include="Content\admin\fonts\fontawesome-webfont.woff2" />
-    <Content Include="Content\admin\fonts\FontAwesome.otf" />
-    <Content Include="Content\admin\fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Content\admin\fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="Content\admin\fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="Content\admin\fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="Content\admin\js\metisMenu\metisMenu.min.js.map" />
-    <Content Include="Content\Login_v6\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.eot" />
-    <Content Include="Content\Login_v6\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.ttf" />
-    <Content Include="Content\Login_v6\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.woff" />
-    <Content Include="Content\Login_v6\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.woff2" />
-    <Content Include="Content\Login_v6\fonts\font-awesome-4.7.0\fonts\FontAwesome.otf" />
-    <Content Include="Content\Login_v6\fonts\font-awesome-4.7.0\less\animated.less" />
-    <Content Include="Content\Login_v6\fonts\font-awesome-4.7.0\less\bordered-pulled.less" />
-    <Content Include="Content\Login_v6\fonts\font-awesome-4.7.0\less\core.less" />
-    <Content Include="Content\Login_v6\fonts\font-awesome-4.7.0\less\fixed-width.less" />
-    <Content Include="Content\Login_v6\fonts\font-awesome-4.7.0\less\font-awesome.less" />
-    <Content Include="Content\Login_v6\fonts\font-awesome-4.7.0\less\icons.less" />
-    <Content Include="Content\Login_v6\fonts\font-awesome-4.7.0\less\larger.less" />
-    <Content Include="Content\Login_v6\fonts\font-awesome-4.7.0\less\list.less" />
-    <Content Include="Content\Login_v6\fonts\font-awesome-4.7.0\less\mixins.less" />
-    <Content Include="Content\Login_v6\fonts\font-awesome-4.7.0\less\path.less" />
-    <Content Include="Content\Login_v6\fonts\font-awesome-4.7.0\less\rotated-flipped.less" />
-    <Content Include="Content\Login_v6\fonts\font-awesome-4.7.0\less\screen-reader.less" />
-    <Content Include="Content\Login_v6\fonts\font-awesome-4.7.0\less\stacked.less" />
-    <Content Include="Content\Login_v6\fonts\font-awesome-4.7.0\less\variables.less" />
-    <Content Include="Content\Login_v6\fonts\font-awesome-4.7.0\scss\font-awesome.scss" />
-    <Content Include="Content\Login_v6\fonts\font-awesome-4.7.0\scss\_animated.scss" />
-    <Content Include="Content\Login_v6\fonts\font-awesome-4.7.0\scss\_bordered-pulled.scss" />
-    <Content Include="Content\Login_v6\fonts\font-awesome-4.7.0\scss\_core.scss" />
-    <Content Include="Content\Login_v6\fonts\font-awesome-4.7.0\scss\_fixed-width.scss" />
-    <Content Include="Content\Login_v6\fonts\font-awesome-4.7.0\scss\_icons.scss" />
-    <Content Include="Content\Login_v6\fonts\font-awesome-4.7.0\scss\_larger.scss" />
-    <Content Include="Content\Login_v6\fonts\font-awesome-4.7.0\scss\_list.scss" />
-    <Content Include="Content\Login_v6\fonts\font-awesome-4.7.0\scss\_mixins.scss" />
-    <Content Include="Content\Login_v6\fonts\font-awesome-4.7.0\scss\_path.scss" />
-    <Content Include="Content\Login_v6\fonts\font-awesome-4.7.0\scss\_rotated-flipped.scss" />
-    <Content Include="Content\Login_v6\fonts\font-awesome-4.7.0\scss\_screen-reader.scss" />
-    <Content Include="Content\Login_v6\fonts\font-awesome-4.7.0\scss\_stacked.scss" />
-    <Content Include="Content\Login_v6\fonts\font-awesome-4.7.0\scss\_variables.scss" />
-    <Content Include="Content\Login_v6\fonts\iconic\fonts\Material-Design-Iconic-Font.eot" />
-    <Content Include="Content\Login_v6\fonts\iconic\fonts\Material-Design-Iconic-Font.ttf" />
-    <Content Include="Content\Login_v6\fonts\iconic\fonts\Material-Design-Iconic-Font.woff" />
-    <Content Include="Content\Login_v6\fonts\iconic\fonts\Material-Design-Iconic-Font.woff2" />
-    <Content Include="Content\Login_v6\fonts\poppins\Poppins-Black.ttf" />
-    <Content Include="Content\Login_v6\fonts\poppins\Poppins-BlackItalic.ttf" />
-    <Content Include="Content\Login_v6\fonts\poppins\Poppins-Bold.ttf" />
-    <Content Include="Content\Login_v6\fonts\poppins\Poppins-BoldItalic.ttf" />
-    <Content Include="Content\Login_v6\fonts\poppins\Poppins-ExtraBold.ttf" />
-    <Content Include="Content\Login_v6\fonts\poppins\Poppins-ExtraBoldItalic.ttf" />
-    <Content Include="Content\Login_v6\fonts\poppins\Poppins-ExtraLight.ttf" />
-    <Content Include="Content\Login_v6\fonts\poppins\Poppins-ExtraLightItalic.ttf" />
-    <Content Include="Content\Login_v6\fonts\poppins\Poppins-Italic.ttf" />
-    <Content Include="Content\Login_v6\fonts\poppins\Poppins-Light.ttf" />
-    <Content Include="Content\Login_v6\fonts\poppins\Poppins-LightItalic.ttf" />
-    <Content Include="Content\Login_v6\fonts\poppins\Poppins-Medium.ttf" />
-    <Content Include="Content\Login_v6\fonts\poppins\Poppins-MediumItalic.ttf" />
-    <Content Include="Content\Login_v6\fonts\poppins\Poppins-Regular.ttf" />
-    <Content Include="Content\Login_v6\fonts\poppins\Poppins-SemiBold.ttf" />
-    <Content Include="Content\Login_v6\fonts\poppins\Poppins-SemiBoldItalic.ttf" />
-    <Content Include="Content\Login_v6\fonts\poppins\Poppins-Thin.ttf" />
-    <Content Include="Content\Login_v6\fonts\poppins\Poppins-ThinItalic.ttf" />
-    <Content Include="Content\Login_v6\vendor\bootstrap\css\bootstrap-grid.css.map" />
-    <Content Include="Content\Login_v6\vendor\bootstrap\css\bootstrap-grid.min.css.map" />
-    <Content Include="Content\Login_v6\vendor\bootstrap\css\bootstrap-reboot.css.map" />
-    <Content Include="Content\Login_v6\vendor\bootstrap\css\bootstrap-reboot.min.css.map" />
-    <Content Include="Content\Login_v6\vendor\bootstrap\css\bootstrap.css.map" />
-    <Content Include="Content\Login_v6\vendor\bootstrap\css\bootstrap.min.css.map" />
+    <Content Include="fonts\latin.woff2" />
+    <Content Include="fonts\Latin2.woff2" />
+    <Content Include="fonts\vietnameese.woff2" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -553,36 +303,78 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
-    <Content Include="Web.config" />
+    <Content Include="Server\User_Address.asmx" />
+    <Content Include="Views\Layout\Mail\send_paymentsuccess.html" />
+    <Content Include="Views\Layout\Mail\veriify_checkorder.html" />
+    <Content Include="Views\Layout\Mail\verify_mail.html" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\OrderCartController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\TestController.cs" />
-    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Account.cs" />
+    <Compile Include="Models\Address.cs">
+      <DependentUpon>JewelleryShopping.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\AdminLoginMst.cs">
+      <DependentUpon>JewelleryShopping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Adminn.cs" />
+    <Compile Include="Models\BrandMst.cs">
       <DependentUpon>JewelleryShopping.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CatMst.cs">
       <DependentUpon>JewelleryShopping.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CertifyMst.cs">
+      <DependentUpon>JewelleryShopping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Delivery.cs">
+      <DependentUpon>JewelleryShopping.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\DiamonView.cs">
+      <DependentUpon>JewelleryShopping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DimMst.cs">
+      <DependentUpon>JewelleryShopping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DimQltyMst.cs">
+      <DependentUpon>JewelleryShopping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DimQltySubMst.cs">
       <DependentUpon>JewelleryShopping.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DisplayCommonPro.cs">
       <DependentUpon>JewelleryShopping.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\eProjectDAO.cs" />
+    <Compile Include="Models\Feedback.cs">
+      <DependentUpon>JewelleryShopping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GoldKrtMst.cs">
+      <DependentUpon>JewelleryShopping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GoldMst.cs">
+      <DependentUpon>JewelleryShopping.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\GoldView.cs">
       <DependentUpon>JewelleryShopping.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Image.cs">
+      <DependentUpon>JewelleryShopping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Inquiry.cs">
+      <DependentUpon>JewelleryShopping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ItemMst.cs">
       <DependentUpon>JewelleryShopping.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\JewelleryShopping.Context.cs">
@@ -603,16 +395,41 @@
     <Compile Include="Models\JewelTypeMst.cs">
       <DependentUpon>JewelleryShopping.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Order_.cs">
+      <DependentUpon>JewelleryShopping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Order_Details.cs">
+      <DependentUpon>JewelleryShopping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Payment.cs">
+      <DependentUpon>JewelleryShopping.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ProdMst.cs">
+      <DependentUpon>JewelleryShopping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProductView.cs">
+      <DependentUpon>JewelleryShopping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Receiver.cs">
+      <DependentUpon>JewelleryShopping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SimilarPrice.cs">
+      <DependentUpon>JewelleryShopping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\StoneMst.cs">
+      <DependentUpon>JewelleryShopping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\StoneQltyMst.cs">
       <DependentUpon>JewelleryShopping.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\StoneView.cs">
       <DependentUpon>JewelleryShopping.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UploadClass.cs" />
     <Compile Include="Models\UserRegMst.cs">
       <DependentUpon>JewelleryShopping.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\UserValidate.cs" />
+    <Compile Include="Models\Validatee.cs" />
     <Compile Include="Models\ViewDisplayItem.cs">
       <DependentUpon>JewelleryShopping.tt</DependentUpon>
     </Compile>
@@ -620,6 +437,10 @@
       <DependentUpon>JewelleryShopping.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Server\User_Address.asmx.cs">
+      <DependentUpon>User_Address.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
@@ -649,33 +470,48 @@
       <DependentUpon>JewelleryShopping.edmx</DependentUpon>
     </Content>
     <None Include="packages.config" />
-    <Content Include="Views\Layout\MyLayout.cshtml" />
-    <Content Include="Views\Layout\Product\LayoutProduct.cshtml" />
     <Content Include="Views\Product\Product.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
-    <Content Include="Views\Layout\_Layout1.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Admin\Index.cshtml" />
-    <Content Include="Views\Layout\_LayoutHomeAdmin.cshtml" />
-    <Content Include="Views\Layout\_LayoutLoginAdmin.cshtml" />
-    <Content Include="Views\Admin\Login.cshtml" />
-    <Content Include="Views\Admin\ChangePass.cshtml" />
-    <Content Include="Views\Admin\ManageUser.cshtml" />
-    <Content Include="Views\User\Login.cshtml" />
-    <Content Include="Views\User\Register.cshtml" />
-    <Content Include="Views\User\UpdateUser.cshtml" />
-    <Content Include="Views\User\ChangePass.cshtml" />
-    <Content Include="Views\User\Details.cshtml" />
-    <Content Include="Views\Admin\ManageAdmin.cshtml" />
     <Content Include="Views\Product\ProductList.cshtml" />
-    <Content Include="Views\Layout\Product\LayoutListProduct.cshtml" />
-    <Content Include="Views\Test\Index2.cshtml" />
-    <Content Include="Views\Test\Index.cshtml" />
     <Content Include="Views\Product\GetNoMetal.cshtml" />
     <Content Include="Views\Product\GetNoDiamond.cshtml" />
     <Content Include="Views\Product\GetNoStone.cshtml" />
+    <Content Include="Views\OrderCart\CartShop.cshtml" />
+    <Content Include="Views\OrderCart\Index.cshtml" />
+    <Content Include="Views\OrderCart\Checkout.cshtml" />
+    <Content Include="Views\OrderCart\Payment.cshtml" />
+    <Content Include="Views\OrderCart\CalDistance.cshtml" />
+    <Content Include="Views\OrderCart\Infor_Order.cshtml" />
+    <Content Include="Views\OrderCart\Step2.cshtml" />
+    <Content Include="Views\OrderCart\payment_success.cshtml" />
+    <Content Include="Views\OrderCart\payment_false.cshtml" />
+    <Content Include="Views\OrderCart\CheckOrder.cshtml" />
+    <Content Include="Views\OrderCart\send_mail_order.cshtml" />
+    <Content Include="Views\OrderCart\GetOrder.cshtml" />
+    <Content Include="Views\Layout\Product\LayoutListProduct.cshtml" />
+    <Content Include="Views\Layout\Admin\AdminLayout.cshtml" />
+    <Content Include="Views\Test\Index.cshtml" />
+    <Content Include="Views\Admin\Login.cshtml" />
+    <Content Include="Views\Admin\AdminAccount.cshtml" />
+    <Content Include="Views\Admin\HomeAdmin.cshtml" />
+    <Content Include="Views\Admin\Change_Password.cshtml" />
+    <Content Include="Views\Admin\Delete_AdminAccount.cshtml" />
+    <Content Include="Views\Admin\Create_New_AdminAccount.cshtml" />
+    <Content Include="Views\Admin\UserAccount.cshtml" />
+    <Content Include="Views\Admin\UserAccount_Edit.cshtml" />
+    <Content Include="Views\Admin\UserAccount_Detele.cshtml" />
+    <Content Include="Views\Admin\UserAccount_Create.cshtml" />
+    <Content Include="data\json.json" />
+    <Content Include="Views\Test\Index2.cshtml" />
+    <Content Include="Views\Admin\UserAddress_Create.cshtml" />
+    <Content Include="Views\Admin\UserAddress_Edit.cshtml" />
+    <Content Include="Views\Admin\UserAddress_Delete.cshtml" />
+    <Content Include="Views\Admin\Product.cshtml" />
+    <Content Include="Views\Admin\Product_Details.cshtml" />
+    <Content Include="Views\Test\Index3.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -685,9 +521,19 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Videofiles\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Comon\Comon.csproj">
+      <Project>{a5cfc538-8e2b-48c7-85d7-3b7835384c6b}</Project>
+      <Name>Comon</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

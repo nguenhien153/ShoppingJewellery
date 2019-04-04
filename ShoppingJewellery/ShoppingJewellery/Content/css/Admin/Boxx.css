@@ -1,0 +1,23 @@
+﻿.boxx {
+    background-color: #ffffff;
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+}
+
+
+.headerboxx {
+    background-color: #f7f7f7;
+    height: 6%;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    border-bottom: 2px solid #dee2e6;
+    position: relative;
+
+}
+
+    .headerboxx h4 {
+        padding-top: 1vh;
+    }
+
+
+

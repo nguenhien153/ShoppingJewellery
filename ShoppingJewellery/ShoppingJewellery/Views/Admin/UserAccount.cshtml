@@ -1,0 +1,473 @@
+﻿@model IEnumerable<ShoppingJewellery.Models.UserRegMst>
+
+@{
+    ViewBag.Title = "User Account";
+    Layout = "~/Views/Layout/Admin/AdminLayout.cshtml";
+    Page.name = Session["username"];
+}
+<link href="~/Content/css/Admin/w3.css" rel="stylesheet" />
+<link href="~/Content/css/Admin/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="~/Content/css/Admin/Boxx.css?1" rel="stylesheet" />
+<link href="~/Content/css/Admin/select.dataTables.min.css" rel="stylesheet" />
+<style>
+    td.details-control {
+        background: url('../../Content/images/Icon/Admin/details_open.png') no-repeat center center;
+        cursor: pointer;
+    }
+
+    tr.shown td.details-control {
+        background: url('../../Content/images/Icon/Admin/details_close.png') no-repeat center center;
+        cursor: pointer;
+    }
+
+    table.dataTable thead .sorting_desc {
+        background-image: url('../../Content/images/Icon/Admin/sort_desc.png');
+    }
+
+    table.dataTable thead .sorting_asc {
+        background-image: url('../../Content/images/Icon/Admin/sort_asc.png');
+    }
+
+    table.dataTable thead .sorting {
+        background-image: url('../../Content/images/Icon/Admin/sort_both.png');
+    }
+
+    .field-icon {
+        float: right;
+        margin-top: -27px;
+        margin-right: -5px;
+        position: relative;
+        z-index: 20;
+        width: 20px;
+    }
+
+
+    td {
+        font-size: 0.8em;
+        word-break: break-all;
+    }
+
+    table#example th {
+        font-size: 0.8em;
+        background-color: #f7f7f7;
+        white-space: nowrap;
+    }
+
+   
+
+    #example_filter {
+        margin-top: 15px;
+    }
+
+    hr {
+        border-top: 1.5px solid #32bea6;
+    }
+</style>
+
+<div class="form-group col-12 ">
+    <div class="col-12 headerboxx">
+        <h4><strong class="center">User Account</strong></h4>
+    </div>
+    <div class="col-12 boxx ">
+        <div style="width:70vw;padding:10px 0 15px 0" class="m-auto">
+            <table id="example" class="table  table-responsive hover" style="">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>
+                            Username
+                        </th>
+                        <th>
+                            First Name
+                        </th>
+                        <th>
+                            Last Name
+                        </th>
+                        <th>
+                            Phone Number
+                        </th>
+                        <th>
+                            Email
+                        </th>
+                        <th>
+                            Date of Birth
+                        </th>
+                        <th>
+                            Creation Date
+                        </th>
+                        <th>
+                            Password
+                        </th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th></th>
+                        <th>
+                            Username
+                        </th>
+                        <th>
+                            First Name
+                        </th>
+                        <th>
+                            Last Name
+                        </th>
+                        <th>
+                            Phone Number
+                        </th>
+                        <th>
+                            Email
+                        </th>
+                        <th>
+                            Date of Birth
+                        </th>
+                        <th>
+                            Creation Date
+                        </th>
+                        <th>
+                            Password
+                        </th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"><strong>Delete User Account</strong></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="content_delete">
+
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-primary" id="delete_button">Yes</a>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="selectRow" tabindex="-1" role="dialog" aria-hidden="true" on>
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h7 class="modal-title">
+                    <img src="~/Content/images/Icon/Admin/amount_Copy_3-512.png" style="width:30px" />
+                </h7>
+                <button type="button" class=" btn btn-danger close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p id="contentt"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Content/js/Admin/jquery.dataTables.min.js"></script>
+<script src="~/Content/js/Admin/Password.js?1"></script>
+<script src="~/Content/js/Admin/dataTables.select.min.js"></script>
+<script type="text/javascript">
+    var admin = "@Session["admin"]";
+    var userID;
+    var key;
+    function clickChildRow(trr) {
+        $(".seletedRow").css("background-color", "#ffffff");
+        $(".seletedRow").removeClass("seletedRow");
+        $(trr).addClass("seletedRow");
+        $(".seletedRow").css("background-color", "#B0BED9");
+        key = $(trr).attr("AddressID");
+    }
+
+    function UserAddress_Edit() {
+        if (key != null) {
+            window.location.href = "/Admin/UserAddress_Edit?key=" + key;
+        } else {
+            $("#contentt").text("Please select the address.");
+            $('#selectRow').modal('show');
+        }
+        key = null;
+    }
+
+    function UserAddress_Delete() {
+        if (key != null) {
+            $("#content_delete").text("Are you sure?");
+            $("#delete_button").attr("href", "/Admin/UserAddress_Delete?key=" + key);
+            $("#exampleModal").modal('show');
+        } else {
+            $("#contentt").text("Please select the address.");
+            $('#selectRow').modal('show');
+        }
+        key = null;
+    }
+
+    function showTooltip() {
+        $('[data-toggle="tooltip"]').tooltip();
+    }
+
+
+    function format(d) {
+        var hien = " ";
+        var table = " ";
+        var check = 0;
+
+        var defaultt = '<img src="/Content/images/Icon/Admin/check_Address.png" style="width:30px" />';
+        var createe;
+        if (admin == "SuperAdmin") {
+            createe = "<a href='/Admin/UserAddress_Create?username=" + d.userID + "' class='btn createeed marginleft5px' style='margin-bottom: 10px' data-toggle='tooltip' title='Create Address' data-placement='bottom' ><img src='/Content/images/Icon/Admin/ChildRow_Create.png' style='width:35px'/></a> " +
+                '<button onclick="UserAddress_Edit()" class="btn edittt marginleft5px" style="margin-bottom: 10px;background: rgba(0,0,0,0)" data-toggle="tooltip" title="Edit Addresss" data-placement="bottom"><img src="/Content/images/Icon/Admin/ChildRow_Edit.png" style="width:35px "/></button>' +
+                '<button onclick="UserAddress_Delete()" class="btn deteleee marginleft5px" style="margin-bottom: 10px;background: rgba(0,0,0,0)" data-toggle="tooltip" title="Delete Address" data-placement="bottom"><img src="/Content/images/Icon/Admin/ChildRow_Delete.png" style="width:35px "/></button>';
+        } else {
+            createe = '<button onclick="UserAddress_Edit()" class="btn edittt marginleft5px" style="margin-bottom: 10px;background: rgba(0,0,0,0)" data-toggle="tooltip" title="Edit Addresss" data-placement="bottom"><img src="/Content/images/Icon/Admin/ChildRow_Edit.png" style="width:35px "/></button>';
+        }
+        for (var i = 0; i < d.Addresses1.length; i++) {
+            if (d.Addresses1[i].Instruction_Optional === "") {
+                d.Addresses1[i].Instruction_Optional = "None";
+            }
+            if (d.Addresses1[i].default_address === "True") {
+                d.Addresses1[i].default_address = defaultt;
+                $('[data-toggle="tooltip"]').tooltip();
+            } else {
+                d.Addresses1[i].default_address = "";
+            }
+            hien += '<tr onclick="clickChildRow(this)" AddressID=' + d.Addresses1[i].NorR + '>' +
+                '<td class="align-middle">' + d.Addresses1[i].country + '</td>' +
+                '<td class="align-middle">' + d.Addresses1[i].state_province + '</td>' +
+                '<td class="align-middle">' + d.Addresses1[i].city + '</td>' +
+                '<td class="align-middle">' + d.Addresses1[i].Address + '</td>' +
+                '<td class="align-middle">' + d.Addresses1[i].Zip_Postal + '</td>' +
+                '<td class="align-middle">' + d.Addresses1[i].Instruction_Optional + '</td>' +
+                '<td class="align-middle"><center>' + d.Addresses1[i].default_address + '</center></td>' +
+                '</tr>';
+            if (d.Addresses1[i].country != "") {
+                check++;
+            }
+        };
+        if (check==0) {
+            hien = '<tr>' +
+                '<td class="align-middle">None</td>' +
+                '<td class="align-middle">None</td>' +
+                '<td class="align-middle">None</td>' +
+                '<td class="align-middle">None</td>' +
+                '<td class="align-middle">None</td>' +
+                '<td class="align-middle">None</td>' +
+                '<td class="align-middle">None</td>' +
+                '</tr>';
+        }
+        table = '<div style="width:100%; font-size: 1.2em" onmouseover="showTooltip()">' +
+            createe +
+            '<table id="childtable" style="width:100%" >' +
+            '<tr>' +
+            '<th style=" background-color: #32bea6">Country</th>' +
+            '<th style=" background-color: #32bea6">State / Province</th>' +
+            '<th style=" background-color: #32bea6">City</th>' +
+            '<th style=" background-color: #32bea6">Address</th>' +
+            '<th style=" background-color: #32bea6">Zip Postal</th>' +
+            '<th style=" background-color: #32bea6">Instruction</th>' +
+            '<th  style="width:10%;background-color: #32bea6">Default Address</th></tr>' +
+            hien +
+            '</table>' +
+            '<hr/>'+
+            '</div>';
+           return table;
+    }
+
+    $(document).ready(function () {
+        $.ajax({
+            url: "/Server/User_Address.asmx/HelloWorld",
+            method: 'post',
+            dataType: 'json',
+            success: function (data) {
+
+                var table = $("#example").DataTable({
+                    data: data,
+                    "responsive": false,
+                    "pageLength": 10,
+                    "stateSave": true,
+                    "select": {
+                        "info": false
+                    },
+                    "columns": [
+                        {
+                            "className": 'details-control',
+                            "orderable": false,
+                            "data": null,
+                            "defaultContent": ''
+                        },
+                        {
+                            "data": "userID",
+                            "className": "align-middle",
+                            "render": function (userID) {
+                                return userID;
+                            }
+                        },
+                        {
+                            "data": "userFname",
+                            "className": "align-middle",
+                            "width": "9%",
+                            "render": function (userFname) {
+                                return userFname;
+                            }
+                        },
+                        {
+                            "data": "userLname",
+                            "className": "align-middle",
+                            "render": function (userLname) {
+                                return userLname;
+                            }
+                        },
+                        {
+                            "data": "mobNo",
+                            "className": "align-middle",
+                            "width": "13%",
+                            "render": function (mobNo) {
+                                var phone2 = mobNo.replace(/\s/g, '').length;
+                                var area, phone;
+
+
+                                if (phone2 == 11) {
+                                    area = mobNo.substring(0, 2);
+                                    phone = mobNo.substring(2);
+                                    area = "(+" + area + ")"
+                                    phone = phone.slice(0, 4) + " " + phone.slice(4, 7) + " " + phone.slice(7, 9);
+                                    mobNo = area + " " + phone;
+                                }
+                                if (phone2 == 10) {
+                                    area = mobNo.substring(0, 1);
+                                    phone = mobNo.substring(1);
+                                    area = "(+" + area + ")"
+                                    phone = phone.slice(0, 4) + " " + phone.slice(4, 7) + " " + phone.slice(7, 9);
+                                    mobNo = area + " " + phone;
+                                }
+                                if (phone2 == 12) {
+                                    area = mobNo.substring(0, 3);
+                                    phone = mobNo.substring(3);
+                                    area = "(+" + area + ")"
+                                    phone = phone.slice(0, 4) + " " + phone.slice(4, 7) + " " + phone.slice(7, 9);
+                                    mobNo = area + " " + phone;
+                                }
+                                return mobNo;
+
+                            }
+                        },
+                        {
+                            "data": "emailID",
+                            "className": "align-middle",
+                            "render": function (emailID) {
+                                return emailID;
+                            }
+                        },
+                        {
+                            "data": "dob",
+                            "className": "align-middle",
+                            "render": function (dob) {
+                                return dob;
+                            }
+                        },
+                        {
+                            "data": "cdate",
+                            "className": "align-middle",
+                            "render": function (cdate) {
+                                return cdate;
+                            }
+                        },
+                        {
+                            "data": "password",
+                            "className": "align-middle",
+                            "searchable": false,
+                            "width":"15%",
+                            'sortable': false,
+                            "render": function (password) {
+                                return "<div style'width:100%'>" +
+                                    "<input id='password' type='password' class='w3-input col-12' value='" + password + "'readonly  style='background: rgba(0,0,0,0);border-bottom:0;width:70%;text-overflow: ellipsis;'>" +
+                                    "<img src='../Content/images/Icon/Admin/Hide_Password.png' class='field-icon show_hide' onclick='show_hide(this)' />" +
+                                    "</div>";
+                            }
+                        }
+                    ],
+                    "order": [[1, 'asc']]
+                });
+
+
+
+
+                $("#example_length label").remove();
+
+                $("#example_length").append("<a href='/Admin/UserAccount_Create' class='btn createe marginleft5px' style='margin-bottom:10px' data-toggle='tooltip' title='Create Account' data-placement='bottom'><img src='/Content/images/Icon/Admin/Icon_Create.png' style='width:35px'/></a> " +
+                    '<button class="btn editt marginleft5px" style="margin-bottom: 10px;background-color:#ffffff" data-toggle="tooltip" title="Edit Account" data-placement="bottom"><img src="/Content/images/Icon/Admin/Icon_Edit.png" style="width:39px "/></button>' +
+                    '<button class="btn deletee marginleft5px" style="margin-bottom: 10px;background-color:#ffffff" data-toggle="tooltip" title="Delete Account" data-placement="bottom"><img src="/Content/images/Icon/Admin/Icon_Remove.png" style="width:39px "/></button>'
+                );
+
+                $('[data-toggle="tooltip"]').tooltip();
+
+                $('#example tbody').on('click', 'tr', function () {
+                    var row = table.row(this).data();
+                    userID = row.userID;
+                });
+
+                if (admin == "SuperAdmin")
+                {
+                    $(".createe").show();
+                    $(".deletee").show();
+                } else {
+                    $(".createe").hide();
+                    $(".deletee").hide();
+                }
+
+                $(".editt").on("click", function () {
+                    if (userID != null) {
+                        window.location.href = "/Admin/UserAccount_Edit?username=" + userID.replace(/\s/g, '');
+                    } else {
+                        $("#contentt").text("Please select account.");
+                        $('#selectRow').modal('show');
+                    }
+                    userID = null;
+                });
+                $(".deletee").on("click", function () {
+                    if (userID != null) {
+                        $("#content_delete").text("Deleting an account will delete all account addresses. Are you sure?");
+                        $("#delete_button").attr("href", "/Admin/UserAccount_Detele?username=" + userID.replace(/\s/g, ''));
+                        $("#exampleModal").modal('show');
+                    } else {
+                        $("#contentt").text("Please select account.");
+                        $('#selectRow').modal('show');
+                    }
+                    userID = null;
+                });
+
+                $("#example_filter").addClass("form-inline");
+                $("#example_filter label input").addClass("form-control");
+
+                $('#example').on('click', 'td.details-control', function () {
+                    var tr = $(this).closest('tr');
+                    var row = table.row(tr);
+
+                    if (row.child.isShown()) {
+
+                        row.child.hide();
+                        tr.removeClass('shown');
+                    }
+                    else {
+
+                        row.child(format(row.data())).show();
+                        tr.addClass('shown');
+                    }
+                });
+
+            }
+        });
+
+
+    });
+
+
+</script>

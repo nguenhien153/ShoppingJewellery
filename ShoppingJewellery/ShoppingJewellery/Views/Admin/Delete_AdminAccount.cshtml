@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewBag.Title = "Delete Admin Account";
+    Layout = "~/Views/Layout/Admin/AdminLayout.cshtml";
+}
+<link href="~/Content/css/Admin/Boxx.css" rel="stylesheet" />
+
+<div class="col-7 form-group m-auto">
+    <div class="col-12 headerboxx"><h4><strong>Delete Admin Account</strong></h4></div>
+    <div class="boxx col-12">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger", @style="font-size:25px;text-align:center; padding-top:10px" })
+        <div class="col-12 d-flex">
+            <a href="@Url.Action("AdminAccount","Admin")" class="btn btn-dark ml-auto m-3 col-2">Go Back</a>
+        </div>
+    </div>
+</div>

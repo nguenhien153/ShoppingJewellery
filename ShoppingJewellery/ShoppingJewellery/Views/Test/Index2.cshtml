@@ -1,111 +1,35 @@
-﻿<html>
-<head>
-    <title>My Now Amazing Webpage</title>
-    <link rel="stylesheet" type="text/css" href="~/Content/css/slick.css" />
-    <link rel="stylesheet" type="text/css" href="~/Content/css/slick-theme.css" />
-    <link href="~/Content/css/hee.css" rel="stylesheet" />
+﻿
+@{
+    ViewBag.Title = "Index2";
+    Layout = "";
+}
+<script src="~/Content/bootstrap-4.0.0-dist/js/bootstrap.min.js"></script>
+<link href="~/Content/bootstrap-4.0.0-dist/css/bootstrap.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<style>
+    .field-icon {
+        float: right;
+        margin-top: -30px;
+     
+        margin-right: -25px;
+        position: relative;
+        z-index: 20;
+        width: 20px;
+    }
 
-    <style type="text/css">
+    .show_hide {
+        width: 20px;
+        cursor: pointer;
+    }
+</style>
 
-        .slider {
-            width: 50%;
-            margin: 100px auto;
-        }
+<div class="col-md-2">
+    <input id="password-field" type="text" class="w3-input" name="password" value="wwwwwwwwwwwwwwwwwwwwwwwwwwww" style="background-color:white;border-bottom:0" disabled>
+    <img src="~/Content/images/Icon/Admin/Hide_Password.png" class="field-icon show_hide" />
+</div>
 
-        .slick-slide {
-            margin: 0px 20px;
-        }
+<script>
 
-            .slick-slide img {
-                width: 100%;
-            }
+     
 
-
-        .slick-next:before {
-            content: url('../../Content/images/Icon/left-arrow (1).png');
-        }
-
-        .slick-prev:before {
-            content: url('../../Content/images/Icon/left-arrow (2).png');
-        }
-
-        .slick-slide {
-            transition: all ease-in-out .3s;
-            opacity: .2;
-        }
-
-        .slick-active {
-            opacity: 2;
-        }
-
-        .slick-current {
-            opacity: 2;
-        }
-    </style>
-
-</head>
-<body>
-
-
-
-
-    
-        <div class="slider slider-for title">
-            <div class="tile" data-scale="3.6 data-image="http://ultraimg.com/images/bNeWGWB.jpg">
-             
-            </div>
-            <div>
-                <img  src="~/Content/images/Product_Image/RINGS/Img/EllaClassicSolitaireRing.jpg" />
-            </div>
-            <div><h3>3</h3></div>
-            <div><h3>4</h3></div>
-            <div><h3>5</h3></div>
-        </div>
-        <div id="myresult" class="img-zoom-result"></div>
-        <div class="slider slider-nav">
-            <div>
-                <img src="~/Content/images/Product_Image/RINGS/Image/RingfromtheButterfly.jpg" />
-            </div>
-            <div>
-                <img src="~/Content/images/Product_Image/RINGS/Image/RingfromtheButterfly.jpg" />
-            </div>
-            <div><h3>3</h3></div>
-            <div><h3>4</h3></div>
-            <div><h3>5</h3></div>
-        </div>
-
-        <button type="button" class="hien">Next</button>
-        <a></a>
-
-        <script type="text/javascript" src="~/Content/JQuery/jquery-3.3.1.min.js"></script>
-        <script type="text/javascript" src="~/Content/js/Product/slick.js"></script>
-    <script src="~/Content/js/Product/hee.js"></script>
-        <script type="text/javascript">
-
-           
-           
-
-            
-
-            $('.slider-for').slick({
-                slidesToShow: 1,
-                slidesToScroll: 1,
-                arrows: true,
-                fade: true,
-                asNavFor: '.slider-nav'
-            });
-            $('.slider-nav').slick({
-                slidesToShow: 3,
-                slidesToScroll: 1,
-                asNavFor: '.slider-for',
-                focusOnSelect: true
-
-            });
-
-
-
-
-        </script>
-
-</body>
-</html>
+</script>

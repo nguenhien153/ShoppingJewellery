@@ -1,0 +1,29 @@
+﻿
+@{
+    ViewBag.Title = "Index3";
+}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="~/Content/bootstrap-4.0.0-dist/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+    <img src="~/Videofiles/icons8-add-96.png" />
+    <div class="container">
+        @using (Html.BeginForm("Index3", "Test", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <div class="form-group">
+                <label> Upload Video</label>
+                <div class="input-group">
+                    @Html.TextBox("videofile", "", new { type = "file" })<br />
+                    <input type="submit" value="Upload Video" />
+                    @ViewData["Message"]
+                </div>
+            </div>
+        }
+    </div>
+</body>
+</html>
+

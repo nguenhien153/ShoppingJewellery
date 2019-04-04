@@ -1,0 +1,300 @@
+﻿@model ShoppingJewellery.Models.Payment
+
+<style type="text/css">
+    .paymentWrap .paymentBtnGroup .paymentMethod {
+        padding: 40px;
+        box-shadow: none;
+        position: relative;
+    }
+
+        .paymentWrap .paymentBtnGroup .paymentMethod.active {
+            outline: none !important;
+        }
+
+            .paymentWrap .paymentBtnGroup .paymentMethod.active .method {
+                border-color: #007bff;
+                outline: none !important;
+                box-shadow: 0px 3px 22px 0px #7b7b7b;
+            }
+
+        .paymentWrap .paymentBtnGroup .paymentMethod .method {
+            position: absolute;
+            right: 3px;
+            top: 3px;
+            bottom: 3px;
+            left: 3px;
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            border: 2px solid transparent;
+            transition: all 0.5s;
+        }
+
+            .paymentWrap .paymentBtnGroup .paymentMethod .method.visa {
+                background-image: url('../../Content/images/Icon/visa.png');
+            }
+
+            .paymentWrap .paymentBtnGroup .paymentMethod .method.master-card {
+                background-image: url('../../Content/images/Icon/mastercard.png');
+            }
+
+            .paymentWrap .paymentBtnGroup .paymentMethod .method:hover {
+                border-color: #007bff;
+                outline: none !important;
+            }
+
+    .tooltip-inner {
+        max-width: 320px;
+        /* If max-width does not work, try using width instead */
+        width: 320px;
+        height: 210px;
+        max-height: 210px;
+    }
+</style>
+
+
+@{
+    Page.Title = "Payment";
+    Layout = "~/Views/Layout/Product/LayoutListProduct.cshtml";
+}
+
+
+<div class="body">
+    <div class="container">
+
+        <div class="col-10" style=" margin:auto">
+            <h2>Payment</h2><hr />
+            <div class="col-12 ">
+                <div class="paymentCont col-12 row">
+                    <h4 style="text-align:center" class="col-12">Select Your Type Card</h4>
+                    <div class="paymentWrap col-6" style=" margin:auto;">
+                        <div class="btn-group paymentBtnGroup btn-group-justified col-12" data-toggle="buttons" id="paymentt">
+                            <label class="btn paymentMethod active col-6">
+                                <div class="method visa"></div>
+                                <input type="radio" name="options" checked value="visa" onchange="paymentmethod()">
+                            </label>
+                            <label class="btn paymentMethod col-6">
+                                <div class="method master-card"></div>
+                                <input type="radio" name="options" value="master" onchange="paymentmethod()">
+                            </label>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <form action="/OrderCart/Payment" method="post" data-toggle="validator" id="myForm">
+                <hr />
+                <div class="form-horizontal">
+
+                    <input id="TypeCreditCard" name="TypeCreditCard" type="hidden" value="visa">
+
+                    <div class="form-group row col-12">
+                        <label for="Method_Card" class="col-4">Select Your Payment Method</label>
+                        <div class="col-8">
+                            <div class="input-group col-12">
+                                <div id="radioBtn" class="btn-group col-12">
+                                    <a class="btn btn-outline-primary active col-5" data-toggle="Method_Card" data-title="Debit Card">Debit Card</a>
+                                    <a class="btn btn-outline-primary notActive col-5" data-toggle="Method_Card" data-title="Credit Card">Credit Card</a>
+                                </div>
+                                <input type="hidden" name="Method_Card" id="Method_Card" value="Debit Card">
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-2" for="CardNumber">Card Number</label>
+                        <div class="col-md-12">
+                            <input class="form-control text-box single-line" id="CardNumber" name="CardNumber" type="text" value="" required maxlength="20">
+                            <span class="field-validation-valid" id="result_cardnumber" data-valmsg-for="CardNumber" data-valmsg-replace="true"></span>
+                        </div>
+                    </div>
+
+                    <input data-val="true" data-val-number="The field ID_Order must be a number." data-val-required="The ID_Order field is required." id="ID_Order" name="ID_Order" type="hidden" value="0">
+
+                    <div class="form-group">
+                        <label class="control-label col-md-2" for="NameOnCard">Name On Card</label>
+                        <div class="col-md-12">
+                            <input class="form-control text-box single-line" id="NameOnCard" name="NameOnCard" type="text" value=""  style="text-transform:uppercase" maxlength="50">
+                            <span class="field-validation-valid " id="result_nameoncard" data-valmsg-for="NameOnCard" data-valmsg-replace="true"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+
+                        <label class="control-label col-md-2" for="CVV_CVC" id="cv">CVV</label>
+                        <label for="CVV_CVC" class=" btn-link" id="panelPrecios" data-toggle="tooltip" title="<img src='/Content/images/Icon/CVV.png' />">
+                            What is CVV/CVC number?
+                        </label>
+                        <div class="col-md-12">
+                            <input class="form-control text-box " id="CVV_CVC" name="CVV_CVC" type="text" pattern="^\d{3}$" maxlength="3" value="" title="3 digit number">
+                            <span class="field-validation-valid " data-valmsg-for="CVV_CVC" data-valmsg-replace="true"></span>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="control-label col-md-2" for="Expiry_Date">Expiry Date</label>
+                        <div class="col-md-12">
+                            <input class="form-control text-box single-line from" id="Expiry_Date" name="Expiry_Date" type="text" value="" required>
+                            <span class="field-validation-valid" id="result_expiry_date" data-valmsg-for="Expiry_Date" data-valmsg-replace="true"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-12">
+                            <input type="checkbox" name="agree[]" id="agree" style="margin-right:10px" /><label class="form-check-label" for="agree"> Agree to the <a href="@Url.Action("ProductList","Product")" target="_blank">payment terms</a> of Jewelryshopping</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class=" col-md-12 row">
+                            <button class="btn btn-primary col-3 btn-lg" style="margin:auto">Pay Now</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+<script src="~/Content/bootstrap-4.0.0-dist/js/bootstrap.min.js"></script>
+<script src="~/Content/JQuery/jquery-1.11.1.min.js"></script>
+<script src="~/Content/bootstrap-4.0.0-dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/Content/js/Product/jquery.mask.min.js"></script>
+<script src="~/Content/bootstrap-4.0.0-dist/js/bootstrap-datepicker.min.js"></script>
+<link href="~/Content/bootstrap-4.0.0-dist/css/datepicker.min.css" rel="stylesheet" />
+<script type="text/javascript">
+
+    var rex_number = /^\d{4}\s{1}\d{4}\s{1}\d{4}\s{1}\d{4}$/;
+    var re_name = /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/;
+    var re_expily = /^\d{2}(\/)\d{4}$/;
+    var check_number = false;
+    var check_name = false;
+    var check_expily = false;
+
+    var startDate = new Date();
+
+    function GetNo(Name) {
+        var No;
+        var MetalNo = document.getElementsByName(Name);
+        for (var i = 0, length = MetalNo.length; i < length; i++) {
+            if (MetalNo[i].checked) {
+                No = MetalNo[i].value;
+                break;
+            }
+        }
+        return No;
+    }
+    function paymentmethod() {
+        var No = GetNo('options');
+        document.getElementById('TypeCreditCard').value = No;
+        if (No == 'visa') {
+            document.getElementById("cv").innerHTML = "CVV";
+        }
+        if (No == 'master') {
+            document.getElementById("cv").innerHTML = "CVC";
+        }
+    }
+    function validateInput(re, email) {
+        return re.test(email);
+    }
+    function validate(inputt, resultt, re) {
+        var $result = $("#" + resultt);
+        var input = $("#" + inputt).val();
+        var varr = false;
+        var inputte = $("#" + inputt);
+        $result.text("");
+        if (validateInput(re, input)) {
+            inputte.css('border', '1px solid #ced4da');
+            varr = true;
+        } else {
+            $result.text(input + " is not valid ");
+            $result.css("color", "red");
+            inputte.css('border', '1px solid red');
+            varr = false
+        }
+        return varr;
+    }
+
+    $(document).ready(function () {
+
+        $('#myForm').submit(function (event) {
+            if (check_number == false) {
+                alert("Card Number is not valid !!!");
+                event.preventDefault();
+            }
+            if (check_name == false) {
+                alert("Name On Card is not valid !!!");
+                event.preventDefault();
+            }
+            if (check_expily == false) {
+                alert("Expily Date is not valid !!!");
+                event.preventDefault();
+            }
+            if (check_expily == false) {
+                alert("Expily Date is not valid !!!");
+                event.preventDefault();
+            }
+            if ($('input[name="agree[]"]:checked').length == 0) {
+                alert("Please Checked the payment terms !!!");
+                event.preventDefault();
+            } 
+        });
+
+        $('#radioBtn a').on('click', function () {
+            var sel = $(this).data('title');
+            var tog = $(this).data('toggle');
+            $('#' + tog).prop('value', sel);
+            $('a[data-toggle="' + tog + '"]').not('[data-title="' + sel + '"]').removeClass('active').addClass('notActive');
+            $('a[data-toggle="' + tog + '"][data-title="' + sel + '"]').removeClass('notActive').addClass('active');
+        })
+
+        $('#panelPrecios').tooltip({
+            animated: 'fade',
+            placement: 'bottom',
+            html: true,
+            boundary: 'window'
+        });
+
+        $('.from').datepicker({
+            autoclose: true,
+            minViewMode: 1,
+            format: 'mm/yyyy'
+        }).on('changeDate', function (selected) {
+            startDate = new Date(selected.date.valueOf());
+            startDate.setDate(startDate.getDate(new Date(selected.date.valueOf())));
+            $('.to').datepicker('setStartDate', startDate);
+        });
+
+        $('#CardNumber').mask('0000 0000 0000 0000');
+        $('#CVV_CVC').mask('000');
+        $("#Expiry_Date").mask('00/0000');
+
+        $("#Expiry_Date").bind("change", function () {
+            var stringg = $('#Expiry_Date').val();
+            var string2 = stringg.split("/");
+            var year = new Date().getFullYear();
+            var $result = $("#result_expiry_date");
+            $result.text("");
+            if (parseInt(string2[1]) <= parseInt(year) && re_expily.test(stringg)) {
+                $('#Expiry_Date').css('border', '1px solid #ced4da');
+                check_expily = true;
+            } else {
+                $result.text(stringg + " is not valid ");
+                $result.css("color", "red");
+                $('#Expiry_Date').css('border', '1px solid red');
+                check_expily = false;
+            }
+        });
+
+        $("#CardNumber").bind("change", function () {
+            check_number = validate("CardNumber", "result_cardnumber", rex_number);
+        });
+
+        $("#NameOnCard").bind("change", function () {
+            check_name = validate("NameOnCard", "result_nameoncard", re_name);
+        });
+    });
+</script>
+

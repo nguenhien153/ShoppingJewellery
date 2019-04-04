@@ -1,49 +1,39 @@
 ﻿
 @{
-    ViewBag.Title = "Login";
-    Layout = "~/Views/Layout/_LayoutLoginAdmin.cshtml";
+    Layout = null;
 }
-@if (Session["check"] != null)
-{
-    <script>
-        alert("Username or password is wrong");
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Log In</title>
+    <link href="~/Content/bootstrap-4.0.0-dist/css/bootstrap.css" rel="stylesheet" />
+    <script src="~/Content/bootstrap-4.0.0-dist/js/bootstrap.js"></script>
+    <link href="~/Content/css/Admin/Login.css?1" rel="stylesheet" />
+</head>
+<body>
+    <div class="contact-form">
+        <img src="~/Content/images/Icon/Admin/Login.png" class="avatar">
+        <h2>Contact Form</h2>
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <form method="post" action="@Url.Action("Login","Admin")">
+            <p>Username</p>
+            <input type="text" name="username" id="username" placeholder="Enter Username" required>
+            <p>Password</p>
+            <input type="password" name="password" id="password" placeholder="Enter Password" required>
+            <div class="form-group">
+                <input type="checkbox" id="remember" name="remember" value="true"><label for="remember">Remember Me</label>
+            </div>
+            <input type="submit" name="" value="Sign In">
+        </form>
+    </div>
+    <script src="~/Content/JQuery/jquery-3.3.1.js"></script>
+    <script type="text/javascript">
+        if ($(".validation-summary-errors ul li").text()) {
+            $(".contact-form").css("height", "480px");
+        } else {
+            $(".contact-form").css("height", "430px");
+        }
     </script>
-    Session["check"] = null;
-}
-@using (Html.BeginForm("Login", "Admin", FormMethod.Post))
-{
-    <div class="wrap-input100 validate-input m-t-85 m-b-35" data-validate="Enter username">
-        <input class="input100" type="text" name="username" value="admin">
-        <span class="focus-input100" data-placeholder="Username"></span>
-    </div>
-
-    <div class="wrap-input100 validate-input m-b-50" data-validate="Enter password">
-        <input class="input100" type="password" name="password" value="admin">
-        <span class="focus-input100" data-placeholder="Password"></span>
-    </div>
-
-    <div class="container-login100-form-btn">
-        <input class="login100-form-btn" type="submit" value="Log In" />
-    </div>
-}
-<ul class="login-more p-t-190">
-    <li class="m-b-8">
-        <span class="txt1">
-            Forgot
-        </span>
-
-        <a href="#" class="txt2">
-            Username / Password?
-        </a>
-    </li>
-
-    <li>
-        <span class="txt1">
-            Don’t have an account?
-        </span>
-
-        <a href="#" class="txt2">
-            Sign up
-        </a>
-    </li>
-</ul>
+</body>
+</html>

@@ -1,0 +1,219 @@
+﻿@model IEnumerable<ShoppingJewellery.Models.AdminLoginMst>
+
+@{
+    ViewBag.Title = "Admin Account";
+    Layout = "~/Views/Layout/Admin/AdminLayout.cshtml";
+    Page.name = Session["username"];
+}
+<link href="~/Content/css/Admin/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="~/Content/css/Admin/Boxx.css?1" rel="stylesheet" />
+<link href="~/Content/css/Admin/select.dataTables.min.css" rel="stylesheet" />
+<link href="~/Content/css/Admin/w3.css" rel="stylesheet" />
+<style>
+    .field-icon {
+        float: right;
+        margin-top: -27px;
+        margin-right: 46px;
+        position: relative;
+        z-index: 20;
+        width: 20px;
+    }
+
+    table.dataTable thead .sorting_desc {
+        background-image: url('../../Content/images/Icon/Admin/sort_desc.png');
+    }
+
+    table.dataTable thead .sorting_asc {
+        background-image: url('../../Content/images/Icon/Admin/sort_asc.png');
+    }
+
+    table.dataTable thead .sorting {
+        background-image: url('../../Content/images/Icon/Admin/sort_both.png');
+    }
+</style>
+<div class="col-12 form-group m-auto">
+    <div class="col-12 headerboxx"><h4><strong>Admin Account</strong></h4></div>
+    <div class="boxx col-12">
+
+        <div style="padding:10px 0 15px 0">
+            <table class="table table-striped hover" id="table">
+                <thead>
+                    <tr class="col-12">
+                        <th>
+                            @Html.DisplayNameFor(model => model.Username)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Password)
+                        </th>
+                        <th>
+                            Role
+                        </th>
+                        @if (Session["admin"].ToString().Equals("Admin"))
+                        {
+                            <th></th>
+                        }
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        if (Session["admin"].ToString().Equals("SuperAdmin"))
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Username)
+                                </td>
+                                <td>
+                                    <div>
+                                        <input id='password' type='password' class='w3-input' value='@item.Password' readonly style='background: rgba(0,0,0,0);border-bottom:0;width:70%;text-overflow: ellipsis;'>
+                                        <img src='../Content/images/Icon/Admin/Hide_Password.png' class='field-icon show_hide' onclick='show_hide(this)' />
+                                    </div>
+                                </td>
+
+                                @if (item.role == true)
+                                {
+                                    <td>
+                                        Admin
+
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td>
+                                        Supporter
+                                    </td>
+                                }
+                            </tr>
+                        }
+                        if (Session["admin"].ToString().Equals("Admin"))
+                        {
+                            if (item.Username.Trim().Equals(Session["username"]))
+                            {
+                                <tr>
+                                    <td class="align-middle">
+                                        <input type='text' class='w3-input' value='@item.Username' readonly style='background: rgba(0,0,0,0);border-bottom:0;width:70%;text-overflow: ellipsis;'>
+                                    </td>
+                                    <td class="align-middle">
+                                        <div>
+                                            <input id='password' type='password' class='w3-input' value='@item.Password' readonly style='background: rgba(0,0,0,0);border-bottom:0;width:70%;text-overflow: ellipsis;'>
+                                            <img src='../Content/images/Icon/Admin/Hide_Password.png' class='field-icon show_hide' onclick='show_hide(this)' />
+                                        </div>
+                                    </td>
+                                    <td class="align-middle">
+                                        Supporter
+                                    </td>
+                                    <td >
+                                        <a class="btn " data-toggle="tooltip" title="Change Password" data-placement="bottom" href="@Url.Action("Change_Password","Admin",new { username = item.Username })"><img src="~/Content/images/Icon/Admin/Icon_ChangePassword.png" style="width:35px"/> </a>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"><strong>Delete User Account</strong></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="content_delete">
+
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-primary" id="delete_button">Yes</a>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="selectRow" tabindex="-1" role="dialog" aria-hidden="true" on>
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h7 class="modal-title">
+                    <img src="~/Content/images/Icon/Admin/amount_Copy_3-512.png" style="width:30px" />
+                </h7>
+                <button type="button" class=" btn btn-danger close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p id="contentt"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Content/js/Admin/Password.js?45"></script>
+<script src="~/Content/js/Admin/jquery.dataTables.min.js"></script>
+<script src="~/Content/js/Admin/dataTables.select.min.js"></script>
+<script type="text/javascript">
+    var username;
+    var admin = "@Session["admin"]";
+    $(document).ready(function () {
+        if (admin == "SuperAdmin") {
+            $('#table').DataTable({
+                "responsive": false,
+                "pageLength": 10,
+                "stateSave": true,
+
+                "select": {
+                    "info": false
+                },
+                "columnDefs": [{
+                    "targets": 1,
+                    "searchable": false,
+                    "sortable": false
+
+                },
+                {
+                    "targets": 2,
+                    "searchable": false
+                }
+                ],
+
+            });
+            AddButton("table", "/Content/images/Icon/Admin/Icon_Create.png", "/Content/images/Icon/Admin/Icon_ChangePassword.png", "/Content/images/Icon/Admin/Icon_Remove.png", "Create Account", "Change Password", "Delete Account", "/Admin/Create_New_AdminAccount");
+          
+
+            $('#table tbody').on('click', 'tr', function () {
+                username = $(this).children("td").eq(0).text();
+            });
+            $(".editt").click(function () {
+                if (username != null) {
+                    window.location.href = "/Admin/Change_Password?username=" + username.replace(/\s/g, '');
+                } else {
+                    $("#contentt").text("Please select account.");
+                    $('#selectRow').modal('show');
+                }
+                username = null;
+            });
+
+            $(".deletee").on("click", function () {
+                if (username != null) {
+                    $("#content_delete").text("Deleting an account will delete all account addresses. Are you sure?");
+                    $("#delete_button").attr("href", "/Admin/Delete_AdminAccount?username=" + username.replace(/\s/g, ''));
+                    $("#exampleModal").modal('show');
+                } else {
+                    $("#contentt").text("Please select account.");
+                    $('#selectRow').modal('show');
+                }
+                username = null;
+            });
+        }
+        $('[data-toggle="tooltip"]').tooltip();
+
+    });
+</script>

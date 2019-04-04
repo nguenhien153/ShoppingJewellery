@@ -1,0 +1,6 @@
+F:\eProjectSem3\ShoppingJewellery\ShoppingJewellery\Comon\bin\Debug\Comon.dll
+F:\eProjectSem3\ShoppingJewellery\ShoppingJewellery\Comon\bin\Debug\Comon.pdb
+F:\eProjectSem3\ShoppingJewellery\ShoppingJewellery\Comon\obj\Debug\Comon.csprojAssemblyReference.cache
+F:\eProjectSem3\ShoppingJewellery\ShoppingJewellery\Comon\obj\Debug\Comon.csproj.CoreCompileInputs.cache
+F:\eProjectSem3\ShoppingJewellery\ShoppingJewellery\Comon\obj\Debug\Comon.dll
+F:\eProjectSem3\ShoppingJewellery\ShoppingJewellery\Comon\obj\Debug\Comon.pdb

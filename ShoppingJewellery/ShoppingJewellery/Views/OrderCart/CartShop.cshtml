@@ -1,0 +1,44 @@
+﻿
+@{
+    Layout = null;
+}
+@using ShoppingJewellery.Models
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>CartShop</title>
+</head>
+<body>
+   <table class="table">
+       <thead>
+           <tr>
+               <th>Style Code</th>
+               <th>Gold No</th>
+               <th>Diamond No</th>
+               <th>Stone No</th>
+               <th>Size</th>
+               <th>Unit Price</th>
+               <th>Quantity</th>
+               <th>Total</th>
+           </tr>
+       </thead>
+       <tbody>
+           @foreach(ItemCart item in (List<ItemCart>)Session["cart"])
+           {
+           <tr>
+               <td>@item.Itemm.Style_Code</td>
+               <td>@item.GoldNo1</td>
+               <td>@item.DiamondNo1</td>
+               <td>@item.StoneNo1</td>
+               <td>@item.Size1</td>
+               <td>@item.UnitPrice1</td>
+               <td>@item.Quantity</td>
+               <td>@(item.Quantity*item.UnitPrice1)</td>
+           </tr>
+           }
+       </tbody>
+   </table>
+</body>
+</html>

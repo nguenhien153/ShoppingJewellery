@@ -27,7 +27,6 @@ namespace ShoppingJewellery.Models
     
         public virtual DbSet<DisplayCommonPro> DisplayCommonProes { get; set; }
         public virtual DbSet<AdminLoginMst> AdminLoginMsts { get; set; }
-        public virtual DbSet<UserRegMst> UserRegMsts { get; set; }
         public virtual DbSet<CatMst> CatMsts { get; set; }
         public virtual DbSet<JewelTypeMst> JewelTypeMsts { get; set; }
         public virtual DbSet<ProdMst> ProdMsts { get; set; }
@@ -37,6 +36,26 @@ namespace ShoppingJewellery.Models
         public virtual DbSet<GoldView> GoldViews { get; set; }
         public virtual DbSet<StoneView> StoneViews { get; set; }
         public virtual DbSet<ViewFullItem> ViewFullItems { get; set; }
-        public virtual DbSet<Item_Require> Item_Require { get; set; }
+        public virtual DbSet<SimilarPrice> SimilarPrices { get; set; }
+        public virtual DbSet<ItemMst> ItemMsts { get; set; }
+        public virtual DbSet<Payment> Payments { get; set; }
+        public virtual DbSet<Order_> Order_ { get; set; }
+        public virtual DbSet<Feedback> Feedbacks { get; set; }
+        public virtual DbSet<Inquiry> Inquiries { get; set; }
+        public virtual DbSet<Order_Details> Order_Details { get; set; }
+        public virtual DbSet<BrandMst> BrandMsts { get; set; }
+        public virtual DbSet<CertifyMst> CertifyMsts { get; set; }
+        public virtual DbSet<Delivery> Deliveries { get; set; }
+        public virtual DbSet<DimQltyMst> DimQltyMsts { get; set; }
+        public virtual DbSet<DimQltySubMst> DimQltySubMsts { get; set; }
+        public virtual DbSet<GoldKrtMst> GoldKrtMsts { get; set; }
+        public virtual DbSet<Receiver> Receivers { get; set; }
+        public virtual DbSet<StoneQltyMst> StoneQltyMsts { get; set; }
+        public virtual DbSet<DimMst> DimMsts { get; set; }
+        public virtual DbSet<GoldMst> GoldMsts { get; set; }
+        public virtual DbSet<StoneMst> StoneMsts { get; set; }
+        public virtual DbSet<UserRegMst> UserRegMsts { get; set; }
+        public virtual DbSet<Address> Addresses { get; set; }
+        public virtual DbSet<ProductView> ProductViews { get; set; }
     }
 }

@@ -1,0 +1,31 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>CalDistance</title>
+</head>
+<body>
+    <div class="form-group">
+        <input type="text" class="form-control" id="address" value="@ViewBag.address" placeholder="Address">
+    </div>
+    <form id="reesult">
+        <input name="lat" id="lat" type="text" value="">
+        <input name="lng" id="lng" type="text" value="">
+    </form>
+    <script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/20625/jquery.geocomplete.min.js'></script>
+    <script src='https://maps.googleapis.com/maps/api/js?key=AIzaSyDS-ue65Jx_HySaXRqnMehRbg67cMCL_xM&libraries=places'></script>
+    <script>
+        $("#address").geocomplete({ details: "#reesult" });
+        $("#address").trigger("geocode");
+        $(document).ready(function () {
+         
+        });
+    </script>
+</body>
+</html>

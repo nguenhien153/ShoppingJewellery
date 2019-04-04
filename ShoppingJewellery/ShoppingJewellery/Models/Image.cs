@@ -17,5 +17,7 @@ namespace ShoppingJewellery.Models
         public string Style_Colde { get; set; }
         public string image1 { get; set; }
         public int No { get; set; }
+    
+        public virtual ItemMst ItemMst { get; set; }
     }
 }

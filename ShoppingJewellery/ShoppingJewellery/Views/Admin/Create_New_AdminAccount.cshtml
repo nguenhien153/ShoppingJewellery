@@ -1,0 +1,139 @@
+﻿@model ShoppingJewellery.Models.AdminLoginMst
+
+@{
+    ViewBag.Title = "Create Admin Account";
+    Layout = "~/Views/Layout/Admin/AdminLayout.cshtml";
+    Page.name = Session["username"];
+}
+<link href="~/Content/css/Admin/Boxx.css" rel="stylesheet" />
+<style>
+    .tooltip-inner {
+        text-align: center;
+        min-width: 30em;
+    }
+    .field-icon {
+        float: right;
+        margin-top: -30px;
+        margin-right: 10px;
+        position: relative;
+        z-index: 2;
+        width: 20px;
+    }
+</style>
+<div class="col-8 form-group m-auto">
+    <div class="headerboxx col-12"><h4><strong>Create Admin Account</strong></h4></div>
+    <div class="boxx col-12 p-2">
+        <div class="col-12">
+            @{if (Session["create"] != null)
+                {
+                    if (Session["create"].ToString().ToLower().Equals("create success"))
+                    {
+                        <span class="field-validation-valid text-success">@Session["create"]</span>
+                    }
+                    else
+                    {
+                        <span class="field-validation-valid text-danger">@Session["create"]</span>
+                    }
+                    Session.Remove("create");
+                }
+            }
+            <br />
+            <span class="field-validation-valid text-danger" id="result_all"></span>
+        </div>
+        @using (Html.BeginForm(new { id = "Myform" }))
+        {
+            <div class="form-horizontal">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "control-label col-md-12" })
+                    <div class="col-md-12">
+                        <input class="form-control text-box single-line" data-html="true" data-toggle="tooltip" id="Username" maxlength="50" minlength="8" name="Username" required="required" title="" type="text" value="" data-original-title="">
+                        @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger", @id = "result_username" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-12" })
+                    <div class="col-md-12">
+                        <input class="form-control text-box single-line" data-html="true" data-toggle="tooltip" id="Password" maxlength="50" minlength="8" name="Password" required="required" title="" type="password" value="" data-original-title="">
+                        <img src="~/Content/images/Icon/Admin/Hide_Password.png" class="field-icon show_hide" />
+                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger", @id = "result_passowrd" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-12" for="Confirm_Password">Confirm Password</label>
+                    <div class="col-md-12">
+                        <input type="password" class="form-control" minlength="8" maxlength="50" id="Confirm_Password" required />
+                        <img src="~/Content/images/Icon/Admin/Hide_Password.png" class="field-icon show_hide" />
+                        <span class="field-validation-valid text-danger" data-valmsg-for="Confirm_Password" data-valmsg-replace="true" id="result_Confirm_Password"></span>
+                    </div>
+                </div>
+
+                <input type="hidden" id="role" name="role" checked value="false" readonly />
+                <div class="form-group col-12 d-flex">
+                    <input type="submit" value="Create" class="btn btn-success ml-auto p-2 col-2" />
+                </div>
+            </div>
+        }
+
+    </div>
+</div>
+<script src="~/Content/js/Admin/Password.js"></script>
+<script>
+    var rex_pasword = /^[_A-z0-9]*[_A-z0-9]*$/;
+
+
+    var check_password = false;
+    var check_cpassword = false;
+    var check_username = false;
+    $(document).ready(function () {
+        $("#role").css("pointer-events", "none");
+        show_hide_cursor("show_hide");
+        $(".show_hide").click(function () {
+            show_hide(this);
+        });
+
+        $("#Confirm_Password").bind("change", function () {
+            check_cpassword = validate("Confirm_Password", "result_Confirm_Password", rex_pasword);
+        });
+        $("#Password").bind("change", function () {
+            check_password = validate("Password", "result_passowrd", rex_pasword);
+        });
+        $("#Username").bind("change", function () {
+            check_username = validate("Username", "result_username", rex_pasword);
+        });
+
+        $("#Password,#Username").on("focus", function () {
+            $(this).tooltip("show");
+        }).tooltip({
+            placement: "top",
+            trigger: "focus",
+            title: "Not contain Space and Special characters. <br/> Minimum 8 characters and maximum is 50."
+        });
+
+        $('#Myform').submit(function (event) {
+            var warning = " ";
+            if (check_username == false) {
+                event.preventDefault();
+                warning += " Username Not Valid !!!\n"
+            }
+            if (check_password == false) {
+                event.preventDefault();
+                warning += " Password Not Valid !!!\n";
+            }
+            if (check_cpassword == false) {
+                event.preventDefault();
+                warning += " Confirm Password Not Valid !!!\n";
+            }
+            if (check_cpassword == true && check_password == true) {
+                if ($("#Password").val().toString() != $("#Confirm_Password").val().toString()) {
+                    event.preventDefault();
+                    warning += " Confirm Password Does Not Match !!!";
+                }
+            }
+            var war = $("#result_all").text(warning);
+            war.html(war.html().replace(/\n/g, '<br/>'));
+        });
+
+    });
+</script>

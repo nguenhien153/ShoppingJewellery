@@ -1,0 +1,158 @@
+﻿
+@{
+    Page.Title = "Check Order";
+    Layout = "~/Views/Layout/Product/LayoutListProduct.cshtml";
+}
+@using ShoppingJewellery.Models
+<div class="body">
+    <div class="container">
+
+        @{
+            string disablee = null, style = null;
+            if (Session["code_check"] == null)
+            {
+                disablee = null;
+                style = "style='display:none'";
+            }
+            else
+            {
+                disablee = "disabled";
+                style = "style='display:block; margin:auto;'";
+            }
+
+        }
+
+        <div class="col-12 row">
+            <div class="col-12">
+                <h4>Check Order</h4>
+                <hr />
+            </div>
+            <div class="col-12">
+                <label class="label" for="id">ID Order</label>
+                <input class="form-control" type="text" required id="id" name="id" />
+            </div>
+            <div class="col-12">
+                <label class="label" for="email">Email</label>
+                <input class="form-control" type="text" required id="email" name="email" />
+            </div>
+            <div class="col-12">
+                <br>
+                <button class="btn btn-primary btn-lg" style="float:right" id="send" @disablee>Send Code To Email</button>
+            </div>
+
+
+            <div class="col-5" @Html.Raw(style)>
+                <div class="col-12" id="form_verify">
+                    <h5 class="col-12">Validation Email</h5>
+                    <hr />
+                    <p class="col-12">
+                        Code Validation has been sent to email<br />
+                        Please enter the code in the field below to verify.
+                    </p>
+                    <input type="text" maxlength="5" id="verify" class="form-control col-10" style="margin:auto" />
+                    <br />
+                    <div class="col-12 row" style="margin:auto">
+                        <button type="submit" class="col-6 btn btn-success" id="validation">Validation </button>
+                        <button type="button" class="btn btn-link col-6" id="resend">Resend Code</button>
+                    </div>
+                </div>
+                <hr />
+                <br />
+                <br />
+            </div>
+
+           <div id="getorder" class="col-12 row"></div>
+
+        </div>
+    </div>
+</div>
+<div id="resultt"></div>
+<input type="hidden" readonly id="code" value="@Session["code_check"]" maxlength="5" />
+<input type="hidden" readonly id="idorder" value="@Session["id"]" />
+<br />
+<script src="~/Content/JQuery/jquery-3.3.1.min.js"></script>
+<script src="~/Content/JQuery/jquery.session.js"></script>
+<script>
+    var idd;
+    var mail;
+    function Currentcc(id) {
+        var num = $(id).text();
+        var ne = parseFloat(num);
+        var commaNum = numberWithCommas(ne.toFixed(2));
+        $(id).text(commaNum);
+    };
+    function numberWithCommas(number) {
+        var parts = number.toString().split(".");
+        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        return parts.join(".");
+    };
+    $(document).ready(function () {
+
+        $("#id").bind("change", function () {
+            idd = $("#id").val();
+        });
+
+        $("#email").bind("change", function () {
+            mail = $("#email").val();
+        });
+
+        $("#send , #resend").click(function () {
+            if (idd != null || mail != null) {
+                    $("#send").attr("disabled", true);
+                    var e = $.ajax({
+                        url: "/OrderCart/send_mail_order",
+                        data: { id: idd, mail: mail },
+                        type: "get",
+                        contentType: "application/json;charset=utf-8", //application/html;charset=utf-8
+                        dataType: "html",
+                        success: function (result) {
+                            $("#resultt").html(result);
+                            $("#form_verify").show();
+                            location.reload();
+                        }
+                    });
+                    e.faile(function (xhr, status) {
+                        alert("Status: " + status);
+                    });
+            } else {
+                alert("Please Enter ID Order & Your Email");
+            }
+        });
+
+        $("#validation").click(function () {
+            var verify = $("#verify").val();
+            var code = $("#code").val();
+            var idorder = $("#idorder").val();
+
+            if (parseInt(verify) == parseInt(code)) {
+                alert("Validation Sucess !!!");
+                $("#form_verify").hide();
+                $("#send").attr("disabled", false);
+                var e = $.ajax({
+                    url: "/OrderCart/GetOrder",
+                    data: { id: idorder },
+                    type: "get",
+                    contentType: "application/json;charset=utf-8", //application/html;charset=utf-8
+                    dataType: "html",
+                    success: function (result) {
+                        $("#getorder").html(result);
+                        $(".sum").each(function () {
+                            Currentcc(this);
+                        });
+                        $(".pricee").each(function () {
+                            Currentcc(this);
+                        });
+                        Currentcc("#total");
+                    }
+                });
+                e.faile(function (xhr, status) {
+                    alert("Status: " + status);
+                });
+            }
+            else {
+                alert("Validation False !!!");
+            }
+        });
+
+    });
+</script>

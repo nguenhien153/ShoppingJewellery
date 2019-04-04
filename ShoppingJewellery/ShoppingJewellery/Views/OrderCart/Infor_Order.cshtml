@@ -1,0 +1,298 @@
+﻿
+@{
+    Page.Title = "Infor Order";
+    Layout = "~/Views/Layout/Product/LayoutListProduct.cshtml";
+}
+@using ShoppingJewellery.Models;
+<div class="body">
+    <div class="container">
+        <div class="col-12">
+            <h4>Your Order</h4>
+            <br />
+            <div class="col-12">
+                <table class="table col-12" style="font-size:12px;">
+                    <thead>
+                        <tr>
+                            <th><strong>Item Name</strong></th>
+                            <th><strong>Image</strong></th>
+                            <th><strong>Metal</strong></th>
+                            <th><strong>Diamond</strong></th>
+                            <th><strong>Gemstone</strong></th>
+                            <th><strong>Size</strong></th>
+                            <th><strong>Price</strong></th>
+                            <th><strong>Quantity</strong></th>
+                            <th><strong>Total</strong></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (ItemCart item in (List<ItemCart>)Session["cart"])
+                        {
+                            <tr class="rowww" style="line-height:100px" s>
+                                <td><a href="@Url.Action("Product","Product",new { Style_Code=item.Itemm.Style_Code})">@item.Itemm.Style_Code</a></td>
+                                <td style="display:none">@item.GoldNo1</td>
+                                <td style="display:none">@item.DiamondNo1</td>
+                                <td style="display:none">@item.StoneNo1</td>
+                                <td style="display:none">@item.Size1</td>
+                                <td><img width="100px" src="@item.Img" /></td>
+                                <td>@item.Namemetal</td>
+                                @if (item.DiamondNo1 != 0)
+                                {
+                                    <td>
+                                        @item.Namediamond
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td>None</td>
+                                }
+                                @if (item.StoneNo1 != 0)
+                                {
+                                    <td>@item.Namestone</td>
+                                }
+                                else
+                                {
+                                    <td>None</td>
+                                }
+                                <td style="text-align:center">@item.Size1</td>
+                                <td>₹ <span class="pricee">@item.UnitPrice1</span></td>
+                                <td style="text-align:center">@item.Quantity</td>
+                                <td>₹ <span class="sum">@(item.Quantity * item.UnitPrice1)</span></td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+            <br /><br />
+            <div class="col-12 row">
+                <div class="col-8" style="background-color:#d7d7d7; border-radius: 25px; margin-right:10px; margin-left:-10px">
+                    <br />
+                    @{
+                        Order_ order = new Order_();
+                        order = (Order_)Session["Order"];
+                    }
+                    <h5><strong>Information & Address</strong></h5>
+                    <br />
+                    <table class="table col-12">
+                        <tbody>
+                            <tr>
+                                <td><strong>First Name</strong></td>
+                                <td id="first">@order.FirstName</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Last Name</strong></td>
+                                <td id="last">@order.LastName</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Country (acronym)</strong></td>
+                                <td id="country">@order.Country</td>
+                            </tr>
+                            <tr>
+                                <td><strong>State / Province (acronym)</strong></td>
+                                <td id="state">@order.State_Province</td>
+                            </tr>
+                            <tr>
+                                <td><strong>City</strong></td>
+                                <td id="city">@order.City</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Address</strong></td>
+                                <td id="addresss">@order.Address</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Zip Postal</strong></td>
+                                <td id="zip">@order.Zip_Postal</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Phone</strong></td>
+                                <td id="phone">@order.Phone</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Email</strong></td>
+                                <td id="email">@order.email</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Instruction (Optinal)</strong></td>
+                                <td><textarea id="instruction" class="col-12 form-control" readonly rows="5" style="background-color:#d7d7d7">@order.Instruction_Optional</textarea></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <input type="hidden" value="@order.Date_order" id="datee" />
+                </div>
+                <div class="col-4" style="background-color:#d7d7d7; border-radius: 25px;">
+                    <br />
+                    <h5><strong>Pay Order</strong></h5>
+                    <br />
+                    <table class="table col-12">
+                        <tbody>
+                            <tr>
+                                <td><strong>Total Order</strong></td>
+                                <td>₹ <span id="total">@order.Total_brand</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Shipping Fee</strong></td>
+                                <td>₹ <span id="shipping_fee"></span></td>
+                            </tr>
+                            <tr style="border-top:3px solid black">
+                                <td><strong>Total Payment</strong></td>
+                                <td>₹ <span id="total_payment"></span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br />
+                    <div class="col-12 row">
+
+                        @{
+                            string disablee = null, style = null;
+                            if (Session["code"] == null)
+                            {
+                                disablee = null;
+                                style = "style='display:none'";
+                            }
+                            else
+                            {
+                                disablee = "disabled";
+                                style = "style='display:block'";
+                            }
+
+                        }
+                        <button class="btn btn-primary col-8" style="margin:auto;" id="payment" @disablee>Send Code Validation</button>
+                    </div>
+                    <br />
+                    <div class="col-12">
+
+                        <div class="col-12" id="form_verify" @Html.Raw(style)>
+                            <h5 class="col-12">Validation Order</h5>
+                            <hr />
+                            <p class="col-12">
+                                Code Validation has been sent to @order.email.<br />
+                                Please enter the code in the field below to verify.
+                            </p>
+                            <input type="text" maxlength="5" id="verify" class="form-control col-10" style="margin:auto" />
+                            <br />
+                            <div class="col-12 row" style="margin:auto">
+                                <button type="submit" class="col-6 btn btn-success" id="validation">Validation </button>
+                                <button type="button" class="btn btn-link col-6" id="resend">Resend Code</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br /><br />
+<div id="resultt"></div>
+<input type="hidden" value="@Session["code"]" id="code" maxlength="5" readonly />
+
+<script src="~/Content/JQuery/jquery-1.11.1.min.js"></script>
+<script src="~/Content/js/Product/jquery.mask.min.js"></script>
+<script src="~/Content/JQuery/jquery.session.js"></script>
+<script>
+
+    function Currentcc(id) {
+        var num = $(id).text();
+        var ne = parseFloat(num);
+        var commaNum = numberWithCommas(ne.toFixed(2));
+        $(id).text(commaNum);
+    };
+    function numberWithCommas(number) {
+        var parts = number.toString().split(".");
+        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        return parts.join(".");
+    };
+
+
+
+    $(document).ready(function () {
+        $('#verify').mask('00000');
+
+        var address = $("#addresss").text() + ", " + $("#city").text() + ", " + $("#state").text() + ", " + $("#country").text();
+        var fullname = $("#first").text() + " " + $("#last").text();
+        var str = $("#datee").val().toString();
+        var datee = str.split(" ");
+        var zip = $("#zip").text();
+        var phone = $("#phone").text();
+        var email = $("#email").text();
+        var instruction = $("#instruction").text();
+        var distance = $.session.get("Distance");
+
+        var check_validation = false;
+
+        if (typeof distance == "undefined") {
+            window.location.replace("/Product/ProductList");
+        }
+        var shipping = parseInt(distance) * 1;
+        $("#shipping_fee").text(shipping);
+
+        var total = $("#total").text();
+        var total_pay = parseFloat(total) + parseFloat(shipping);
+        $("#total_payment").text(total_pay.toFixed(2));
+
+        Currentcc("#total_payment");
+        Currentcc("#shipping_fee");
+        Currentcc("#total");
+
+
+        $(".sum").each(function () {
+            Currentcc(this);
+        });
+        $(".pricee").each(function () {
+            Currentcc(this);
+        });
+
+        // { total: total_pay.toFixed(2), fullname: fullname, address: address, zip: zip, phone: phone, email: email, instruction: instruction, date: datee[0]}
+        $("#payment , #resend").click(function () {
+            if (check_validation == false) {
+                $("#payment").attr("disabled", true);
+                var mail = new Object();
+                mail.Total = total_pay;
+                mail.Fullname = fullname;
+                mail.Address = address;
+                mail.Zip = zip;
+                mail.Phone = phone;
+                mail.Email = email;
+                mail.Instruction = instruction;
+                mail.Date = datee[0];
+                var e = $.ajax({
+                    url: "/OrderCart/Step2",
+                    data: JSON.stringify(mail),
+                    type: "post",
+                    contentType: "application/json; charset=utf-8", //application/html;charset=utf-8
+                    dataType: "html",
+                    success: function (result) {
+                        $("#resultt").html(result);
+                        $("#form_verify").show();
+                        alert("Code has been send !!!");
+                        location.reload();
+                    }
+                });
+                e.faile(function (xhr, status) {
+                    alert("Status: " + status);
+                });
+            }
+            if (check_validation == true) {
+                window.location.replace("/OrderCart/Payment");
+            }
+        });
+
+        $("#validation").click(function () {
+            var verify = $("#verify").val();
+            var code = $("#code").val();
+
+            if (parseInt(verify) == parseInt(code)) {
+                alert("Validation Sucess !!!");
+                $("#form_verify").hide();
+                check_validation = true;
+                $("#payment").text("Payment");
+                $("#payment").attr("disabled", false);
+            }
+            else {
+                alert("Validation False !!!");
+                check_validation = false;
+
+            }
+        });
+    });
+</script>

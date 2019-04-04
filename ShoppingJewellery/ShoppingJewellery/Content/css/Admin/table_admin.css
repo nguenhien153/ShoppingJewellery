@@ -1,0 +1,50 @@
+﻿
+td.details-control {
+    background: url('../../Content/images/Icon/Admin/details_open.png') no-repeat center center;
+    cursor: pointer;
+}
+
+tr.shown td.details-control {
+    background: url('../../Content/images/Icon/Admin/details_close.png') no-repeat center center;
+}
+
+table.dataTable thead .sorting_desc {
+    background-image: url('../../Content/images/Icon/Admin/sort_desc.png');
+}
+
+table.dataTable thead .sorting_asc {
+    background-image: url('../../Content/images/Icon/Admin/sort_asc.png');
+}
+
+table.dataTable thead .sorting {
+    background-image: url('../../Content/images/Icon/Admin/sort_both.png');
+}
+
+.field-icon {
+    float: right;
+    margin-top: -27px;
+    margin-right: -14px;
+    position: relative;
+    z-index: 20;
+    width: 20px;
+}
+
+.show_hide {
+    width: 20px;
+    cursor: pointer;
+}
+
+table {
+    max-width: 900px;
+}
+
+td {
+    font-size: 0.8em;
+    word-break: break-all;
+}
+
+th {
+    font-size: 0.8em;
+    background-color: #f7f7f7;
+    white-space: nowrap;
+}

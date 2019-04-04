@@ -1,0 +1,245 @@
+﻿@model ShoppingJewellery.Models.Details_Product
+@{
+    ViewBag.Title = "Product_Details";
+    Layout = "~/Views/Layout/Admin/AdminLayout.cshtml";
+}
+<link href="~/Content/css/Admin/Boxx.css" rel="stylesheet" />
+<style>
+    label {
+        cursor: pointer;
+    }
+
+    #imagefile {
+        opacity: 0;
+        position: absolute;
+        z-index: -1;
+    }
+
+    .image {
+        opacity: 1;
+        display: block;
+        width: 100%;
+        height: auto;
+        transition: .5s ease;
+        backface-visibility: hidden;
+    }
+
+    .middle {
+        transition: .5s ease;
+        opacity: 0;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        text-align: center;
+    }
+
+    .backk:hover .image {
+        opacity: 0.3;
+    }
+
+    .backk:hover .middle {
+        opacity: 1;
+    }
+
+    fieldset {
+        border: 1px solid #666;
+        border-radius: 8px;
+    }
+
+    legend {
+        width: auto;
+        margin-left: 50px;
+    }
+</style>
+<div class="form-group col-12">
+    <div class="col-12 headerboxx"><h4>Details of Item</h4></div>
+    <div class="col-12 boxx">
+        <form method="post" action="#" class="col-8 m-auto" enctype="multipart/form-data">
+            <fieldset>
+                <legend>Information</legend>
+                <div class="form-group col-12">
+                    <div class="backk col-4 m-auto">
+                        <img src="/Content/images/Product_Image/@Model.protypee.Prod_Type/Img/@Model.pro_item.Img" alt="Avatar" id='img-upload' class="image" style="width:100%">
+                        <div class="middle">
+                            <label for="imagefile" data-toggle="tooltip" title="Upload Image"><img src="~/Content/images/Icon/Admin/Upload1.png" style="width:40px" /></label>
+                            <div class="m-auto">
+                                <input type="file" id="imagefile" name="imagefile">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <input type="hidden"  value="@Model.protypee.Prod_Type" id="Protype" name="Protype"/>
+                <div class="form-group">
+                    <label class="control-label col-12" for="Style_Code">Style Code</label>
+                    <div class="col-12">
+                        <input class="form-control text-box single-line" id="Style_Code" name="Style_Code" type="text" value="@Model.pro_item.Style_Code" required data-html="true">
+                        <span class="field-validation-valid text-danger" data-valmsg-for="Style_Code" data-valmsg-replace="true" id="result_Style_Code"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-12" for="Brand_ID">Designer ID</label>
+                    <div class="col-12">
+                        <input class="form-control text-box single-line" id="Brand_ID" name="Brand_ID" type="text" value="@Model.pro_item.Brand_ID.Trim()" required data-html="true">
+                        <span class="field-validation-valid text-danger" data-valmsg-for="Brand_ID" data-valmsg-replace="true" id="result_Brand_ID"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-12" for="Cat_ID">Cat ID</label>
+                    <div class="col-12">
+                        <input class="form-control text-box single-line" id="Cat_ID" name="Cat_ID" type="text" value="@Model.pro_item.Cat_ID.Trim()" required data-html="true">
+                        <span class="field-validation-valid text-danger" data-valmsg-for="Cat_ID" data-valmsg-replace="true" id="result_Cat_ID"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-12" for="Brand_ID">Product Type ID</label>
+                    <div class="col-12">
+                        <input class="form-control text-box single-line" id="Prod_ID" name="Prod_ID" type="text" value="@Model.pro_item.Prod_ID.Trim()" required data-html="true">
+                        <span class="field-validation-valid text-danger" data-valmsg-for="Prod_ID" data-valmsg-replace="true" id="result_Prod_ID"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-12" for="JewelleryType_ID">Brand ID</label>
+                    <div class="col-12">
+                        <input class="form-control text-box single-line" id="JewelleryType_ID" name="JewelleryType_ID" type="text" value="@Model.pro_item.JewelleryType_ID.Trim()" required data-html="true">
+                        <span class="field-validation-valid text-danger" data-valmsg-for="JewelleryType_ID" data-valmsg-replace="true" id="result_JewelleryType_ID"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-12" for="Certify_ID">Certificate ID</label>
+                    <div class="col-12">
+                        <input class="form-control text-box single-line" id="Certify_ID" name="Certify_ID" type="text" value="@Model.pro_item.Certify_ID.Trim()" required data-html="true">
+                        <span class="field-validation-valid text-danger" data-valmsg-for="Certify_ID" data-valmsg-replace="true" id="result_Certify_ID"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-12" for="Prod_Quality">Prod Quality</label>
+                    <div class="col-12">
+                        <input class="form-control text-box single-line" id="Prod_Quality" name="Prod_Quality" type="text" value="@Model.pro_item.Prod_Quality.Trim()" required data-html="true">
+                        <span class="field-validation-valid text-danger" data-valmsg-for="Prod_Quality" data-valmsg-replace="true" id="result_Prod_Quality"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-12" for="size">Size</label>
+                    <div class="col-12">
+                        <input class="form-control text-box single-line" id="size" name="size" type="text" value="@Model.pro_item.size" required data-html="true">
+                        <span class="field-validation-valid text-danger" data-valmsg-for="size" data-valmsg-replace="true" id="result_size"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-12" for="Quantity">Quantity</label>
+                    <div class="col-12">
+                        <input class="form-control text-box single-line" id="Quantity" name="Quantity" type="text" value="@Model.pro_item.Quantity" required data-html="true">
+                        <span class="field-validation-valid text-danger" data-valmsg-for="Quantity" data-valmsg-replace="true" id="result_Quantity"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-12" for="Pairs">Pairs</label>
+                    <div class="col-12">
+                        <input class="form-control text-box single-line" id="Pairs" name="Pairs" type="text" value="@Model.pro_item.Pairs" required data-html="true">
+                        <span class="field-validation-valid text-danger" data-valmsg-for="Pairs" data-valmsg-replace="true" id="result_Pairs"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-12" for="Net_Gold">Gold Weight</label>
+                    <div class="col-12">
+                        <input class="form-control text-box single-line" id="Net_Gold" name="Net_Gold" type="text" value="@Model.pro_item.Net_Gold" required data-html="true">
+                        <span class="field-validation-valid text-danger" data-valmsg-for="Pairs" data-valmsg-replace="true" id="result_Net_Gold"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-12" for="Stone_Wt">Stone Weight</label>
+                    <div class="col-12">
+                        <input class="form-control text-box single-line" id="Stone_Wt" name="Stone_Wt" type="text" value="@Model.pro_item.Stone_Wt" required data-html="true">
+                        <span class="field-validation-valid text-danger" data-valmsg-for="Stone_Wt" data-valmsg-replace="true" id="result_Stone_Wt"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-12" for="Tot_Gross_Wt">Total Weight</label>
+                    <div class="col-12">
+                        <input class="form-control text-box single-line" id="Tot_Gross_Wt" name="Tot_Gross_Wt" type="text" value="@Model.pro_item.Tot_Gross_Wt" required data-html="true">
+                        <span class="field-validation-valid text-danger" data-valmsg-for="Tot_Gross_Wt" data-valmsg-replace="true" id="result_Tot_Gross_Wt"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-12" for="Gold_Making">Gold Making</label>
+                    <div class="col-12">
+                        <input class="form-control text-box single-line" id="Gold_Making" name="Gold_Making" type="text" value="@Model.pro_item.Gold_Making" required data-html="true">
+                        <span class="field-validation-valid text-danger" data-valmsg-for="Gold_Making" data-valmsg-replace="true" id="result_Gold_Making"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-12" for="Stone_Making">Stone Making</label>
+                    <div class="col-12">
+                        <input class="form-control text-box single-line" id="Stone_Making" name="Stone_Making" type="text" value="@Model.pro_item.Stone_Making" required data-html="true">
+                        <span class="field-validation-valid text-danger" data-valmsg-for="Stone_Making" data-valmsg-replace="true" id="result_Stone_Making"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-12" for="Other_Making">Other Making</label>
+                    <div class="col-12">
+                        <input class="form-control text-box single-line" id="Other_Making" name="Other_Making" type="text" value="@Model.pro_item.Other_Making" required data-html="true">
+                        <span class="field-validation-valid text-danger" data-valmsg-for="Other_Making" data-valmsg-replace="true" id="result_Other_Making"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-12" for="Tot_Making">Total Making</label>
+                    <div class="col-12">
+                        <input class="form-control text-box single-line" id="Tot_Making" name="Tot_Making" type="text" value="@Model.pro_item.Tot_Making" required data-html="true">
+                        <span class="field-validation-valid text-danger" data-valmsg-for="Tot_Making" data-valmsg-replace="true" id="result_Tot_Making"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-12" for="MRP">MRP</label>
+                    <div class="col-12">
+                        <input class="form-control text-box single-line" id="MRP" name="MRP" type="text" value="@Model.pro_item.MRP" required data-html="true">
+                        <span class="field-validation-valid text-danger" data-valmsg-for="Tot_Making" data-valmsg-replace="true" id="result_MRP"></span>
+                    </div>
+                </div>
+
+                <div id="sumitbutton" style="padding-bottom:10px">
+                    <input type="submit" value="Edit">
+                </div>
+            </fieldset>
+
+        </form>
+    </div>
+</div>
+<script src="~/Content/js/Admin/Password.js?1"></script>
+<script>
+
+    $(document).ready(function () {
+        buttonsubmit("sumitbutton");
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#img-upload').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        $("#imagefile").change(function () {
+            readURL(this);
+        });
+    });
+</script>

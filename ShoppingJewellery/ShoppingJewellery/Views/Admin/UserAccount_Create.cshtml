@@ -1,0 +1,301 @@
+﻿@model ShoppingJewellery.Models.UserRegMst
+
+@{
+    ViewBag.Title = "UserAccount_Create";
+    Layout = "~/Views/Layout/Admin/AdminLayout.cshtml";
+}
+<link href="~/Content/css/Admin/Boxx.css" rel="stylesheet" />
+<style>
+    label {
+        font-weight: bold;
+    }
+
+    .tooltip-inner {
+        text-align: center;
+        min-width: 30em;
+    }
+
+    .field-icon {
+        float: right;
+        margin-top: -30px;
+        margin-right: 10px;
+        position: relative;
+        z-index: 2;
+        width: 20px;
+    }
+
+    #myForm {
+        padding: 10px 0px 0px 0px;
+    }
+</style>
+<div class="form-group col-8 m-auto">
+    <div class="col-12 headerboxx">
+        <h4><strong>Create User Account</strong></h4>
+    </div>
+    <div class="boxx col-12">
+        <form action="/Admin/UserAccount_Create" id="myForm" method="post">
+
+            @{
+                if (Session["UserAccount_Create"] != null)
+                {
+                    if (Session["UserAccount_Create"].ToString().Equals("false"))
+                    {
+                        <div class="alert alert-danger">
+                            <strong>Create False.</strong> Username is already taken. Please try another username !!!
+                        </div>
+                    }
+                    if (Session["UserAccount_Create"].ToString().Equals("error"))
+                    {
+                        <div class="alert alert-danger">
+                            <strong>Create False.</strong> System Error !!!
+                        </div>
+                    }
+                    if (Session["UserAccount_Create"].ToString().Equals("success"))
+                    {
+                        <div class="alert alert-success">
+                            <strong>Create Success.</strong> Congratulation !!!
+                        </div>
+                    }
+                    Session.Remove("UserAccount_Create");
+                }
+                else
+                {
+                    <div class="" id="reportt"></div>
+                }
+
+            }
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <label class="control-label col-12" for="userID">Username</label>
+                    <div class="col-12">
+                        <input class="form-control text-box single-line" id="userID" name="userID" type="text" value="" required data-html="true">
+                        <span class="field-validation-valid text-danger" data-valmsg-for="userID" data-valmsg-replace="true" id="result_userID"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-12" for="userFname">First Name</label>
+                    <div class="col-12">
+                        <input class="form-control text-box single-line" id="userFname" name="userFname" type="text" value="" required data-html="true">
+                        <span class="field-validation-valid text-danger" data-valmsg-for="userFname" data-valmsg-replace="true" id="result_userFname"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-12" for="userLname">Last Name</label>
+                    <div class="col-12">
+                        <input class="form-control text-box single-line" id="userLname" name="userLname" type="text" value="" required data-html="true">
+                        <span class="field-validation-valid text-danger" data-valmsg-for="userLname" data-valmsg-replace="true" id="result_userLname"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-12" for="mobNo">Phone Number</label>
+                    <div class="col-12">
+                        <input class="form-control text-box single-line" id="mobNo" name="mobNo" type="text" value="" required data-html="true">
+                        <span class="field-validation-valid text-danger" data-valmsg-for="mobNo" data-valmsg-replace="true" id="result_mobNo"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-12" for="emailID">Email</label>
+                    <div class="col-12">
+                        <input class="form-control text-box single-line" id="emailID" name="emailID" type="text" value="" required data-html="true">
+                        <span class="field-validation-valid text-danger" data-valmsg-for="emailID" data-valmsg-replace="true" id="result_emailID"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-12" for="dob">Date of Birth (dd/mm/yyyy)</label>
+                    <div class="col-12">
+                        <input class="form-control text-box single-line from" id="dob" name="dob" type="text" value="" required data-html="true">
+                        <span class="field-validation-valid text-danger" data-valmsg-for="dob" data-valmsg-replace="true" id="result_dob"></span>
+                    </div>
+                </div>
+                @{
+                    DateTime today = DateTime.Today;
+                }
+                <input class="form-control text-box single-line" id="cdate" name="cdate" type="hidden" value="@today.ToString("dd/MM/yyyy")">
+
+                <div class="form-group">
+                    <label class="control-label col-12" for="password">Password</label>
+                    <div class="col-12">
+                        <input class="form-control text-box single-line" id="password" name="password" type="password" value="" required data-html="true">
+                        <img src="~/Content/images/Icon/Admin/Hide_Password.png" class="field-icon show_hide" />
+                        <span class="field-validation-valid text-danger" data-valmsg-for="password" data-valmsg-replace="true" id="result_password"></span>
+                    </div>
+                </div>
+
+                <div id="sumitbutton" style="padding-bottom:10px">
+                    <input type="submit" value="Create">
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>
+<script src="~/Content/bootstrap-4.0.0-dist/js/bootstrap-datepicker.min.js"></script>
+<link href="~/Content/bootstrap-4.0.0-dist/css/datepicker.min.css" rel="stylesheet" />
+<script src="~/Content/js/Product/jquery.mask.min.js"></script>
+<script src="~/Content/js/Admin/Password.js?100"></script>
+<script type="text/javascript">
+    var rex_pasword = /^[_A-z0-9]{8,50}$/;
+    var rex_email = /^[A-z][A-z0-9_\.]{6,32}@@[a-z0-9]{2,}(\.[a-z0-9]{2,4}){1,2}$/;
+    var re_name = /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/;
+    var username = /^[A-z]{1}[_A-z0-9]{3,9}$/;
+    var checkFname = true;
+    var checkLname = true;
+    var check_email = true;
+    var check_password = true;
+    var check_phone = true;
+    var check_date = true;
+    var check_username = true;
+    $(document).ready(function () {
+        $(".show_hide").click(function () {
+            show_hide(this);
+        });
+        buttonsubmit("sumitbutton");
+        $('.from').datepicker({
+            autoclose: true,
+            minViewMode: 0,
+            format: 'dd/mm/yyyy'
+        }).on('changeDate', function (selected) {
+            startDate = new Date(selected.date.valueOf());
+            startDate.setDate(startDate.getDate(new Date(selected.date.valueOf())));
+            $('.to').datepicker('setStartDate', startDate);
+        });
+
+        $("#userID").bind("change", function () {
+            check_username = validate("userID", "result_userID", username);
+        });
+        $("#userID").on("focus", function () {
+            $(this).tooltip("show");
+        }).tooltip({
+            placement: "top",
+            trigger: "focus",
+            title: "Begin with a letter. <br/> Not contain Space and Special Character.  <br/> Minimum is 4 characters and maximum is 10."
+        });
+
+        $("#userLname").bind("change", function () {
+            if ($(this).val().length > 30 || $(this).val().length < 4) {
+                $("#result_userLname").text("Last Name is not valid.");
+                checkLname = false;
+            } else {
+                if (checkLname = validate("userLname", "result_userLname", re_name)) {
+                    checkLname = true;
+                }
+            }
+        });
+        $("#userFname").bind("change", function () {
+            if ($(this).val().length > 30 || $(this).val().length < 4) {
+                $("#result_userFname").text("Last Name is not valid.");
+                checkFname = false;
+            } else {
+                if (checkFname = validate("userFname", "result_userFname", re_name)) {
+                    checkFname = true;
+                }
+            }
+        });
+        $("#userLname,#userFname").on("focus", function () {
+            $(this).tooltip("show");
+        }).tooltip({
+            placement: "top",
+            trigger: "focus",
+            title: "Not contain Space, Digit and Special Character. <br/> Minimum is 4 characters and maximum is 30."
+        });
+
+        $("#mobNo").bind("change focusout", function () {
+            var phone = $(this).val();
+            var phone2 = phone.replace(/\s/g, '').length;
+            if (phone2 == 11) {
+                $(this).mask('(+00) 0000 000 00');
+                $("#result_mobNo").text("");
+                check_phone = true;
+            }
+            if (phone2 == 10) {
+                $(this).mask('(+0) 0000 000 00');
+                $("#result_mobNo").text("");
+                check_phone = true;
+            }
+            if (phone2 == 12) {
+                $(this).mask('(+000) 0000 000 00');
+                check_phone = true;
+                $("#result_mobNo").text("");
+            }
+            if ($(this).val().length < 10) {
+                $("#result_mobNo").text("Phone Number is not valid.");
+                check_phone = false;
+            }
+        });
+        $("#mobNo").focus(function () {
+            $(this).mask('000000000000');
+        });
+        $("#mobNo").on("focus", function () {
+            $(this).tooltip("show");
+        }).tooltip({
+            placement: "top",
+            trigger: "focus",
+            title: "Not contain space. <br/> Code Area + Phone Number. "
+        });
+
+        $("#emailID").on("focus", function () {
+            $(this).tooltip("show");
+        }).tooltip({
+            placement: "top",
+            trigger: "focus",
+            title: "Not contain Space and Special Characters. <br/> Maximum is 50 characters."
+        });
+        $("#emailID").bind("change", function () {
+            if ($(this).val().length > 50) {
+                $("#result_emailID").text("Email is not valid.");
+                check_email = false;
+            } else {
+                if (validate("emailID", "result_emailID", rex_email)) {
+                    $("#result_emailID").text(" ");
+                    check_email = true;
+                }
+            }
+        });
+
+        $("#dob").bind("change", function () {
+            var day = $("#dob").val().split("/");
+            var date = new Date(day[2], day[1] - 1, day[0]);
+            var year = date.getFullYear();
+            var stringg = year.toString();
+            var intt = parseInt(stringg);
+            if (intt < 1900 || intt > 2019) {
+                $("#result_dob").text("Date of Birth is not valid.");
+                check_date = false;
+            } else {
+                $("#result_dob").text(" ");
+                check_date = true;
+            }
+        });
+
+        $("#password").on("focus", function () {
+            $(this).tooltip("show");
+        }).tooltip({
+            placement: "top",
+            trigger: "focus",
+            title: "Not contain Space and Special Characters. <br/> Minimum 8 characters and maximum is 50."
+        });
+        $("#password").bind("change", function () {
+            check_password = validate("password", "result_password", rex_pasword);
+        });
+
+        var count = 0;
+        $('#myForm').submit(function (event) {
+            if (checkFname == false || checkLname == false || check_email == false || check_password == false || check_phone == false || check_date == false || check_username == false) {
+                event.preventDefault();
+                if (count == 0) {
+                    $("#reportt").append("<strong>Your Infor not valid. Please check against !!!</strong>");
+                    $("#reportt").addClass("alert alert-warning");
+                    count++;
+                }
+
+            } else {
+                $("#mobNo").unmask();
+            }
+        });
+    });
+</script>

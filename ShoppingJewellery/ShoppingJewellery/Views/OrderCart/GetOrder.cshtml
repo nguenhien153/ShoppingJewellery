@@ -1,0 +1,129 @@
+﻿
+@{
+    Layout = null;
+}
+@using ShoppingJewellery.Models
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>GetOrder</title>
+</head>
+<body>
+    @{
+        if (Session["check_order"] != null && Session["list_order"] != null && Session["diamond"] != null && Session["stone"] != null && Session["gold"] != null)
+        {
+            Order_ order = (Order_)Session["check_order"];
+            List<Order_Details> list = (List<Order_Details>)Session["list_order"];
+            List<DiamonView> diamond = (List<DiamonView>)Session["diamond"];
+            List<StoneView> stone = (List<StoneView>)Session["stone"];
+            List<GoldView> gold = (List<GoldView>)Session["gold"];
+
+            <div class="col-12">
+                <label for="info">Information Order</label>
+                <table id="info" class="table col-12" style="font-size:12px">
+                    <thead class="col-12">
+                        <tr class="col-12">
+                            <th><strong>First Name</strong></th>
+                            <th><strong>Last Name</strong></th>
+                            <th><strong>Country</strong></th>
+                            <th><strong>State Province</strong></th>
+                            <th><strong>City</strong></th>
+                            <th><strong>Address</strong></th>
+                            <th><strong>Zip Postal</strong></th>
+                            <th><strong>Phone</strong></th>
+                            <th><strong>Total brand (₹)</strong></th>
+                            <th><strong>Date order</strong></th>
+                            <th><strong>Status</strong></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>@order.FirstName</td>
+                            <td>@order.LastName</td>
+                            <td>@order.Country</td>
+                            <td>@order.State_Province</td>
+                            <td>@order.City</td>
+                            <td>@order.Address</td>
+                            <td>@order.Zip_Postal</td>
+                            <td>@order.Phone</td>
+                            <td id="total">@order.Total_brand</td>
+                            <td>@order.Date_order.Date.ToString("dd/MM/yyyy")</td>
+                            <td>@order.Status</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-12">
+                <label for="info">Order Details</label>
+                <table class="table col-12" style="font-size:12px;">
+                    <thead>
+                        <tr>
+                            <th><strong>Item Name</strong></th>
+                            <th><strong>Metal</strong></th>
+                            <th><strong>Diamond</strong></th>
+                            <th><strong>Gemstone</strong></th>
+                            <th><strong>Size</strong></th>
+                            <th><strong>Price</strong></th>
+                            <th><strong>Quantity</strong></th>
+                            <th><strong>Total</strong></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                        @foreach (Order_Details item in list)
+                        {
+                            <tr>
+                                <td><a href="@Url.Action("Product","Product",new { Style_Code=item.Style_code})">@item.Style_code</a></td>
+                                @{
+                                    var goldname = gold.First(demo => demo.No == item.Gold_No && demo.Style_code.ToLower().Trim().Equals(item.Style_code.Trim().ToLower()));
+                                }
+                                <td>@goldname.Gold_Crt</td>
+                                @{
+                                    if (item.Diamond_No != 0)
+                                    {
+                                        DiamonView diamondname = diamond.First(demo => demo.No == item.Diamond_No && demo.Style_Code.Trim().ToLower().Equals(item.Style_code.ToLower().Trim()));
+                                        <td>@diamondname.MainType</td>
+                                    }
+                                    else
+                                    {
+                                        <td>None</td>
+                                    }
+                                }
+                                @{
+
+                                    if (item.Stone_No != 0)
+                                    {
+                                        StoneView stonename = stone.First(demo => demo.No == item.Stone_No && demo.Style_Code.ToLower().Trim().Equals(item.Style_code.Trim().ToLower()));
+                                        <td>@stonename.StoneQlty</td>
+
+                                    }
+                                    else
+                                    {
+                                        <td>none</td>
+                                    }
+                                }
+                                <td>@item.Size</td>
+                                @*<td><img width="100px" src="@item.Img" /></td>*@
+
+                                <td>₹ <span class="pricee">@item.UnitPrice</span></td>
+                                <td style="text-align:center">@item.Quantity</td>
+                                <td>₹ <span class="sum">@item.Total</span></td>
+                            </tr>
+
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        }
+        else
+        {
+            <div class="col-12">
+                <h4>ID Order Not Exists !!!</h4>
+            </div>
+        }
+    }
+</body>
+</html>

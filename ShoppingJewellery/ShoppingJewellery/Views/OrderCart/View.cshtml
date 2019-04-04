@@ -1,0 +1,86 @@
+﻿@using ShoppingJewellery.Models
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>View</title>
+</head>
+<body>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+        @{ 
+
+        }
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ID_Order)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Style_code)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Gold_No)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Diamond_No)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Stone_No)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Size)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UnitPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Total)
+            </th>
+            <th></th>
+        </tr>
+    
+    
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ID_Order)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Style_code)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Gold_No)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Diamond_No)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Stone_No)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Size)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UnitPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Total)
+            </td>
+         
+        </tr>
+    
+    </table>
+</body>
+</html>

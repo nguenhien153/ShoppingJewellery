@@ -17,7 +17,7 @@ namespace ShoppingJewellery.Controllers
             var gold = dao.GetMetal(Style_Code);
             var stone = dao.GetStone(Style_Code);
             var diamond = dao.GetDiamon(Style_Code);
-            if(item==null || img==null || gold==null)
+            if (item == null || img == null || gold == null || stone == null || diamond == null)
             {
                 return RedirectToAction("Index","Home");
             }else
@@ -29,6 +29,7 @@ namespace ShoppingJewellery.Controllers
                 image_item.DiamonProduct = diamond;
                 image_item.Images = img;
                 image_item.ViewFullItems = item;
+                image_item.SimilarPrices = dao.GetSimilar();
                 return View(image_item);
             }
            
@@ -42,6 +43,7 @@ namespace ShoppingJewellery.Controllers
         {
             return View();
         }
+
         public ActionResult GetNoMetal(int No, string Style_code)
         {
             var pro = dao.GetNoGold(No, Style_code);
@@ -57,5 +59,21 @@ namespace ShoppingJewellery.Controllers
             var pro = dao.GetNoStone(No, Style_code);
             return PartialView(pro);
         }
+
+        //public ActionResult CartShhoppng(string Style_cod, int siz, int NGold, int NoDiamon, int NoGe, decimal total_bran)
+        //{
+        //   bool checkk= dao.CartShopping( Style_cod,  siz, NGold, NoDiamon,  NoGe, total_bran);
+        //    if(checkk==true)
+        //    {
+        //        return RedirectToAction("ProductList", "Product");
+        //    }
+        //    else
+        //    {
+        //        TempData["msg"] = "<script>alert('Add Failse');</script>";
+        //        return RedirectToAction("Index", "Home");
+        //    }
+        //}
+
+       
     }
 }

@@ -1,0 +1,202 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    @RenderSection("head", required: false)
+    <link href="~/Content/bootstrap-4.0.0-dist/css/bootstrap.min.css?1" rel="stylesheet" />
+    <script src="~/Content/JQuery/jquery-3.3.1.min.js?1"></script>
+    <script src="~/Content/bootstrap-4.0.0-dist/js/popper.min.js?1"></script>
+    <script src="~/Content/bootstrap-4.0.0-dist/js/bootstrap.min.js?23"></script>
+    <style>
+        * {
+            font-family: "Quicksand",sans-serif;
+            font-size: 1em;
+            word-wrap: break-word;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            margin: 5px;
+            background-image: url('../../../Content/images/Icon/Admin/background2.jpg');
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+        }
+        /* vietnamese */
+        @@font-face {
+            font-family: 'Quicksand';
+            font-style: normal;
+            font-weight: 400;
+            src: local('Quicksand Regular'), local('Quicksand-Regular'), url(../../../fonts/vietnameese.woff2) format('woff2');
+            unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+        }
+    
+        /* latin-ext */
+        @@font-face {
+            font-family: 'Quicksand';
+            font-style: normal;
+            font-weight: 400;
+            src: local('Quicksand Regular'), local('Quicksand-Regular'), url(../../../fonts/latin.woff2) format('woff2');
+            unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+        }
+        /* latin */
+        @@font-face {
+            font-family: 'Quicksand';
+            font-style: normal;
+            font-weight: 400;
+            src: local('Quicksand Regular'), local('Quicksand-Regular'), url(../../../fonts/Latin2.woff2) format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+        }
+
+        a {
+            text-decoration: none;
+        }
+        a:hover{
+            text-decoration:none;
+        }
+
+        .row {
+            margin-top: 100px;
+        }
+
+        .inital {
+            min-height: 5vh;
+            margin: 0 auto;
+            margin-top: 5px;
+        }
+
+        .initall {
+            min-height: 93vh;
+            margin: 0 auto;
+        }
+
+
+        #Name_Admin {
+            font-family: inherit;
+            font-size: 1.5rem;
+            text-align: left;
+        }
+
+        .margin_top5px {
+            margin-top: 5px;
+        }
+
+        .dropdown-toggle::after {
+            display: none;
+        }
+        .title {
+            background: linear-gradient(to right,#00C292 10%, #435466 80%, #00C292 10%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            width: inherit;
+        }
+        ul {
+            list-style-type: none;
+        }
+        /*.field-icon {
+            float: right;
+            margin-top: -30px;
+            margin-right: 10px;
+            position: relative;
+            z-index: 2;
+            width: 20px;
+        }*/
+        .show_hide {
+            width: 20px;
+            margin: auto;
+            cursor: pointer;
+        }
+        .marginleft5px {
+            margin-left: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="col-12 row inital">
+        <div class="col-2" style="background-color:#ffffff;border-top-left-radius:25px; box-shadow: 20px 20px;">
+            <h4 class="text-center margin_top5px title"><b>Jewelery Shoping</b></h4>
+        </div>
+        <div class="col-10 " style="background-color:#ffffff;border-top-right-radius:25px;">
+            <span class="col-10 " id="Name_Admin">Hello @Page.name</span>
+            <a class="col-1 " href="@Url.Action("Logout","Admin")" style="float:right;margin-top:0.5%">Log Out</a>
+        </div>
+    </div>
+        <div class="col-12 row initall">
+            <div class="col-2" style="background-color:#263544;color:#ffffff;border-bottom-left-radius:25px;">
+                <br />
+                <h4>Hien</h4>
+
+                @*Home*@
+                <div class="btn-group col-12">
+                    <a class="btn btn-primary col-12 " href="@Url.Action("HomeAdmin","Admin")">Home</a>
+                </div>
+
+                @*Account*@
+                <div class="btn-group col-12">
+                    <button type="button" class="col-12 btn btn-primary dropdown-toggle margin_top5px" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Account
+                    </button>
+                    <div class="dropdown-menu col-12 text-center">
+                        <a class="btn btn-outline-primary col-11 " href="@Url.Action("AdminAccount","Admin")">Admin Account</a>
+                        <a class="btn btn-outline-primary col-11 margin_top5px" href="@Url.Action("UserAccount","Admin")">User Account</a>
+                        @*<div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Separated link</a>*@
+                    </div>
+                </div>
+
+                @*Item*@
+                <div class="btn-group col-12">
+                    <button type="button" class="col-12 btn btn-primary dropdown-toggle margin_top5px" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Item
+                    </button>
+                    <div class="dropdown-menu col-12 text-center">
+                        <a class="btn btn-outline-primary col-11 " href="#">Manager Item</a>
+                        <a class="btn btn-outline-primary col-11 margin_top5px" href="#">User Account</a>
+                    </div>
+                </div>
+
+                @*Order*@
+                <div class="btn-group col-12">
+                    <button type="button" class="col-12 btn btn-primary dropdown-toggle margin_top5px" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Order
+                    </button>
+                    <div class="dropdown-menu col-12 text-center">
+                        <a class="btn btn-outline-primary col-11 " href="#">Manager Item</a>
+                        <a class="btn btn-outline-primary col-11 margin_top5px" href="#">User Account</a>
+                    </div>
+                </div>
+
+                @*Delivery*@
+                <div class="btn-group col-12">
+                    <button type="button" class="col-12 btn btn-primary dropdown-toggle margin_top5px" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Delivery
+                    </button>
+                    <div class="dropdown-menu col-12 text-center">
+                        <a class="btn btn-outline-primary col-11 " href="#">Manager Item</a>
+                        <a class="btn btn-outline-primary col-11 margin_top5px" href="#">User Account</a>
+                    </div>
+                </div>
+
+                @*Feedback*@
+                <div class="btn-group col-12">
+                    <button type="button" class="col-12 btn btn-primary dropdown-toggle margin_top5px" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Feedback
+                    </button>
+                    <div class="dropdown-menu col-12 text-center">
+                        <a class="btn btn-outline-primary col-11 " href="#">Manager Item</a>
+                        <a class="btn btn-outline-primary col-11 margin_top5px" href="#">User Account</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-10" style="background-color:#f0f1f6;border-bottom-right-radius:25px;">
+                <br />
+                @RenderBody()
+            </div>
+        </div>
+
+
+</body>
+</html>

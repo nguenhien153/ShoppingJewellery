@@ -1,0 +1,323 @@
+﻿@model ShoppingJewellery.Models.UserRegMst
+@using System.Globalization;
+@{
+    ViewBag.Title = "Edit User Account";
+    Layout = "~/Views/Layout/Admin/AdminLayout.cshtml";
+    Page.name = Session["username"];
+}
+<link href="~/Content/css/Admin/Boxx.css" rel="stylesheet" />
+<link href="~/Content/bootstrap-4.0.0-dist/css/datepicker.min.css" rel="stylesheet" />
+
+<style>
+    label {
+        font-weight: bold;
+    }
+
+    .tooltip-inner {
+        text-align: center;
+        min-width: 30em;
+    }
+
+    .field-icon {
+        float: right;
+        margin-top: -30px;
+        margin-right: 10px;
+        position: relative;
+        z-index: 2;
+        width: 20px;
+    }
+
+    form {
+        padding: 10px 0px 5px 0px;
+    }
+</style>
+<div class="form-group col-9 m-auto" style="padding-bottom:4vh">
+    <div class="headerboxx col-12"><h4><strong>Edit User Account</strong></h4></div>
+    <div class="boxx col-12">
+
+
+        @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "myForm" }))
+        {
+            <div class="" id="reportt">
+
+            </div>
+            if (Session["UserAccount_Edit"] != null)
+            {
+                if (Session["UserAccount_Edit"].ToString().Equals("false"))
+                {
+                    <div class="alert alert-danger">
+                        <strong>Edit False.</strong> Account is not exists !!!.
+                    </div>
+                }
+                if (Session["UserAccount_Edit"].ToString().Equals("error"))
+                {
+                    <div class="alert alert-danger">
+                        <strong>Edit False.</strong> System Error !!!.
+                    </div>
+                }
+                Session.Remove("UserAccount_Edit");
+            }
+
+            <div class="form-horizontal">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.Label("Username", htmlAttributes: new { @class = "control-label col-12", @for = "userID" })
+                    <div class="col-md-12">
+                        @Html.EditorFor(model => model.userID, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                        @Html.ValidationMessageFor(model => model.userID, "", new { @class = "text-danger", @id = "result_username" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.Label("First Name", htmlAttributes: new { @class = "control-label col-12", @for = "userFname" })
+                    <div class="col-md-12">
+                        @Html.EditorFor(model => model.userFname, new { htmlAttributes = new { @class = "form-control", @required = "required", @data_html = "true" } })
+                        @Html.ValidationMessageFor(model => model.userFname, "", new { @class = "text-danger", @id = "result_userFname" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.Label("Last Name", htmlAttributes: new { @class = "control-label col-12", @for = "userLname" })
+                    <div class="col-md-12">
+                        @Html.EditorFor(model => model.userLname, new { htmlAttributes = new { @class = "form-control", @required = "required", @data_html = "true" } })
+                        @Html.ValidationMessageFor(model => model.userLname, "", new { @class = "text-danger", @id = "result_userLname" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.Label("Phone Number", htmlAttributes: new { @class = "control-label col-12", @for = "mobNo" })
+                    <div class="col-md-12">
+                        @Html.EditorFor(model => model.mobNo, new { htmlAttributes = new { @class = "form-control", @maxlength = "12", @minlength = "11", @data_html = "true", @required = "required" } })
+                        @Html.ValidationMessageFor(model => model.mobNo, "", new { @class = "text-danger", @id = "result_mobNo" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.Label("Email", htmlAttributes: new { @class = "control-label col-12", @for = "emailID" })
+                    <div class="col-md-12">
+                        @Html.EditorFor(model => model.emailID, new { htmlAttributes = new { @class = "form-control", @maxlength = "50", @minlength = "8", @data_html = "true", @required = "required" } })
+                        @Html.ValidationMessageFor(model => model.emailID, "", new { @class = "text-danger", @id = "result_email" })
+                    </div>
+                </div>
+                @{
+                    string dob = " ", cdate = Html.DisplayFor(model => model.cdate).ToString();
+                    if (Model != null)
+                    {
+                        DateTime date = DateTime.ParseExact(Html.DisplayFor(model => model.dob).ToString(), "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                        DateTime date2 = DateTime.ParseExact(Html.DisplayFor(model => model.cdate).ToString(), "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                        dob = date.ToString("dd/MM/yyyy");
+                        cdate = date2.ToString("dd/MM/yyyy");
+                    }
+
+                }
+                <div class="form-group">
+                    @Html.Label("Date of Birth (mm/dd/yyyy)", htmlAttributes: new { @class = "control-label col-12", @for = "dob" })
+                    <div class="col-md-12">
+                        @{
+                            if (Model != null)
+                            {
+                                <input value="@dob" type="text" class="form-control from" name="dob" id="dob" required />
+                            }
+                            else
+                            {
+                                @Html.EditorFor(model => model.dob, new { htmlAttributes = new { @class = "form-control from", @required = "required" } })
+                            }
+                        }
+                        @Html.ValidationMessageFor(model => model.dob, "", new { @class = "text-danger", @id = "result_dob" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.Label("Creation Date (mm/dd/yyyy)", htmlAttributes: new { @class = "control-label col-12 ", @for = "cdate" })
+                    <div class="col-md-12">
+                        @{
+                            if (Model != null)
+                            {
+                                <input value="@cdate" type="text" class="form-control from" name="cdate" id="cdate" required readonly />
+                            }
+                            else
+                            {
+                                @Html.EditorFor(model => model.cdate, new { htmlAttributes = new { @class = "form-control from", @required = "required", @readonly = "readonly" } })
+                            }
+                        }
+                        @Html.ValidationMessageFor(model => model.cdate, "", new { @class = "text-danger", @id = "result_cdate" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-12" for="password">Password</label>
+                    <div class="col-md-12">
+                        @Html.EditorFor(model => model.password, new { htmlAttributes = new { @class = "form-control text-box single-line", @required = "required", @data_html = "true", @maxlength = "50", @minlength = "8", @type = "password" } })
+                        <img src="~/Content/images/Icon/Admin/Hide_Password.png" class="field-icon show_hide" />
+                        @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger", @id = "result_password" })
+                    </div>
+                </div>
+
+                <div id="buttonsubmit">
+                    <input type="submit" value="Submit" id="submit" />
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<script src="~/Content/js/Product/jquery.mask.min.js"></script>
+<script src="~/Content/bootstrap-4.0.0-dist/js/bootstrap-datepicker.min.js"></script>
+<link href="~/Content/bootstrap-4.0.0-dist/css/datepicker.min.css" rel="stylesheet" />
+<script src="~/Content/js/Admin/Password.js?1"></script>
+<script type="text/javascript">
+    var rex_pasword = /^[_A-z0-9]{8,50}$/;
+    var rex_email = /^[a-z][a-z0-9_\.]{6,32}@@[a-z0-9]{2,}(\.[a-z0-9]{2,4}){1,2}$/;
+    var re_name = /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/;
+    var username = /^[A-z]{1}[_A-z0-9]{3,9}$/;
+
+    var checkFname = true;
+    var checkLname = true;
+    var check_email = true;
+    var check_password = true;
+    var check_phone = true;
+    var check_date = true;
+    $(document).ready(function () {
+
+        $(".show_hide").click(function () {
+            show_hide(this);
+        });
+
+        buttonsubmit("buttonsubmit");
+        $('.from').datepicker({
+            autoclose: true,
+            minViewMode: 0,
+            format: 'dd/mm/yyyy'
+        }).on('changeDate', function (selected) {
+            startDate = new Date(selected.date.valueOf());
+            startDate.setDate(startDate.getDate(new Date(selected.date.valueOf())));
+            $('.to').datepicker('setStartDate', startDate);
+        });
+
+        $("#password").on("focus", function () {
+            $(this).tooltip("show");
+        }).tooltip({
+            placement: "top",
+            trigger: "focus",
+            title: "Not contain Space and Special Characters. <br/> Minimum 8 characters and maximum is 50."
+        });
+        $("#password").bind("change", function () {
+            check_password = validate("password", "result_password", rex_pasword);
+        });
+
+
+        $("#emailID").on("focus", function () {
+            $(this).tooltip("show");
+        }).tooltip({
+            placement: "top",
+            trigger: "focus",
+            title: "Not contain Space and Special Characters. <br/> Maximum is 50 characters."
+        });
+        $("#emailID").bind("change", function () {
+            check_email = validate("emailID", "result_emailID", rex_email);
+        });
+
+
+        if ($("#mobNo").val().replace(/\s/g, '').length == 11) {
+            $("#mobNo").mask('(+00) 0000 000 00');
+        }
+        if ($("#mobNo").val().replace(/\s/g, '').length == 10) {
+            $("#mobNo").mask('(+0) 0000 000 00');
+        }
+        if ($("#mobNo").val().replace(/\s/g, '').length == 12) {
+            $("#mobNo").mask('(+000) 0000 000 00');
+        }
+
+        $("#mobNo").bind("change focusout", function () {
+            var phone = $(this).val();
+            var phone2 = phone.replace(/\s/g, '').length;
+            if (phone2 == 11) {
+                $(this).mask('(+00) 0000 000 00');
+                $("#result_mobNo").text("");
+                check_phone = true;
+            }
+            if (phone2 == 10) {
+                $(this).mask('(+0) 0000 000 00');
+                $("#result_mobNo").text("");
+                check_phone = true;
+            }
+            if (phone2 == 12) {
+                $(this).mask('(+000) 0000 000 00');
+                check_phone = true;
+                $("#result_mobNo").text("");
+            }
+            if ($(this).val().length < 10) {
+                $("#result_mobNo").text("Phone Number is not valid.");
+                check_phone = false;
+            }
+        });
+        $("#mobNo").focus(function () {
+            $(this).mask('000000000000');
+        });
+        $("#mobNo").on("focus", function () {
+            $(this).tooltip("show");
+        }).tooltip({
+            placement: "top",
+            trigger: "focus",
+            title: "Not contain space. <br/> Code Area + Phone Number. "
+        });
+
+
+
+        $("#userLname").bind("change", function () {
+            if ($(this).val().length > 30 || $(this).val().length < 4) {
+                $("#result_userLname").text("Last Name is not valid.");
+                checkLname = false;
+            } else {
+                if (checkLname = validate("userLname", "result_userLname", re_name)) {
+                    checkLname = true;
+                }
+            }
+        });
+        $("#userFname").bind("change", function () {
+            if ($(this).val().length > 30 || $(this).val().length < 4) {
+                $("#result_userFname").text("Last Name is not valid.");
+                checkFname = false;
+            } else {
+                if (checkFname = validate("userFname", "result_userFname", re_name)) {
+                    checkFname = true;
+                }
+            }
+        });
+        $("#userLname,#userFname").on("focus", function () {
+            $(this).tooltip("show");
+        }).tooltip({
+            placement: "top",
+            trigger: "focus",
+            title: "Not contain Space, Digit and Special Character. <br/> Minimum is 4 characters and maximum is 30."
+        });
+
+        $("#dob").bind("change", function () {
+            var day = $("#dob").val().split("/");
+            var date = new Date(day[2], day[1] - 1, day[0]);
+            var year = date.getFullYear();
+            var stringg = year.toString();
+            var intt = parseInt(stringg);
+            if (intt < 1900 || intt > 2019) {
+                $("#result_dob").text("Date of Birth is not valid.");
+                check_date = false;
+            } else {
+                $("#result_dob").text(" ");
+                check_date = true;
+            }
+        });
+        var count = 0;
+        $('#myForm').submit(function (event) {
+            if (checkFname == false || checkLname == false || check_email == false || check_password == false || check_phone == false || check_date == false) {
+                event.preventDefault();
+                if (count == 0) {
+                    $("#reportt").append("<strong>Your Infor not valid. Please check against !!!</strong>");
+                    $("#reportt").addClass("alert alert-warning");
+                    count++;
+                }
+            } else {
+                $("#mobNo").unmask();
+            }
+        });
+    });
+
+</script>

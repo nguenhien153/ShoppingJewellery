@@ -1,0 +1,220 @@
+﻿
+@{
+    Layout = null;
+    Layout = "~/Views/Layout/Product/LayoutListProduct.cshtml";
+    Page.title = "Cart Shopping";
+}
+@using ShoppingJewellery.Models
+<style>
+    .rowww:hover {
+        cursor: pointer;
+        transition: 0.8s;
+        background-color: #dfdede;
+    }
+</style>
+<div class="body">
+    <div class="container" style="height:50%;overflow: hidden">
+        @{
+            List<ItemCart> listI = new List<ItemCart>();
+            listI = (List<ItemCart>)Session["cart"];
+        }
+        @{ if (Session["cart"] != null && listI.Count != 0)
+            {
+                <table class="table col-12" style="font-size:12px;">
+                    <thead>
+                        <tr>
+                            <th><strong>Item Name</strong></th>
+                            <th><strong>Image</strong></th>
+                            <th><strong>Metal</strong></th>
+                            <th><strong>Diamond</strong></th>
+                            <th><strong>Gemstone</strong></th>
+                            <th><strong>Size</strong></th>
+                            <th><strong>Price</strong></th>
+                            <th><strong>Quantity</strong></th>
+                            <th><strong>Total</strong></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            decimal summ = 0;
+                            int no = 0;
+                        }
+                        @foreach (ItemCart item in (List<ItemCart>)Session["cart"])
+                        {
+                            summ += item.UnitPrice1 * item.Quantity;
+                            <tr class="rowww" id="@no" style="line-height:100px" draggable="true" ondragstart="drag(event)">
+                                <td><a href="@Url.Action("Product","Product",new { Style_Code=item.Itemm.Style_Code})">@item.Itemm.Style_Code</a></td>
+                                <td style="display:none">@item.GoldNo1</td>
+                                <td style="display:none">@item.DiamondNo1</td>
+                                <td style="display:none">@item.StoneNo1</td>
+                                <td style="display:none">@item.Size1</td>
+                                <td><img width="100px" src="@item.Img" /></td>
+                                <td>@item.Namemetal</td>
+                                @if (item.DiamondNo1 != 0)
+                                {
+                                    <td>
+                                        @item.Namediamond
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td>None</td>
+                                }
+                                @if (item.StoneNo1 != 0)
+                                {
+                                    <td>@item.Namestone</td>
+                                }
+                                else
+                                {
+                                    <td>None</td>
+                                }
+                                <td style="text-align:center">@item.Size1</td>
+                                <td>₹ <span class="pricee">@item.UnitPrice1</span></td>
+                                <td style="text-align:center">@item.Quantity</td>
+                                <td>₹ <span class="sum">@(item.Quantity * item.UnitPrice1)</span></td>
+                            </tr>
+                            no++;
+                        }
+                        <tr>
+                            <td colspan="6"></td>
+                            <td><strong>Total :</strong></td>
+                            <td>₹ <span id="total">@summ</span></td>
+                            <td></td>
+                        </tr>
+                        @{
+                            Session["total"] = summ;
+                        }
+                    </tbody>
+                </table>
+
+            }
+
+            if (Session["cart"] == null || listI.Count == 0)
+            {
+                <div class="col-12 row">
+                    <div class="col-4"></div>
+                    <div class="col-4" style="text-align:center" draggable="false">
+                        <img class="col-12" src="/Content/images/Icon/Cart.png" draggable="false" />
+                        <span>Cart is empty</span>
+                    </div>
+                    <div class="col-4"></div>
+                </div>
+            }
+        }
+        <br />
+        <br />
+        <div class="col-12 row">
+            @{
+                if (Session["cart"] != null && listI.Count != 0)
+                {
+                    <div class="col-6" ondrop="drop(event)" ondragover="allowDrop(event)" id="bin" ondragleave="leavedrag(this)" ondragenter="enterdrag(this)">
+                        <img width="70px" src="/Content/images/Icon/RecycleBin.png" />
+                    </div>
+                    <div class="col-3" style="line-height:70px;text-align:right">
+                        <a href="@Url.Action("ProductList","Product")" class="btn btn-primary col-10">Continue Shopping</a>
+                    </div>
+                    <div class="col-3" style="line-height:70px;text-align:right">
+                        <a href="@Url.Action("Checkout","OrderCart")" class="btn btn-success col-10">Checkout</a>
+                    </div>
+                }
+                if (Session["cart"] == null || listI.Count == 0)
+                {
+                    <div class="col-11" style="text-align:right">
+                        <a href="@Url.Action("ProductList","Product")" class="btn btn-primary col-3">Continue Shopping</a>
+                    </div>
+                }
+            }
+
+        </div>
+    </div>
+</div>
+<br /><br />
+<script type="text/javascript" src="~/Content/bootstrap-4.0.0-dist/js/bootstrap.js"></script>
+<script type="text/javascript" src="~/Content/JQuery/jquery-3.3.1.js"></script>
+<script type="text/javascript">
+
+    function Currentcc(id) {
+        var num = $(id).text();
+        var ne = parseFloat(num);
+        var commaNum = numberWithCommas(ne.toFixed(2));
+        $(id).text(commaNum);
+    };
+    function numberWithCommas(number) {
+        var parts = number.toString().split(".");
+        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        return parts.join(".");
+    };
+
+    var sum = document.getElementById("total").innerHTML;
+    var Style_code;
+    var Metal;
+    var Diamond;
+    var Stone;
+    var Size;
+    var id;
+
+    function getMaterial(id) {
+        var i = 0;
+        $("#" + id + " td").each(function () {
+            if (i == 0) {
+                Style_code = $(this).text().toString();
+            }; if (i == 1) {
+                Metal = parseInt($(this).text());
+            }; if (i == 2) {
+                Diamond = parseInt($(this).text());
+            }; if (i == 3) {
+                Stone = parseInt($(this).text());
+            }; if (i == 4) {
+                Size = parseInt($(this).text());
+            };
+            i++;
+        });
+    }
+
+    function allowDrop(ev) {
+        ev.preventDefault();
+    }
+    function drag(ev) {
+        id = ev.target.id;
+        getMaterial(id);
+    }
+    function drop(ev) {
+        ev.preventDefault();
+        var r = confirm("Are You Sure ?");
+        if (r == true) {
+            AjaxtDelete(Style_code, Metal, Diamond, Stone, Size);
+        }
+    }
+    function enterdrag(id) {
+        $("#" + id.id + " img").attr('src', '/Content/images/Icon/BlackBin.png')
+    }
+    function leavedrag(id) {
+        $("#" + id.id + " img").attr('src', '/Content/images/Icon/RecycleBin.png')
+    }
+    function AjaxtDelete(style, metal, diamond, stone, size) {
+        var r = $.ajax({
+            url: "/OrderCart/Delete",
+            data: { Style_code: style, size: size, gold: metal, diamond: diamond, stone: stone },
+            type: "get",
+            contentType: "application/json; charset=utf-8", //application/html;charset=utf-8
+            dataType: "html",
+            success: function () {
+                location.reload();
+            }
+        });
+        r.faile(function (xhr, status) {
+            alert("Status: " + status);
+        });
+    };
+
+    $(document).ready(function () {
+        Currentcc("#total");
+        $(".sum").each(function () {
+            Currentcc(this);
+        });
+        $(".pricee").each(function () {
+            Currentcc(this);
+        });
+        $("a").attr("draggable", "false");
+    })
+</script>

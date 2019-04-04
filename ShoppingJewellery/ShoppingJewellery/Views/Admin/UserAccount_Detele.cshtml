@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewBag.Title = "Delete User Account";
+    Layout = "~/Views/Layout/Admin/AdminLayout.cshtml";
+    Page.name = Session["username"];
+}
+<link href="~/Content/css/Admin/Boxx.css?1" rel="stylesheet" />
+<div class="col-7 form-group m-auto">
+    <div class="col-12 headerboxx"><h4><strong>Delete User Account</strong></h4></div>
+    <div class="boxx col-12">
+        <div style="padding-top:2vh">
+            <div class="alert alert-danger">
+                @{
+                    if (Session["UserAccount_Detele"] != null)
+                    {
+                        if (Session["UserAccount_Detele"].ToString().Equals("false"))
+                        {
+
+                            <strong>Delete False: Account is not exists !!!</strong>
+                        }
+                        if (Session["UserAccount_Detele"].ToString().Equals("error"))
+                        {
+
+                            <strong>Detele False: System Error !!!</strong>
+                        }
+                        Session.Remove("UserAccount_Detele");
+                    }
+                }
+            </div>
+        </div>
+            <div class="col-12 d-flex">
+                <a href="@Url.Action("UserAccount","Admin")" class="btn btn-dark ml-auto m-3 col-2">Go Back</a>
+            </div>
+        </div>
+    </div>

@@ -1,0 +1,171 @@
+﻿@model IEnumerable<ShoppingJewellery.Models.ProductView>
+@{
+    ViewBag.Title = "Product";
+    Layout = "~/Views/Layout/Admin/AdminLayout.cshtml";
+}
+<link href="~/Content/css/Admin/Boxx.css" rel="stylesheet" />
+<link href="~/Content/css/Admin/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="~/Content/css/Admin/select.dataTables.min.css" rel="stylesheet" />
+<link href="~/Content/css/Admin/rowGroup.dataTables.min.css" rel="stylesheet" />
+<link href="~/Content/css/Admin/buttons.dataTables.min.css" rel="stylesheet" />
+<style>
+    table.dataTable thead .sorting_desc {
+        background-image: url('../../Content/images/Icon/Admin/sort_desc.png');
+    }
+
+    table.dataTable thead .sorting_asc {
+        background-image: url('../../Content/images/Icon/Admin/sort_asc.png');
+    }
+
+    table.dataTable thead .sorting {
+        background-image: url('../../Content/images/Icon/Admin/sort_both.png');
+    }
+
+    table#table td {
+        word-break: break-all;
+    }
+</style>
+<div class="form-group col-12">
+    <div class="col-12 headerboxx">
+        <h4>Jewelery</h4>
+    </div>
+    <div class="boxx col-12" >
+        <div style="overflow-x:auto;padding:0px 10px 15px 10px">
+            <table class="table  table-striped hover " id="table" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Style Code</th>
+                        <th>Image</th>
+                        <th>Total Weight</th>
+                        <th>Quantity</th>
+                        <th>Category</th>
+                        <th>Designer</th>
+                        <th>Certificate</th>
+                        <th>Product Type</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="align-middle">@item.Style_Code</td>
+                            <td>
+                                <img src="~/Content/images/Product_Image/@item.Prod_Type/Img/@item.Img" style="width: 10vw" />
+                            </td>
+                            <td class="align-middle">@item.Tot_Gross_Wt</td>
+                            <td class="align-middle">@item.Quantity</td>
+                            <td class="align-middle">@item.Cat_Name</td>
+                            <td class="align-middle">@item.Brand_Type</td>
+                            <td class="align-middle">@item.Certify_Type</td>
+                            <td class="align-middle">@item.Prod_Type</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="selectRow" tabindex="-1" role="dialog" aria-hidden="true" on>
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h7 class="modal-title">
+                    <img src="~/Content/images/Icon/Admin/amount_Copy_3-512.png" style="width:30px" />
+                </h7>
+                <button type="button" class=" btn btn-danger close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p id="contentt"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Content/js/Admin/forTable.js?15"></script>
+<script src="~/Content/js/Admin/jquery.dataTables.min.js"></script>
+<script src="~/Content/js/Admin/dataTables.select.min.js"></script>
+<script src="~/Content/js/Admin/dataTables.rowGroup.min.js"></script>
+<script src="~/Content/js/Admin/dataTables.buttons.min.js"></script>
+<script>
+    var style_code;
+    $(document).ready(function () {
+        var table = $('#table').DataTable({
+            "responsive": false,
+            "stateSave": true,
+            "select": {
+                "info": false
+            },
+            "columnDefs": [
+                { "visible": false, "targets": 7 },
+                { "sortable": false, "targets": 1 }
+            ],
+            rowGroup: {
+                startRender: null,
+                endRender: function (rows, group) {
+                    return group + ' (' + rows.count() + ')';
+                },
+                dataSrc: 7
+            },
+        });
+        new $.fn.dataTable.Buttons(table, {
+            buttons: [
+                {
+                    className: 'btn',
+                    attr: {
+                        title: 'Create Item',
+                        //id: 'copyButton',   
+                    },
+                    text: '<img src="../Content/images/Icon/Admin/Product_Create.png" style="width:50px" />',
+                    action: function () {
+                    }
+                },
+                {
+                    className: 'btn',
+                    attr: {
+                        title: 'Details Item',
+                        //id: 'copyButton',   
+                    },
+                    text: '<img src="../Content/images/Icon/Admin/Prodcut_Details.png" style="width:50px" />',
+                    action: function () {
+                        if (style_code != null) {
+                            window.location.href = "/Admin/Product_Details?style_code=" + style_code.replace(/\s/g, '');
+                        } else {
+                            $("#contentt").text("Please select account.");
+                            $('#selectRow').modal('show');
+                        }
+                        style_code = null;
+                    },
+
+                },
+                {
+                    className: 'btn',
+                    attr: {
+                        title: 'Delete Item',
+                        //id: 'copyButton',   
+                    },
+                    text: '<img src="../Content/images/Icon/Admin/Product_Delete.png" style="width:50px" />',
+                    action: function (e, dt, node, conf) {
+                        console.log('Button 2 clicked on');
+                    },
+
+                }
+            ]
+        });
+
+
+        table.buttons(0, null).container().prependTo(
+            table.table().container()
+        );
+        remove_ClassButton();
+        table_inital("table");
+
+        $('#table tbody').on('click', 'tr', function () {
+            style_code = $(this).children("td").eq(0).text().replace(/\s/g, '');
+        });
+    });
+</script>
