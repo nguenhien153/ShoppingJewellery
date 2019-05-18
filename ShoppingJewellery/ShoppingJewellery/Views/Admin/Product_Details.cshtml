@@ -1,9 +1,13 @@
 ﻿@model ShoppingJewellery.Models.Details_Product
 @{
+    /**/
+
     ViewBag.Title = "Product_Details";
     Layout = "~/Views/Layout/Admin/AdminLayout.cshtml";
 }
 <link href="~/Content/css/Admin/Boxx.css" rel="stylesheet" />
+<link href="~/Content/css/Admin/jquery-ui.min.css?1" rel="stylesheet" />
+<link href="~/Content/css/Admin/forTable.css?1" rel="stylesheet" />
 <style>
     label {
         cursor: pointer;
@@ -52,26 +56,221 @@
         width: auto;
         margin-left: 50px;
     }
+
+    .margin_left10px {
+        margin-left: 10px;
+    }
+
+    .ui-autocomplete {
+        z-index: 1510 !important;
+    }
+
+    .loader {
+        border: 16px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 16px solid #3498db;
+        border-bottom: 16px solid #3498db;
+        width: 120px;
+        height: 120px;
+        -webkit-animation: spin 2s linear infinite; /* Safari */
+        animation: spin 2s linear infinite;
+        z-index: 2002;
+        margin: auto;
+    }
+    /* Safari */
+    @@-webkit-keyframes spin {
+        0% {
+            -webkit-transform: rotate(0deg);
+        }
+
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+
+    @@keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    .report_result {
+        position: fixed;
+        z-index: 2002;
+        top: 10%;
+        left: 50%;
+        height: auto;
+    }
+
+        .report_result .image_report {
+            width: 30px;
+            margin-top: 5px;
+        }
+
+        .report_result p {
+            font-weight: 400;
+            line-height: 1.5;
+            color: #4cff00;
+            text-align: left;
+            background-color: #fff;
+        }
+
+    .tag {
+        background: #28a745;
+        border-radius: 3px 0 0 3px;
+        color: #f3f3f3;
+        display: inline-block;
+        padding: 0 15px 0 18px;
+        position: relative;
+        margin: 0 10px 10px 0px;
+    }
+
+        .tag::before {
+            background: #fff;
+            border-radius: 10px;
+            content: '';
+            height: 6px;
+            left: 10px;
+            position: absolute;
+            width: 6px;
+            top: 10px;
+        }
+
+        .tag::after {
+            background: #fff;
+            border-bottom: 13px solid transparent;
+            border-left: 10px solid #28a745;
+            border-top: 13px solid transparent;
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+
+    .hoverRow .tag::after {
+        background: #ececec;
+    }
+
+    .seletedRow .tag::after {
+        background: #B0BED9 !important;
+    }
+
+    div.sub {
+        background: #007bff;
+        padding-right: 28px;
+    }
+
+        div.sub::after {
+            border-left: 10px solid #007bff;
+        }
+
+    .modal-lg {
+        max-width: 60% !important;
+    }
+
+    .ui-autocomplete {
+        max-height: 200px;
+        overflow-y: scroll;
+        overflow-x: hidden;
+    }
 </style>
+
 <div class="form-group col-12">
+
     <div class="col-12 headerboxx"><h4>Details of Item</h4></div>
+
     <div class="col-12 boxx">
-        <form method="post" action="#" class="col-8 m-auto" enctype="multipart/form-data">
+
+        <div class="report_result ">
+            <img src="" class="image_report" />
+            <strong></strong>
+        </div>
+        <form method="post" action="@Url.Action("Product_Details","Admin")" class="col-8 m-auto" enctype="multipart/form-data" id="myForm">
             <fieldset>
                 <legend>Information</legend>
-                <div class="form-group col-12">
+                @{
+                    if (Session["Product_Details"] != null)
+                    {
+                        if (Session["Product_Details"].ToString().Equals("false"))
+                        {
+                            <div class="alert alert-danger col-11 m-auto">
+                                <strong>Edit False.</strong> Information not valid !!!
+                            </div>
+                        }
+                        if (Session["Product_Details"].ToString().Equals("filefalse"))
+                        {
+                            <div class="alert alert-danger col-11 m-auto">
+                                <strong>Edit False.</strong>Image must be less than 10MB.!!!
+                            </div>
+                        }
+                        if (Session["Product_Details"].ToString().Equals("error"))
+                        {
+                            <div class="alert alert-danger col-11 m-auto">
+                                <strong>Edit False.</strong> System Error !!!
+                            </div>
+                        }
+                        if (Session["Product_Details"].ToString().Equals("success"))
+                        {
+                            <div class="alert alert-success col-11 m-auto">
+                                <strong>Edit Success.</strong> Congratulation.Edit Infor sucecss !!!
+                            </div>
+                        }
+                        if (Session["Product_Details"].ToString().Equals("catfalse"))
+                        {
+                            <div class="alert alert-danger col-11 m-auto">
+                                <strong>Edit Success.</strong>Category ID not exists !!!
+                            </div>
+                        }
+                        if (Session["Product_Details"].ToString().Equals("profalse"))
+                        {
+                            <div class="alert alert-danger col-11 m-auto">
+                                <strong>Edit Success.</strong>Product Type ID not exists !!!
+                            </div>
+                        }
+                        if (Session["Product_Details"].ToString().Equals("cerfalse"))
+                        {
+                            <div class="alert alert-danger col-11 m-auto">
+                                <strong>Edit Success.</strong>Certificate ID not exists !!!
+                            </div>
+                        }
+                        if (Session["Product_Details"].ToString().Equals("jewfalse"))
+                        {
+                            <div class="alert alert-danger col-11 m-auto">
+                                <strong>Edit Success.</strong>Jewellery Type ID not exists !!!
+                            </div>
+                        }
+                        if (Session["Product_Details"].ToString().Equals("brandfalse"))
+                        {
+                            <div class="alert alert-danger col-11 m-auto">
+                                <strong>Edit Success.</strong>Brand ID not exists !!!
+                            </div>
+                        }
+                        Session.Remove("Product_Details");
+                    }
+                    else
+                    {
+                        <div class="" id="reportt"></div>
+                    }
+
+                }
+                <div class="form-group col-12 margin_top5px">
                     <div class="backk col-4 m-auto">
                         <img src="/Content/images/Product_Image/@Model.protypee.Prod_Type/Img/@Model.pro_item.Img" alt="Avatar" id='img-upload' class="image" style="width:100%">
                         <div class="middle">
                             <label for="imagefile" data-toggle="tooltip" title="Upload Image"><img src="~/Content/images/Icon/Admin/Upload1.png" style="width:40px" /></label>
                             <div class="m-auto">
-                                <input type="file" id="imagefile" name="imagefile">
+                                <input type="file" id="imagefile" name="imagefile" accept="image/x-png,image/jpeg">
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <input type="hidden"  value="@Model.protypee.Prod_Type" id="Protype" name="Protype"/>
+                <input type="hidden" value="@Model.protypee.Prod_Type" id="Protype" name="Protype" />
+
                 <div class="form-group">
                     <label class="control-label col-12" for="Style_Code">Style Code</label>
                     <div class="col-12">
@@ -81,7 +280,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label col-12" for="Brand_ID">Designer ID</label>
+                    <label class="control-label col-12" for="Brand_ID">Brand ID</label>
                     <div class="col-12">
                         <input class="form-control text-box single-line" id="Brand_ID" name="Brand_ID" type="text" value="@Model.pro_item.Brand_ID.Trim()" required data-html="true">
                         <span class="field-validation-valid text-danger" data-valmsg-for="Brand_ID" data-valmsg-replace="true" id="result_Brand_ID"></span>
@@ -89,7 +288,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label col-12" for="Cat_ID">Cat ID</label>
+                    <label class="control-label col-12" for="Cat_ID">Category ID</label>
                     <div class="col-12">
                         <input class="form-control text-box single-line" id="Cat_ID" name="Cat_ID" type="text" value="@Model.pro_item.Cat_ID.Trim()" required data-html="true">
                         <span class="field-validation-valid text-danger" data-valmsg-for="Cat_ID" data-valmsg-replace="true" id="result_Cat_ID"></span>
@@ -105,7 +304,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label col-12" for="JewelleryType_ID">Brand ID</label>
+                    <label class="control-label col-12" for="JewelleryType_ID">Jewellery Type ID</label>
                     <div class="col-12">
                         <input class="form-control text-box single-line" id="JewelleryType_ID" name="JewelleryType_ID" type="text" value="@Model.pro_item.JewelleryType_ID.Trim()" required data-html="true">
                         <span class="field-validation-valid text-danger" data-valmsg-for="JewelleryType_ID" data-valmsg-replace="true" id="result_JewelleryType_ID"></span>
@@ -120,42 +319,32 @@
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label class="control-label col-12" for="Prod_Quality">Prod Quality</label>
-                    <div class="col-12">
-                        <input class="form-control text-box single-line" id="Prod_Quality" name="Prod_Quality" type="text" value="@Model.pro_item.Prod_Quality.Trim()" required data-html="true">
-                        <span class="field-validation-valid text-danger" data-valmsg-for="Prod_Quality" data-valmsg-replace="true" id="result_Prod_Quality"></span>
-                    </div>
-                </div>
 
-                <div class="form-group">
-                    <label class="control-label col-12" for="size">Size</label>
-                    <div class="col-12">
-                        <input class="form-control text-box single-line" id="size" name="size" type="text" value="@Model.pro_item.size" required data-html="true">
-                        <span class="field-validation-valid text-danger" data-valmsg-for="size" data-valmsg-replace="true" id="result_size"></span>
-                    </div>
-                </div>
+                <input id="Prod_Quality" name="Prod_Quality" type="hidden" value="@Model.pro_item.Prod_Quality.Trim()">
+
+
+               
+                        <input id="size" name="size" type="hidden" value="@Model.pro_item.size" readonly data-html="true">
+                        
 
                 <div class="form-group">
                     <label class="control-label col-12" for="Quantity">Quantity</label>
                     <div class="col-12">
-                        <input class="form-control text-box single-line" id="Quantity" name="Quantity" type="text" value="@Model.pro_item.Quantity" required data-html="true">
+                        <input class="form-control text-box single-line" id="Quantity" name="Quantity" type="number" value="@Model.pro_item.Quantity" required data-html="true">
                         <span class="field-validation-valid text-danger" data-valmsg-for="Quantity" data-valmsg-replace="true" id="result_Quantity"></span>
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label class="control-label col-12" for="Pairs">Pairs</label>
-                    <div class="col-12">
-                        <input class="form-control text-box single-line" id="Pairs" name="Pairs" type="text" value="@Model.pro_item.Pairs" required data-html="true">
-                        <span class="field-validation-valid text-danger" data-valmsg-for="Pairs" data-valmsg-replace="true" id="result_Pairs"></span>
-                    </div>
-                </div>
+
+                <input id="Pairs" name="Pairs" type="hidden" value="@Model.pro_item.Pairs">
 
                 <div class="form-group">
-                    <label class="control-label col-12" for="Net_Gold">Gold Weight</label>
+                    <label class="control-label col-12" for="Net_Gold">Metal Weight (Standard) </label>
                     <div class="col-12">
-                        <input class="form-control text-box single-line" id="Net_Gold" name="Net_Gold" type="text" value="@Model.pro_item.Net_Gold" required data-html="true">
+                        <div class="form-inline">
+                            <input class="form-control main_input " id="Net_Gold" name="Net_Gold" type="number" value="@Model.pro_item.Net_Gold" required data-html="true">
+                            <input type="text" class="form-control side_input" value="gms" disabled />
+                        </div>
                         <span class="field-validation-valid text-danger" data-valmsg-for="Pairs" data-valmsg-replace="true" id="result_Net_Gold"></span>
                     </div>
                 </div>
@@ -163,7 +352,10 @@
                 <div class="form-group">
                     <label class="control-label col-12" for="Stone_Wt">Stone Weight</label>
                     <div class="col-12">
-                        <input class="form-control text-box single-line" id="Stone_Wt" name="Stone_Wt" type="text" value="@Model.pro_item.Stone_Wt" required data-html="true">
+                        <div class="form-inline">
+                            <input class="form-control main_input " id="Stone_Wt" name="Stone_Wt" type="number" value="@Model.pro_item.Stone_Wt" required data-html="true">
+                            <input type="text" class="form-control side_input" value="gms" disabled />
+                        </div>
                         <span class="field-validation-valid text-danger" data-valmsg-for="Stone_Wt" data-valmsg-replace="true" id="result_Stone_Wt"></span>
                     </div>
                 </div>
@@ -171,15 +363,21 @@
                 <div class="form-group">
                     <label class="control-label col-12" for="Tot_Gross_Wt">Total Weight</label>
                     <div class="col-12">
-                        <input class="form-control text-box single-line" id="Tot_Gross_Wt" name="Tot_Gross_Wt" type="text" value="@Model.pro_item.Tot_Gross_Wt" required data-html="true">
+                        <div class="form-inline">
+                            <input class="form-control main_input" id="Tot_Gross_Wt" name="Tot_Gross_Wt" type="number" value="@Model.pro_item.Tot_Gross_Wt" required data-html="true" readonly>
+                            <input type="text" class="form-control side_input" style="background-color:#ffffff" value="gms" disabled />
+                        </div>
                         <span class="field-validation-valid text-danger" data-valmsg-for="Tot_Gross_Wt" data-valmsg-replace="true" id="result_Tot_Gross_Wt"></span>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label col-12" for="Gold_Making">Gold Making</label>
+                    <label class="control-label col-12" for="Gold_Making">Metal Making</label>
                     <div class="col-12">
-                        <input class="form-control text-box single-line" id="Gold_Making" name="Gold_Making" type="text" value="@Model.pro_item.Gold_Making" required data-html="true">
+                        <div class="form-inline">
+                            <input class="form-control main_input" id="Gold_Making" name="Gold_Making" type="text" value="@Model.pro_item.Gold_Making" required data-html="true">
+                            <input type="text" class="form-control side_input" value="Rs" disabled />
+                        </div>
                         <span class="field-validation-valid text-danger" data-valmsg-for="Gold_Making" data-valmsg-replace="true" id="result_Gold_Making"></span>
                     </div>
                 </div>
@@ -187,7 +385,10 @@
                 <div class="form-group">
                     <label class="control-label col-12" for="Stone_Making">Stone Making</label>
                     <div class="col-12">
-                        <input class="form-control text-box single-line" id="Stone_Making" name="Stone_Making" type="text" value="@Model.pro_item.Stone_Making" required data-html="true">
+                        <div class="form-inline">
+                            <input class="form-control main_input " id="Stone_Making" name="Stone_Making" type="text" value="@Model.pro_item.Stone_Making" required data-html="true">
+                            <input type="text" class="form-control side_input" value="Rs" disabled />
+                        </div>
                         <span class="field-validation-valid text-danger" data-valmsg-for="Stone_Making" data-valmsg-replace="true" id="result_Stone_Making"></span>
                     </div>
                 </div>
@@ -195,7 +396,10 @@
                 <div class="form-group">
                     <label class="control-label col-12" for="Other_Making">Other Making</label>
                     <div class="col-12">
-                        <input class="form-control text-box single-line" id="Other_Making" name="Other_Making" type="text" value="@Model.pro_item.Other_Making" required data-html="true">
+                        <div class="form-inline">
+                            <input class="form-control main_input" id="Other_Making" name="Other_Making" type="text" value="@Model.pro_item.Other_Making" required data-html="true">
+                            <input type="text" class="form-control side_input" value="Rs" disabled />
+                        </div>
                         <span class="field-validation-valid text-danger" data-valmsg-for="Other_Making" data-valmsg-replace="true" id="result_Other_Making"></span>
                     </div>
                 </div>
@@ -203,7 +407,11 @@
                 <div class="form-group">
                     <label class="control-label col-12" for="Tot_Making">Total Making</label>
                     <div class="col-12">
-                        <input class="form-control text-box single-line" id="Tot_Making" name="Tot_Making" type="text" value="@Model.pro_item.Tot_Making" required data-html="true">
+                        <div class="form-inline">
+                            <input class="form-control main_input" id="Tot_Making" name="Tot_Making" type="text" value="@Model.pro_item.Tot_Making" required data-html="true" readonly>
+                            <input type="text" class="form-control side_input" style="background-color:#ffffff" value="Rs" disabled />
+                        </div>
+
                         <span class="field-validation-valid text-danger" data-valmsg-for="Tot_Making" data-valmsg-replace="true" id="result_Tot_Making"></span>
                     </div>
                 </div>
@@ -211,35 +419,2004 @@
                 <div class="form-group">
                     <label class="control-label col-12" for="MRP">MRP</label>
                     <div class="col-12">
-                        <input class="form-control text-box single-line" id="MRP" name="MRP" type="text" value="@Model.pro_item.MRP" required data-html="true">
+                        <div class="form-inline">
+                            <input class="form-control main_input" id="MRP" name="MRP" type="text" value="@Model.pro_item.MRP" required data-html="true">
+                            <input type="text" class="form-control side_input" value="Rs" disabled />
+                        </div>
                         <span class="field-validation-valid text-danger" data-valmsg-for="Tot_Making" data-valmsg-replace="true" id="result_MRP"></span>
                     </div>
                 </div>
 
                 <div id="sumitbutton" style="padding-bottom:10px">
-                    <input type="submit" value="Edit">
+                    <input type="submit" value="Save">
                 </div>
             </fieldset>
-
         </form>
+
+
+        @*Metal Option---------------------------------------------------------------------------------------------------------------------------------------------------------*@
+
+        <div style="margin:0 auto;margin-top:4vh" class="col-11 ">
+            <fieldset>
+                <legend>Metal Options</legend>
+                <div class="form-inline" style="margin-bottom:5px">
+                    <button class="btn bg-white margin_left10px " id="create_metal">
+                        <img src="~/Content/images/Icon/Admin/ChildRow_Create.png" style="width:35px" />
+                    </button>
+                    <button class="btn bg-white margin_left10px" id="edit_metal">
+                        <img src="~/Content/images/Icon/Admin/ChildRow_Edit.png" style="width:35px" />
+                    </button>
+                    <button class="btn bg-white margin_left10px" id="delete_metal">
+                        <img src="~/Content/images/Icon/Admin/ChildRow_Delete.png" style="width:35px" />
+                    </button>
+                </div>
+                <div style="margin:0 15px 20px 15px; overflow-x:auto" class="card">
+                    <table class="table  table-hover w-100" id="table_metal">
+                        <thead>
+                            <tr style=" background-color: #f7f7f7">
+                                <td class="align-middle font-weight-bold">No</td>
+                                <td class="align-middle font-weight-bold">Metal</td>
+                                <td class="align-middle font-weight-bold">Weight(Original)</td>
+                                <td class="align-middle font-weight-bold">Percent Waste</td>
+                                <td class="align-middle font-weight-bold">Weight(Finished)</td>
+                                <td class="align-middle font-weight-bold">Rate/gms</td>
+                                <td class="align-middle font-weight-bold">Amount</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.gold_option != null)
+                            {
+                                foreach (var item in Model.gold_option)
+                                {
+                                    Int32 wasted = (Int32)item.Wstg_Per;
+                                    <tr ID_metal="@item.ID">
+                                        <td class="align-middle">@item.No</td>
+                                        <td class="align-middle">@item.Gold_Crt</td>
+                                        <td class="align-middle">@item.Total_weight gms</td>
+                                        <td class="align-middle">@wasted%</td>
+                                        <td class="align-middle">@item.Gold_Wt gms</td>
+                                        <td class="align-middle">Rs. <span class="current_Unit">@item.Gold_Rate</span></td>
+                                        <td class="align-middle">Rs. <span class="current_Unit">@item.Total_Amount</span></td>
+                                    </tr>
+                                }
+                            }
+                            </tbody>
+                    </table>
+                </div>
+            </fieldset>
+        </div>
+
+
+        @*Stone Option---------------------------------------------------------------------*@
+
+        <div style="margin:0 auto;margin-top:4vh" class="col-11 ">
+            <fieldset>
+                <legend>Stone Options</legend>
+                <div class="form-inline" style="margin-bottom:5px">
+                    <button class="btn bg-white margin_left10px " id="create_stone">
+                        <img src="~/Content/images/Icon/Admin/ChildRow_Create.png" style="width:35px" />
+                    </button>
+                    <button class="btn bg-white margin_left10px" id="edit_stone">
+                        <img src="~/Content/images/Icon/Admin/ChildRow_Edit.png" style="width:35px" />
+                    </button>
+                    <button class="btn bg-white margin_left10px" id="delete_stone">
+                        <img src="~/Content/images/Icon/Admin/ChildRow_Delete.png" style="width:35px" />
+                    </button>
+                </div>
+                <div style="margin:0 15px 20px 15px; overflow-x:auto" class="card">
+                    <table class="table  table-hover w-100" id="table_stone">
+                        <thead>
+                            <tr style=" background-color: #f7f7f7">
+                                <td class="align-middle font-weight-bold">No</td>
+                                <td class="align-middle font-weight-bold">Stone Type</td>
+                                <td class="align-middle font-weight-bold">Carat</td>
+                                <td class="align-middle font-weight-bold">Pcs</td>
+                                <td class="align-middle font-weight-bold">Total Weight</td>
+                                <td class="align-middle font-weight-bold">Rate/gms</td>
+                                <td class="align-middle font-weight-bold">Amount</td>
+                            </tr>
+                        </thead>
+                        @if (Model.stone_option != null)
+                        {
+                            <tbody>
+                                @foreach (var item in Model.stone_option)
+                                {
+                                    <tr ID_stone="@item.ID">
+                                        <td class="align-middle">@item.No</td>
+                                        <td class="align-middle">@item.StoneQlty</td>
+                                        <td class="align-middle">@item.Stone_Crt</td>
+                                        <td class="align-middle">@item.Stone_Pcs</td>
+                                        <td class="align-middle">@item.Stone_Gm gms</td>
+                                        <td class="align-middle">Rs. <span class="current_Unit">@item.Stone_Rate</span></td>
+                                        <td class="align-middle">Rs. <span class="current_Unit">@item.Stone_Amt</span></td>
+                                    </tr>
+                                }
+                            </tbody>
+                        }
+                    </table>
+                </div>
+            </fieldset>
+        </div>
+
+        @*Diamond Option--------------------------------------------------------------------------------------*@
+
+        @{
+            int diamond = 0;
+        }
+        <div style="margin:0 auto;margin-top:4vh" class="col-11 ">
+            <fieldset>
+                <legend>Diamond Options</legend>
+                <div class="form-inline" style="margin-bottom:5px">
+                    <button class="btn bg-white margin_left10px " id="create_diamond">
+                        <img src="~/Content/images/Icon/Admin/ChildRow_Create.png" style="width:35px" />
+                    </button>
+                    <button class="btn bg-white margin_left10px" id="edit_diamond">
+                        <img src="~/Content/images/Icon/Admin/ChildRow_Edit.png" style="width:35px" />
+                    </button>
+                    <button class="btn bg-white margin_left10px" id="delete_diamond">
+                        <img src="~/Content/images/Icon/Admin/ChildRow_Delete.png" style="width:35px" />
+                    </button>
+                </div>
+                <div style="margin:0 15px 20px 15px; overflow-x:auto" class="card">
+                    <table class="table w-100 " id="table_diamond">
+                        <thead>
+                            <tr style=" background-color: #f7f7f7">
+                                <td class="align-middle font-weight-bold">No</td>
+                                <td class="align-middle font-weight-bold">Diamond Type</td>
+                                <td class="align-middle font-weight-bold">Carat</td>
+                                <td class="align-middle font-weight-bold">Size</td>
+                                <td class="align-middle font-weight-bold">Pcs</td>
+                                <td class="align-middle font-weight-bold">Total Weight</td>
+                                <td class="align-middle font-weight-bold">Rate/gms</td>
+                                <td class="align-middle font-weight-bold">Amount</td>
+                                <td class="align-middle font-weight-bold">Total Amount</td>
+                            </tr>
+                        </thead>
+                        @if (Model.diamond_option != null)
+                        {
+                            int style;
+                        <tbody>
+                            @foreach (var item in Model.diamond_option)
+                            {
+
+                                if (!item.DimSubType_ID.Replace(" ", string.Empty).ToLower().Equals("none"))
+                                {
+                                    style = 2;
+                                }
+                                else
+                                {
+                                    style = 1;
+                                }
+                                    <tr ID_diamond="@item.ID" NO_diamond="@item.No" option="@diamond">
+                                        <td class="text-center align-middle" rowspan="@style">@item.No </td>
+                                        <td class="align-middle"><div class="tag">Main</div> @item.DimQlty_ID.Replace(" ", string.Empty)</td>
+                                        <td class="align-middle">@item.Dim_Crt</td>
+                                        <td class="align-middle">@item.Dim_Size </td>
+                                        <td class="align-middle">@Convert.ToInt32(item.Dim_Pcs)</td>
+                                        <td class="align-middle">@item.Dim_Gm gms</td>
+                                        <td class="align-middle">Rs. <span class="current_Unit">@item.Dim_Rate</span></td>
+                                        <td class="align-middle">Rs. <span class="current_Unit">@item.Dim_Amt</span></td>
+                                        <td class="align-middle" rowspan="@style">Rs. <span class="current_Unit">@item.Total_AmtAll</span></td>
+                                    </tr>
+                                    if (!item.DimSubType_ID.Replace(" ", string.Empty).ToLower().Equals("none"))
+                                    {
+                                        <tr option="@diamond" NO_diamond="@item.No" ID_diamond="@item.ID" class="">
+                                            <td class="align-middle"><div class="tag sub">Sub</div>@item.DimSubType_ID.Replace(" ", string.Empty) </td>
+                                            <td class="align-middle">@item.Dim_CrtSub</td>
+                                            <td class="align-middle">@item.Dim_SizeSub </td>
+                                            <td class="align-middle">@Convert.ToInt32(item.Dim_PcsSub)</td>
+                                            <td class="align-middle">@item.Dim_GmSub gms</td>
+                                            <td class="align-middle">Rs. <span class="current_Unit">@item.Dim_RateSub</span></td>
+                                            <td class="align-middle">Rs. <span class="current_Unit">@item.Dim_AmtSub</span></td>
+                                        </tr>
+                                    }
+                                    diamond++;
+                            }
+                        </tbody>
+                        }
+                    </table>
+                </div>
+            </fieldset>
+        </div>
+        <br />
     </div>
 </div>
-<script src="~/Content/js/Admin/Password.js?1"></script>
-<script>
 
+
+@*Modal------------------------------------------------------------------------------------------------------------------------------------------------*@
+<div class="modal fade" id="selectRow" tabindex="-1" role="dialog" aria-hidden="true" on>
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h7 class="modal-title">
+                    <img src="~/Content/images/Icon/Admin/amount_Copy_3-512.png" style="width:30px" />
+                </h7>
+                <button type="button" class=" btn btn-danger close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" data-html="true">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade " id="edit_modal" tabindex="-1" role="dialog" aria-hidden="true" on>
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h7 class="modal-title">Edit Metal Option</h7>
+                <button type="button" class="btn btn-danger close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="loader" id="metal_load"></div>
+
+                <div id="ID_metal" ID_Metal="">
+
+                    <div class="" id="reportt2"></div>
+
+                    <div class="form-group">
+                        <label class="control-label col-12" for="Style_code_metal">Style code</label>
+                        <div class="col-12">
+                            <input class="form-control text-box single-line" id="Style_code_metal" name="Style_code" type="text" value="" required readonly>
+                            <span class="field-validation-valid text-danger" data-valmsg-for="Style_code_metal" data-valmsg-replace="true" id="result_Style_code_metal"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-12" for="GoldType_ID_metal">Metal Type ID</label>
+                        <div class="col-12">
+                            <input class="form-control text-box single-line" id="GoldType_ID_metal" name="GoldType_ID" type="text" value="" required data-html="true">
+                            <span class="field-validation-valid text-danger" data-valmsg-for="GoldType_ID_metal" data-valmsg-replace="true" id="result_GoldType_ID_metal"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-12" for="Total_weight_metal">Weight (Original)</label>
+                        <div class="col-12">
+                            <div class="form-inline">
+                                <input class="form-control" style="border-right: none; width:85%; border-bottom-right-radius: unset; border-top-right-radius: unset;" id="Total_weight_metal" name="Total_weight" type="number" value="" required data-html="true">
+                                <input class="form-control" style=" width: 15%;text-align: center;border-left: none;border-bottom-left-radius: unset;border-top-left-radius: unset" type="text" value="gms" disabled />
+                            </div>
+                            <span class="field-validation-valid text-danger" data-valmsg-for="Total_weight_metal" data-valmsg-replace="true" id="result_Total_weight_metal"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-12" for="Wstg_Per_metal">Percent Waste</label>
+                        <div class="col-12">
+                            <div class="form-inline">
+                                <input class="form-control" style=" text-align:center;border-right: none; width:15%; border-bottom-right-radius: unset; border-top-right-radius: unset;" id="Wstg_Per_metal" name="Wstg_Per" type="number" value="" required data-html="true">
+                                <input class="form-control" style=" width: 10%;text-align: center;border-left: none;border-bottom-left-radius: unset;border-top-left-radius: unset" type="text" value="%" disabled />
+                                ->
+                                <input class="form-control" style=" text-align:center;border-right: none; width:56%; border-bottom-right-radius: unset; border-top-right-radius: unset;" id="Wstq_metal" name="Wstq" type="number" value="" required readonly />
+                                <input class="form-control" style=" width: 15%;text-align: center;border-left: none;border-bottom-left-radius: unset;border-top-left-radius: unset; background-color:#ffffff" type="text" value="gms" disabled />
+                            </div>
+                            <span class="field-validation-valid text-danger" data-valmsg-for="Wstg_Per_metal" data-valmsg-replace="true" id="result_Wstg_Per_metal"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-12" for="Gold_Wt_metal">Weight (Finished)</label>
+                        <div class="col-12">
+                            <div class="form-inline">
+                                <input class="form-control" style="border-right: none; width:85%; border-bottom-right-radius: unset; border-top-right-radius: unset;" id="Gold_Wt_metal" name="Gold_Wt" type="number" value="" required readonly />
+                                <input class="form-control" style=" width: 15%;text-align: center;border-left: none;border-bottom-left-radius: unset;border-top-left-radius: unset;background-color:#ffffff" type="text" value="gms" disabled />
+                            </div>
+                            <span class="field-validation-valid text-danger" data-valmsg-for="Gold_Wt_metal" data-valmsg-replace="true" id="result_Gold_Wt_metal"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-12" for="No_metal">No</label>
+                        <div class="col-12">
+                            <input class="form-control text-box single-line" id="No_metal" name="No" type="number" value="" required data-html="true">
+                            <span class="field-validation-valid text-danger" data-valmsg-for="No_metal" data-valmsg-replace="true" id="result_No_metal"></span>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer form-inline">
+                        <button type="button" class="btn btn-success" id="Save">Save</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade " id="model_common" tabindex="-1" role="dialog" aria-hidden="true" on>
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h7 class="modal-title"></h7>
+                <button type="button" class="btn btn-danger close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal_diamond" tabindex="-1" role="dialog" aria-hidden="true" on>
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h7 class="modal-title"></h7>
+                <button type="button" class="btn btn-danger close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+           
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Content/js/Admin/Text/modalforProduct.js?10"></script>
+<script src="~/Content/js/Admin/jquery-ui.min.js?1"></script>
+<script src="~/Content/js/Admin/Password.js?7"></script>
+<script src="~/Content/js/Admin/forTable.js?9"></script>
+<script>
+    var rex_stylecode = /^[A-Z]+[A-z0-9\s.'-]*$/;
+    var rex_ID = /^[A-z]+[A-z0-9]*$/;
+    var check_stylecode = true;
+    var check_pro = true;
+    var check_jew = true;
+    var check_cat = true;
+    var check_cer = true;
+    var check_bra = true;
+    var check_quan = true;
+    var check_golw = true;
+    var check_stow = true;
+    var check_golm = true;
+    var check_stom = true;
+    var check_othm = true;
+    var check_mrp = true;
+    var check_img = true;
+    var count = 0;
     $(document).ready(function () {
+
         buttonsubmit("sumitbutton");
+
+        CurrentccforValue("#MRP");
+        CurrentccforValue("#Tot_Making");
+        CurrentccforValue("#Other_Making");
+        CurrentccforValue("#Gold_Making");
+        CurrentccforValue("#Stone_Making");
+
+        $("#MRP,#Tot_Making,#Other_Making,#Gold_Making,#Stone_Making").keyup(function () {
+            $(this).val($(this).val().replace(/[^.,0-9]/, ""));
+        });
+
+
+        $(".current_Unit").each(function () {
+            Currentcc(this);
+        });
+
+
         function readURL(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-                reader.onload = function (e) {
-                    $('#img-upload').attr('src', e.target.result);
+            var mimeType = input.files[0].type;
+            if (mimeType == "image/png"  || mimeType == "image/jpeg") {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        $('#img-upload').attr('src', e.target.result);
+                        check_img = true;
+                    }
+                    reader.readAsDataURL(input.files[0]);
                 }
-                reader.readAsDataURL(input.files[0]);
+            } else {
+                $('#img-upload').attr('src', "/Content/images/Icon/Admin/Icon_not.png");
+                check_img = false;
             }
         }
         $("#imagefile").change(function () {
             readURL(this);
+        });
+
+
+        $('#Brand_ID').autocomplete({
+            source: '@Url.Action("GetBrands")'
+        });
+        $('#Cat_ID').autocomplete({
+            source: '@Url.Action("GetCats")'
+        });
+        $('#Certify_ID').autocomplete({
+            source: '@Url.Action("GetCers")'
+        });
+        $('#JewelleryType_ID').autocomplete({
+            source: '@Url.Action("GetJews")'
+        });
+        $('#Prod_ID').autocomplete({
+            source: '@Url.Action("GetPros")'
+        });
+
+        $("#Style_Code").autocomplete({
+            source: '@Url.Action("GetStyle_code")'
+        });
+        $("#Style_Code").on("focus", function () {
+            $(this).tooltip("show");
+        }).tooltip({
+            placement: "top",
+            trigger: "focus",
+            title: "Style Code must be match value in Item Table."
+        });
+        $("#Style_Code").bind("change", function () {
+            check_stylecode = validateMinMax("Style_Code", "result_Style_Code", rex_stylecode,8,50);
+        });
+
+        $("#Brand_ID").on("focus", function () {
+            $(this).tooltip("show");
+        }).tooltip({
+            placement: "top",
+            trigger: "focus",
+            title: "Brand ID must match the value in the Brand table."
+        });
+        $("#Brand_ID").bind("change", function () {
+            check_bra = validateMinMax("Brand_ID", "result_Brand_ID", rex_ID,4,10);
+        });
+
+        $("#Cat_ID").on("focus", function () {
+            $(this).tooltip("show");
+        }).tooltip({
+            placement: "top",
+            trigger: "focus",
+            title: "Category ID must match the value in the Category table."
+        });
+        $("#Cat_ID").bind("change", function () {
+            check_cat = validateMinMax("Cat_ID", "result_Cat_ID", rex_ID, 4, 10);
+        });
+
+        $("#Certify_ID").on("focus", function () {
+            $(this).tooltip("show");
+        }).tooltip({
+            placement: "top",
+            trigger: "focus",
+            title: "Certificate ID must match the value in the Certificate table."
+        });
+        $("#Certify_ID").bind("change", function () {
+            check_cer = validateMinMax("Certify_ID", "result_Certify_ID", rex_ID, 4, 10);
+        });
+
+        $("#JewelleryType_ID").on("focus", function () {
+            $(this).tooltip("show");
+        }).tooltip({
+            placement: "top",
+            trigger: "focus",
+            title: "Jewelery Type ID must match the value in the Jewelery Type table."
+        });
+        $("#JewelleryType_ID").bind("change", function () {
+            check_jew = validateMinMax("JewelleryType_ID", "result_JewelleryType_ID", rex_ID, 4, 10);
+        });
+
+        $("#Prod_ID").on("focus", function () {
+            $(this).tooltip("show");
+        }).tooltip({
+            placement: "top",
+            trigger: "focus",
+            title: "Product Type ID must match the value in the Product Type table."
+        });
+        $("#Prod_ID").bind("change", function () {
+            check_pro = validateMinMax("Prod_ID", "result_Prod_ID", rex_ID, 4, 10);
+        });
+
+
+        $("#Quantity").bind("change", function () {
+            check_quan = validatelessthan0Int("Quantity", "result_Quantity");
+        });
+
+        $("#Net_Gold").bind("change", function () {
+            check_golw = validatelessthan0("Net_Gold", "result_Net_Gold");
+            var total = parseFloat(document.getElementById("Net_Gold").value) + parseFloat(document.getElementById("Stone_Wt").value);
+            $("#Tot_Gross_Wt").val(total.toFixed(3));
+        });
+
+        $("#Stone_Wt").bind("change", function () {
+            check_stow = validatelessthan0("Stone_Wt", "result_Stone_Wt");
+            var total = parseFloat(document.getElementById("Net_Gold").value) + parseFloat(document.getElementById("Stone_Wt").value);
+            $("#Tot_Gross_Wt").val(total.toFixed(3));
+        });
+
+        $("#Gold_Making").bind("change", function () {
+            CurrentccforValue(this);
+            check_golm = validatelessthan0("Gold_Making", "result_Gold_Making");
+            var total = parseFloat(document.getElementById("Gold_Making").value.replace(/,/g, "")) + parseFloat(document.getElementById("Stone_Making").value.replace(/,/, "")) + parseFloat(document.getElementById("Other_Making").value.replace(/,/, ""));
+            CurrentccforPassValue("#Tot_Making", total);
+            CurrentccforPassValue("#MRP", total);
+        });
+
+        $("#Stone_Making").bind("change", function () {
+            CurrentccforValue(this);
+            check_stom = validatelessthan0("Stone_Making", "result_Stone_Making");
+            var total = parseFloat(document.getElementById("Gold_Making").value.replace(/,/, "")) + parseFloat(document.getElementById("Stone_Making").value.replace(/,/, "")) + parseFloat(document.getElementById("Other_Making").value.replace(/,/, ""));
+            CurrentccforPassValue("#Tot_Making", total);
+            CurrentccforPassValue("#MRP", total);
+        });
+
+        $("#Other_Making").bind("change", function () {
+            CurrentccforValue(this);
+            check_othm = validatelessthan0("Other_Making", "result_Other_Making");
+            var total = parseFloat(document.getElementById("Gold_Making").value.replace(/,/, "")) + parseFloat(document.getElementById("Stone_Making").value.replace(/,/, "")) + parseFloat(document.getElementById("Other_Making").value.replace(/,/, ""));
+            CurrentccforPassValue("#Tot_Making", total);
+            CurrentccforPassValue("#MRP", total);
+        });
+
+        $("#MRP").bind("change", function () {
+            CurrentccforValue(this);
+            check_mrp = validatelessthan0("MRP", "result_MRP");
+        });
+
+        $('#myForm').submit(function (event) {
+            if (check_stylecode == false || check_pro == false || check_jew == false || check_cat == false || check_cer == false || check_bra == false  || check_quan == false || check_golw == false || check_stow == false || check_golm == false || check_stom == false || check_othm == false || check_mrp == false || check_img == false ) {
+                event.preventDefault();
+                if (count == 0) {
+                    $("#reportt").append("<strong>Your Infor not valid. Please check against !!!</strong>");
+                    $("#reportt").addClass("alert alert-warning col-11 m-auto");
+                    count++;
+                }
+            } else {
+                default_currentInput("#Gold_Making");
+                default_currentInput("#Stone_Making ");
+                default_currentInput("#Other_Making");
+                default_currentInput("#Tot_Making");
+                default_currentInput("#MRP");
+            }
+        });
+    });
+</script>
+
+<script>
+
+
+    function reportt(classdiv, classImg, srcImg, status, text) {
+        $("." + classdiv).addClass("alert-" + status + " alert form-inline");
+        $("." + classImg).attr("src", srcImg);
+        $("." + classdiv + " strong").append("&nbsp; &nbsp;  " + text);
+
+    }
+
+    var admin = '@Session["admin"]';
+
+    var id;
+    var NO;
+    var rex_goldtype = /^[A-Z]{1}-[0-9]{2}[K]{1}$/;
+
+
+
+    var modalClone = $("#selectRow").clone();
+    var divClone = $("#reportt2").clone();
+    var reportClone = $(".report_result").clone();
+
+    $("#metal_load").hide();
+    $("#ID_metal").hide();
+
+
+    $(document).ready(function () {
+
+        $(".report_result").hide();
+
+        if (admin != "SuperAdmin") {
+            $('#delete_metal').hide();
+        };
+
+        $("#table_metal").on("click", "tbody tr", function () {
+            $(".seletedRow").css("background-color", "#ffffff");
+            $("#table_metal .seletedRow").removeClass("seletedRow");
+            $(this).addClass("seletedRow");
+            $(".seletedRow").css("background-color", "#B0BED9");
+            id = $(this).attr("ID_metal");
+            NO = $(this).children("td").eq(0).text();
+        });
+
+        $("#edit_metal").click(function () {
+
+            var check_goldtypeid = true;
+            var check_Total_weight_metal = true;
+            var check_Wstg_Per_metal = true;
+            var check_No_metal = true;
+
+            $("#reportt2").empty();
+            $("#reportt2").replaceWith(divClone.clone());
+            if (id != null) {
+                $.when($("#edit_modal").modal("show"), $("#metal_load").show()).done(function () {
+                     $.ajax({
+                         url: '/Admin/MetalOption',
+                        data: { id_item: id },
+                        type: "get",
+                        success: function (result) {
+                            $("#metal_load").hide();
+                            $("#ID_metal").fadeIn(500);
+                            $("#Style_code_metal").val(result[1]);
+                            $("#GoldType_ID_metal").val(result[2].replace(/\s/g, ''));
+                            $("#Gold_Wt_metal").val(result[3]);
+                            $("#No_metal").val(result[4]);
+                            $("#Total_weight_metal").val(result[5]);
+                            $("#Wstg_Per_metal").val(parseInt(result[6]));
+                            $("#Wstq_metal").val(result[7]);
+                            $("#ID_metal").attr("ID_Metal", result[0]);
+
+
+                            $("#GoldType_ID_metal").autocomplete({
+                                source: '/Admin/GetMetalID'
+                            });
+
+                            $("#GoldType_ID_metal").on("focus", function () {
+                                $(this).tooltip("show");
+                            }).tooltip({
+                                placement: "top",
+                                trigger: "focus",
+                                title: "Metal Type ID must be match the value in Gold Type Table."
+                            });
+                            $("#GoldType_ID_metal").bind("change", function () {
+                                check_goldtypeid = validate("GoldType_ID_metal", "result_GoldType_ID_metal", rex_goldtype);
+                            });
+
+                            $("#Total_weight_metal").bind("change", function () {
+                                check_Total_weight_metal = validatelessthan0("Total_weight_metal", "result_Total_weight_metal");
+                                var weight = parseFloat($("#Total_weight_metal").val()) * parseInt($("#Wstg_Per_metal").val()) / 100;
+                                var weight2 = parseFloat($("#Total_weight_metal").val()) - weight;
+                                $("#Wstq_metal").val(weight.toFixed(2));
+                                $("#Gold_Wt_metal").val(weight2.toFixed(2));
+                            });
+
+                            $("#Wstg_Per_metal").bind("change", function () {
+                                check_Wstg_Per_metal = validateRange("Wstg_Per_metal", "result_Wstg_Per_metal", 0, 100);
+                                var weight = parseFloat($("#Total_weight_metal").val()) * parseInt($("#Wstg_Per_metal").val()) / 100;
+                                var weight2 = parseFloat($("#Total_weight_metal").val()) - weight;
+                                $("#Wstq_metal").val(weight.toFixed(2));
+                                $("#Gold_Wt_metal").val(weight2.toFixed(2));
+                            });
+
+                            $("#No_metal").bind("change", function () {
+                                check_No_metal = validatelessthan0("No_metal", "result_No_metal");
+                            });
+                            $("#No_metal").on("focus", function () {
+                                $(this).tooltip("show");
+                            }).tooltip({
+                                placement: "top",
+                                trigger: "focus",
+                                title: "Not contain negative number.<br/> Note: The options will be displayed in order from small to large."
+                            });
+
+
+                            $("#Save").click(function () {
+                                if (check_goldtypeid == false || check_Total_weight_metal == false || check_Wstg_Per_metal == false || check_No_metal == false) {
+                                    $("#reportt2").empty();
+                                    $("#reportt2").replaceWith(divClone.clone());
+                                    $("#reportt2").append("<strong>Your Infor not valid. Please check against !!!</strong>");
+                                    $("#reportt2").addClass("alert-warning col-12 alert");
+
+                                } else {
+                                    $.ajax({
+                                        url: '/Admin/EditMetalOption',
+                                        data: {
+                                            ID: $("#ID_metal").attr("ID_Metal"),
+                                            GoldType_ID: $("#GoldType_ID_metal").val(),
+                                            Total_weight: $("#Total_weight_metal").val(),
+                                            Wstg_Per: $("#Wstg_Per_metal").val(),
+                                            Wstq: $("#Wstq_metal").val(),
+                                            Gold_Wt: $("#Gold_Wt_metal").val(),
+                                            No: $("#No_metal").val()
+                                        },
+                                        type: "post",
+                                        success: function (data) {
+                                            $("#reportt2").empty();
+                                            $("#reportt2").replaceWith(divClone.clone());
+                                            if (data == "success") {
+                                                $("#reportt2").append("<strong>Edit Option Success.</strong>");
+                                                $("#reportt2").addClass(" alert-success col-12 alert ");
+                                                $('#edit_modal').on('hidden.bs.modal', function () {
+                                                    location.reload();
+                                                });
+                                            } else if (data == "false") {
+                                                $("#reportt2").append("<strong>Edit Option False.</strong>");
+                                                $("#reportt2").addClass(" alert-danger col-12 alert");
+                                            } else if (data == "Nofalse") {
+                                                $("#reportt2").append("<strong>Edit Option False. No already exist !!!</strong>");
+                                                $("#reportt2").addClass(" alert-danger col-12 alert");
+                                            } else if (data == "metalfalse") {
+                                                $("#reportt2").append("<strong>Edit Option False.Metal Type ID dosen't exists !!!</strong>");
+                                                $("#reportt2").addClass(" alert-danger col-12 alert");
+                                            } else if (data == "systemfalse") {
+                                                $("#reportt2").append("<strong>Edit Option False.System Error !!!</strong>");
+                                                $("#reportt2").addClass(" alert-danger col-12 alert");
+                                            }
+                                        },
+                                        error: function (xhr, status, error) {
+                                            alert("Error: " + status);
+                                        }
+                                    });
+                                }
+                            });
+                        },
+                        error: function (xhr, error, status) {
+                            alert("Error: " + status);
+                        }
+                    });
+                });
+
+
+            } else {
+                $("#selectRow").replaceWith(modalClone.clone());
+                $("#selectRow .modal-body").append("Please select option.");
+                $('#selectRow').modal('show');
+            }
+        });
+
+        $("#create_metal").click(function () {
+
+            var metal_style_id_create = false;
+            var total_weight_metal_create = false;
+            var percent_weight_metal_create = false;
+            var No_metal_create = false;
+
+
+            $("#model_common .modal-body").empty();
+            $("#model_common .modal-title").text("Create Metal Option");
+            $.when($("#model_common .modal-body").append(create_metal_option)).done(function () {
+                readonlyInput();
+                $("#create_metal_div").hide();
+
+                $.when($("#model_common").modal("show")).done(function () {
+
+                    $("#metal_load_create").hide();
+
+                    $("#create_metal_div").fadeIn(800);
+
+
+                    $("#GoldType_ID_create_metal").autocomplete({
+                        source: '/Admin/GetMetalID'
+                    });
+
+
+                    //Begin with uppercase letter. <br/> Style Code must be 8-50 characters. <br/> Not contain Special Characters (Except . - ' ).
+                    $("#Style_code_create_metal").val($("#Style_Code").val());
+
+                    $("#GoldType_ID_create_metal").on("focus", function () {
+                        $(this).tooltip("show");
+                    }).tooltip({
+                        placement: "top",
+                        trigger: "focus",
+                        title: "Metal Type ID must be match the value in Gold Type Table."
+                    });
+                    $("#GoldType_ID_create_metal").bind("change", function () {
+                        metal_style_id_create = validate("GoldType_ID_create_metal", "result_GoldType_ID_create_metal", rex_goldtype);
+                    });
+
+                    $("#Total_weight_create_metal").bind("change", function () {
+                        total_weight_metal_create = validatelessthan0("Total_weight_create_metal", "result_Total_weight_create_metal");
+                        var weight = parseFloat($("#Total_weight_create_metal").val()) * parseInt($("#Wstg_Per_create_metal").val()) / 100;
+                        var weight2 = parseFloat($("#Total_weight_create_metal").val()) - weight;
+                        $("#Wstq_create_metal").val(weight.toFixed(2));
+                        $("#Gold_Wt_create_metal").val(weight2.toFixed(2));
+                    });
+
+                    $("#Wstg_Per_create_metal").bind("change", function () {
+                        percent_weight_metal_create = validateRange("Wstg_Per_create_metal", "result_Wstg_Per_create_metal", 0, 100);
+                        var weight = parseFloat($("#Total_weight_create_metal").val()) * parseInt($("#Wstg_Per_create_metal").val()) / 100;
+                        var weight2 = parseFloat($("#Total_weight_create_metal").val()) - weight;
+                        $("#Wstq_create_metal").val(weight.toFixed(2));
+                        $("#Gold_Wt_create_metal").val(weight2.toFixed(2));
+                    });
+
+                    $("#No_create_metal").bind("change", function () {
+                        No_metal_create = validatelessthan0Int("No_create_metal", "result_No_create_metal");
+                    });
+
+                    $("#No_create_metal").on("focus", function () {
+                        $(this).tooltip("show");
+                    }).tooltip({
+                        placement: "top",
+                        trigger: "focus",
+                        title: "Not contain negative number.<br/> Note: The options will be displayed in order from small to large."
+                    });
+
+                    $("#Save_create_metal").click(function () {
+                        $("#report_create_metal").empty();
+                        $("#report_create_metal").attr('class', '');
+                        if ( metal_style_id_create == true && total_weight_metal_create == true && percent_weight_metal_create == true && No_metal_create == true) {
+                            $.ajax({
+                                url: '/Admin/CreateMetalOption',
+                                data: {
+                                    Style_code: $("#Style_code_create_metal").val(),
+                                    GoldType_ID: $("#GoldType_ID_create_metal").val(),
+                                    Total_weight: $("#Total_weight_create_metal").val(),
+                                    Wstg_Per: $("#Wstg_Per_create_metal").val(),
+                                    Wstq: $("#Wstq_create_metal").val(),
+                                    Gold_Wt: $("#Gold_Wt_create_metal").val(),
+                                    No: $("#No_create_metal").val()
+                                },
+                                type: "post",
+                                success: function (data) {
+                                    if (data == "success") {
+                                        $("#report_create_metal").append("<strong>Create Option Success.</strong>");
+                                        $("#report_create_metal").addClass("alert-success col-12 alert");
+                                        $('#model_common').on('hidden.bs.modal', function () {
+                                            location.reload();
+                                        });
+                                    }
+                                    else if (data == "false") {
+                                        $("#report_create_metal").append("<strong>Create Option False. Please check against !!!</strong>");
+                                        $("#report_create_metal").addClass("alert-danger col-12 alert");
+                                    }
+                                    else if (data == "Nofalse") {
+                                        $("#report_create_metal").append("<strong>Create Option False. No already exist !!!</strong>");
+                                        $("#report_create_metal").addClass("alert-danger col-12 alert");
+                                    }
+                                    else if (data == "metalfalse") {
+                                        $("#report_create_metal").append("<strong>Create Option False. Metal Type ID dosen't exist !!!</strong>");
+                                        $("#report_create_metal").addClass("alert-danger col-12 alert");
+                                    }
+                                    else if (data == "Systemerror") {
+                                        $("#report_create_metal").append("<strong>Create Option False. System error !!!</strong>");
+                                        $("#report_create_metal").addClass("alert-danger col-12 alert");
+                                    }
+                                },
+                                error: function (xhr, error, status) {
+                                    alert("Error: " + status);
+                                }
+                            })
+                        } else {
+                            $("#report_create_metal").append("<strong>Your Infor not valid. Please check against !!!</strong>");
+                            $("#report_create_metal").addClass("alert-warning col-12 alert");
+                        }
+                    });
+                });
+            });
+        });
+
+        $('#delete_metal').click(function () {
+            if (admin != "SuperAdmin") {
+                return;
+            }
+            $("#selectRow").replaceWith(modalClone.clone());
+            if (id != null && NO != null) {
+                $("#selectRow .modal-title").empty();
+                $("#selectRow .modal-title").text("Delete Metal Option");
+                $("#selectRow .modal-body").append("Delete Option No: " + NO +"." + "<br/> Are you sure?");
+                $("#selectRow .modal-footer").prepend('<button class="accept btn btn-success" id="delete_metal_option">Yes</button>');
+                $("#selectRow .modal-footer").children("button").eq(1).text("No");
+                $('#selectRow').modal('show');
+
+                $("#delete_metal_option").click(function () {
+                    $.ajax({
+                        url: '/Admin/DeleteMetalOption',
+                        data: { id_option: id },
+                        type: "get",
+                        success: function (data) {
+                            $('#selectRow').modal('hide');
+                            $(".report_result").replaceWith(reportClone.clone());
+                            if (data == "success") {
+                                $.when(reportt("report_result", "image_report", "/Content/images/Icon/Admin/icon_Success.png", "success", "Delete Metal Option Success")).done(function () {
+                                    $(".report_result").show();
+                                    setTimeout(function () {
+                                        location.reload();
+                                    }, 2000);
+
+                                });
+                            } else if (data == "false") {
+                                $.when(reportt("report_result", "image_report", "/Content/images/Icon/Admin/icon_false.png", "danger", "Delete Metal Option False")).done(function () {
+                                    $(".report_result").show();
+                                    setTimeout(function () {
+                                        location.reload();
+                                    }, 2000);
+                                });
+                            } else {
+                                $.when(reportt("report_result", "image_report", "/Content/images/Icon/Admin/icon_false.png", "danger", "Delete False. System Error !!!")).done(function () {
+                                    $(".report_result").show();
+                                    setTimeout(function () {
+                                        location.reload();
+                                    }, 2000);
+                                });
+                            }
+                         ;
+                        },
+                        error: function (xhr, error, status) {
+                            alert("Error: " + status);
+                        }
+                    });
+                });
+            }
+            else
+            {
+                $("#selectRow").replaceWith(modalClone.clone());
+                $("#selectRow .modal-body").text("Please select option.");
+                $('#selectRow').modal('show');
+            }
+        });
+
+    });
+
+</script>
+
+<script>
+    var rex_Stone = /^[A-Z]{1}-{1}[A-z0-9]{4,8}$/;
+
+    $(document).ready(function () {
+
+        var id_stone, NO_stone;
+        $("#table_stone").on("click", "tbody tr", function () {
+            $(".seletedRow").css("background-color", "#ffffff");
+            $("#table_stone .seletedRow").removeClass("seletedRow");
+            $(this).addClass("seletedRow");
+            $(".seletedRow").css("background-color", "#B0BED9");
+            id_stone = $(this).attr("id_stone");
+            NO_stone = $(this).children("td").eq(0).text();
+        });
+
+        $("#edit_stone").click(function () {
+            var check_stoneID = true;
+            var check_carat = true;
+            var check_pcs = true;
+            var check_No_stone = true;
+            var check_rate_stone = true;
+            if (id_stone != null) {
+                $.ajax({
+                    url: '/Admin/StoneOption',
+                    data: { id_item: id_stone },
+                    type: "get",
+                    success: function (data) {
+
+                        $("#model_common .modal-body").empty();
+                        $("#model_common .modal-title").text("Edit Stone Option");
+                        $('#model_common').modal('show');
+                        $.when($("#model_common .modal-body").append(edit_stone_option)).done(function () {
+                            readonlyInput();
+                            var report_stone = $("#report_stone").clone();
+                            $("#Style_Code_stone").val($("#Style_Code").val());
+                            $("#StoneQlty_ID").val(data[0]);
+                            $("#Stone_Gm").val(data[1]);
+                            $("#Stone_Pcs").val(data[2]);
+                            $("#Stone_Crt").val(data[3]);
+                            $("#Stone_Rate").val(data[4]);
+                            $("#Stone_Amt").val(data[5]);
+                            $("#No_stone").val(data[6]);
+
+                            $("#StoneQlty_ID").autocomplete({
+                                source: '/Admin/GetStoneID'
+                            });
+                            $("#StoneQlty_ID").on("focus", function () {
+                                $(this).tooltip("show");
+                            }).tooltip({
+                                placement: "top",
+                                trigger: "focus",
+                                title: "Metal Type ID must be match the value in Gold Type Table."
+                            });
+                            $("#StoneQlty_ID").bind("change", function () {
+                                check_stoneID = validate("StoneQlty_ID", "result_StoneQlty_ID", rex_Stone);
+                            });
+
+                            $("#Stone_Crt").bind("change", function () {
+                                check_carat = validatelessthan0("Stone_Crt", "result_Stone_Crt");
+                                var total = parseFloat($("#Stone_Crt").val()) * 0.2 * parseInt($("#Stone_Pcs").val());
+                                $.when($("#Stone_Gm").val(total.toFixed(2))).done(function () {
+                                    var total2 = parseFloat($("#Stone_Gm").val()) * parseFloat($("#Stone_Rate").val().replace(/,/g, ""));
+                                    CurrentccforPassValue("#Stone_Amt", total2);
+                                });
+                            });
+
+                            $("#Stone_Pcs").bind("change", function () {
+                                check_pcs = validatelessthan0Int("Stone_Pcs", "result_Stone_Pcs");
+                                var total = parseFloat($("#Stone_Crt").val()) * 0.2 * parseInt($("#Stone_Pcs").val().replace(/[^.0-9]/, ""));
+                                $.when($("#Stone_Gm").val(total.toFixed(2))).done(function () {
+                                    var total2 = parseFloat($("#Stone_Gm").val()) * parseFloat($("#Stone_Rate").val().replace(/,/g, ""));
+                                    CurrentccforPassValue("#Stone_Amt", total2);
+                                });
+                            });
+
+
+                            $("#Stone_Rate").bind("change", function () {
+                                CurrentccforValue(this);
+                                $.when(check_rate_stone = validatelessthan0("Stone_Rate", "result_Stone_Rate")).done(function () {
+                                    var total2 = parseFloat($("#Stone_Gm").val()) * parseFloat($("#Stone_Rate").val().replace(/,/g, ""));
+                                    CurrentccforPassValue("#Stone_Amt", total2);
+                                });
+
+                            });
+                            $("#No_stone").bind("change", function () {
+                                check_No_stone = validatelessthan0Int("No_stone", "result_No_stone");
+                            });
+
+                            $("#Stone_Rate").keyup(function () {
+                                $(this).val($(this).val().replace(/[^.,0-9]/, ""));
+                            });
+
+                            $.when($("#model_common .loader").fadeOut(2000)).done(function () {
+                                $("#ID_stone").fadeIn(1000);
+                            });
+
+                            $("#Save_stone").click(function () {
+                                if (check_stoneID == false || check_carat == false || check_pcs == false || check_No_stone == false || check_rate_stone == false) {
+                                    $("#report_stone").empty();
+                                    $("#report_stone").replaceWith(report_stone.clone());
+                                    $("#report_stone").append("<strong>Your Infor not valid. Please check against !!!</strong>");
+                                    $("#report_stone").addClass("alert-warning col-12 alert");
+                                } else {
+                                    $.ajax({
+                                        url: '/Admin/EditStoneOption',
+                                        data: {
+                                            ID: id_stone,
+                                            StoneQlty_ID: $("#StoneQlty_ID").val(),
+                                            Stone_Gm: $("#Stone_Gm").val(),
+                                            Stone_Pcs: $("#Stone_Pcs").val(),
+                                            Stone_Crt: $("#Stone_Crt").val(),
+                                            Stone_Rate: $("#Stone_Rate").val().replace(/,/g, ""),
+                                            Stone_Amt: $("#Stone_Amt").val().replace(/,/g, ""),
+                                            No: $("#No_stone").val()
+                                        },
+                                        type: "post",
+                                        success: function (data) {
+                                            $("#report_stone").empty();
+                                            $("#report_stone").replaceWith(report_stone.clone());
+                                            if (data == "success") {
+                                                $("#report_stone").append("<strong>Edit Option Success.</strong>");
+                                                $("#report_stone").addClass(" alert-success col-12 alert ");
+                                                refreshpage("#model_common");
+                                            } else if (data == "false") {
+                                                $("#report_stone").append("<strong>Edit Option False.</strong>");
+                                                $("#report_stone").addClass(" alert-danger col-12 alert");
+                                            } else if (data == "Nofalse") {
+                                                $("#report_stone").append("<strong>Edit Option False. No already exist !!!</strong>");
+                                                $("#report_stone").addClass(" alert-danger col-12 alert");
+                                            } else if (data == "metalfalse") {
+                                                $("#report_stone").append("<strong>Edit Option False.Stone Type ID dosen't exists !!!</strong>");
+                                                $("#report_stone").addClass(" alert-danger col-12 alert");
+                                            } else if (data == "systemfalse") {
+                                                $("#report_stone").append("<strong>Edit Option False.System Error !!!</strong>");
+                                                $("#report_stone").addClass(" alert-danger col-12 alert");
+                                            }
+                                        },
+                                        error: function (xhr, error, status) {
+                                            alert("Error: " + status);
+                                        }
+                                    });
+                                }
+                            });
+                        });
+                    },
+                    error: function (xhr, error, status, ) {
+                        alert("Error: " + status);
+                    }
+                });
+            } else {
+                $("#selectRow").replaceWith(modalClone.clone());
+                $("#selectRow .modal-body").append("Please select option.");
+                $('#selectRow').modal('show');
+            }
+        });
+
+        $("#create_stone").click(function () {
+
+            var check_stoneID = false;
+            var check_carat = false;
+            var check_pcs = false;
+            var check_No_stone = false;
+            var check_rate_stone = false;
+
+            $("#model_common .modal-body").empty();
+            $("#model_common .modal-title").text("Create Stone Option");
+            $('#model_common').modal('show');
+
+            $.when($("#model_common .modal-body").append(edit_stone_option)).done(function () {
+                readonlyInput();
+                var report_stone = $("#report_stone").clone();
+                $("#Style_Code_stone").val($("#Style_Code").val());
+                $("#Save_stone").text("Create");
+
+                $("#StoneQlty_ID").autocomplete({
+                    source: '/Admin/GetStoneID'
+                });
+                $("#StoneQlty_ID").on("focus", function () {
+                    $(this).tooltip("show");
+                }).tooltip({
+                    placement: "top",
+                    trigger: "focus",
+                    title: "Metal Type ID must be match the value in Gold Type Table."
+                });
+                $("#StoneQlty_ID").bind("change", function () {
+                    //check_stoneID = validate("StoneQlty_ID", "result_StoneQlty_ID", rex_Stone);
+                    check_stoneID = true;
+                });
+
+                $("#Stone_Crt").bind("change", function () {
+                    check_carat = validatelessthan0("Stone_Crt", "result_Stone_Crt");
+                    var total = parseFloat($("#Stone_Crt").val()) * 0.2 * parseInt($("#Stone_Pcs").val());
+                    $.when($("#Stone_Gm").val(total.toFixed(2))).done(function () {
+                        var total2 = parseFloat($("#Stone_Gm").val()) * parseFloat($("#Stone_Rate").val().replace(/,/g, ""));
+                        CurrentccforPassValue("#Stone_Amt", total2);
+                    });
+                });
+
+                $("#Stone_Pcs").bind("change", function () {
+                    check_pcs = validatelessthan0Int("Stone_Pcs", "result_Stone_Pcs");
+                    var total = parseFloat($("#Stone_Crt").val()) * 0.2 * parseInt($("#Stone_Pcs").val().replace(/[^.0-9]/, ""));
+                    $.when($("#Stone_Gm").val(total.toFixed(2))).done(function () {
+                        var total2 = parseFloat($("#Stone_Gm").val()) * parseFloat($("#Stone_Rate").val().replace(/,/g, ""));
+                        CurrentccforPassValue("#Stone_Amt", total2);
+                    });
+                });
+
+
+                $("#Stone_Rate").bind("change", function () {
+                    CurrentccforValue(this);
+                    $.when(check_rate_stone = validatelessthan0("Stone_Rate", "result_Stone_Rate")).done(function () {
+                        var total2 = parseFloat($("#Stone_Gm").val()) * parseFloat($("#Stone_Rate").val().replace(/,/g, ""));
+                        CurrentccforPassValue("#Stone_Amt", total2);
+                    });
+
+                });
+                $("#No_stone").bind("change", function () {
+                    check_No_stone = validatelessthan0Int("No_stone", "result_No_stone");
+                });
+
+                $("#Stone_Rate").keyup(function () {
+                    $(this).val($(this).val().replace(/[^.,0-9]/, ""));
+                });
+
+                $.when($("#model_common .loader").fadeOut(1000)).done(function () {
+                    $("#ID_stone").fadeIn(800);
+
+                    $("#Save_stone").click(function () {
+                        if (check_stoneID == false || check_carat == false || check_pcs == false || check_No_stone == false || check_rate_stone == false) {
+                            $("#report_stone").empty();
+                            $("#report_stone").replaceWith(report_stone.clone());
+                            $("#report_stone").append("<strong>Your Infor not valid. Please check against !!!</strong>");
+                            $("#report_stone").addClass("alert-warning col-12 alert");
+                        } else {
+                            $.ajax({
+                                url: '/Admin/CreateStoneOption',
+                                data: {
+                                    Style_Code: $("#Style_Code_stone").val(),
+                                    StoneQlty_ID: $("#StoneQlty_ID").val(),
+                                    Stone_Gm: $("#Stone_Gm").val(),
+                                    Stone_Pcs: $("#Stone_Pcs").val(),
+                                    Stone_Crt: $("#Stone_Crt").val(),
+                                    Stone_Rate: $("#Stone_Rate").val().replace(/,/g, ""),
+                                    Stone_Amt: $("#Stone_Amt").val().replace(/,/g, ""),
+                                    No: $("#No_stone").val()
+                                },
+                                type: "post",
+                                success: function (data) {
+                                    $("#report_stone").empty();
+                                    $("#report_stone").replaceWith(report_stone.clone());
+                                    if (data == "success") {
+                                        $("#report_stone").append("<strong>Create Option Success.</strong>");
+                                        $("#report_stone").addClass(" alert-success col-12 alert ");
+                                        refreshpage("#model_common");
+                                    } else if (data == "false") {
+                                        $("#report_stone").append("<strong>Create Option False.</strong>");
+                                        $("#report_stone").addClass(" alert-danger col-12 alert");
+                                    } else if (data == "Nofalse") {
+                                        $("#report_stone").append("<strong>Create Option False. No already exist !!!</strong>");
+                                        $("#report_stone").addClass(" alert-danger col-12 alert");
+                                    } else if (data == "stonefalse") {
+                                        $("#report_stone").append("<strong>Create Option False.Stone Type ID dosen't exists !!!</strong>");
+                                        $("#report_stone").addClass(" alert-danger col-12 alert");
+                                    } else if (data == "systemfalse") {
+                                        $("#report_stone").append("<strong>Create Option False.System Error !!!</strong>");
+                                        $("#report_stone").addClass(" alert-danger col-12 alert");
+                                    }
+                                },
+                                error: function (xhr, error, status) {
+                                    alert("Error: " + status);
+                                }
+                            });
+                        }
+                    });
+                });
+            });
+        });
+
+        if (admin != "SuperAdmin") {
+            $("#delete_stone").hide();
+        }
+
+        $("#delete_stone").click(function () {
+
+            if (admin != "SuperAdmin") {
+                return;
+            }
+
+            $("#selectRow").replaceWith(modalClone.clone());
+
+            if (id_stone != null && NO_stone != null) {
+                $("#selectRow .modal-title").empty();
+                $("#selectRow .modal-title").text("Delete Stone Option");
+                $("#selectRow .modal-body").append("Delete Option No: " + NO_stone + "." + "<br/> Are you sure?");
+                $("#selectRow .modal-footer").prepend('<button class="accept btn btn-success" id="delete_stone_option">Yes</button>');
+                $("#selectRow .modal-footer").children("button").eq(1).text("No");
+                $('#selectRow').modal('show');
+
+                $("#delete_stone_option").click(function () {
+                    $.ajax({
+                        url: '/Admin/DeleteStoneOption',
+                        data: { id: id_stone },
+                        type: "get",
+                        success: function (data) {
+                            $('#selectRow').modal('hide');
+                            $(".report_result").replaceWith(reportClone.clone());
+                            if (data == "success") {
+                                $.when(reportt("report_result", "image_report", "/Content/images/Icon/Admin/icon_Success.png", "success", "Delete Stone Option Success")).done(function () {
+                                    $(".report_result").show();
+                                    setTimeout(function () {
+                                        location.reload();
+                                    }, 2000);
+
+                                });
+                            } else if (data == "false") {
+                                $.when(reportt("report_result", "image_report", "/Content/images/Icon/Admin/icon_false.png", "danger", "Delete Stone Option False")).done(function () {
+                                    $(".report_result").show();
+                                    setTimeout(function () {
+                                        location.reload();
+                                    }, 2000);
+                                });
+                            } else {
+                                $.when(reportt("report_result", "image_report", "/Content/images/Icon/Admin/icon_false.png", "danger", "Delete False. System Error !!!")).done(function () {
+                                    $(".report_result").show();
+                                    setTimeout(function () {
+                                        location.reload();
+                                    }, 2000);
+                                });
+                            }
+                        },
+                        error: function (xhr, error, status) {
+                            alert("Error: " + status);
+                        }
+                    });
+                });
+            }
+            else {
+                $("#selectRow").replaceWith(modalClone.clone());
+                $("#selectRow .modal-body").text("Please select option.");
+                $('#selectRow').modal('show');
+            }
+        });
+
+    });
+</script>
+
+<script>
+
+    var id_diamond;
+    var NO_diamond;
+    var rex_seleted = /seletedRow/g;
+    var rex_diamond = /^([A-Z]{1}-(([A-Z]?)|[A-Z]{1}[a-z]{1})-[A-Z]{1}-[A-Z]{1,3}|none)$/;
+    $(document).ready(function () {
+
+        $("#table_diamond").on("click", "tbody  tr", function () {
+            $(".seletedRow").css("background-color", "#ffffff");
+            $("#table_diamond .seletedRow").removeClass("seletedRow");
+            var option = $(this).attr("option");
+            $.when($("#table_diamond tbody tr[option=" + option + "]").addClass("seletedRow"), $("#table_diamond tbody tr[option=" + option + "]").removeClass("hoverRow")).done(function () {
+                $(".seletedRow").css("background-color", "#B0BED9");
+
+            });
+            NO_diamond = $(this).attr("NO_diamond");
+            id_diamond = $(this).attr("ID_diamond");
+
+        });
+
+        $("#table_diamond tbody  tr").mouseenter(function () {
+            if ($(this).attr("class").search("seletedRow") == -1) {
+                var option = $(this).attr("option");
+                $.when($("#table_diamond tbody tr[option=" + option + "]").addClass("hoverRow")).done(function () {
+                    $(".hoverRow").css("background-color", "#ececec");
+                });
+            }
+        });
+
+        $("#table_diamond tbody  tr").mouseleave(function () {
+            if ($(this).attr("class").search("seletedRow") == -1) {
+                var option = $(this).attr("option");
+                $.when($(".hoverRow").css("background-color", "#ffffff")).done(function () {
+                    $("#table_diamond tbody tr[option=" + option + "]").removeClass("hoverRow");
+                });
+            }
+        });
+
+        $('input[readonly]').each(function () {
+            if ($(this).prop('disabled') == false) {
+                $(this).css("background", "#fff");
+            }
+        });
+     
+        $('input[readonly]').parent(".form-inline").each(function () {
+            $(this).children("input").eq(1).css("background", "#e9ecef");
+        });
+
+        $("#edit_diamond").click(function () {
+            
+            var check_mainID = true;
+            var check_carat = true;
+            var check_size = true;
+            var check_pcs = true;
+            var check_rate = true;
+            var check_No = true;
+
+            var hasOption = false;
+
+            if (id_diamond != null) {
+                $.ajax({
+                    url: '/Admin/DiamondOption',
+                    data: { id_item: id_diamond },
+                    type: "get",
+                    success: function (data) {
+                        $("#modal_diamond .modal-body").empty();
+                        $("#modal_diamond .modal-title").text("Edit Diamond Option");
+                        $('#modal_diamond').modal('show');
+                        $.when($("#modal_diamond .modal-body").append(diamond_option)).done(function () {
+                            readonlyInput();
+                            var report_diamond = $("#report_option").clone();
+                            $("#Style_code_diamond").val($("#Style_Code").val());
+                            $("#No_diamond").val(data[0]);
+
+                            $("#DimQlty_ID").val(data[1].replace(/\s/g, ""));
+                            $("#Dim_Crt").val(data[2]);
+                            $("#Dim_Size").val(data[3]);
+                            $("#Dim_Pcs").val(parseInt(data[4]));
+                            $("#Dim_Gm").val(data[5]);
+                            $("#Dim_Rate").val(data[6]);
+                            $("#Dim_Amt").val(data[7]);
+
+                            $("#DimSubType_ID").val(data[8].replace(/\s/g, ""));
+                            $("#Dim_CrtSub").val(data[9]);
+                            $("#Dim_SizeSub").val(data[10]);
+                            $("#Dim_PcsSub").val(parseInt(data[11]));
+                            $("#Dim_GmSub").val(data[12]);
+                            $("#Dim_RateSub").val(data[13]);
+                            $("#Dim_AmtSub").val(data[14]);
+
+                            $("#Total_AmtAll").val(data[15]);
+
+                            if (data[8] != null && data[8].replace(/\s/g, "") != "none") {
+                                $("#hassub").addClass("btn-primary");
+                                $("#DimSubType_ID").attr("disabled", false);
+                                $("#Dim_CrtSub").attr("disabled", false);
+                                $("#Dim_SizeSub").attr("disabled", false);
+                                $("#Dim_PcsSub").attr("disabled", false);
+                                $("#Dim_GmSub").attr("disabled", false);
+                                $("#Dim_RateSub").attr("disabled", false);
+                                $("#Dim_AmtSub").attr("disabled", false);
+                                $('#tablediamond input[readonly]').each(function () {
+                                    if ($(this).prop('disabled') == false) {
+                                        $(this).css("background", "#fff");
+                                    }
+                                });
+                                hasOption = true;
+                            }
+
+                            var check_subID = true;
+                            var check_caratsub = true;
+                            var check_sizesub = true;
+                            var check_pcssub = true;
+                            var check_ratesub = true;
+
+                            $("#DimSubType_ID").autocomplete({
+                                source: '/Admin/GetDiamondID'
+                            });
+                            $("#DimSubType_ID").on("focus", function () {
+                                $(this).tooltip("show");
+                            }).tooltip({
+                                placement: "top",
+                                trigger: "focus",
+                                title: "Diamond Type ID must be match the value in Diamond Type Table."
+                            });
+                            $("#DimSubType_ID").bind("change", function () {
+                                check_subID = validate("DimSubType_ID", "result_DimSubType_ID", rex_diamond);
+                                if ($(this).val() == "none") {
+                                    $("#Dim_CrtSub").val("0.00");
+                                    $("#Dim_SizeSub").val("0.00");
+                                    $("#Dim_PcsSub").val("0");
+                                    $("#Dim_GmSub").val("0.00");
+                                    $("#Dim_RateSub").val("0.00");
+                                    $("#Dim_RateSub").trigger("change");
+                                }
+                            });
+
+                            $("#Dim_CrtSub").bind("change", function () {
+                                check_caratsub = validatecanbe0("Dim_CrtSub", "result_Dim_CrtSub");
+                                var total = parseFloat($("#Dim_CrtSub").val()) * 0.2 * parseInt($("#Dim_PcsSub").val());
+                                $.when($("#Dim_GmSub").val(total.toFixed(2))).done(function () {
+                                    var total2 = parseFloat($("#Dim_GmSub").val()) * parseFloat($("#Dim_RateSub").val().replace(/,/g, ""));
+                                    CurrentccforPassValue("#Dim_AmtSub", total2);
+                                });
+                                var total3 = parseFloat($("#Dim_Amt").val().replace(/,/g, "")) + parseFloat($("#Dim_AmtSub").val().replace(/,/g, ""));
+                                CurrentccforPassValue("#Total_AmtAll", total3);
+                            });
+
+                            $("#Dim_PcsSub").bind("change", function () {
+                                check_pcssub = validatecanbe0Int("Dim_PcsSub", "result_Dim_PcsSub");
+                                var total = parseFloat($("#Dim_CrtSub").val()) * 0.2 * parseInt($("#Dim_PcsSub").val().replace(/[^.0-9]/, ""));
+                                $.when($("#Dim_GmSub").val(total.toFixed(2))).done(function () {
+                                    var total2 = parseFloat($("#Dim_GmSub").val()) * parseFloat($("#Dim_RateSub").val().replace(/,/g, ""));
+                                    CurrentccforPassValue("#Dim_AmtSub", total2);
+                                });
+                                var total3 = parseFloat($("#Dim_Amt").val().replace(/,/g, "")) + parseFloat($("#Dim_AmtSub").val().replace(/,/g, ""));
+                                CurrentccforPassValue("#Total_AmtAll", total3);
+                            });
+
+                            $("#Dim_RateSub").bind("change", function () {
+                                CurrentccforValue(this);
+                                $.when(check_ratesub = validatecanbe0("Dim_RateSub", "result_Dim_RateSub")).done(function () {
+                                    var total2 = parseFloat($("#Dim_GmSub").val()) * parseFloat($("#Dim_RateSub").val().replace(/,/g, ""));
+                                    CurrentccforPassValue("#Dim_AmtSub", total2);
+                                });
+                                var total3 = parseFloat($("#Dim_Amt").val().replace(/,/g, "")) + parseFloat($("#Dim_AmtSub").val().replace(/,/g, ""));
+                                CurrentccforPassValue("#Total_AmtAll", total3);
+
+                            });
+                            $("#Dim_RateSub").keyup(function () {
+                                $(this).val($(this).val().replace(/[^.,0-9]/, ""));
+                            });
+
+                            $("#Dim_SizeSub").bind("change", function () {
+                                check_sizesub = validatecanbe0("Dim_SizeSub", "result_Dim_SizeSub");
+                            });
+
+                            $("#hassub").click(function () {
+                                if (hasOption == false) {
+                                    $(this).addClass("btn-primary");
+                                    $("#DimSubType_ID").attr("disabled", false);
+                                    $("#Dim_CrtSub").attr("disabled", false);
+                                    $("#Dim_SizeSub").attr("disabled", false);
+                                    $("#Dim_PcsSub").attr("disabled", false);
+                                    $("#Dim_GmSub").attr("disabled", false);
+                                    $("#Dim_RateSub").attr("disabled", false);
+                                    $("#Dim_AmtSub").attr("disabled", false);
+                                    $('#tablediamond input[readonly]').each(function () {
+                                        if ($(this).prop('disabled') == false) {
+                                            $(this).css("background", "#fff");
+                                        }
+                                    });
+                                    hasOption = true;
+                                } else {
+                                    $(this).removeClass("btn-primary");
+                                    $("#DimSubType_ID").attr("disabled", true);
+                                    $("#Dim_CrtSub").attr("disabled", true);
+                                    $("#Dim_SizeSub").attr("disabled", true);
+                                    $("#Dim_PcsSub").attr("disabled", true);
+                                    $("#Dim_GmSub").attr("disabled", true);
+                                    $("#Dim_RateSub").attr("disabled", true);
+                                    $("#Dim_AmtSub").attr("disabled", true);
+                                    $('#tablediamond input[readonly]').each(function () {
+                                        if ($(this).prop('disabled') == true) {
+                                            $(this).css("background", "#e9ecef");
+                                        }
+                                    });
+                                    hasOption = false;
+                                }
+                            });
+
+                            //------------------------------------------------------------------------------------
+                            $("#DimQlty_ID").autocomplete({
+                                source: '/Admin/GetDiamondI'
+                            });
+                            $("#DimQlty_ID").on("focus", function () {
+                                $(this).tooltip("show");
+                            }).tooltip({
+                                placement: "top",
+                                trigger: "focus",
+                                title: "Diamond Type ID must be match the value in Diamond Type Table."
+                            });
+                            $("#DimQlty_ID").bind("change", function () {
+                                check_mainID = validate("DimQlty_ID", "result_DimQlty_ID", rex_diamond);
+                            });
+
+                            $("#Dim_Crt").bind("change", function () {
+                                check_carat = validatelessthan0("Dim_Crt", "result_Dim_Crt");
+                                var total = parseFloat($("#Dim_Crt").val()) * 0.2 * parseInt($("#Dim_Pcs").val());
+                                $.when($("#Dim_Gm").val(total.toFixed(2))).done(function () {
+                                    var total2 = parseFloat($("#Dim_Gm").val()) * parseFloat($("#Dim_Rate").val().replace(/,/g, ""));
+                                    CurrentccforPassValue("#Dim_Amt", total2);
+                                });
+                                var total3 = parseFloat($("#Dim_Amt").val().replace(/,/g, "")) + parseFloat($("#Dim_AmtSub").val().replace(/,/g, ""));
+                                CurrentccforPassValue("#Total_AmtAll", total3);
+                            });
+
+                            $("#Dim_Pcs").bind("change", function () {
+                                check_pcs = validatelessthan0Int("Dim_Pcs", "result_Dim_Pcs");
+                                var total = parseFloat($("#Dim_Crt").val()) * 0.2 * parseInt($("#Dim_Pcs").val().replace(/[^.0-9]/, ""));
+                                $.when($("#Dim_Gm").val(total.toFixed(2))).done(function () {
+                                    var total2 = parseFloat($("#Dim_Gm").val()) * parseFloat($("#Dim_Rate").val().replace(/,/g, ""));
+                                    CurrentccforPassValue("#Dim_Amt", total2);
+                                });
+                                var total3 = parseFloat($("#Dim_Amt").val().replace(/,/g, "")) + parseFloat($("#Dim_AmtSub").val().replace(/,/g, ""));
+                                CurrentccforPassValue("#Total_AmtAll", total3);
+                            });
+
+                            $("#Dim_Rate").bind("change", function () {
+                                CurrentccforValue(this);
+                                $.when(check_rate = validatelessthan0("Dim_Rate", "result_Dim_Rate")).done(function () {
+                                    var total2 = parseFloat($("#Dim_Gm").val()) * parseFloat($("#Dim_Rate").val().replace(/,/g, ""));
+                                    CurrentccforPassValue("#Dim_Amt", total2);
+                                });
+                                var total3 = parseFloat($("#Dim_Amt").val().replace(/,/g, "")) + parseFloat($("#Dim_AmtSub").val().replace(/,/g, ""));
+                                CurrentccforPassValue("#Total_AmtAll", total3);
+
+                            });
+                            $("#Dim_Rate").keyup(function () {
+                                $(this).val($(this).val().replace(/[^.,0-9]/, ""));
+                            });
+
+                            $("#Dim_Size").bind("change", function () {
+                                check_size = validatelessthan0("Dim_Size", "result_Dim_Size");
+                            });
+
+                            $("#No_diamond").bind("change", function () {
+                                check_No = validatelessthan0Int("No_diamond", "result_No_diamond");
+                            });
+
+                            $.when($("#modal_diamond .loader").fadeOut(2000)).done(function () {
+                                $("#Diamond_ID").fadeIn(1000);
+                            });
+
+                            $("#Save_diamond").click(function () {
+                                var checkoption = false;
+                                if (check_mainID == false || check_carat == false || check_pcs == false || check_size == false || check_rate == false || check_No == false) {
+                                    checkoption = false;
+                                } else {
+                                    if (hasOption == true) {
+                                        if (check_subID == false || check_caratsub == false || check_pcssub == false || check_sizesub == false || check_ratesub == false) {
+                                            checkoption = false;
+                                        } else {
+                                            checkoption = true;
+                                        }
+                                    } else {
+                                        checkoption = true;
+                                    }
+                                }
+
+                                if (checkoption == true) {
+                                    var subID = "none";
+                                    var carat = 0;
+                                    var size = 0;
+                                    var pcs = 0;
+                                    var total_gm = 0;
+                                    var rate = 0;
+                                    var amount = 0;
+
+                                    if (hasOption == true) {
+                                        subID = $("#DimSubType_ID").val();
+                                        carat = $("#Dim_CrtSub").val();
+                                        size = $("#Dim_SizeSub").val();
+                                        pcs = $("#Dim_PcsSub").val();
+                                        total_gm = $("#Dim_GmSub").val();
+                                        rate = $("#Dim_RateSub").val().replace(/,/g, "");
+                                        amount = $("#Dim_AmtSub").val().replace(/,/g, "");
+                                    }
+
+                                    $.ajax({
+                                        url: '/Admin/EditDiamondOption',
+                                        data: {
+                                            ID: id_diamond,
+                                            No: NO_diamond,
+                                            DimQlty_ID: $("#DimQlty_ID").val(),
+                                            Dim_Crt: $("#Dim_Crt").val(),
+                                            Dim_Pcs: $("#Dim_Pcs").val(),
+                                            Dim_Gm: $("#Dim_Gm").val(),
+                                            Dim_Size: $("#Dim_Size").val(),
+                                            Dim_Rate: $("#Dim_Rate").val().replace(/,/g, ""),
+                                            Dim_Amt: $("#Dim_Amt").val().replace(/,/g, ""),
+                                            DimSubType_ID: subID,
+                                            Dim_CrtSub: carat,
+                                            Dim_PcsSub: pcs,
+                                            Dim_GmSub: total_gm,
+                                            Dim_SizeSub: size,
+                                            Dim_RateSub: rate,
+                                            Dim_AmtSub: amount,
+                                            Total_AmtAll: $("#Total_AmtAll").val().replace(/,/g, "")
+                                        },
+                                        type: "post",
+                                        success: function (data) {
+                                            $("#report_option").empty();
+                                            $("#report_option").replaceWith(report_diamond.clone());
+                                            if (data == "success") {
+                                                $("#report_option").append("<strong>Edit Option Success.</strong>");
+                                                $("#report_option").addClass(" alert-success col-12 alert ");
+                                                refreshpage("#modal_diamond");
+                                            } else if (data == "false") {
+                                                $("#report_option").append("<strong>Edit Option False.</strong>");
+                                                $("#report_option").addClass(" alert-danger col-12 alert");
+                                            } else if (data == "Nofalse") {
+                                                $("#report_option").append("<strong>Edit Option False. No already exist !!!</strong>");
+                                                $("#report_option").addClass(" alert-danger col-12 alert");
+                                            } else if (data == "mainFalse") {
+                                                $("#report_option").append("<strong>Edit Option False.Diamond Main Type ID dosen't exists !!!</strong>");
+                                                $("#report_option").addClass(" alert-danger col-12 alert");
+                                            } else if (data == "subFalse") {
+                                                $("#report_option").append("<strong>Edit Option False.Diamond Sub Type ID dosen't exists !!!</strong>");
+                                                $("#report_option").addClass(" alert-danger col-12 alert");
+                                            } else if (data == "systemfalse") {
+                                                $("#report_option").append("<strong>Edit Option False.System Error !!!</strong>");
+                                                $("#report_option").addClass(" alert-danger col-12 alert");
+                                            }
+                                        },
+                                        error: function (xhr, error, status) {
+                                            alert("Error: " + status);
+                                        }
+                                    });
+                                } else {
+                                    $("#report_option").empty();
+                                    $("#report_option").replaceWith(report_diamond.clone());
+                                    $("#report_option").append("<strong>Your Infor not valid. Please check against !!!</strong>");
+                                    $("#report_option").addClass("alert-warning col-12 alert");
+                                }
+
+                            });
+                    });
+                    },
+                    error: function (xhr, error, status) {
+                        alert("Error: " + status);
+                    }
+                });
+            } else {
+                $("#selectRow").replaceWith(modalClone.clone());
+                $("#selectRow .modal-body").append("Please select option.");
+                $('#selectRow').modal('show');
+            }
+
+        });
+
+        $("#create_diamond").click(function () {
+
+            var check_mainID = false;
+            var check_carat = false;
+            var check_size = false;
+            var check_pcs = false;
+            var check_rate = false;
+            var check_No = false;
+            var hasOption = false;
+
+            $("#modal_diamond .modal-body").empty();
+            $("#modal_diamond .modal-title").text("Edit Diamond Option");
+            $('#modal_diamond').modal('show');
+            $.when($("#modal_diamond .modal-body").append(diamond_option)).done(function () {
+                readonlyInput();
+                var report_diamond = $("#report_option").clone();
+                $("#Style_code_diamond").val($("#Style_Code").val());
+                var check_subID = false;
+                var check_caratsub = false;
+                var check_sizesub = false;
+                var check_pcssub = false;
+                var check_ratesub = false;
+
+                $("#DimSubType_ID").val("none");
+                $("#Dim_CrtSub").val("0.00");
+                $("#Dim_SizeSub").val("0.00");
+                $("#Dim_PcsSub").val("0");
+                $("#Dim_GmSub").val("0.00");
+                $("#Dim_RateSub").val("0.00");
+                $("#Dim_AmtSub").val("0.00");
+
+                $("#DimSubType_ID").autocomplete({
+                    source: '/Admin/GetDiamondID'
+                });
+                $("#DimSubType_ID").on("focus", function () {
+                    $(this).tooltip("show");
+                }).tooltip({
+                    placement: "top",
+                    trigger: "focus",
+                    title: "Diamond Type ID must be match the value in Diamond Type Table."
+                });
+                $("#DimSubType_ID").bind("change", function () {
+                    if ($(this).val() == "none") {
+                        $("#Dim_CrtSub").val("0.00");
+                        $("#Dim_SizeSub").val("0.00");
+                        $("#Dim_PcsSub").val("0");
+                        $("#Dim_GmSub").val("0.00");
+                        $("#Dim_RateSub").val("0.00");
+                        $("#Dim_RateSub").trigger("change");
+                    }
+                    check_subID = validate("DimSubType_ID", "result_DimSubType_ID", rex_diamond);
+                });
+
+                $("#Dim_CrtSub").bind("change", function () {
+                    check_caratsub = validatecanbe0("Dim_CrtSub", "result_Dim_CrtSub");
+                    var total = parseFloat($("#Dim_CrtSub").val()) * 0.2 * parseInt($("#Dim_PcsSub").val());
+                    $.when($("#Dim_GmSub").val(total.toFixed(2))).done(function () {
+                        var total2 = parseFloat($("#Dim_GmSub").val()) * parseFloat($("#Dim_RateSub").val().replace(/,/g, ""));
+                        CurrentccforPassValue("#Dim_AmtSub", total2);
+                    });
+                    var total3 = parseFloat($("#Dim_Amt").val().replace(/,/g, "")) + parseFloat($("#Dim_AmtSub").val().replace(/,/g, ""));
+                    CurrentccforPassValue("#Total_AmtAll", total3);
+                });
+
+                $("#Dim_PcsSub").bind("change", function () {
+                    check_pcssub = validatecanbe0Int("Dim_PcsSub", "result_Dim_PcsSub");
+                    var total = parseFloat($("#Dim_CrtSub").val()) * 0.2 * parseInt($("#Dim_PcsSub").val().replace(/[^.0-9]/, ""));
+                    $.when($("#Dim_GmSub").val(total.toFixed(2))).done(function () {
+                        var total2 = parseFloat($("#Dim_GmSub").val()) * parseFloat($("#Dim_RateSub").val().replace(/,/g, ""));
+                        CurrentccforPassValue("#Dim_AmtSub", total2);
+                    });
+                    var total3 = parseFloat($("#Dim_Amt").val().replace(/,/g, "")) + parseFloat($("#Dim_AmtSub").val().replace(/,/g, ""));
+                    CurrentccforPassValue("#Total_AmtAll", total3);
+                });
+
+                $("#Dim_RateSub").bind("change", function () {
+                    CurrentccforValue(this);
+                    $.when(check_ratesub = validatecanbe0("Dim_RateSub", "result_Dim_RateSub")).done(function () {
+                        var total2 = parseFloat($("#Dim_GmSub").val()) * parseFloat($("#Dim_RateSub").val().replace(/,/g, ""));
+                        CurrentccforPassValue("#Dim_AmtSub", total2);
+                    });
+                    var total3 = parseFloat($("#Dim_Amt").val().replace(/,/g, "")) + parseFloat($("#Dim_AmtSub").val().replace(/,/g, ""));
+                    CurrentccforPassValue("#Total_AmtAll", total3);
+
+                });
+                $("#Dim_RateSub").keyup(function () {
+                    $(this).val($(this).val().replace(/[^.,0-9]/, ""));
+                });
+
+                $("#Dim_SizeSub").bind("change", function () {
+                    check_sizesub = validatecanbe0("Dim_SizeSub", "result_Dim_SizeSub");
+                });
+
+                $("#hassub").click(function () {
+                    if (hasOption == false) {
+                        $(this).addClass("btn-primary");
+                        $("#DimSubType_ID").attr("disabled", false);
+                        $("#Dim_CrtSub").attr("disabled", false);
+                        $("#Dim_SizeSub").attr("disabled", false);
+                        $("#Dim_PcsSub").attr("disabled", false);
+                        $("#Dim_GmSub").attr("disabled", false);
+                        $("#Dim_RateSub").attr("disabled", false);
+                        $("#Dim_AmtSub").attr("disabled", false);
+                        $('#tablediamond input[readonly]').each(function () {
+                            if ($(this).prop('disabled') == false) {
+                                $(this).css("background", "#fff");
+                            }
+                        });
+                        hasOption = true;
+                    } else {
+                        $(this).removeClass("btn-primary");
+                        $("#DimSubType_ID").attr("disabled", true);
+                        $("#Dim_CrtSub").attr("disabled", true);
+                        $("#Dim_SizeSub").attr("disabled", true);
+                        $("#Dim_PcsSub").attr("disabled", true);
+                        $("#Dim_GmSub").attr("disabled", true);
+                        $("#Dim_RateSub").attr("disabled", true);
+                        $("#Dim_AmtSub").attr("disabled", true);
+                        $('#tablediamond input[readonly]').each(function () {
+                            if ($(this).prop('disabled') == true) {
+                                $(this).css("background", "#e9ecef");
+                            }
+                        });
+                        hasOption = false;
+                    }
+                });
+
+                //------------------------------------------------------------------------------------
+                $("#DimQlty_ID").autocomplete({
+                    source: '/Admin/GetDiamondI'
+                });
+                $("#DimQlty_ID").on("focus", function () {
+                    $(this).tooltip("show");
+                }).tooltip({
+                    placement: "top",
+                    trigger: "focus",
+                    title: "Diamond Type ID must be match the value in Diamond Type Table."
+                });
+                $("#DimQlty_ID").bind("change", function () {
+                    check_mainID = validate("DimQlty_ID", "result_DimQlty_ID", rex_diamond);
+                });
+
+                $("#Dim_Crt").bind("change", function () {
+                    check_carat = validatelessthan0("Dim_Crt", "result_Dim_Crt");
+                    var total = parseFloat($("#Dim_Crt").val()) * 0.2 * parseInt($("#Dim_Pcs").val());
+                    $.when($("#Dim_Gm").val(total.toFixed(2))).done(function () {
+                        var total2 = parseFloat($("#Dim_Gm").val()) * parseFloat($("#Dim_Rate").val().replace(/,/g, ""));
+                        CurrentccforPassValue("#Dim_Amt", total2);
+                    });
+                    var total3 = parseFloat($("#Dim_Amt").val().replace(/,/g, "")) + parseFloat($("#Dim_AmtSub").val().replace(/,/g, ""));
+                    CurrentccforPassValue("#Total_AmtAll", total3);
+                });
+
+                $("#Dim_Pcs").bind("change", function () {
+                    check_pcs = validatelessthan0Int("Dim_Pcs", "result_Dim_Pcs");
+                    var total = parseFloat($("#Dim_Crt").val()) * 0.2 * parseInt($("#Dim_Pcs").val().replace(/[^.0-9]/, ""));
+                    $.when($("#Dim_Gm").val(total.toFixed(2))).done(function () {
+                        var total2 = parseFloat($("#Dim_Gm").val()) * parseFloat($("#Dim_Rate").val().replace(/,/g, ""));
+                        CurrentccforPassValue("#Dim_Amt", total2);
+                    });
+                    var total3 = parseFloat($("#Dim_Amt").val().replace(/,/g, "")) + parseFloat($("#Dim_AmtSub").val().replace(/,/g, ""));
+                    CurrentccforPassValue("#Total_AmtAll", total3);
+                });
+
+                $("#Dim_Rate").bind("change", function () {
+                    CurrentccforValue(this);
+                    $.when(check_rate = validatelessthan0("Dim_Rate", "result_Dim_Rate")).done(function () {
+                        var total2 = parseFloat($("#Dim_Gm").val()) * parseFloat($("#Dim_Rate").val().replace(/,/g, ""));
+                        CurrentccforPassValue("#Dim_Amt", total2);
+                    });
+                    var total3 = parseFloat($("#Dim_Amt").val().replace(/,/g, "")) + parseFloat($("#Dim_AmtSub").val().replace(/,/g, ""));
+                    CurrentccforPassValue("#Total_AmtAll", total3);
+
+                });
+                $("#Dim_Rate").keyup(function () {
+                    $(this).val($(this).val().replace(/[^.,0-9]/, ""));
+                });
+
+                $("#Dim_Size").bind("change", function () {
+                    check_size = validatelessthan0("Dim_Size", "result_Dim_Size");
+                });
+
+                $("#No_diamond").bind("change", function () {
+                    check_No = validatelessthan0Int("No_diamond", "result_No_diamond");
+                });
+
+                $.when($("#modal_diamond .loader").fadeOut(2000)).done(function () {
+                    $("#Diamond_ID").fadeIn(1000);
+                    $("#Save_diamond").text("Create");
+                });
+
+                $("#Save_diamond").click(function () {
+                    var checkoption = false;
+                    if (check_mainID == false || check_carat == false || check_pcs == false || check_size == false || check_rate == false || check_No == false) {
+                        checkoption = false;
+                    } else {
+                        if (hasOption == true) {
+                            if (check_subID == false || check_caratsub == false || check_pcssub == false || check_sizesub == false || check_ratesub == false) {
+                                checkoption = false;
+                            } else {
+                                checkoption = true;
+                            }
+                        } else {
+                            checkoption = true;
+                        }
+                    }
+                    if (checkoption == true) {
+                        var subID = "none";
+                        var carat = 0;
+                        var size = 0;
+                        var pcs = 0;
+                        var total_gm = 0;
+                        var rate = 0;
+                        var amount = 0;
+
+                        if (hasOption == true) {
+                            subID = $("#DimSubType_ID").val();
+                            carat = $("#Dim_CrtSub").val();
+                            size = $("#Dim_SizeSub").val();
+                            pcs = $("#Dim_PcsSub").val();
+                            total_gm = $("#Dim_GmSub").val();
+                            rate = $("#Dim_RateSub").val().replace(/,/g, "");
+                            amount = $("#Dim_AmtSub").val().replace(/,/g, "");
+                        }
+
+                        $.ajax({
+                            url: '/Admin/CreateDiamondOption',
+                            data: {
+                                No: $("#No_diamond").val(),
+                                Style_code: $("#Style_code_diamond").val(),
+                                DimQlty_ID: $("#DimQlty_ID").val(),
+                                Dim_Crt: $("#Dim_Crt").val(),
+                                Dim_Pcs: $("#Dim_Pcs").val(),
+                                Dim_Gm: $("#Dim_Gm").val(),
+                                Dim_Size: $("#Dim_Size").val(),
+                                Dim_Rate: $("#Dim_Rate").val().replace(/,/g, ""),
+                                Dim_Amt: $("#Dim_Amt").val().replace(/,/g, ""),
+                                DimSubType_ID: subID,
+                                Dim_CrtSub: carat,
+                                Dim_PcsSub: pcs,
+                                Dim_GmSub: total_gm,
+                                Dim_SizeSub: size,
+                                Dim_RateSub: rate,
+                                Dim_AmtSub: amount,
+                                Total_AmtAll: $("#Total_AmtAll").val().replace(/,/g, "")
+                            },
+                            type: "post",
+                            success: function (data) {
+                                $("#report_option").empty();
+                                $("#report_option").replaceWith(report_diamond.clone());
+                                if (data == "success") {
+                                    $("#report_option").append("<strong>Edit Option Success.</strong>");
+                                    $("#report_option").addClass(" alert-success col-12 alert ");
+                                    refreshpage("#modal_diamond");
+                                } else if (data == "false") {
+                                    $("#report_option").append("<strong>Edit Option False.</strong>");
+                                    $("#report_option").addClass(" alert-danger col-12 alert");
+                                } else if (data == "Nofalse") {
+                                    $("#report_option").append("<strong>Edit Option False. No already exist !!!</strong>");
+                                    $("#report_option").addClass(" alert-danger col-12 alert");
+                                } else if (data == "mainFalse") {
+                                    $("#report_option").append("<strong>Edit Option False.Diamond Main Type ID dosen't exists !!!</strong>");
+                                    $("#report_option").addClass(" alert-danger col-12 alert");
+                                } else if (data == "subFalse") {
+                                    $("#report_option").append("<strong>Edit Option False.Diamond Sub Type ID dosen't exists !!!</strong>");
+                                    $("#report_option").addClass(" alert-danger col-12 alert");
+                                } else if (data == "systemfalse") {
+                                    $("#report_option").append("<strong>Edit Option False.System Error !!!</strong>");
+                                    $("#report_option").addClass(" alert-danger col-12 alert");
+                                }
+                            },
+                            error: function (xhr, error, status) {
+                                alert("Error: " + status);
+                            }
+                        });
+                    } else {
+                        $("#report_option").empty();
+                        $("#report_option").replaceWith(report_diamond.clone());
+                        $("#report_option").append("<strong>Your Infor not valid. Please check against !!!</strong>");
+                        $("#report_option").addClass("alert-warning col-12 alert");
+                    }
+                });
+
+            });
+        });
+
+        if (admin != "SuperAdmin") {
+            $("#delete_diamond").hide();
+        }
+
+        $("#delete_diamond").click(function () {
+
+            if (admin != "SuperAdmin") {
+                return;
+            }
+
+            $("#selectRow").replaceWith(modalClone.clone());
+
+            if (id_diamond != null && NO_diamond != null) {
+                $("#selectRow .modal-title").empty();
+                $("#selectRow .modal-title").text("Delete Diamond Option");
+                $("#selectRow .modal-body").append("Delete Option No: " + NO_diamond + "." + "<br/> Are you sure?");
+                $("#selectRow .modal-footer").prepend('<button class="accept btn btn-success" id="delete_diamond_option">Yes</button>');
+                $("#selectRow .modal-footer").children("button").eq(1).text("No");
+                $('#selectRow').modal('show');
+
+                $("#delete_diamond_option").click(function () {
+                    $.ajax({
+                        url: '/Admin/DeleteDiamondOption',
+                        data: { id_item: id_diamond },
+                        type: "get",
+                        success: function (data) {
+                            $('#selectRow').modal('hide');
+                            $(".report_result").replaceWith(reportClone.clone());
+                            if (data == "success") {
+                                $.when(reportt("report_result", "image_report", "/Content/images/Icon/Admin/icon_Success.png", "success", "Delete Diamond Option Success")).done(function () {
+                                    $(".report_result").show();
+                                    setTimeout(function () {
+                                        location.reload();
+                                    }, 2000);
+
+                                });
+                            } else if (data == "false") {
+                                $.when(reportt("report_result", "image_report", "/Content/images/Icon/Admin/icon_false.png", "danger", "Delete Diamond Option False")).done(function () {
+                                    $(".report_result").show();
+                                    setTimeout(function () {
+                                        location.reload();
+                                    }, 2000);
+                                });
+                            } else {
+                                $.when(reportt("report_result", "image_report", "/Content/images/Icon/Admin/icon_false.png", "danger", "Delete False. System Error !!!")).done(function () {
+                                    $(".report_result").show();
+                                    setTimeout(function () {
+                                        location.reload();
+                                    }, 2000);
+                                });
+                            }
+                        },
+                        error: function (xhr, error, status) {
+                            alert("Error: " + status);
+                        }
+                    });
+                });
+            }
+            else {
+                $("#selectRow").replaceWith(modalClone.clone());
+                $("#selectRow .modal-body").text("Please select option.");
+                $('#selectRow').modal('show');
+            }
         });
     });
 </script>

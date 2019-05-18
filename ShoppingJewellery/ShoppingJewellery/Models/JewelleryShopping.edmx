@@ -59,27 +59,9 @@
           <Property Name="Date_Deliver_estimate" Type="date" Nullable="false" />
           <Property Name="CodeTracking" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'JewelleryShopping_db.dbo.DimMst' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="DimMst">
           <Key>
-            <PropertyRef Name="Style_Code" />
-            <PropertyRef Name="DimQlty_ID" />
-            <PropertyRef Name="DimSubType_ID" />
-            <PropertyRef Name="Dim_Crt" />
-            <PropertyRef Name="Dim_Pcs" />
-            <PropertyRef Name="Dim_Gm" />
-            <PropertyRef Name="Dim_Size" />
-            <PropertyRef Name="Dim_Rate" />
-            <PropertyRef Name="Dim_Amt" />
-            <PropertyRef Name="No" />
-            <PropertyRef Name="Dim_CrtSub" />
-            <PropertyRef Name="Dim_PcsSub" />
-            <PropertyRef Name="Dim_GmSub" />
-            <PropertyRef Name="Dim_SizeSub" />
-            <PropertyRef Name="Dim_RateSub" />
-            <PropertyRef Name="Dim_AmtSub" />
-            <PropertyRef Name="Total_AmtAll" />
+            <PropertyRef Name="ID" />
           </Key>
           <Property Name="Style_Code" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="DimQlty_ID" Type="nchar" MaxLength="10" Nullable="false" />
@@ -98,6 +80,7 @@ warning 6002: The table/view 'JewelleryShopping_db.dbo.DimMst' does not have a p
           <Property Name="Dim_RateSub" Type="numeric" Precision="10" Scale="2" Nullable="false" />
           <Property Name="Dim_AmtSub" Type="numeric" Precision="10" Scale="2" Nullable="false" />
           <Property Name="Total_AmtAll" Type="numeric" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <EntityType Name="DimQltyMst">
           <Key>
@@ -140,17 +123,9 @@ warning 6002: The table/view 'JewelleryShopping_db.dbo.DimMst' does not have a p
           <Property Name="Gold_Crt" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Gold_Rate" Type="numeric" Precision="10" Scale="2" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'JewelleryShopping_db.dbo.GoldMst' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="GoldMst">
           <Key>
-            <PropertyRef Name="Style_code" />
-            <PropertyRef Name="GoldType_ID" />
-            <PropertyRef Name="Gold_Wt" />
-            <PropertyRef Name="Wstg_Per" />
-            <PropertyRef Name="Total_weight" />
-            <PropertyRef Name="Wstq" />
-            <PropertyRef Name="No" />
+            <PropertyRef Name="ID" />
           </Key>
           <Property Name="Style_code" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="GoldType_ID" Type="nchar" MaxLength="10" Nullable="false" />
@@ -159,6 +134,7 @@ warning 6002: The table/view 'JewelleryShopping_db.dbo.GoldMst' does not have a 
           <Property Name="Total_weight" Type="numeric" Precision="10" Scale="3" Nullable="false" />
           <Property Name="Wstq" Type="numeric" Precision="10" Scale="3" Nullable="false" />
           <Property Name="No" Type="int" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'JewelleryShopping_db.dbo.Image' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -281,18 +257,9 @@ warning 6002: The table/view 'JewelleryShopping_db.dbo.Image' does not have a pr
           <Property Name="Address_receive" Type="varchar(max)" Nullable="false" />
           <Property Name="ID_Order" Type="int" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'JewelleryShopping_db.dbo.StoneMst' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="StoneMst">
           <Key>
-            <PropertyRef Name="Style_Code" />
-            <PropertyRef Name="StoneQlty_ID" />
-            <PropertyRef Name="Stone_Gm" />
-            <PropertyRef Name="Stone_Pcs" />
-            <PropertyRef Name="Stone_Crt" />
-            <PropertyRef Name="Stone_Rate" />
-            <PropertyRef Name="Stone_Amt" />
-            <PropertyRef Name="No" />
+            <PropertyRef Name="ID" />
           </Key>
           <Property Name="Style_Code" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="StoneQlty_ID" Type="nchar" MaxLength="10" Nullable="false" />
@@ -302,6 +269,7 @@ warning 6002: The table/view 'JewelleryShopping_db.dbo.StoneMst' does not have a
           <Property Name="Stone_Rate" Type="numeric" Precision="10" Scale="2" Nullable="false" />
           <Property Name="Stone_Amt" Type="numeric" Precision="10" Scale="2" Nullable="false" />
           <Property Name="No" Type="int" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <EntityType Name="StoneQltyMst">
           <Key>
@@ -327,6 +295,7 @@ warning 6002: The table/view 'JewelleryShopping_db.dbo.StoneMst' does not have a
 warning 6002: The table/view 'JewelleryShopping_db.dbo.DiamonView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="DiamonView">
           <Key>
+            <PropertyRef Name="ID" />
             <PropertyRef Name="No" />
             <PropertyRef Name="Style_Code" />
             <PropertyRef Name="DimQlty_ID" />
@@ -345,6 +314,7 @@ warning 6002: The table/view 'JewelleryShopping_db.dbo.DiamonView' does not have
             <PropertyRef Name="Dim_AmtSub" />
             <PropertyRef Name="Total_AmtAll" />
           </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
           <Property Name="No" Type="int" Nullable="false" />
           <Property Name="Style_Code" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="DimQlty_ID" Type="nchar" MaxLength="10" Nullable="false" />
@@ -369,6 +339,7 @@ warning 6002: The table/view 'JewelleryShopping_db.dbo.DiamonView' does not have
 warning 6002: The table/view 'JewelleryShopping_db.dbo.GoldView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="GoldView">
           <Key>
+            <PropertyRef Name="ID" />
             <PropertyRef Name="No" />
             <PropertyRef Name="Style_code" />
             <PropertyRef Name="GoldType_ID" />
@@ -377,6 +348,7 @@ warning 6002: The table/view 'JewelleryShopping_db.dbo.GoldView' does not have a
             <PropertyRef Name="Wstq" />
             <PropertyRef Name="Total_weight" />
           </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
           <Property Name="No" Type="int" Nullable="false" />
           <Property Name="Style_code" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="GoldType_ID" Type="nchar" MaxLength="10" Nullable="false" />
@@ -405,6 +377,7 @@ warning 6002: The table/view 'JewelleryShopping_db.dbo.ProductView' does not hav
           <Property Name="Brand_Type" Type="varchar" MaxLength="50" />
           <Property Name="Certify_Type" Type="varchar" MaxLength="50" />
           <Property Name="Prod_Type" Type="varchar" MaxLength="50" />
+          <Property Name="Jewellery_Type" Type="varchar" MaxLength="50" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'JewelleryShopping_db.dbo.SimilarPrice' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -422,6 +395,7 @@ warning 6002: The table/view 'JewelleryShopping_db.dbo.SimilarPrice' does not ha
 warning 6002: The table/view 'JewelleryShopping_db.dbo.StoneView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="StoneView">
           <Key>
+            <PropertyRef Name="ID" />
             <PropertyRef Name="No" />
             <PropertyRef Name="Style_Code" />
             <PropertyRef Name="StoneQlty_ID" />
@@ -431,6 +405,7 @@ warning 6002: The table/view 'JewelleryShopping_db.dbo.StoneView' does not have 
             <PropertyRef Name="Stone_Rate" />
             <PropertyRef Name="Stone_Amt" />
           </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
           <Property Name="No" Type="int" Nullable="false" />
           <Property Name="Style_Code" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="StoneQlty_ID" Type="nchar" MaxLength="10" Nullable="false" />
@@ -838,11 +813,13 @@ warning 6002: The table/view 'JewelleryShopping_db.dbo.ViewFullItem' does not ha
           <EntitySet Name="CatMst" EntityType="Self.CatMst" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CertifyMst" EntityType="Self.CertifyMst" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Delivery" EntityType="Self.Delivery" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DimMst" EntityType="Self.DimMst" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DimQltyMst" EntityType="Self.DimQltyMst" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DimQltySubMst" EntityType="Self.DimQltySubMst" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DisplayCommonPro" EntityType="Self.DisplayCommonPro" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Feedback" EntityType="Self.Feedback" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GoldKrtMst" EntityType="Self.GoldKrtMst" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GoldMst" EntityType="Self.GoldMst" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Inquiry" EntityType="Self.Inquiry" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ItemMst" EntityType="Self.ItemMst" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="JewelTypeMst" EntityType="Self.JewelTypeMst" Schema="dbo" store:Type="Tables" />
@@ -851,40 +828,9 @@ warning 6002: The table/view 'JewelleryShopping_db.dbo.ViewFullItem' does not ha
           <EntitySet Name="Payment" EntityType="Self.Payment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProdMst" EntityType="Self.ProdMst" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Receiver" EntityType="Self.Receiver" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StoneMst" EntityType="Self.StoneMst" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StoneQltyMst" EntityType="Self.StoneQltyMst" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserRegMst" EntityType="Self.UserRegMst" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="DimMst" EntityType="Self.DimMst" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [DimMst].[Style_Code] AS [Style_Code], 
-    [DimMst].[DimQlty_ID] AS [DimQlty_ID], 
-    [DimMst].[DimSubType_ID] AS [DimSubType_ID], 
-    [DimMst].[Dim_Crt] AS [Dim_Crt], 
-    [DimMst].[Dim_Pcs] AS [Dim_Pcs], 
-    [DimMst].[Dim_Gm] AS [Dim_Gm], 
-    [DimMst].[Dim_Size] AS [Dim_Size], 
-    [DimMst].[Dim_Rate] AS [Dim_Rate], 
-    [DimMst].[Dim_Amt] AS [Dim_Amt], 
-    [DimMst].[No] AS [No], 
-    [DimMst].[Dim_CrtSub] AS [Dim_CrtSub], 
-    [DimMst].[Dim_PcsSub] AS [Dim_PcsSub], 
-    [DimMst].[Dim_GmSub] AS [Dim_GmSub], 
-    [DimMst].[Dim_SizeSub] AS [Dim_SizeSub], 
-    [DimMst].[Dim_RateSub] AS [Dim_RateSub], 
-    [DimMst].[Dim_AmtSub] AS [Dim_AmtSub], 
-    [DimMst].[Total_AmtAll] AS [Total_AmtAll]
-    FROM [dbo].[DimMst] AS [DimMst]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="GoldMst" EntityType="Self.GoldMst" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [GoldMst].[Style_code] AS [Style_code], 
-    [GoldMst].[GoldType_ID] AS [GoldType_ID], 
-    [GoldMst].[Gold_Wt] AS [Gold_Wt], 
-    [GoldMst].[Wstg_Per] AS [Wstg_Per], 
-    [GoldMst].[Total_weight] AS [Total_weight], 
-    [GoldMst].[Wstq] AS [Wstq], 
-    [GoldMst].[No] AS [No]
-    FROM [dbo].[GoldMst] AS [GoldMst]</DefiningQuery>
-          </EntitySet>
           <EntitySet Name="Image" EntityType="Self.Image" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [Image].[Style_Colde] AS [Style_Colde], 
@@ -892,20 +838,9 @@ warning 6002: The table/view 'JewelleryShopping_db.dbo.ViewFullItem' does not ha
     [Image].[No] AS [No]
     FROM [dbo].[Image] AS [Image]</DefiningQuery>
           </EntitySet>
-          <EntitySet Name="StoneMst" EntityType="Self.StoneMst" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [StoneMst].[Style_Code] AS [Style_Code], 
-    [StoneMst].[StoneQlty_ID] AS [StoneQlty_ID], 
-    [StoneMst].[Stone_Gm] AS [Stone_Gm], 
-    [StoneMst].[Stone_Pcs] AS [Stone_Pcs], 
-    [StoneMst].[Stone_Crt] AS [Stone_Crt], 
-    [StoneMst].[Stone_Rate] AS [Stone_Rate], 
-    [StoneMst].[Stone_Amt] AS [Stone_Amt], 
-    [StoneMst].[No] AS [No]
-    FROM [dbo].[StoneMst] AS [StoneMst]</DefiningQuery>
-          </EntitySet>
           <EntitySet Name="DiamonView" EntityType="Self.DiamonView" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
+    [DiamonView].[ID] AS [ID], 
     [DiamonView].[No] AS [No], 
     [DiamonView].[Style_Code] AS [Style_Code], 
     [DiamonView].[DimQlty_ID] AS [DimQlty_ID], 
@@ -929,6 +864,7 @@ warning 6002: The table/view 'JewelleryShopping_db.dbo.ViewFullItem' does not ha
           </EntitySet>
           <EntitySet Name="GoldView" EntityType="Self.GoldView" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
+    [GoldView].[ID] AS [ID], 
     [GoldView].[No] AS [No], 
     [GoldView].[Style_code] AS [Style_code], 
     [GoldView].[GoldType_ID] AS [GoldType_ID], 
@@ -950,7 +886,8 @@ warning 6002: The table/view 'JewelleryShopping_db.dbo.ViewFullItem' does not ha
     [ProductView].[Cat_Name] AS [Cat_Name], 
     [ProductView].[Brand_Type] AS [Brand_Type], 
     [ProductView].[Certify_Type] AS [Certify_Type], 
-    [ProductView].[Prod_Type] AS [Prod_Type]
+    [ProductView].[Prod_Type] AS [Prod_Type], 
+    [ProductView].[Jewellery_Type] AS [Jewellery_Type]
     FROM [dbo].[ProductView] AS [ProductView]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="SimilarPrice" EntityType="Self.SimilarPrice" store:Type="Views" store:Schema="dbo">
@@ -963,6 +900,7 @@ warning 6002: The table/view 'JewelleryShopping_db.dbo.ViewFullItem' does not ha
           </EntitySet>
           <EntitySet Name="StoneView" EntityType="Self.StoneView" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
+    [StoneView].[ID] AS [ID], 
     [StoneView].[No] AS [No], 
     [StoneView].[Style_Code] AS [Style_Code], 
     [StoneView].[StoneQlty_ID] AS [StoneQlty_ID], 
@@ -1175,11 +1113,7 @@ warning 6002: The table/view 'JewelleryShopping_db.dbo.ViewFullItem' does not ha
           </AssociationSet>
           <EntitySet Name="ViewDisplayItems" EntityType="JewelleryShopping_dbModel.ViewDisplayItem" />
           <EntitySet Name="Images" EntityType="JewelleryShopping_dbModel.Image" />
-          <EntitySet Name="DiamonViews" EntityType="JewelleryShopping_dbModel.DiamonView" />
-          <EntitySet Name="GoldViews" EntityType="JewelleryShopping_dbModel.GoldView" />
-          <EntitySet Name="StoneViews" EntityType="JewelleryShopping_dbModel.StoneView" />
           <EntitySet Name="ViewFullItems" EntityType="JewelleryShopping_dbModel.ViewFullItem" />
-          <EntitySet Name="SimilarPrices" EntityType="JewelleryShopping_dbModel.SimilarPrice" />
           <EntitySet Name="ItemMsts" EntityType="JewelleryShopping_dbModel.ItemMst" />
           <AssociationSet Name="FK_ItemMst_CatMst" Association="JewelleryShopping_dbModel.FK_ItemMst_CatMst">
             <End Role="CatMst" EntitySet="CatMsts" />
@@ -1226,9 +1160,6 @@ warning 6002: The table/view 'JewelleryShopping_db.dbo.ViewFullItem' does not ha
           <EntitySet Name="GoldKrtMsts" EntityType="JewelleryShopping_dbModel.GoldKrtMst" />
           <EntitySet Name="Receivers" EntityType="JewelleryShopping_dbModel.Receiver" />
           <EntitySet Name="StoneQltyMsts" EntityType="JewelleryShopping_dbModel.StoneQltyMst" />
-          <EntitySet Name="DimMsts" EntityType="JewelleryShopping_dbModel.DimMst" />
-          <EntitySet Name="GoldMsts" EntityType="JewelleryShopping_dbModel.GoldMst" />
-          <EntitySet Name="StoneMsts" EntityType="JewelleryShopping_dbModel.StoneMst" />
           <AssociationSet Name="FK_ItemMst_CertifyMst" Association="JewelleryShopping_dbModel.FK_ItemMst_CertifyMst">
             <End Role="CertifyMst" EntitySet="CertifyMsts" />
             <End Role="ItemMst" EntitySet="ItemMsts" />
@@ -1237,37 +1168,9 @@ warning 6002: The table/view 'JewelleryShopping_db.dbo.ViewFullItem' does not ha
             <End Role="Order_" EntitySet="Order_" />
             <End Role="Delivery" EntitySet="Deliveries" />
           </AssociationSet>
-          <AssociationSet Name="FK_DimMst_DimQltyMst" Association="JewelleryShopping_dbModel.FK_DimMst_DimQltyMst">
-            <End Role="DimQltyMst" EntitySet="DimQltyMsts" />
-            <End Role="DimMst" EntitySet="DimMsts" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DimMst_DimQltySubMst" Association="JewelleryShopping_dbModel.FK_DimMst_DimQltySubMst">
-            <End Role="DimQltySubMst" EntitySet="DimQltySubMsts" />
-            <End Role="DimMst" EntitySet="DimMsts" />
-          </AssociationSet>
-          <AssociationSet Name="FK_GoldMst_GoldKrtMst" Association="JewelleryShopping_dbModel.FK_GoldMst_GoldKrtMst">
-            <End Role="GoldKrtMst" EntitySet="GoldKrtMsts" />
-            <End Role="GoldMst" EntitySet="GoldMsts" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DimMst_ItemMst" Association="JewelleryShopping_dbModel.FK_DimMst_ItemMst">
-            <End Role="ItemMst" EntitySet="ItemMsts" />
-            <End Role="DimMst" EntitySet="DimMsts" />
-          </AssociationSet>
-          <AssociationSet Name="FK_GoldMst_ItemMst" Association="JewelleryShopping_dbModel.FK_GoldMst_ItemMst">
-            <End Role="ItemMst" EntitySet="ItemMsts" />
-            <End Role="GoldMst" EntitySet="GoldMsts" />
-          </AssociationSet>
-          <AssociationSet Name="FK_StoneMst_ItemMst" Association="JewelleryShopping_dbModel.FK_StoneMst_ItemMst">
-            <End Role="ItemMst" EntitySet="ItemMsts" />
-            <End Role="StoneMst" EntitySet="StoneMsts" />
-          </AssociationSet>
           <AssociationSet Name="FK_Receiver_Order_" Association="JewelleryShopping_dbModel.FK_Receiver_Order_">
             <End Role="Order_" EntitySet="Order_" />
             <End Role="Receiver" EntitySet="Receivers" />
-          </AssociationSet>
-          <AssociationSet Name="FK_StoneMst_StoneQltyMst" Association="JewelleryShopping_dbModel.FK_StoneMst_StoneQltyMst">
-            <End Role="StoneQltyMst" EntitySet="StoneQltyMsts" />
-            <End Role="StoneMst" EntitySet="StoneMsts" />
           </AssociationSet>
           <EntitySet Name="UserRegMsts" EntityType="JewelleryShopping_dbModel.UserRegMst" />
           <AssociationSet Name="FK_Feedback_UserRegMst" Association="JewelleryShopping_dbModel.FK_Feedback_UserRegMst">
@@ -1279,6 +1182,41 @@ warning 6002: The table/view 'JewelleryShopping_db.dbo.ViewFullItem' does not ha
             <End Role="UserRegMst" EntitySet="UserRegMsts" />
             <End Role="Address" EntitySet="Addresses" />
           </AssociationSet>
+          <EntitySet Name="DimMsts" EntityType="JewelleryShopping_dbModel.DimMst" />
+          <EntitySet Name="GoldMsts" EntityType="JewelleryShopping_dbModel.GoldMst" />
+          <EntitySet Name="StoneMsts" EntityType="JewelleryShopping_dbModel.StoneMst" />
+          <AssociationSet Name="FK_DimMst_DimQltyMst" Association="JewelleryShopping_dbModel.FK_DimMst_DimQltyMst">
+            <End Role="DimQltyMst" EntitySet="DimQltyMsts" />
+            <End Role="DimMst" EntitySet="DimMsts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DimMst_DimQltySubMst" Association="JewelleryShopping_dbModel.FK_DimMst_DimQltySubMst">
+            <End Role="DimQltySubMst" EntitySet="DimQltySubMsts" />
+            <End Role="DimMst" EntitySet="DimMsts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DimMst_ItemMst" Association="JewelleryShopping_dbModel.FK_DimMst_ItemMst">
+            <End Role="ItemMst" EntitySet="ItemMsts" />
+            <End Role="DimMst" EntitySet="DimMsts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GoldMst_GoldKrtMst" Association="JewelleryShopping_dbModel.FK_GoldMst_GoldKrtMst">
+            <End Role="GoldKrtMst" EntitySet="GoldKrtMsts" />
+            <End Role="GoldMst" EntitySet="GoldMsts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GoldMst_ItemMst" Association="JewelleryShopping_dbModel.FK_GoldMst_ItemMst">
+            <End Role="ItemMst" EntitySet="ItemMsts" />
+            <End Role="GoldMst" EntitySet="GoldMsts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoneMst_ItemMst" Association="JewelleryShopping_dbModel.FK_StoneMst_ItemMst">
+            <End Role="ItemMst" EntitySet="ItemMsts" />
+            <End Role="StoneMst" EntitySet="StoneMsts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoneMst_StoneQltyMst" Association="JewelleryShopping_dbModel.FK_StoneMst_StoneQltyMst">
+            <End Role="StoneQltyMst" EntitySet="StoneQltyMsts" />
+            <End Role="StoneMst" EntitySet="StoneMsts" />
+          </AssociationSet>
+          <EntitySet Name="DiamonViews" EntityType="JewelleryShopping_dbModel.DiamonView" />
+          <EntitySet Name="GoldViews" EntityType="JewelleryShopping_dbModel.GoldView" />
+          <EntitySet Name="SimilarPrices" EntityType="JewelleryShopping_dbModel.SimilarPrice" />
+          <EntitySet Name="StoneViews" EntityType="JewelleryShopping_dbModel.StoneView" />
           <EntitySet Name="ProductViews" EntityType="JewelleryShopping_dbModel.ProductView" />
           </EntityContainer>
         <EntityType Name="DisplayCommonPro">
@@ -1403,88 +1341,6 @@ warning 6002: The table/view 'JewelleryShopping_db.dbo.ViewFullItem' does not ha
           <Property Name="No" Type="Int32" Nullable="false" />
           <NavigationProperty Name="ItemMst" Relationship="JewelleryShopping_dbModel.FK_Image_ItemMst" FromRole="Image" ToRole="ItemMst" />
         </EntityType>
-        <EntityType Name="DiamonView">
-          <Key>
-            <PropertyRef Name="No" />
-            <PropertyRef Name="Style_Code" />
-            <PropertyRef Name="DimQlty_ID" />
-            <PropertyRef Name="Dim_Crt" />
-            <PropertyRef Name="Dim_Pcs" />
-            <PropertyRef Name="Dim_Gm" />
-            <PropertyRef Name="Dim_Size" />
-            <PropertyRef Name="Dim_Rate" />
-            <PropertyRef Name="Dim_Amt" />
-            <PropertyRef Name="DimSubType_ID" />
-            <PropertyRef Name="Dim_CrtSub" />
-            <PropertyRef Name="Dim_PcsSub" />
-            <PropertyRef Name="Dim_GmSub" />
-            <PropertyRef Name="Dim_SizeSub" />
-            <PropertyRef Name="Dim_RateSub" />
-            <PropertyRef Name="Dim_AmtSub" />
-            <PropertyRef Name="Total_AmtAll" />
-          </Key>
-          <Property Name="No" Type="Int32" Nullable="false" />
-          <Property Name="Style_Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="DimQlty_ID" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="MainType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Dim_Crt" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="Dim_Pcs" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="Dim_Gm" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="Dim_Size" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="Dim_Rate" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="Dim_Amt" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="DimSubType_ID" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="SubTyle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Dim_CrtSub" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="Dim_PcsSub" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="Dim_GmSub" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="Dim_SizeSub" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="Dim_RateSub" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="Dim_AmtSub" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="Total_AmtAll" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-        </EntityType>
-        <EntityType Name="GoldView">
-          <Key>
-            <PropertyRef Name="No" />
-            <PropertyRef Name="Style_code" />
-            <PropertyRef Name="GoldType_ID" />
-            <PropertyRef Name="Gold_Wt" />
-            <PropertyRef Name="Wstg_Per" />
-            <PropertyRef Name="Wstq" />
-            <PropertyRef Name="Total_weight" />
-          </Key>
-          <Property Name="No" Type="Int32" Nullable="false" />
-          <Property Name="Style_code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="GoldType_ID" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="Gold_Crt" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Gold_Wt" Type="Decimal" Nullable="false" Precision="10" Scale="3" />
-          <Property Name="Wstg_Per" Type="Decimal" Nullable="false" Precision="10" Scale="3" />
-          <Property Name="Wstq" Type="Decimal" Nullable="false" Precision="10" Scale="3" />
-          <Property Name="Total_weight" Type="Decimal" Nullable="false" Precision="10" Scale="3" />
-          <Property Name="Gold_Rate" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="Total_Amount" Type="Decimal" Precision="10" Scale="2" />
-        </EntityType>
-        <EntityType Name="StoneView">
-          <Key>
-            <PropertyRef Name="No" />
-            <PropertyRef Name="Style_Code" />
-            <PropertyRef Name="StoneQlty_ID" />
-            <PropertyRef Name="Stone_Gm" />
-            <PropertyRef Name="Stone_Pcs" />
-            <PropertyRef Name="Stone_Crt" />
-            <PropertyRef Name="Stone_Rate" />
-            <PropertyRef Name="Stone_Amt" />
-          </Key>
-          <Property Name="No" Type="Int32" Nullable="false" />
-          <Property Name="Style_Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="StoneQlty_ID" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="StoneQlty" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Stone_Gm" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="Stone_Pcs" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="Stone_Crt" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="Stone_Rate" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="Stone_Amt" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-        </EntityType>
         <EntityType Name="ViewFullItem">
           <Key>
             <PropertyRef Name="Style_Code" />
@@ -1566,16 +1422,6 @@ warning 6002: The table/view 'JewelleryShopping_db.dbo.ViewFullItem' does not ha
           <Property Name="Stone_Crt" Type="Decimal" Precision="10" Scale="2" />
           <Property Name="Stone_Rate" Type="Decimal" Precision="10" Scale="2" />
           <Property Name="Stone_Amt" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="total_brand" Type="Decimal" Precision="38" Scale="2" />
-        </EntityType>
-        <EntityType Name="SimilarPrice">
-          <Key>
-            <PropertyRef Name="Style_Code" />
-            <PropertyRef Name="Img" />
-          </Key>
-          <Property Name="Style_Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Img" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Prod_Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="total_brand" Type="Decimal" Precision="38" Scale="2" />
         </EntityType>
         <EntityType Name="ItemMst">
@@ -1858,89 +1704,6 @@ warning 6002: The table/view 'JewelleryShopping_db.dbo.ViewFullItem' does not ha
           <Property Name="StoneQlty" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="StoneMsts" Relationship="JewelleryShopping_dbModel.FK_StoneMst_StoneQltyMst" FromRole="StoneQltyMst" ToRole="StoneMst" />
         </EntityType>
-        <EntityType Name="DimMst">
-          <Key>
-            <PropertyRef Name="Style_Code" />
-            <PropertyRef Name="DimQlty_ID" />
-            <PropertyRef Name="DimSubType_ID" />
-            <PropertyRef Name="Dim_Crt" />
-            <PropertyRef Name="Dim_Pcs" />
-            <PropertyRef Name="Dim_Gm" />
-            <PropertyRef Name="Dim_Size" />
-            <PropertyRef Name="Dim_Rate" />
-            <PropertyRef Name="Dim_Amt" />
-            <PropertyRef Name="No" />
-            <PropertyRef Name="Dim_CrtSub" />
-            <PropertyRef Name="Dim_PcsSub" />
-            <PropertyRef Name="Dim_GmSub" />
-            <PropertyRef Name="Dim_SizeSub" />
-            <PropertyRef Name="Dim_RateSub" />
-            <PropertyRef Name="Dim_AmtSub" />
-            <PropertyRef Name="Total_AmtAll" />
-          </Key>
-          <Property Name="Style_Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="DimQlty_ID" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="DimSubType_ID" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="Dim_Crt" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="Dim_Pcs" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="Dim_Gm" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="Dim_Size" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="Dim_Rate" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="Dim_Amt" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="No" Type="Int32" Nullable="false" />
-          <Property Name="Dim_CrtSub" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="Dim_PcsSub" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="Dim_GmSub" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="Dim_SizeSub" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="Dim_RateSub" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="Dim_AmtSub" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="Total_AmtAll" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <NavigationProperty Name="DimQltyMst" Relationship="JewelleryShopping_dbModel.FK_DimMst_DimQltyMst" FromRole="DimMst" ToRole="DimQltyMst" />
-          <NavigationProperty Name="DimQltySubMst" Relationship="JewelleryShopping_dbModel.FK_DimMst_DimQltySubMst" FromRole="DimMst" ToRole="DimQltySubMst" />
-          <NavigationProperty Name="ItemMst" Relationship="JewelleryShopping_dbModel.FK_DimMst_ItemMst" FromRole="DimMst" ToRole="ItemMst" />
-        </EntityType>
-        <EntityType Name="GoldMst">
-          <Key>
-            <PropertyRef Name="Style_code" />
-            <PropertyRef Name="GoldType_ID" />
-            <PropertyRef Name="Gold_Wt" />
-            <PropertyRef Name="Wstg_Per" />
-            <PropertyRef Name="Total_weight" />
-            <PropertyRef Name="Wstq" />
-            <PropertyRef Name="No" />
-          </Key>
-          <Property Name="Style_code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="GoldType_ID" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="Gold_Wt" Type="Decimal" Nullable="false" Precision="10" Scale="3" />
-          <Property Name="Wstg_Per" Type="Decimal" Nullable="false" Precision="10" Scale="3" />
-          <Property Name="Total_weight" Type="Decimal" Nullable="false" Precision="10" Scale="3" />
-          <Property Name="Wstq" Type="Decimal" Nullable="false" Precision="10" Scale="3" />
-          <Property Name="No" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="GoldKrtMst" Relationship="JewelleryShopping_dbModel.FK_GoldMst_GoldKrtMst" FromRole="GoldMst" ToRole="GoldKrtMst" />
-          <NavigationProperty Name="ItemMst" Relationship="JewelleryShopping_dbModel.FK_GoldMst_ItemMst" FromRole="GoldMst" ToRole="ItemMst" />
-        </EntityType>
-        <EntityType Name="StoneMst">
-          <Key>
-            <PropertyRef Name="Style_Code" />
-            <PropertyRef Name="StoneQlty_ID" />
-            <PropertyRef Name="Stone_Gm" />
-            <PropertyRef Name="Stone_Pcs" />
-            <PropertyRef Name="Stone_Crt" />
-            <PropertyRef Name="Stone_Rate" />
-            <PropertyRef Name="Stone_Amt" />
-            <PropertyRef Name="No" />
-          </Key>
-          <Property Name="Style_Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="StoneQlty_ID" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="Stone_Gm" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="Stone_Pcs" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="Stone_Crt" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="Stone_Rate" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="Stone_Amt" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="No" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="ItemMst" Relationship="JewelleryShopping_dbModel.FK_StoneMst_ItemMst" FromRole="StoneMst" ToRole="ItemMst" />
-          <NavigationProperty Name="StoneQltyMst" Relationship="JewelleryShopping_dbModel.FK_StoneMst_StoneQltyMst" FromRole="StoneMst" ToRole="StoneQltyMst" />
-        </EntityType>
         <Association Name="FK_ItemMst_CertifyMst">
           <End Type="JewelleryShopping_dbModel.CertifyMst" Role="CertifyMst" Multiplicity="1" />
           <End Type="JewelleryShopping_dbModel.ItemMst" Role="ItemMst" Multiplicity="*" />
@@ -1965,78 +1728,6 @@ warning 6002: The table/view 'JewelleryShopping_db.dbo.ViewFullItem' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_DimMst_DimQltyMst">
-          <End Type="JewelleryShopping_dbModel.DimQltyMst" Role="DimQltyMst" Multiplicity="1" />
-          <End Type="JewelleryShopping_dbModel.DimMst" Role="DimMst" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DimQltyMst">
-              <PropertyRef Name="DimQlty_ID" />
-            </Principal>
-            <Dependent Role="DimMst">
-              <PropertyRef Name="DimQlty_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DimMst_DimQltySubMst">
-          <End Type="JewelleryShopping_dbModel.DimQltySubMst" Role="DimQltySubMst" Multiplicity="1" />
-          <End Type="JewelleryShopping_dbModel.DimMst" Role="DimMst" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DimQltySubMst">
-              <PropertyRef Name="DimSubType_ID" />
-            </Principal>
-            <Dependent Role="DimMst">
-              <PropertyRef Name="DimSubType_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_GoldMst_GoldKrtMst">
-          <End Type="JewelleryShopping_dbModel.GoldKrtMst" Role="GoldKrtMst" Multiplicity="1" />
-          <End Type="JewelleryShopping_dbModel.GoldMst" Role="GoldMst" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="GoldKrtMst">
-              <PropertyRef Name="GoldType_ID" />
-            </Principal>
-            <Dependent Role="GoldMst">
-              <PropertyRef Name="GoldType_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DimMst_ItemMst">
-          <End Type="JewelleryShopping_dbModel.ItemMst" Role="ItemMst" Multiplicity="1" />
-          <End Type="JewelleryShopping_dbModel.DimMst" Role="DimMst" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ItemMst">
-              <PropertyRef Name="Style_Code" />
-            </Principal>
-            <Dependent Role="DimMst">
-              <PropertyRef Name="Style_Code" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_GoldMst_ItemMst">
-          <End Type="JewelleryShopping_dbModel.ItemMst" Role="ItemMst" Multiplicity="1" />
-          <End Type="JewelleryShopping_dbModel.GoldMst" Role="GoldMst" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ItemMst">
-              <PropertyRef Name="Style_Code" />
-            </Principal>
-            <Dependent Role="GoldMst">
-              <PropertyRef Name="Style_code" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_StoneMst_ItemMst">
-          <End Type="JewelleryShopping_dbModel.ItemMst" Role="ItemMst" Multiplicity="1" />
-          <End Type="JewelleryShopping_dbModel.StoneMst" Role="StoneMst" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ItemMst">
-              <PropertyRef Name="Style_Code" />
-            </Principal>
-            <Dependent Role="StoneMst">
-              <PropertyRef Name="Style_Code" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Receiver_Order_">
           <End Type="JewelleryShopping_dbModel.Order_" Role="Order_" Multiplicity="1" />
           <End Type="JewelleryShopping_dbModel.Receiver" Role="Receiver" Multiplicity="*" />
@@ -2046,18 +1737,6 @@ warning 6002: The table/view 'JewelleryShopping_db.dbo.ViewFullItem' does not ha
             </Principal>
             <Dependent Role="Receiver">
               <PropertyRef Name="ID_Order" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_StoneMst_StoneQltyMst">
-          <End Type="JewelleryShopping_dbModel.StoneQltyMst" Role="StoneQltyMst" Multiplicity="1" />
-          <End Type="JewelleryShopping_dbModel.StoneMst" Role="StoneMst" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="StoneQltyMst">
-              <PropertyRef Name="StoneQlty_ID" />
-            </Principal>
-            <Dependent Role="StoneMst">
-              <PropertyRef Name="StoneQlty_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2115,6 +1794,245 @@ warning 6002: The table/view 'JewelleryShopping_db.dbo.ViewFullItem' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="DimMst">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="Style_Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DimQlty_ID" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="DimSubType_ID" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Dim_Crt" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="Dim_Pcs" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="Dim_Gm" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="Dim_Size" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="Dim_Rate" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="Dim_Amt" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="No" Type="Int32" Nullable="false" />
+          <Property Name="Dim_CrtSub" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="Dim_PcsSub" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="Dim_GmSub" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="Dim_SizeSub" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="Dim_RateSub" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="Dim_AmtSub" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="Total_AmtAll" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="DimQltyMst" Relationship="JewelleryShopping_dbModel.FK_DimMst_DimQltyMst" FromRole="DimMst" ToRole="DimQltyMst" />
+          <NavigationProperty Name="DimQltySubMst" Relationship="JewelleryShopping_dbModel.FK_DimMst_DimQltySubMst" FromRole="DimMst" ToRole="DimQltySubMst" />
+          <NavigationProperty Name="ItemMst" Relationship="JewelleryShopping_dbModel.FK_DimMst_ItemMst" FromRole="DimMst" ToRole="ItemMst" />
+        </EntityType>
+        <EntityType Name="GoldMst">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="Style_code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="GoldType_ID" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Gold_Wt" Type="Decimal" Nullable="false" Precision="10" Scale="3" />
+          <Property Name="Wstg_Per" Type="Decimal" Nullable="false" Precision="10" Scale="3" />
+          <Property Name="Total_weight" Type="Decimal" Nullable="false" Precision="10" Scale="3" />
+          <Property Name="Wstq" Type="Decimal" Nullable="false" Precision="10" Scale="3" />
+          <Property Name="No" Type="Int32" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="GoldKrtMst" Relationship="JewelleryShopping_dbModel.FK_GoldMst_GoldKrtMst" FromRole="GoldMst" ToRole="GoldKrtMst" />
+          <NavigationProperty Name="ItemMst" Relationship="JewelleryShopping_dbModel.FK_GoldMst_ItemMst" FromRole="GoldMst" ToRole="ItemMst" />
+        </EntityType>
+        <EntityType Name="StoneMst">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="Style_Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="StoneQlty_ID" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Stone_Gm" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="Stone_Pcs" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="Stone_Crt" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="Stone_Rate" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="Stone_Amt" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="No" Type="Int32" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="ItemMst" Relationship="JewelleryShopping_dbModel.FK_StoneMst_ItemMst" FromRole="StoneMst" ToRole="ItemMst" />
+          <NavigationProperty Name="StoneQltyMst" Relationship="JewelleryShopping_dbModel.FK_StoneMst_StoneQltyMst" FromRole="StoneMst" ToRole="StoneQltyMst" />
+        </EntityType>
+        <Association Name="FK_DimMst_DimQltyMst">
+          <End Type="JewelleryShopping_dbModel.DimQltyMst" Role="DimQltyMst" Multiplicity="1" />
+          <End Type="JewelleryShopping_dbModel.DimMst" Role="DimMst" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DimQltyMst">
+              <PropertyRef Name="DimQlty_ID" />
+            </Principal>
+            <Dependent Role="DimMst">
+              <PropertyRef Name="DimQlty_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DimMst_DimQltySubMst">
+          <End Type="JewelleryShopping_dbModel.DimQltySubMst" Role="DimQltySubMst" Multiplicity="1" />
+          <End Type="JewelleryShopping_dbModel.DimMst" Role="DimMst" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DimQltySubMst">
+              <PropertyRef Name="DimSubType_ID" />
+            </Principal>
+            <Dependent Role="DimMst">
+              <PropertyRef Name="DimSubType_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DimMst_ItemMst">
+          <End Type="JewelleryShopping_dbModel.ItemMst" Role="ItemMst" Multiplicity="1" />
+          <End Type="JewelleryShopping_dbModel.DimMst" Role="DimMst" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemMst">
+              <PropertyRef Name="Style_Code" />
+            </Principal>
+            <Dependent Role="DimMst">
+              <PropertyRef Name="Style_Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GoldMst_GoldKrtMst">
+          <End Type="JewelleryShopping_dbModel.GoldKrtMst" Role="GoldKrtMst" Multiplicity="1" />
+          <End Type="JewelleryShopping_dbModel.GoldMst" Role="GoldMst" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GoldKrtMst">
+              <PropertyRef Name="GoldType_ID" />
+            </Principal>
+            <Dependent Role="GoldMst">
+              <PropertyRef Name="GoldType_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GoldMst_ItemMst">
+          <End Type="JewelleryShopping_dbModel.ItemMst" Role="ItemMst" Multiplicity="1" />
+          <End Type="JewelleryShopping_dbModel.GoldMst" Role="GoldMst" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemMst">
+              <PropertyRef Name="Style_Code" />
+            </Principal>
+            <Dependent Role="GoldMst">
+              <PropertyRef Name="Style_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoneMst_ItemMst">
+          <End Type="JewelleryShopping_dbModel.ItemMst" Role="ItemMst" Multiplicity="1" />
+          <End Type="JewelleryShopping_dbModel.StoneMst" Role="StoneMst" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemMst">
+              <PropertyRef Name="Style_Code" />
+            </Principal>
+            <Dependent Role="StoneMst">
+              <PropertyRef Name="Style_Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoneMst_StoneQltyMst">
+          <End Type="JewelleryShopping_dbModel.StoneQltyMst" Role="StoneQltyMst" Multiplicity="1" />
+          <End Type="JewelleryShopping_dbModel.StoneMst" Role="StoneMst" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StoneQltyMst">
+              <PropertyRef Name="StoneQlty_ID" />
+            </Principal>
+            <Dependent Role="StoneMst">
+              <PropertyRef Name="StoneQlty_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="DiamonView">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="No" />
+            <PropertyRef Name="Style_Code" />
+            <PropertyRef Name="DimQlty_ID" />
+            <PropertyRef Name="Dim_Crt" />
+            <PropertyRef Name="Dim_Pcs" />
+            <PropertyRef Name="Dim_Gm" />
+            <PropertyRef Name="Dim_Size" />
+            <PropertyRef Name="Dim_Rate" />
+            <PropertyRef Name="Dim_Amt" />
+            <PropertyRef Name="DimSubType_ID" />
+            <PropertyRef Name="Dim_CrtSub" />
+            <PropertyRef Name="Dim_PcsSub" />
+            <PropertyRef Name="Dim_GmSub" />
+            <PropertyRef Name="Dim_SizeSub" />
+            <PropertyRef Name="Dim_RateSub" />
+            <PropertyRef Name="Dim_AmtSub" />
+            <PropertyRef Name="Total_AmtAll" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="No" Type="Int32" Nullable="false" />
+          <Property Name="Style_Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DimQlty_ID" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="MainType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Dim_Crt" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="Dim_Pcs" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="Dim_Gm" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="Dim_Size" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="Dim_Rate" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="Dim_Amt" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="DimSubType_ID" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="SubTyle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Dim_CrtSub" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="Dim_PcsSub" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="Dim_GmSub" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="Dim_SizeSub" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="Dim_RateSub" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="Dim_AmtSub" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="Total_AmtAll" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+        </EntityType>
+        <EntityType Name="GoldView">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="No" />
+            <PropertyRef Name="Style_code" />
+            <PropertyRef Name="GoldType_ID" />
+            <PropertyRef Name="Gold_Wt" />
+            <PropertyRef Name="Wstg_Per" />
+            <PropertyRef Name="Wstq" />
+            <PropertyRef Name="Total_weight" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="No" Type="Int32" Nullable="false" />
+          <Property Name="Style_code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="GoldType_ID" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Gold_Crt" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Gold_Wt" Type="Decimal" Nullable="false" Precision="10" Scale="3" />
+          <Property Name="Wstg_Per" Type="Decimal" Nullable="false" Precision="10" Scale="3" />
+          <Property Name="Wstq" Type="Decimal" Nullable="false" Precision="10" Scale="3" />
+          <Property Name="Total_weight" Type="Decimal" Nullable="false" Precision="10" Scale="3" />
+          <Property Name="Gold_Rate" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Total_Amount" Type="Decimal" Precision="10" Scale="2" />
+        </EntityType>
+        <EntityType Name="SimilarPrice">
+          <Key>
+            <PropertyRef Name="Style_Code" />
+            <PropertyRef Name="Img" />
+          </Key>
+          <Property Name="Style_Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Img" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Prod_Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="total_brand" Type="Decimal" Precision="38" Scale="2" />
+        </EntityType>
+        <EntityType Name="StoneView">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="No" />
+            <PropertyRef Name="Style_Code" />
+            <PropertyRef Name="StoneQlty_ID" />
+            <PropertyRef Name="Stone_Gm" />
+            <PropertyRef Name="Stone_Pcs" />
+            <PropertyRef Name="Stone_Crt" />
+            <PropertyRef Name="Stone_Rate" />
+            <PropertyRef Name="Stone_Amt" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="No" Type="Int32" Nullable="false" />
+          <Property Name="Style_Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="StoneQlty_ID" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="StoneQlty" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Stone_Gm" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="Stone_Pcs" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="Stone_Crt" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="Stone_Rate" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="Stone_Amt" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+        </EntityType>
         <EntityType Name="ProductView">
           <Key>
             <PropertyRef Name="Style_Code" />
@@ -2130,6 +2048,7 @@ warning 6002: The table/view 'JewelleryShopping_db.dbo.ViewFullItem' does not ha
           <Property Name="Brand_Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Certify_Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Prod_Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Jewellery_Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -2212,62 +2131,6 @@ warning 6002: The table/view 'JewelleryShopping_db.dbo.ViewFullItem' does not ha
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="DiamonViews">
-            <EntityTypeMapping TypeName="JewelleryShopping_dbModel.DiamonView">
-              <MappingFragment StoreEntitySet="DiamonView">
-                <ScalarProperty Name="Total_AmtAll" ColumnName="Total_AmtAll" />
-                <ScalarProperty Name="Dim_AmtSub" ColumnName="Dim_AmtSub" />
-                <ScalarProperty Name="Dim_RateSub" ColumnName="Dim_RateSub" />
-                <ScalarProperty Name="Dim_SizeSub" ColumnName="Dim_SizeSub" />
-                <ScalarProperty Name="Dim_GmSub" ColumnName="Dim_GmSub" />
-                <ScalarProperty Name="Dim_PcsSub" ColumnName="Dim_PcsSub" />
-                <ScalarProperty Name="Dim_CrtSub" ColumnName="Dim_CrtSub" />
-                <ScalarProperty Name="SubTyle" ColumnName="SubTyle" />
-                <ScalarProperty Name="DimSubType_ID" ColumnName="DimSubType_ID" />
-                <ScalarProperty Name="Dim_Amt" ColumnName="Dim_Amt" />
-                <ScalarProperty Name="Dim_Rate" ColumnName="Dim_Rate" />
-                <ScalarProperty Name="Dim_Size" ColumnName="Dim_Size" />
-                <ScalarProperty Name="Dim_Gm" ColumnName="Dim_Gm" />
-                <ScalarProperty Name="Dim_Pcs" ColumnName="Dim_Pcs" />
-                <ScalarProperty Name="Dim_Crt" ColumnName="Dim_Crt" />
-                <ScalarProperty Name="MainType" ColumnName="MainType" />
-                <ScalarProperty Name="DimQlty_ID" ColumnName="DimQlty_ID" />
-                <ScalarProperty Name="Style_Code" ColumnName="Style_Code" />
-                <ScalarProperty Name="No" ColumnName="No" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="GoldViews">
-            <EntityTypeMapping TypeName="JewelleryShopping_dbModel.GoldView">
-              <MappingFragment StoreEntitySet="GoldView">
-                <ScalarProperty Name="Total_Amount" ColumnName="Total_Amount" />
-                <ScalarProperty Name="Gold_Rate" ColumnName="Gold_Rate" />
-                <ScalarProperty Name="Total_weight" ColumnName="Total_weight" />
-                <ScalarProperty Name="Wstq" ColumnName="Wstq" />
-                <ScalarProperty Name="Wstg_Per" ColumnName="Wstg_Per" />
-                <ScalarProperty Name="Gold_Wt" ColumnName="Gold_Wt" />
-                <ScalarProperty Name="Gold_Crt" ColumnName="Gold_Crt" />
-                <ScalarProperty Name="GoldType_ID" ColumnName="GoldType_ID" />
-                <ScalarProperty Name="Style_code" ColumnName="Style_code" />
-                <ScalarProperty Name="No" ColumnName="No" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="StoneViews">
-            <EntityTypeMapping TypeName="JewelleryShopping_dbModel.StoneView">
-              <MappingFragment StoreEntitySet="StoneView">
-                <ScalarProperty Name="Stone_Amt" ColumnName="Stone_Amt" />
-                <ScalarProperty Name="Stone_Rate" ColumnName="Stone_Rate" />
-                <ScalarProperty Name="Stone_Crt" ColumnName="Stone_Crt" />
-                <ScalarProperty Name="Stone_Pcs" ColumnName="Stone_Pcs" />
-                <ScalarProperty Name="Stone_Gm" ColumnName="Stone_Gm" />
-                <ScalarProperty Name="StoneQlty" ColumnName="StoneQlty" />
-                <ScalarProperty Name="StoneQlty_ID" ColumnName="StoneQlty_ID" />
-                <ScalarProperty Name="Style_Code" ColumnName="Style_Code" />
-                <ScalarProperty Name="No" ColumnName="No" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="ViewFullItems">
             <EntityTypeMapping TypeName="JewelleryShopping_dbModel.ViewFullItem">
               <MappingFragment StoreEntitySet="ViewFullItem">
@@ -2329,16 +2192,6 @@ warning 6002: The table/view 'JewelleryShopping_db.dbo.ViewFullItem' does not ha
                 <ScalarProperty Name="Prod_ID" ColumnName="Prod_ID" />
                 <ScalarProperty Name="Cat_ID" ColumnName="Cat_ID" />
                 <ScalarProperty Name="Pairs" ColumnName="Pairs" />
-                <ScalarProperty Name="Img" ColumnName="Img" />
-                <ScalarProperty Name="Style_Code" ColumnName="Style_Code" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="SimilarPrices">
-            <EntityTypeMapping TypeName="JewelleryShopping_dbModel.SimilarPrice">
-              <MappingFragment StoreEntitySet="SimilarPrice">
-                <ScalarProperty Name="total_brand" ColumnName="total_brand" />
-                <ScalarProperty Name="Prod_Type" ColumnName="Prod_Type" />
                 <ScalarProperty Name="Img" ColumnName="Img" />
                 <ScalarProperty Name="Style_Code" ColumnName="Style_Code" />
               </MappingFragment>
@@ -2516,56 +2369,6 @@ warning 6002: The table/view 'JewelleryShopping_db.dbo.ViewFullItem' does not ha
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="DimMsts">
-            <EntityTypeMapping TypeName="JewelleryShopping_dbModel.DimMst">
-              <MappingFragment StoreEntitySet="DimMst">
-                <ScalarProperty Name="Total_AmtAll" ColumnName="Total_AmtAll" />
-                <ScalarProperty Name="Dim_AmtSub" ColumnName="Dim_AmtSub" />
-                <ScalarProperty Name="Dim_RateSub" ColumnName="Dim_RateSub" />
-                <ScalarProperty Name="Dim_SizeSub" ColumnName="Dim_SizeSub" />
-                <ScalarProperty Name="Dim_GmSub" ColumnName="Dim_GmSub" />
-                <ScalarProperty Name="Dim_PcsSub" ColumnName="Dim_PcsSub" />
-                <ScalarProperty Name="Dim_CrtSub" ColumnName="Dim_CrtSub" />
-                <ScalarProperty Name="No" ColumnName="No" />
-                <ScalarProperty Name="Dim_Amt" ColumnName="Dim_Amt" />
-                <ScalarProperty Name="Dim_Rate" ColumnName="Dim_Rate" />
-                <ScalarProperty Name="Dim_Size" ColumnName="Dim_Size" />
-                <ScalarProperty Name="Dim_Gm" ColumnName="Dim_Gm" />
-                <ScalarProperty Name="Dim_Pcs" ColumnName="Dim_Pcs" />
-                <ScalarProperty Name="Dim_Crt" ColumnName="Dim_Crt" />
-                <ScalarProperty Name="DimSubType_ID" ColumnName="DimSubType_ID" />
-                <ScalarProperty Name="DimQlty_ID" ColumnName="DimQlty_ID" />
-                <ScalarProperty Name="Style_Code" ColumnName="Style_Code" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="GoldMsts">
-            <EntityTypeMapping TypeName="JewelleryShopping_dbModel.GoldMst">
-              <MappingFragment StoreEntitySet="GoldMst">
-                <ScalarProperty Name="No" ColumnName="No" />
-                <ScalarProperty Name="Wstq" ColumnName="Wstq" />
-                <ScalarProperty Name="Total_weight" ColumnName="Total_weight" />
-                <ScalarProperty Name="Wstg_Per" ColumnName="Wstg_Per" />
-                <ScalarProperty Name="Gold_Wt" ColumnName="Gold_Wt" />
-                <ScalarProperty Name="GoldType_ID" ColumnName="GoldType_ID" />
-                <ScalarProperty Name="Style_code" ColumnName="Style_code" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="StoneMsts">
-            <EntityTypeMapping TypeName="JewelleryShopping_dbModel.StoneMst">
-              <MappingFragment StoreEntitySet="StoneMst">
-                <ScalarProperty Name="No" ColumnName="No" />
-                <ScalarProperty Name="Stone_Amt" ColumnName="Stone_Amt" />
-                <ScalarProperty Name="Stone_Rate" ColumnName="Stone_Rate" />
-                <ScalarProperty Name="Stone_Crt" ColumnName="Stone_Crt" />
-                <ScalarProperty Name="Stone_Pcs" ColumnName="Stone_Pcs" />
-                <ScalarProperty Name="Stone_Gm" ColumnName="Stone_Gm" />
-                <ScalarProperty Name="StoneQlty_ID" ColumnName="StoneQlty_ID" />
-                <ScalarProperty Name="Style_Code" ColumnName="Style_Code" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="UserRegMsts">
             <EntityTypeMapping TypeName="JewelleryShopping_dbModel.UserRegMst">
               <MappingFragment StoreEntitySet="UserRegMst">
@@ -2595,9 +2398,132 @@ warning 6002: The table/view 'JewelleryShopping_db.dbo.ViewFullItem' does not ha
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="DimMsts">
+            <EntityTypeMapping TypeName="JewelleryShopping_dbModel.DimMst">
+              <MappingFragment StoreEntitySet="DimMst">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Total_AmtAll" ColumnName="Total_AmtAll" />
+                <ScalarProperty Name="Dim_AmtSub" ColumnName="Dim_AmtSub" />
+                <ScalarProperty Name="Dim_RateSub" ColumnName="Dim_RateSub" />
+                <ScalarProperty Name="Dim_SizeSub" ColumnName="Dim_SizeSub" />
+                <ScalarProperty Name="Dim_GmSub" ColumnName="Dim_GmSub" />
+                <ScalarProperty Name="Dim_PcsSub" ColumnName="Dim_PcsSub" />
+                <ScalarProperty Name="Dim_CrtSub" ColumnName="Dim_CrtSub" />
+                <ScalarProperty Name="No" ColumnName="No" />
+                <ScalarProperty Name="Dim_Amt" ColumnName="Dim_Amt" />
+                <ScalarProperty Name="Dim_Rate" ColumnName="Dim_Rate" />
+                <ScalarProperty Name="Dim_Size" ColumnName="Dim_Size" />
+                <ScalarProperty Name="Dim_Gm" ColumnName="Dim_Gm" />
+                <ScalarProperty Name="Dim_Pcs" ColumnName="Dim_Pcs" />
+                <ScalarProperty Name="Dim_Crt" ColumnName="Dim_Crt" />
+                <ScalarProperty Name="DimSubType_ID" ColumnName="DimSubType_ID" />
+                <ScalarProperty Name="DimQlty_ID" ColumnName="DimQlty_ID" />
+                <ScalarProperty Name="Style_Code" ColumnName="Style_Code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GoldMsts">
+            <EntityTypeMapping TypeName="JewelleryShopping_dbModel.GoldMst">
+              <MappingFragment StoreEntitySet="GoldMst">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="No" ColumnName="No" />
+                <ScalarProperty Name="Wstq" ColumnName="Wstq" />
+                <ScalarProperty Name="Total_weight" ColumnName="Total_weight" />
+                <ScalarProperty Name="Wstg_Per" ColumnName="Wstg_Per" />
+                <ScalarProperty Name="Gold_Wt" ColumnName="Gold_Wt" />
+                <ScalarProperty Name="GoldType_ID" ColumnName="GoldType_ID" />
+                <ScalarProperty Name="Style_code" ColumnName="Style_code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StoneMsts">
+            <EntityTypeMapping TypeName="JewelleryShopping_dbModel.StoneMst">
+              <MappingFragment StoreEntitySet="StoneMst">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="No" ColumnName="No" />
+                <ScalarProperty Name="Stone_Amt" ColumnName="Stone_Amt" />
+                <ScalarProperty Name="Stone_Rate" ColumnName="Stone_Rate" />
+                <ScalarProperty Name="Stone_Crt" ColumnName="Stone_Crt" />
+                <ScalarProperty Name="Stone_Pcs" ColumnName="Stone_Pcs" />
+                <ScalarProperty Name="Stone_Gm" ColumnName="Stone_Gm" />
+                <ScalarProperty Name="StoneQlty_ID" ColumnName="StoneQlty_ID" />
+                <ScalarProperty Name="Style_Code" ColumnName="Style_Code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DiamonViews">
+            <EntityTypeMapping TypeName="JewelleryShopping_dbModel.DiamonView">
+              <MappingFragment StoreEntitySet="DiamonView">
+                <ScalarProperty Name="Total_AmtAll" ColumnName="Total_AmtAll" />
+                <ScalarProperty Name="Dim_AmtSub" ColumnName="Dim_AmtSub" />
+                <ScalarProperty Name="Dim_RateSub" ColumnName="Dim_RateSub" />
+                <ScalarProperty Name="Dim_SizeSub" ColumnName="Dim_SizeSub" />
+                <ScalarProperty Name="Dim_GmSub" ColumnName="Dim_GmSub" />
+                <ScalarProperty Name="Dim_PcsSub" ColumnName="Dim_PcsSub" />
+                <ScalarProperty Name="Dim_CrtSub" ColumnName="Dim_CrtSub" />
+                <ScalarProperty Name="SubTyle" ColumnName="SubTyle" />
+                <ScalarProperty Name="DimSubType_ID" ColumnName="DimSubType_ID" />
+                <ScalarProperty Name="Dim_Amt" ColumnName="Dim_Amt" />
+                <ScalarProperty Name="Dim_Rate" ColumnName="Dim_Rate" />
+                <ScalarProperty Name="Dim_Size" ColumnName="Dim_Size" />
+                <ScalarProperty Name="Dim_Gm" ColumnName="Dim_Gm" />
+                <ScalarProperty Name="Dim_Pcs" ColumnName="Dim_Pcs" />
+                <ScalarProperty Name="Dim_Crt" ColumnName="Dim_Crt" />
+                <ScalarProperty Name="MainType" ColumnName="MainType" />
+                <ScalarProperty Name="DimQlty_ID" ColumnName="DimQlty_ID" />
+                <ScalarProperty Name="Style_Code" ColumnName="Style_Code" />
+                <ScalarProperty Name="No" ColumnName="No" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GoldViews">
+            <EntityTypeMapping TypeName="JewelleryShopping_dbModel.GoldView">
+              <MappingFragment StoreEntitySet="GoldView">
+                <ScalarProperty Name="Total_Amount" ColumnName="Total_Amount" />
+                <ScalarProperty Name="Gold_Rate" ColumnName="Gold_Rate" />
+                <ScalarProperty Name="Total_weight" ColumnName="Total_weight" />
+                <ScalarProperty Name="Wstq" ColumnName="Wstq" />
+                <ScalarProperty Name="Wstg_Per" ColumnName="Wstg_Per" />
+                <ScalarProperty Name="Gold_Wt" ColumnName="Gold_Wt" />
+                <ScalarProperty Name="Gold_Crt" ColumnName="Gold_Crt" />
+                <ScalarProperty Name="GoldType_ID" ColumnName="GoldType_ID" />
+                <ScalarProperty Name="Style_code" ColumnName="Style_code" />
+                <ScalarProperty Name="No" ColumnName="No" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SimilarPrices">
+            <EntityTypeMapping TypeName="JewelleryShopping_dbModel.SimilarPrice">
+              <MappingFragment StoreEntitySet="SimilarPrice">
+                <ScalarProperty Name="total_brand" ColumnName="total_brand" />
+                <ScalarProperty Name="Prod_Type" ColumnName="Prod_Type" />
+                <ScalarProperty Name="Img" ColumnName="Img" />
+                <ScalarProperty Name="Style_Code" ColumnName="Style_Code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StoneViews">
+            <EntityTypeMapping TypeName="JewelleryShopping_dbModel.StoneView">
+              <MappingFragment StoreEntitySet="StoneView">
+                <ScalarProperty Name="Stone_Amt" ColumnName="Stone_Amt" />
+                <ScalarProperty Name="Stone_Rate" ColumnName="Stone_Rate" />
+                <ScalarProperty Name="Stone_Crt" ColumnName="Stone_Crt" />
+                <ScalarProperty Name="Stone_Pcs" ColumnName="Stone_Pcs" />
+                <ScalarProperty Name="Stone_Gm" ColumnName="Stone_Gm" />
+                <ScalarProperty Name="StoneQlty" ColumnName="StoneQlty" />
+                <ScalarProperty Name="StoneQlty_ID" ColumnName="StoneQlty_ID" />
+                <ScalarProperty Name="Style_Code" ColumnName="Style_Code" />
+                <ScalarProperty Name="No" ColumnName="No" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="ProductViews">
             <EntityTypeMapping TypeName="JewelleryShopping_dbModel.ProductView">
               <MappingFragment StoreEntitySet="ProductView">
+                <ScalarProperty Name="Jewellery_Type" ColumnName="Jewellery_Type" />
                 <ScalarProperty Name="Prod_Type" ColumnName="Prod_Type" />
                 <ScalarProperty Name="Certify_Type" ColumnName="Certify_Type" />
                 <ScalarProperty Name="Brand_Type" ColumnName="Brand_Type" />

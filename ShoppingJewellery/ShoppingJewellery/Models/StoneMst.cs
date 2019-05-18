@@ -22,6 +22,7 @@ namespace ShoppingJewellery.Models
         public decimal Stone_Rate { get; set; }
         public decimal Stone_Amt { get; set; }
         public int No { get; set; }
+        public int ID { get; set; }
     
         public virtual ItemMst ItemMst { get; set; }
         public virtual StoneQltyMst StoneQltyMst { get; set; }

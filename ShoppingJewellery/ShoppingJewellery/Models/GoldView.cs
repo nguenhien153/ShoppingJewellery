@@ -14,6 +14,7 @@ namespace ShoppingJewellery.Models
     
     public partial class GoldView
     {
+        public int ID { get; set; }
         public int No { get; set; }
         public string Style_code { get; set; }
         public string GoldType_ID { get; set; }

@@ -24,6 +24,26 @@
     table#table td {
         word-break: break-all;
     }
+    .report_result {
+        position: fixed;
+        z-index: 2002;
+        top: 10%;
+        left: 50%;
+        height: auto;
+    }
+
+        .report_result .image_report {
+            width: 30px;
+            margin-top: 5px;
+        }
+
+        .report_result p {
+            font-weight: 400;
+            line-height: 1.5;
+            color: #4cff00;
+            text-align: left;
+            background-color: #fff;
+        }
 </style>
 <div class="form-group col-12">
     <div class="col-12 headerboxx">
@@ -31,17 +51,22 @@
     </div>
     <div class="boxx col-12" >
         <div style="overflow-x:auto;padding:0px 10px 15px 10px">
+            <div class="report_result ">
+                <img src="" class="image_report" />
+                <strong></strong>
+            </div>
             <table class="table  table-striped hover " id="table" style="width:100%">
                 <thead>
                     <tr>
-                        <th>Style Code</th>
-                        <th>Image</th>
-                        <th>Total Weight</th>
-                        <th>Quantity</th>
-                        <th>Category</th>
-                        <th>Designer</th>
-                        <th>Certificate</th>
-                        <th>Product Type</th>
+                        <th class="align-middle">Style Code</th>
+                        <th class="align-middle">Image</th>
+                        <th class="align-middle">Total Weight</th>
+                        <th class="align-middle">Quantity</th>
+                        <th class="align-middle">Category</th>
+                        <th class="align-middle">Designer</th>
+                        <th class="align-middle">Certificate</th>
+                        <th class="align-middle">Product Type</th>
+                        <th class="align-middle">Jewelery Type</th>
                     </tr>
                 </thead>
 
@@ -59,6 +84,7 @@
                             <td class="align-middle">@item.Brand_Type</td>
                             <td class="align-middle">@item.Certify_Type</td>
                             <td class="align-middle">@item.Prod_Type</td>
+                            <td class="align-middle">@item.Jewellery_Type</td>
                         </tr>
                     }
                 </tbody>
@@ -93,6 +119,17 @@
 <script src="~/Content/js/Admin/dataTables.buttons.min.js"></script>
 <script>
     var style_code;
+    var admin = '@Session["admin"]';
+    var modalClone = $("#selectRow").clone();
+    var reportClone = $(".report_result").clone();
+
+    function reportt(classdiv, classImg, srcImg, status, text) {
+        $("." + classdiv).addClass("alert-" + status + " alert form-inline");
+        $("." + classImg).attr("src", srcImg);
+        $("." + classdiv + " strong").append("&nbsp; &nbsp;  " + text);
+
+    }
+
     $(document).ready(function () {
         var table = $('#table').DataTable({
             "responsive": false,
@@ -100,6 +137,7 @@
             "select": {
                 "info": false
             },
+            orderFixed: [7, 'des'],
             "columnDefs": [
                 { "visible": false, "targets": 7 },
                 { "sortable": false, "targets": 1 }
@@ -111,6 +149,7 @@
                 },
                 dataSrc: 7
             },
+           
         });
         new $.fn.dataTable.Buttons(table, {
             buttons: [
@@ -122,6 +161,7 @@
                     },
                     text: '<img src="../Content/images/Icon/Admin/Product_Create.png" style="width:50px" />',
                     action: function () {
+                        window.location.href = "/Admin/Create_Product_Details";
                     }
                 },
                 {
@@ -135,6 +175,7 @@
                         if (style_code != null) {
                             window.location.href = "/Admin/Product_Details?style_code=" + style_code.replace(/\s/g, '');
                         } else {
+                            $("#selectRow").replaceWith(modalClone.clone());
                             $("#contentt").text("Please select account.");
                             $('#selectRow').modal('show');
                         }
@@ -146,11 +187,75 @@
                     className: 'btn',
                     attr: {
                         title: 'Delete Item',
-                        //id: 'copyButton',   
+                        id: 'DeleteItem',   
                     },
                     text: '<img src="../Content/images/Icon/Admin/Product_Delete.png" style="width:50px" />',
-                    action: function (e, dt, node, conf) {
-                        console.log('Button 2 clicked on');
+                    action: function () {
+                        if (admin != "SuperAdmin") {
+                            return;
+                        }
+
+                        $("#selectRow").replaceWith(modalClone.clone());
+
+                        if (style_code != null) {
+                            $("#selectRow .modal-title").empty();
+                            $("#selectRow .modal-title").text("Delete Product");
+                            $("#selectRow .modal-body").append("Delete Style Code: " + style_code + "." + "<br/> Are you sure?");
+                            $("#selectRow .modal-footer").prepend('<button class="accept btn btn-success" id="delete_product">Yes</button>');
+                            $("#selectRow .modal-footer").children("button").eq(1).text("No");
+                            $('#selectRow').modal('show');
+
+                            $("#delete_product").click(function () {
+                                $.ajax({
+                                    url: '/Admin/Delete_ProductInfor',
+                                    data: { stylecode: style_code },
+                                    type: "get",
+                                    success: function (data) {
+                                        $('#selectRow').modal('hide');
+                                        $(".report_result").replaceWith(reportClone.clone());
+                                        if (data == "success") {
+                                            $.when(reportt("report_result", "image_report", "/Content/images/Icon/Admin/icon_Success.png", "success", "Delete Product Success")).done(function () {
+                                                $(".report_result").show();
+                                                setTimeout(function () {
+                                                    location.reload();
+                                                }, 2000);
+
+                                            });
+                                        } else if (data == "false") {
+                                            $.when(reportt("report_result", "image_report", "/Content/images/Icon/Admin/icon_false.png", "danger", "Delete Product False")).done(function () {
+                                                $(".report_result").show();
+                                                setTimeout(function () {
+                                                    location.reload();
+                                                }, 2000);
+                                            });
+
+                                        }  else if (data == "filefalse") {
+                                            $.when(reportt("report_result", "image_report", "/Content/images/Icon/Admin/icon_false.png", "danger", "Delete False. Occur Error during delete image")).done(function () {
+                                                $(".report_result").show();
+                                                setTimeout(function () {
+                                                    location.reload();
+                                                }, 2000);
+                                            });
+                                        } else {
+                                            $.when(reportt("report_result", "image_report", "/Content/images/Icon/Admin/icon_false.png", "danger", "Delete False. System Error !!!")).done(function () {
+                                                $(".report_result").show();
+                                                setTimeout(function () {
+                                                    location.reload();
+                                                }, 2000);
+                                            });
+                                        }
+                                    },
+                                    error: function (xhr, error, status) {
+                                        alert("Error: " + status);
+                                    }
+                                });
+                            });
+                        }
+                        else {
+                            $("#selectRow").replaceWith(modalClone.clone());
+                            $("#selectRow .modal-body").text("Please select option.");
+                            $('#selectRow').modal('show');
+                        }
                     },
 
                 }
@@ -165,7 +270,13 @@
         table_inital("table");
 
         $('#table tbody').on('click', 'tr', function () {
-            style_code = $(this).children("td").eq(0).text().replace(/\s/g, '');
+            style_code = $(this).children("td").eq(0).text();
         });
+
+        if (admin != "SuperAdmin") {
+            $("#DeleteItem").hide();
+        }
+
+     
     });
 </script>

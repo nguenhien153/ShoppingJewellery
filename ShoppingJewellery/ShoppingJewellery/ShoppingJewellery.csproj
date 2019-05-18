@@ -119,6 +119,8 @@
     <Content Include="Content\css\Admin\buttons.bootstrap4.min.css" />
     <Content Include="Content\css\Admin\buttons.dataTables.min.css" />
     <Content Include="Content\css\Admin\forTable.css" />
+    <Content Include="Content\css\Admin\jquery-ui.css" />
+    <Content Include="Content\css\Admin\jquery-ui.min.css" />
     <Content Include="Content\css\Admin\Login.css" />
     <Content Include="Content\css\Admin\rowGroup.dataTables.min.css" />
     <Content Include="Content\css\Admin\select.dataTables.min.css" />
@@ -143,6 +145,8 @@
     <Content Include="Content\images\Icon\Admin\ChildRow_Create.png" />
     <Content Include="Content\images\Icon\Admin\ChildRow_Delete.png" />
     <Content Include="Content\images\Icon\Admin\ChildRow_Edit.png" />
+    <Content Include="Content\images\Icon\Admin\icon_false.png" />
+    <Content Include="Content\images\Icon\Admin\Icon_not.png" />
     <Content Include="Content\images\Icon\Admin\Icon_Remove.png" />
     <Content Include="Content\images\Icon\Admin\Icon_Create.png" />
     <Content Include="Content\images\Icon\Admin\Background.jpg" />
@@ -151,7 +155,9 @@
     <Content Include="Content\images\Icon\Admin\details_open.png" />
     <Content Include="Content\images\Icon\Admin\Hide_Password.png" />
     <Content Include="Content\images\Icon\Admin\Icon_Edit.png" />
+    <Content Include="Content\images\Icon\Admin\icon_Success.png" />
     <Content Include="Content\images\Icon\Admin\Login.png" />
+    <Content Include="Content\images\Icon\Admin\picture.png" />
     <Content Include="Content\images\Icon\Admin\Prodcut_Details.png" />
     <Content Include="Content\images\Icon\Admin\Product_Create.png" />
     <Content Include="Content\images\Icon\Admin\Product_Delete.png" />
@@ -246,9 +252,12 @@
     <Content Include="Content\JQuery\jquery-3.3.1.js" />
     <Content Include="Content\JQuery\jquery-3.3.1.min.js" />
     <Content Include="Content\JQuery\jquery-migrate-1.4.1.min.js" />
-    <Content Include="Content\js\Admin\buttons.bootstrap4.min.js" />
     <Content Include="Content\js\Admin\buttons.html5.min.js" />
     <Content Include="Content\js\Admin\forTable.js" />
+    <Content Include="Content\js\Admin\jquery-ui.js" />
+    <Content Include="Content\js\Admin\jquery-ui.min.js" />
+    <Content Include="Content\js\Admin\jquery.js" />
+    <Content Include="Content\js\Admin\Text\modalforProduct.js" />
     <Content Include="Content\js\Admin\Password.js" />
     <Content Include="Content\js\Admin\dataTables.buttons.min.js" />
     <Content Include="Content\js\Admin\dataTables.rowGroup.min.js" />
@@ -472,7 +481,6 @@
     <None Include="packages.config" />
     <Content Include="Views\Product\Product.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Product\ProductList.cshtml" />
@@ -504,7 +512,6 @@
     <Content Include="Views\Admin\UserAccount_Edit.cshtml" />
     <Content Include="Views\Admin\UserAccount_Detele.cshtml" />
     <Content Include="Views\Admin\UserAccount_Create.cshtml" />
-    <Content Include="data\json.json" />
     <Content Include="Views\Test\Index2.cshtml" />
     <Content Include="Views\Admin\UserAddress_Create.cshtml" />
     <Content Include="Views\Admin\UserAddress_Edit.cshtml" />
@@ -512,6 +519,7 @@
     <Content Include="Views\Admin\Product.cshtml" />
     <Content Include="Views\Admin\Product_Details.cshtml" />
     <Content Include="Views\Test\Index3.cshtml" />
+    <Content Include="Views\Admin\Create_Product_Details.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -521,7 +529,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Videofiles\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

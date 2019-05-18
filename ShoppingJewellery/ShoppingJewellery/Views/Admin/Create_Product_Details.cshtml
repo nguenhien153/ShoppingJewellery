@@ -1,0 +1,523 @@
+﻿
+@{
+    ViewBag.Title = "Create_Product_Details";
+    Layout = "~/Views/Layout/Admin/AdminLayout.cshtml";
+}
+<link href="~/Content/css/Admin/Boxx.css" rel="stylesheet" />
+<link href="~/Content/css/Admin/jquery-ui.min.css?1" rel="stylesheet" />
+<link href="~/Content/css/Admin/forTable.css?1" rel="stylesheet" />
+<style>
+    label {
+        cursor: pointer;
+    }
+
+    #imagefile {
+        opacity: 0;
+        position: absolute;
+        z-index: -1;
+    }
+
+    .image {
+        opacity: 1;
+        display: block;
+        width: 100%;
+        height: auto;
+        transition: .5s ease;
+        backface-visibility: hidden;
+    }
+
+    .middle {
+        transition: .5s ease;
+        opacity: 0;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        text-align: center;
+    }
+
+    .backk:hover .image {
+        opacity: 0.3;
+    }
+
+    .backk:hover .middle {
+        opacity: 1;
+    }
+
+    fieldset {
+        border: 1px solid #666;
+        border-radius: 8px;
+    }
+
+    legend {
+        width: auto;
+        margin-left: 50px;
+    }
+</style>
+<div class="form-group col-12">
+
+    <div class="col-12 headerboxx"><h4>Details of Item</h4></div>
+
+    <div class="col-12 boxx">
+        <form method="post" action="@Url.Action("Create_Product_Details","Admin")" class="col-8 m-auto" enctype="multipart/form-data" id="myForm">
+            <fieldset>
+                <legend>Information</legend>
+
+                @{
+                    if (Session["Create_Product_Details"] != null)
+                    {
+                        if (Session["Create_Product_Details"].ToString().Equals("false"))
+                        {
+                            <div class="alert alert-danger col-11 m-auto">
+                                <strong>Edit False.</strong> Information not valid !!!
+                            </div>
+                        }
+                        if (Session["Create_Product_Details"].ToString().Equals("falseFile"))
+                        {
+                            <div class="alert alert-danger col-11 m-auto">
+                                <strong>Edit False.</strong>Image must be less than 10MB.!!!
+                            </div>
+                        }
+                        if (Session["Create_Product_Details"].ToString().Equals("systemfalse"))
+                        {
+                            <div class="alert alert-danger col-11 m-auto">
+                                <strong>Edit False.</strong> System Error !!!
+                            </div>
+                        }
+                        if (Session["Create_Product_Details"].ToString().Equals("success"))
+                        {
+                            <div class="alert alert-success col-11 m-auto">
+                                <strong>Edit Success.</strong> Congratulation.Edit Infor sucecss !!!
+                            </div>
+                        }
+                        if (Session["Create_Product_Details"].ToString().Equals("catFalse"))
+                        {
+                            <div class="alert alert-danger col-11 m-auto">
+                                <strong>Edit Success.</strong>Category ID not exists !!!
+                            </div>
+                        }
+                        if (Session["Create_Product_Details"].ToString().Equals("proFalse"))
+                        {
+                            <div class="alert alert-danger col-11 m-auto">
+                                <strong>Edit Success.</strong>Product Type ID not exists !!!
+                            </div>
+                        }
+                        if (Session["Create_Product_Details"].ToString().Equals("cerFalse"))
+                        {
+                            <div class="alert alert-danger col-11 m-auto">
+                                <strong>Edit Success.</strong>Certificate ID not exists !!!
+                            </div>
+                        }
+                        if (Session["Create_Product_Details"].ToString().Equals("jewFalse"))
+                        {
+                            <div class="alert alert-danger col-11 m-auto">
+                                <strong>Edit Success.</strong>Jewellery Type ID not exists !!!
+                            </div>
+                        }
+                        if (Session["Create_Product_Details"].ToString().Equals("brandFalse"))
+                        {
+                            <div class="alert alert-danger col-11 m-auto">
+                                <strong>Edit Success.</strong>Brand ID not exists !!!
+                            </div>
+                        }
+                        Session.Remove("Create_Product_Details");
+                    }
+                    else
+                    {
+                        <div class="" id="report"></div>
+                    }
+
+                }
+
+                <div class="form-group col-12 margin_top5px">
+                    <div class="backk col-4 m-auto">
+                        <img src="/Content/images/Icon/Admin/picture.png" alt="Avatar" id='img-upload' class="image" style="width:100%">
+                        <div class="middle">
+                            <label for="imagefile" data-toggle="tooltip" title="Upload Image"><img src="~/Content/images/Icon/Admin/Upload1.png" style="width:40px" /></label>
+                            <div class="m-auto">
+                                <input type="file" id="imagefile" name="imagefile" accept="image/x-png,image/jpeg">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-12" for="Style_Code">Style Code</label>
+                    <div class="col-12">
+                        <input class="form-control text-box single-line" id="Style_Code" name="Style_Code" type="text" value="" required data-html="true">
+                        <span class="field-validation-valid text-danger" data-valmsg-for="Style_Code" data-valmsg-replace="true" id="result_Style_Code"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-12" for="Brand_ID">Brand ID</label>
+                    <div class="col-12">
+                        <input class="form-control text-box single-line" id="Brand_ID" name="Brand_ID" type="text" value="" required data-html="true">
+                        <span class="field-validation-valid text-danger" data-valmsg-for="Brand_ID" data-valmsg-replace="true" id="result_Brand_ID"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-12" for="Cat_ID">Category ID</label>
+                    <div class="col-12">
+                        <input class="form-control text-box single-line" id="Cat_ID" name="Cat_ID" type="text" value="" required data-html="true">
+                        <span class="field-validation-valid text-danger" data-valmsg-for="Cat_ID" data-valmsg-replace="true" id="result_Cat_ID"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-12" for="Brand_ID">Product Type ID</label>
+                    <div class="col-12">
+                        <input class="form-control text-box single-line" id="Prod_ID" name="Prod_ID" type="text" value="" required data-html="true">
+                        <span class="field-validation-valid text-danger" data-valmsg-for="Prod_ID" data-valmsg-replace="true" id="result_Prod_ID"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-12" for="JewelleryType_ID">Jewellery Type ID</label>
+                    <div class="col-12">
+                        <input class="form-control text-box single-line" id="JewelleryType_ID" name="JewelleryType_ID" type="text" value="" required data-html="true">
+                        <span class="field-validation-valid text-danger" data-valmsg-for="JewelleryType_ID" data-valmsg-replace="true" id="result_JewelleryType_ID"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-12" for="Certify_ID">Certificate ID</label>
+                    <div class="col-12">
+                        <input class="form-control text-box single-line" id="Certify_ID" name="Certify_ID" type="text" value="" required data-html="true">
+                        <span class="field-validation-valid text-danger" data-valmsg-for="Certify_ID" data-valmsg-replace="true" id="result_Certify_ID"></span>
+                    </div>
+                </div>
+
+
+                <input id="Prod_Quality" name="Prod_Quality" type="hidden" value="0.00">
+
+
+           
+                        <input class="" id="size" name="size" type="hidden" value="5" readonly data-html="true">
+                     
+                <div class="form-group">
+                    <label class="control-label col-12" for="Quantity">Quantity</label>
+                    <div class="col-12">
+                        <input class="form-control text-box single-line" id="Quantity" name="Quantity" type="number" value="" required data-html="true">
+                        <span class="field-validation-valid text-danger" data-valmsg-for="Quantity" data-valmsg-replace="true" id="result_Quantity"></span>
+                    </div>
+                </div>
+
+
+                <input id="Pairs" name="Pairs" type="hidden" value="0">
+
+                <div class="form-group">
+                    <label class="control-label col-12" for="Net_Gold">Metal Weight (Standard) </label>
+                    <div class="col-12">
+                        <div class="form-inline">
+                            <input class="form-control main_input " id="Net_Gold" name="Net_Gold" type="number" value="" required data-html="true">
+                            <input type="text" class="form-control side_input" value="gms" disabled />
+                        </div>
+                        <span class="field-validation-valid text-danger" data-valmsg-for="Pairs" data-valmsg-replace="true" id="result_Net_Gold"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-12" for="Stone_Wt">Stone Weight</label>
+                    <div class="col-12">
+                        <div class="form-inline">
+                            <input class="form-control main_input " id="Stone_Wt" name="Stone_Wt" type="number" value="" required data-html="true">
+                            <input type="text" class="form-control side_input" value="gms" disabled />
+                        </div>
+                        <span class="field-validation-valid text-danger" data-valmsg-for="Stone_Wt" data-valmsg-replace="true" id="result_Stone_Wt"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-12" for="Tot_Gross_Wt">Total Weight</label>
+                    <div class="col-12">
+                        <div class="form-inline">
+                            <input class="form-control main_input" id="Tot_Gross_Wt" name="Tot_Gross_Wt" type="number" value="" required data-html="true" readonly>
+                            <input type="text" class="form-control side_input" style="background-color:#ffffff" value="gms" disabled />
+                        </div>
+                        <span class="field-validation-valid text-danger" data-valmsg-for="Tot_Gross_Wt" data-valmsg-replace="true" id="result_Tot_Gross_Wt"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-12" for="Gold_Making">Metal Making</label>
+                    <div class="col-12">
+                        <div class="form-inline">
+                            <input class="form-control main_input" id="Gold_Making" name="Gold_Making" type="text" value="" required data-html="true">
+                            <input type="text" class="form-control side_input" value="Rs" disabled />
+                        </div>
+                        <span class="field-validation-valid text-danger" data-valmsg-for="Gold_Making" data-valmsg-replace="true" id="result_Gold_Making"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-12" for="Stone_Making">Stone Making</label>
+                    <div class="col-12">
+                        <div class="form-inline">
+                            <input class="form-control main_input " id="Stone_Making" name="Stone_Making" type="text" value="" required data-html="true">
+                            <input type="text" class="form-control side_input" value="Rs" disabled />
+                        </div>
+                        <span class="field-validation-valid text-danger" data-valmsg-for="Stone_Making" data-valmsg-replace="true" id="result_Stone_Making"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-12" for="Other_Making">Other Making</label>
+                    <div class="col-12">
+                        <div class="form-inline">
+                            <input class="form-control main_input" id="Other_Making" name="Other_Making" type="text" value="" required data-html="true">
+                            <input type="text" class="form-control side_input" value="Rs" disabled />
+                        </div>
+                        <span class="field-validation-valid text-danger" data-valmsg-for="Other_Making" data-valmsg-replace="true" id="result_Other_Making"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-12" for="Tot_Making">Total Making</label>
+                    <div class="col-12">
+                        <div class="form-inline">
+                            <input class="form-control main_input" id="Tot_Making" name="Tot_Making" type="text" value="" required data-html="true" readonly>
+                            <input type="text" class="form-control side_input" style="background-color:#ffffff" value="Rs" disabled />
+                        </div>
+
+                        <span class="field-validation-valid text-danger" data-valmsg-for="Tot_Making" data-valmsg-replace="true" id="result_Tot_Making"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-12" for="MRP">MRP</label>
+                    <div class="col-12">
+                        <div class="form-inline">
+                            <input class="form-control main_input" id="MRP" name="MRP" type="text" value="" required data-html="true">
+                            <input type="text" class="form-control side_input" value="Rs" disabled />
+                        </div>
+                        <span class="field-validation-valid text-danger" data-valmsg-for="Tot_Making" data-valmsg-replace="true" id="result_MRP"></span>
+                    </div>
+                </div>
+
+                <div id="sumitbutton" style="padding-bottom:10px">
+                    <input type="submit" value="Create">
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>
+
+<script src="~/Content/js/Admin/Text/modalforProduct.js?10"></script>
+<script src="~/Content/js/Admin/jquery-ui.min.js?1"></script>
+<script src="~/Content/js/Admin/Password.js?7"></script>
+<script src="~/Content/js/Admin/forTable.js?9"></script>
+<script>
+    var rex_stylecode = /^[A-Z]+[A-z0-9\s.'-]*$/;
+    var rex_ID = /^[A-z]+[A-z0-9]*$/;
+    var check_stylecode = false;
+    var check_pro = false;
+    var check_jew = false;
+    var check_cat = false;
+    var check_cer = false;
+    var check_bra = false;
+    var check_quan = false;
+    var check_golw = false;
+    var check_stow = false;
+    var check_golm = false;
+    var check_stom = false;
+    var check_othm = false;
+    var check_mrp = true;
+    var check_img = false;
+    var report_stone = $("#report").clone();
+    function readURL(input) {
+        var mimeType = input.files[0].type;
+        if (mimeType == "image/png" || mimeType == "image/jpeg") {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#img-upload').attr('src', e.target.result);
+                    check_img = true;
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        } else {
+            $('#img-upload').attr('src', "/Content/images/Icon/Admin/Icon_not.png");
+            check_img = false;
+        }
+    }
+
+    $(document).ready(function () {
+
+        readonlyInput();
+        buttonsubmit("sumitbutton");
+
+        $("#Gold_Making").val("0.00");
+        $("#Stone_Making").val("0.00");
+        $("#Other_Making").val("0.00");
+
+        $("#MRP,#Tot_Making,#Other_Making,#Gold_Making,#Stone_Making").keyup(function () {
+            $(this).val($(this).val().replace(/[^.,0-9]/, ""));
+        });
+
+        $(".current_Unit").each(function () {
+            Currentcc(this);
+        });
+
+        var data;
+        $("#imagefile").change(function () {
+            readURL(this);
+            data = new FormData();
+            var files = $("#imagefile").get(0).files;
+            if (files.length > 0) {
+                data.append("HelpSectionImages", files[0]);
+            } else {
+                alert("File not valid");
+            }
+
+        });
+
+        $('#Brand_ID').autocomplete({
+            source: '@Url.Action("GetBrands")'
+        });
+        $('#Cat_ID').autocomplete({
+            source: '@Url.Action("GetCats")'
+        });
+        $('#Certify_ID').autocomplete({
+            source: '@Url.Action("GetCers")'
+        });
+        $('#JewelleryType_ID').autocomplete({
+            source: '@Url.Action("GetJews")'
+        });
+        $('#Prod_ID').autocomplete({
+            source: '@Url.Action("GetPros")'
+        });
+
+        $("#Style_Code").on("focus", function () {
+            $(this).tooltip("show");
+        }).tooltip({
+            placement: "top",
+            trigger: "focus",
+            title: "Begin with letter Upercase<br/> Min Length:8, Max Lenghth:50<br/> Not Contain Special Characters(except [. ' -])"
+        });
+        $("#Style_Code").bind("change", function () {
+            check_stylecode = validateMinMax("Style_Code", "result_Style_Code", rex_stylecode,8,50);
+        });
+
+        $("#Brand_ID").on("focus", function () {
+            $(this).tooltip("show");
+        }).tooltip({
+            placement: "top",
+            trigger: "focus",
+            title: "Brand ID must match the value in the Brand table."
+        });
+        $("#Brand_ID").bind("change", function () {
+            check_bra = validateMinMax("Brand_ID", "result_Brand_ID", rex_ID,4,10);
+        });
+
+        $("#Cat_ID").on("focus", function () {
+            $(this).tooltip("show");
+        }).tooltip({
+            placement: "top",
+            trigger: "focus",
+            title: "Category ID must match the value in the Category table."
+        });
+        $("#Cat_ID").bind("change", function () {
+            check_cat = validateMinMax("Cat_ID", "result_Cat_ID", rex_ID, 4, 10);
+        });
+
+        $("#Certify_ID").on("focus", function () {
+            $(this).tooltip("show");
+        }).tooltip({
+            placement: "top",
+            trigger: "focus",
+            title: "Certificate ID must match the value in the Certificate table."
+        });
+        $("#Certify_ID").bind("change", function () {
+            check_cer = validateMinMax("Certify_ID", "result_Certify_ID", rex_ID, 4, 10);
+        });
+
+        $("#JewelleryType_ID").on("focus", function () {
+            $(this).tooltip("show");
+        }).tooltip({
+            placement: "top",
+            trigger: "focus",
+            title: "Jewelery Type ID must match the value in the Jewelery Type table."
+        });
+        $("#JewelleryType_ID").bind("change", function () {
+            check_jew = validateMinMax("JewelleryType_ID", "result_JewelleryType_ID", rex_ID, 4, 10);
+        });
+
+        $("#Prod_ID").on("focus", function () {
+            $(this).tooltip("show");
+        }).tooltip({
+            placement: "top",
+            trigger: "focus",
+            title: "Product Type ID must match the value in the Product Type table."
+        });
+        $("#Prod_ID").bind("change", function () {
+            check_pro = validateMinMax("Prod_ID", "result_Prod_ID", rex_ID, 4, 10);
+        });
+
+       
+
+        $("#Quantity").bind("change", function () {
+            check_quan = validatelessthan0Int("Quantity", "result_Quantity");
+        });
+
+        $("#Net_Gold").bind("change", function () {
+            check_golw = validatelessthan0("Net_Gold", "result_Net_Gold");
+            var total = parseFloat(document.getElementById("Net_Gold").value) + parseFloat(document.getElementById("Stone_Wt").value);
+            $("#Tot_Gross_Wt").val(total.toFixed(3));
+        });
+
+        $("#Stone_Wt").bind("change", function () {
+            check_stow = validatelessthan0("Stone_Wt", "result_Stone_Wt");
+            var total = parseFloat(document.getElementById("Net_Gold").value) + parseFloat(document.getElementById("Stone_Wt").value);
+            $("#Tot_Gross_Wt").val(total.toFixed(3));
+        });
+
+        $("#Gold_Making").bind("change", function () {
+            CurrentccforValue(this);
+            check_golm = validatelessthan0("Gold_Making", "result_Gold_Making");
+            var total = parseFloat(document.getElementById("Gold_Making").value.replace(/,/g, "")) + parseFloat(document.getElementById("Stone_Making").value.replace(/,/, "")) + parseFloat(document.getElementById("Other_Making").value.replace(/,/, ""));
+            CurrentccforPassValue("#Tot_Making", total);
+            CurrentccforPassValue("#MRP", total);
+        });
+
+        $("#Stone_Making").bind("change", function () {
+            CurrentccforValue(this);
+            check_stom = validatelessthan0("Stone_Making", "result_Stone_Making");
+            var total = parseFloat(document.getElementById("Gold_Making").value.replace(/,/, "")) + parseFloat(document.getElementById("Stone_Making").value.replace(/,/, "")) + parseFloat(document.getElementById("Other_Making").value.replace(/,/, ""));
+            CurrentccforPassValue("#Tot_Making", total);
+            CurrentccforPassValue("#MRP", total);
+        });
+
+        $("#Other_Making").bind("change", function () {
+            CurrentccforValue(this);
+            check_othm = validatelessthan0("Other_Making", "result_Other_Making");
+            var total = parseFloat(document.getElementById("Gold_Making").value.replace(/,/, "")) + parseFloat(document.getElementById("Stone_Making").value.replace(/,/, "")) + parseFloat(document.getElementById("Other_Making").value.replace(/,/, ""));
+            CurrentccforPassValue("#Tot_Making", total);
+            CurrentccforPassValue("#MRP", total);
+        });
+
+        $("#MRP").bind("change", function () {
+            CurrentccforValue(this);
+            check_mrp = validatelessthan0("MRP", "result_MRP");
+        });
+        $('#myForm').submit(function (event) {
+            if (check_stylecode == false || check_pro == false || check_jew == false || check_cat == false || check_cer == false || check_bra == false  || check_quan == false || check_golw == false || check_stow == false || check_golm == false || check_stom == false || check_othm == false || check_mrp == false || check_img == false ) {
+                event.preventDefault();
+               
+                $("#report").replaceWith(report_stone.clone());
+                    $("#report").append("<strong>Your Infor not valid. Please check against !!!</strong>");
+                $("#report").addClass("alert alert-warning col-11 m-auto");
+                setTimeout(function () { $("#report").fadeOut(1000); }, 2500);
+            } else {
+                default_currentInput("#Gold_Making");
+                default_currentInput("#Stone_Making ");
+                default_currentInput("#Other_Making");
+                default_currentInput("#Tot_Making");
+                default_currentInput("#MRP");
+            }
+        });
+
+    });
+</script>

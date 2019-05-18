@@ -76,62 +76,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="DiamonViews">
-      <EntityTypeMapping TypeName="JewelleryShopping_dbModel.DiamonView">
-        <MappingFragment StoreEntitySet="DiamonView">
-          <ScalarProperty Name="Total_AmtAll" ColumnName="Total_AmtAll" />
-          <ScalarProperty Name="Dim_AmtSub" ColumnName="Dim_AmtSub" />
-          <ScalarProperty Name="Dim_RateSub" ColumnName="Dim_RateSub" />
-          <ScalarProperty Name="Dim_SizeSub" ColumnName="Dim_SizeSub" />
-          <ScalarProperty Name="Dim_GmSub" ColumnName="Dim_GmSub" />
-          <ScalarProperty Name="Dim_PcsSub" ColumnName="Dim_PcsSub" />
-          <ScalarProperty Name="Dim_CrtSub" ColumnName="Dim_CrtSub" />
-          <ScalarProperty Name="SubTyle" ColumnName="SubTyle" />
-          <ScalarProperty Name="DimSubType_ID" ColumnName="DimSubType_ID" />
-          <ScalarProperty Name="Dim_Amt" ColumnName="Dim_Amt" />
-          <ScalarProperty Name="Dim_Rate" ColumnName="Dim_Rate" />
-          <ScalarProperty Name="Dim_Size" ColumnName="Dim_Size" />
-          <ScalarProperty Name="Dim_Gm" ColumnName="Dim_Gm" />
-          <ScalarProperty Name="Dim_Pcs" ColumnName="Dim_Pcs" />
-          <ScalarProperty Name="Dim_Crt" ColumnName="Dim_Crt" />
-          <ScalarProperty Name="MainType" ColumnName="MainType" />
-          <ScalarProperty Name="DimQlty_ID" ColumnName="DimQlty_ID" />
-          <ScalarProperty Name="Style_Code" ColumnName="Style_Code" />
-          <ScalarProperty Name="No" ColumnName="No" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="GoldViews">
-      <EntityTypeMapping TypeName="JewelleryShopping_dbModel.GoldView">
-        <MappingFragment StoreEntitySet="GoldView">
-          <ScalarProperty Name="Total_Amount" ColumnName="Total_Amount" />
-          <ScalarProperty Name="Gold_Rate" ColumnName="Gold_Rate" />
-          <ScalarProperty Name="Total_weight" ColumnName="Total_weight" />
-          <ScalarProperty Name="Wstq" ColumnName="Wstq" />
-          <ScalarProperty Name="Wstg_Per" ColumnName="Wstg_Per" />
-          <ScalarProperty Name="Gold_Wt" ColumnName="Gold_Wt" />
-          <ScalarProperty Name="Gold_Crt" ColumnName="Gold_Crt" />
-          <ScalarProperty Name="GoldType_ID" ColumnName="GoldType_ID" />
-          <ScalarProperty Name="Style_code" ColumnName="Style_code" />
-          <ScalarProperty Name="No" ColumnName="No" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="StoneViews">
-      <EntityTypeMapping TypeName="JewelleryShopping_dbModel.StoneView">
-        <MappingFragment StoreEntitySet="StoneView">
-          <ScalarProperty Name="Stone_Amt" ColumnName="Stone_Amt" />
-          <ScalarProperty Name="Stone_Rate" ColumnName="Stone_Rate" />
-          <ScalarProperty Name="Stone_Crt" ColumnName="Stone_Crt" />
-          <ScalarProperty Name="Stone_Pcs" ColumnName="Stone_Pcs" />
-          <ScalarProperty Name="Stone_Gm" ColumnName="Stone_Gm" />
-          <ScalarProperty Name="StoneQlty" ColumnName="StoneQlty" />
-          <ScalarProperty Name="StoneQlty_ID" ColumnName="StoneQlty_ID" />
-          <ScalarProperty Name="Style_Code" ColumnName="Style_Code" />
-          <ScalarProperty Name="No" ColumnName="No" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="ViewFullItems">
       <EntityTypeMapping TypeName="JewelleryShopping_dbModel.ViewFullItem">
         <MappingFragment StoreEntitySet="ViewFullItem">
@@ -193,16 +137,6 @@
           <ScalarProperty Name="Prod_ID" ColumnName="Prod_ID" />
           <ScalarProperty Name="Cat_ID" ColumnName="Cat_ID" />
           <ScalarProperty Name="Pairs" ColumnName="Pairs" />
-          <ScalarProperty Name="Img" ColumnName="Img" />
-          <ScalarProperty Name="Style_Code" ColumnName="Style_Code" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="SimilarPrices">
-      <EntityTypeMapping TypeName="JewelleryShopping_dbModel.SimilarPrice">
-        <MappingFragment StoreEntitySet="SimilarPrice">
-          <ScalarProperty Name="total_brand" ColumnName="total_brand" />
-          <ScalarProperty Name="Prod_Type" ColumnName="Prod_Type" />
           <ScalarProperty Name="Img" ColumnName="Img" />
           <ScalarProperty Name="Style_Code" ColumnName="Style_Code" />
         </MappingFragment>
@@ -380,56 +314,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="DimMsts">
-      <EntityTypeMapping TypeName="JewelleryShopping_dbModel.DimMst">
-        <MappingFragment StoreEntitySet="DimMst">
-          <ScalarProperty Name="Total_AmtAll" ColumnName="Total_AmtAll" />
-          <ScalarProperty Name="Dim_AmtSub" ColumnName="Dim_AmtSub" />
-          <ScalarProperty Name="Dim_RateSub" ColumnName="Dim_RateSub" />
-          <ScalarProperty Name="Dim_SizeSub" ColumnName="Dim_SizeSub" />
-          <ScalarProperty Name="Dim_GmSub" ColumnName="Dim_GmSub" />
-          <ScalarProperty Name="Dim_PcsSub" ColumnName="Dim_PcsSub" />
-          <ScalarProperty Name="Dim_CrtSub" ColumnName="Dim_CrtSub" />
-          <ScalarProperty Name="No" ColumnName="No" />
-          <ScalarProperty Name="Dim_Amt" ColumnName="Dim_Amt" />
-          <ScalarProperty Name="Dim_Rate" ColumnName="Dim_Rate" />
-          <ScalarProperty Name="Dim_Size" ColumnName="Dim_Size" />
-          <ScalarProperty Name="Dim_Gm" ColumnName="Dim_Gm" />
-          <ScalarProperty Name="Dim_Pcs" ColumnName="Dim_Pcs" />
-          <ScalarProperty Name="Dim_Crt" ColumnName="Dim_Crt" />
-          <ScalarProperty Name="DimSubType_ID" ColumnName="DimSubType_ID" />
-          <ScalarProperty Name="DimQlty_ID" ColumnName="DimQlty_ID" />
-          <ScalarProperty Name="Style_Code" ColumnName="Style_Code" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="GoldMsts">
-      <EntityTypeMapping TypeName="JewelleryShopping_dbModel.GoldMst">
-        <MappingFragment StoreEntitySet="GoldMst">
-          <ScalarProperty Name="No" ColumnName="No" />
-          <ScalarProperty Name="Wstq" ColumnName="Wstq" />
-          <ScalarProperty Name="Total_weight" ColumnName="Total_weight" />
-          <ScalarProperty Name="Wstg_Per" ColumnName="Wstg_Per" />
-          <ScalarProperty Name="Gold_Wt" ColumnName="Gold_Wt" />
-          <ScalarProperty Name="GoldType_ID" ColumnName="GoldType_ID" />
-          <ScalarProperty Name="Style_code" ColumnName="Style_code" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="StoneMsts">
-      <EntityTypeMapping TypeName="JewelleryShopping_dbModel.StoneMst">
-        <MappingFragment StoreEntitySet="StoneMst">
-          <ScalarProperty Name="No" ColumnName="No" />
-          <ScalarProperty Name="Stone_Amt" ColumnName="Stone_Amt" />
-          <ScalarProperty Name="Stone_Rate" ColumnName="Stone_Rate" />
-          <ScalarProperty Name="Stone_Crt" ColumnName="Stone_Crt" />
-          <ScalarProperty Name="Stone_Pcs" ColumnName="Stone_Pcs" />
-          <ScalarProperty Name="Stone_Gm" ColumnName="Stone_Gm" />
-          <ScalarProperty Name="StoneQlty_ID" ColumnName="StoneQlty_ID" />
-          <ScalarProperty Name="Style_Code" ColumnName="Style_Code" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="UserRegMsts">
       <EntityTypeMapping TypeName="JewelleryShopping_dbModel.UserRegMst">
         <MappingFragment StoreEntitySet="UserRegMst">
@@ -459,9 +343,132 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="DimMsts">
+      <EntityTypeMapping TypeName="JewelleryShopping_dbModel.DimMst">
+        <MappingFragment StoreEntitySet="DimMst">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Total_AmtAll" ColumnName="Total_AmtAll" />
+          <ScalarProperty Name="Dim_AmtSub" ColumnName="Dim_AmtSub" />
+          <ScalarProperty Name="Dim_RateSub" ColumnName="Dim_RateSub" />
+          <ScalarProperty Name="Dim_SizeSub" ColumnName="Dim_SizeSub" />
+          <ScalarProperty Name="Dim_GmSub" ColumnName="Dim_GmSub" />
+          <ScalarProperty Name="Dim_PcsSub" ColumnName="Dim_PcsSub" />
+          <ScalarProperty Name="Dim_CrtSub" ColumnName="Dim_CrtSub" />
+          <ScalarProperty Name="No" ColumnName="No" />
+          <ScalarProperty Name="Dim_Amt" ColumnName="Dim_Amt" />
+          <ScalarProperty Name="Dim_Rate" ColumnName="Dim_Rate" />
+          <ScalarProperty Name="Dim_Size" ColumnName="Dim_Size" />
+          <ScalarProperty Name="Dim_Gm" ColumnName="Dim_Gm" />
+          <ScalarProperty Name="Dim_Pcs" ColumnName="Dim_Pcs" />
+          <ScalarProperty Name="Dim_Crt" ColumnName="Dim_Crt" />
+          <ScalarProperty Name="DimSubType_ID" ColumnName="DimSubType_ID" />
+          <ScalarProperty Name="DimQlty_ID" ColumnName="DimQlty_ID" />
+          <ScalarProperty Name="Style_Code" ColumnName="Style_Code" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GoldMsts">
+      <EntityTypeMapping TypeName="JewelleryShopping_dbModel.GoldMst">
+        <MappingFragment StoreEntitySet="GoldMst">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="No" ColumnName="No" />
+          <ScalarProperty Name="Wstq" ColumnName="Wstq" />
+          <ScalarProperty Name="Total_weight" ColumnName="Total_weight" />
+          <ScalarProperty Name="Wstg_Per" ColumnName="Wstg_Per" />
+          <ScalarProperty Name="Gold_Wt" ColumnName="Gold_Wt" />
+          <ScalarProperty Name="GoldType_ID" ColumnName="GoldType_ID" />
+          <ScalarProperty Name="Style_code" ColumnName="Style_code" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StoneMsts">
+      <EntityTypeMapping TypeName="JewelleryShopping_dbModel.StoneMst">
+        <MappingFragment StoreEntitySet="StoneMst">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="No" ColumnName="No" />
+          <ScalarProperty Name="Stone_Amt" ColumnName="Stone_Amt" />
+          <ScalarProperty Name="Stone_Rate" ColumnName="Stone_Rate" />
+          <ScalarProperty Name="Stone_Crt" ColumnName="Stone_Crt" />
+          <ScalarProperty Name="Stone_Pcs" ColumnName="Stone_Pcs" />
+          <ScalarProperty Name="Stone_Gm" ColumnName="Stone_Gm" />
+          <ScalarProperty Name="StoneQlty_ID" ColumnName="StoneQlty_ID" />
+          <ScalarProperty Name="Style_Code" ColumnName="Style_Code" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DiamonViews">
+      <EntityTypeMapping TypeName="JewelleryShopping_dbModel.DiamonView">
+        <MappingFragment StoreEntitySet="DiamonView">
+          <ScalarProperty Name="Total_AmtAll" ColumnName="Total_AmtAll" />
+          <ScalarProperty Name="Dim_AmtSub" ColumnName="Dim_AmtSub" />
+          <ScalarProperty Name="Dim_RateSub" ColumnName="Dim_RateSub" />
+          <ScalarProperty Name="Dim_SizeSub" ColumnName="Dim_SizeSub" />
+          <ScalarProperty Name="Dim_GmSub" ColumnName="Dim_GmSub" />
+          <ScalarProperty Name="Dim_PcsSub" ColumnName="Dim_PcsSub" />
+          <ScalarProperty Name="Dim_CrtSub" ColumnName="Dim_CrtSub" />
+          <ScalarProperty Name="SubTyle" ColumnName="SubTyle" />
+          <ScalarProperty Name="DimSubType_ID" ColumnName="DimSubType_ID" />
+          <ScalarProperty Name="Dim_Amt" ColumnName="Dim_Amt" />
+          <ScalarProperty Name="Dim_Rate" ColumnName="Dim_Rate" />
+          <ScalarProperty Name="Dim_Size" ColumnName="Dim_Size" />
+          <ScalarProperty Name="Dim_Gm" ColumnName="Dim_Gm" />
+          <ScalarProperty Name="Dim_Pcs" ColumnName="Dim_Pcs" />
+          <ScalarProperty Name="Dim_Crt" ColumnName="Dim_Crt" />
+          <ScalarProperty Name="MainType" ColumnName="MainType" />
+          <ScalarProperty Name="DimQlty_ID" ColumnName="DimQlty_ID" />
+          <ScalarProperty Name="Style_Code" ColumnName="Style_Code" />
+          <ScalarProperty Name="No" ColumnName="No" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GoldViews">
+      <EntityTypeMapping TypeName="JewelleryShopping_dbModel.GoldView">
+        <MappingFragment StoreEntitySet="GoldView">
+          <ScalarProperty Name="Total_Amount" ColumnName="Total_Amount" />
+          <ScalarProperty Name="Gold_Rate" ColumnName="Gold_Rate" />
+          <ScalarProperty Name="Total_weight" ColumnName="Total_weight" />
+          <ScalarProperty Name="Wstq" ColumnName="Wstq" />
+          <ScalarProperty Name="Wstg_Per" ColumnName="Wstg_Per" />
+          <ScalarProperty Name="Gold_Wt" ColumnName="Gold_Wt" />
+          <ScalarProperty Name="Gold_Crt" ColumnName="Gold_Crt" />
+          <ScalarProperty Name="GoldType_ID" ColumnName="GoldType_ID" />
+          <ScalarProperty Name="Style_code" ColumnName="Style_code" />
+          <ScalarProperty Name="No" ColumnName="No" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SimilarPrices">
+      <EntityTypeMapping TypeName="JewelleryShopping_dbModel.SimilarPrice">
+        <MappingFragment StoreEntitySet="SimilarPrice">
+          <ScalarProperty Name="total_brand" ColumnName="total_brand" />
+          <ScalarProperty Name="Prod_Type" ColumnName="Prod_Type" />
+          <ScalarProperty Name="Img" ColumnName="Img" />
+          <ScalarProperty Name="Style_Code" ColumnName="Style_Code" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StoneViews">
+      <EntityTypeMapping TypeName="JewelleryShopping_dbModel.StoneView">
+        <MappingFragment StoreEntitySet="StoneView">
+          <ScalarProperty Name="Stone_Amt" ColumnName="Stone_Amt" />
+          <ScalarProperty Name="Stone_Rate" ColumnName="Stone_Rate" />
+          <ScalarProperty Name="Stone_Crt" ColumnName="Stone_Crt" />
+          <ScalarProperty Name="Stone_Pcs" ColumnName="Stone_Pcs" />
+          <ScalarProperty Name="Stone_Gm" ColumnName="Stone_Gm" />
+          <ScalarProperty Name="StoneQlty" ColumnName="StoneQlty" />
+          <ScalarProperty Name="StoneQlty_ID" ColumnName="StoneQlty_ID" />
+          <ScalarProperty Name="Style_Code" ColumnName="Style_Code" />
+          <ScalarProperty Name="No" ColumnName="No" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="ProductViews">
       <EntityTypeMapping TypeName="JewelleryShopping_dbModel.ProductView">
         <MappingFragment StoreEntitySet="ProductView">
+          <ScalarProperty Name="Jewellery_Type" ColumnName="Jewellery_Type" />
           <ScalarProperty Name="Prod_Type" ColumnName="Prod_Type" />
           <ScalarProperty Name="Certify_Type" ColumnName="Certify_Type" />
           <ScalarProperty Name="Brand_Type" ColumnName="Brand_Type" />

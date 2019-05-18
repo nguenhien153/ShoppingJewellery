@@ -5,6 +5,9 @@ using System.Web.Mvc;
 using System.IO;
 using System.Data.SqlClient;
 using System.Configuration;
+using System.Collections.Generic;
+using System;
+
 namespace ShoppingJewellery.Controllers
 {
     public class TestController : Controller
@@ -15,6 +18,24 @@ namespace ShoppingJewellery.Controllers
         {
             return View(db.UserRegMsts.ToList());
         }
+
+        public JsonResult GetBrand(string brandid)
+        {
+            JewelleryShopping_dbEntities dbb = new JewelleryShopping_dbEntities();
+            List<string> brand;
+            brand = dbb.ItemMsts.Where(p => p.Style_Code.Contains(brandid)).Select(i => i.Style_Code).ToList();
+            return new JsonResult { Data = brand, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }
+
+        public ActionResult Autocomplete(string term)
+        {
+            JewelleryShopping_dbEntities dbb = new JewelleryShopping_dbEntities();
+            List<string> brand;
+            brand = dbb.ItemMsts.Where(p => p.Style_Code.StartsWith(term)).Select(i => i.Style_Code).ToList();
+
+            return Json(brand, JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult Index2()
         {
           

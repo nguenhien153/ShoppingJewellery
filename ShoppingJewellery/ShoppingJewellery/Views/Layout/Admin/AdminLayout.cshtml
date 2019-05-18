@@ -111,19 +111,24 @@
         .marginleft5px {
             margin-left: 5px;
         }
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+      
     </style>
 </head>
 <body>
-
-    <div class="col-12 row inital">
-        <div class="col-2" style="background-color:#ffffff;border-top-left-radius:25px; box-shadow: 20px 20px;">
-            <h4 class="text-center margin_top5px title"><b>Jewelery Shoping</b></h4>
+        <div class="col-12 row inital">
+            <div class="col-2" style="background-color:#ffffff;border-top-left-radius:25px; box-shadow: 20px 20px;">
+                <h4 class="text-center margin_top5px title"><b>Jewelery Shoping</b></h4>
+            </div>
+            <div class="col-10 " style="background-color:#ffffff;border-top-right-radius:25px;">
+                <span class="col-10 " id="Name_Admin">Hello @Page.name</span>
+                <a class="col-1 " href="@Url.Action("Logout","Admin")" style="float:right;margin-top:0.5%">Log Out</a>
+            </div>
         </div>
-        <div class="col-10 " style="background-color:#ffffff;border-top-right-radius:25px;">
-            <span class="col-10 " id="Name_Admin">Hello @Page.name</span>
-            <a class="col-1 " href="@Url.Action("Logout","Admin")" style="float:right;margin-top:0.5%">Log Out</a>
-        </div>
-    </div>
         <div class="col-12 row initall">
             <div class="col-2" style="background-color:#263544;color:#ffffff;border-bottom-left-radius:25px;">
                 <br />
@@ -196,7 +201,9 @@
                 @RenderBody()
             </div>
         </div>
-
+    <script>
+      
+    </script>
 
 </body>
 </html>

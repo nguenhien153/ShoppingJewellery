@@ -1,11 +1,18 @@
-﻿table.dataTable thead .sorting_desc {
-    background-image: url('../../Content/images/Icon/Admin/sort_desc.png');
+﻿.tooltip-inner {
+    max-width: none;
+    white-space: nowrap;
 }
 
-table.dataTable thead .sorting_asc {
-    background-image: url('../../Content/images/Icon/Admin/sort_asc.png');
+.main_input {
+    border-right: none !important;
+    width: 90% !important;
+    border-bottom-right-radius: unset !important;
+    border-top-right-radius: unset !important;
 }
-
-table.dataTable thead .sorting {
-    background-image: url('../../Content/images/Icon/Admin/sort_both.png');
+.side_input {
+    width: 10% !important;
+    text-align: center !important;
+    border-left: none !important;
+    border-bottom-left-radius: unset !important;
+    border-top-left-radius: unset !important;
 }

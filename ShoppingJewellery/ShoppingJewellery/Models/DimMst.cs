@@ -31,6 +31,7 @@ namespace ShoppingJewellery.Models
         public decimal Dim_RateSub { get; set; }
         public decimal Dim_AmtSub { get; set; }
         public decimal Total_AmtAll { get; set; }
+        public int ID { get; set; }
     
         public virtual DimQltyMst DimQltyMst { get; set; }
         public virtual DimQltySubMst DimQltySubMst { get; set; }

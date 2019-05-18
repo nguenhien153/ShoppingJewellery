@@ -59,7 +59,108 @@ function validateMinMax(inputt, resultt, re, min, max) {
     var ancestor2 = $(ancestor).parent();
     var text = $(ancestor2).children("label").text();
     $result.text("");
-    if (validateInput(re, input) == true && input.length >= min && input.length <= max) {
+    if (validateInput(re, input) == true && input.replace(/\s/g, '').length >= min && input.replace(/\s/g, '').length <= max) {
+        inputte.css('border', '1px solid #ced4da');
+        varr = true;
+    } else {
+        $result.text(text + " is not valid ");
+        $result.css("color", "red");
+        inputte.css('border', '1px solid red');
+        varr = false
+    }
+    return varr;
+}
+
+function validateRange(inputt, resultt, min, max) {
+    var $result = $("#" + resultt);
+    var input = parseInt($("#" + inputt).val());
+    var inputte = $("#" + inputt);
+    var ancestor = $("#" + inputt).closest("div");
+    var ancestor2 = $(ancestor).parent();
+    var text = $(ancestor2).children("label").text();
+    $result.text("");
+    if (input >= min && input <= max) {
+        inputte.css('border', '1px solid #ced4da');
+        varr = true;
+    } else {
+        $result.text(text + " is not valid ");
+        $result.css("color", "red");
+        inputte.css('border', '1px solid red');
+        varr = false
+    }
+    return varr;
+}
+
+function validatelessthan0(inputt, resultt) {
+    var $result = $("#" + resultt);
+    var input = parseFloat($("#" + inputt).val());
+    var inputte = $("#" + inputt);
+    var ancestor = $("#" + inputt).closest("div");
+    var ancestor2 = $(ancestor).parent();
+    var text = $(ancestor2).children("label").text();
+    $result.text("");
+    if (input > 0) {
+        inputte.css('border', '1px solid #ced4da');
+        varr = true;
+    } else {
+        $result.text(text + " is not valid ");
+        $result.css("color", "red");
+        inputte.css('border', '1px solid red');
+        varr = false
+    }
+    return varr;
+}
+
+
+function validatelessthan0Int(inputt, resultt) {
+    var $result = $("#" + resultt);
+    var input = parseInt($("#" + inputt).val());
+    var inputte = $("#" + inputt);
+    var ancestor = $("#" + inputt).closest("div");
+    var ancestor2 = $(ancestor).parent();
+    var text = $(ancestor2).children("label").text();
+    $result.text("");
+    if (input > 0) {
+        inputte.css('border', '1px solid #ced4da');
+        varr = true;
+    } else {
+        $result.text(text + " is not valid ");
+        $result.css("color", "red");
+        inputte.css('border', '1px solid red');
+        varr = false
+    }
+    return varr;
+}
+
+function validatecanbe0(inputt, resultt) {
+    var $result = $("#" + resultt);
+    var input = parseFloat($("#" + inputt).val());
+    var inputte = $("#" + inputt);
+    var ancestor = $("#" + inputt).closest("div");
+    var ancestor2 = $(ancestor).parent();
+    var text = $(ancestor2).children("label").text();
+    $result.text("");
+    if (input >= 0) {
+        inputte.css('border', '1px solid #ced4da');
+        varr = true;
+    } else {
+        $result.text(text + " is not valid ");
+        $result.css("color", "red");
+        inputte.css('border', '1px solid red');
+        varr = false
+    }
+    return varr;
+}
+
+function validatecanbe0Int(inputt, resultt) {
+    var $result = $("#" + resultt);
+    var input = parseInt($("#" + inputt).val());
+    var inputte = $("#" + inputt);
+    var ancestor = $("#" + inputt).closest("div");
+    var ancestor2 = $(ancestor).parent();
+    var text = $(ancestor2).children("label").text();
+    $result.text("");
+    if (input >= 0) {
         inputte.css('border', '1px solid #ced4da');
         varr = true;
     } else {

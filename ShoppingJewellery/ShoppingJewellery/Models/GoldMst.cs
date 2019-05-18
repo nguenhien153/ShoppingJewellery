@@ -21,6 +21,7 @@ namespace ShoppingJewellery.Models
         public decimal Total_weight { get; set; }
         public decimal Wstq { get; set; }
         public int No { get; set; }
+        public int ID { get; set; }
     
         public virtual GoldKrtMst GoldKrtMst { get; set; }
         public virtual ItemMst ItemMst { get; set; }

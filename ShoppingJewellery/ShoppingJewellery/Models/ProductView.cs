@@ -22,5 +22,6 @@ namespace ShoppingJewellery.Models
         public string Brand_Type { get; set; }
         public string Certify_Type { get; set; }
         public string Prod_Type { get; set; }
+        public string Jewellery_Type { get; set; }
     }
 }

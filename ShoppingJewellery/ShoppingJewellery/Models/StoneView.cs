@@ -14,6 +14,7 @@ namespace ShoppingJewellery.Models
     
     public partial class StoneView
     {
+        public int ID { get; set; }
         public int No { get; set; }
         public string Style_Code { get; set; }
         public string StoneQlty_ID { get; set; }

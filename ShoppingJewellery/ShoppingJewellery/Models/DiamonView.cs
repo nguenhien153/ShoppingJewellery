@@ -14,6 +14,7 @@ namespace ShoppingJewellery.Models
     
     public partial class DiamonView
     {
+        public int ID { get; set; }
         public int No { get; set; }
         public string Style_Code { get; set; }
         public string DimQlty_ID { get; set; }
