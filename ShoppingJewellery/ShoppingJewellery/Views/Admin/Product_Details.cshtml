@@ -1,9 +1,9 @@
 ﻿@model ShoppingJewellery.Models.Details_Product
-@{
-    /**/
 
-    ViewBag.Title = "Product_Details";
+@{
+    ViewBag.Title = "Product Details";
     Layout = "~/Views/Layout/Admin/AdminLayout.cshtml";
+    Page.name = Session["username"];
 }
 <link href="~/Content/css/Admin/Boxx.css" rel="stylesheet" />
 <link href="~/Content/css/Admin/jquery-ui.min.css?1" rel="stylesheet" />
@@ -172,11 +172,7 @@
         max-width: 60% !important;
     }
 
-    .ui-autocomplete {
-        max-height: 200px;
-        overflow-y: scroll;
-        overflow-x: hidden;
-    }
+
 </style>
 
 <div class="form-group col-12">
@@ -249,6 +245,12 @@
                                 <strong>Edit Success.</strong>Brand ID not exists !!!
                             </div>
                         }
+                        if (Session["Product_Details"].ToString().Equals("fileFalse"))
+                        {
+                            <div class="alert alert-danger col-11 m-auto">
+                                <strong>Edit Success.</strong>Occurr error while proccessing the file image !!!
+                            </div>
+                        }
                         Session.Remove("Product_Details");
                     }
                     else
@@ -274,7 +276,7 @@
                 <div class="form-group">
                     <label class="control-label col-12" for="Style_Code">Style Code</label>
                     <div class="col-12">
-                        <input class="form-control text-box single-line" id="Style_Code" name="Style_Code" type="text" value="@Model.pro_item.Style_Code" required data-html="true">
+                        <input class="form-control text-box single-line" id="Style_Code" name="Style_Code" type="text" value="@Model.pro_item.Style_Code" required readonly data-html="true">
                         <span class="field-validation-valid text-danger" data-valmsg-for="Style_Code" data-valmsg-replace="true" id="result_Style_Code"></span>
                     </div>
                 </div>
@@ -323,9 +325,9 @@
                 <input id="Prod_Quality" name="Prod_Quality" type="hidden" value="@Model.pro_item.Prod_Quality.Trim()">
 
 
-               
-                        <input id="size" name="size" type="hidden" value="@Model.pro_item.size" readonly data-html="true">
-                        
+
+                <input id="size" name="size" type="hidden" value="@Model.pro_item.size" readonly data-html="true">
+
 
                 <div class="form-group">
                     <label class="control-label col-12" for="Quantity">Quantity</label>
@@ -480,7 +482,7 @@
                                     </tr>
                                 }
                             }
-                            </tbody>
+                        </tbody>
                     </table>
                 </div>
             </fieldset>
@@ -575,18 +577,18 @@
                         @if (Model.diamond_option != null)
                         {
                             int style;
-                        <tbody>
-                            @foreach (var item in Model.diamond_option)
-                            {
+                            <tbody>
+                                @foreach (var item in Model.diamond_option)
+                                {
 
-                                if (!item.DimSubType_ID.Replace(" ", string.Empty).ToLower().Equals("none"))
-                                {
-                                    style = 2;
-                                }
-                                else
-                                {
-                                    style = 1;
-                                }
+                                    if (!item.DimSubType_ID.Replace(" ", string.Empty).ToLower().Equals("none"))
+                                    {
+                                        style = 2;
+                                    }
+                                    else
+                                    {
+                                        style = 1;
+                                    }
                                     <tr ID_diamond="@item.ID" NO_diamond="@item.No" option="@diamond">
                                         <td class="text-center align-middle" rowspan="@style">@item.No </td>
                                         <td class="align-middle"><div class="tag">Main</div> @item.DimQlty_ID.Replace(" ", string.Empty)</td>
@@ -611,8 +613,8 @@
                                         </tr>
                                     }
                                     diamond++;
-                            }
-                        </tbody>
+                                }
+                            </tbody>
                         }
                     </table>
                 </div>
@@ -757,7 +759,7 @@
             </div>
             <div class="modal-body">
 
-           
+
             </div>
         </div>
     </div>
@@ -769,7 +771,7 @@
 <script src="~/Content/js/Admin/forTable.js?9"></script>
 <script>
     var rex_stylecode = /^[A-Z]+[A-z0-9\s.'-]*$/;
-    var rex_ID = /^[A-z]+[A-z0-9]*$/;
+    var rex_ID = /^[A-Z]+[A-z0-9]*$/;
     var check_stylecode = true;
     var check_pro = true;
     var check_jew = true;
@@ -842,16 +844,7 @@
             source: '@Url.Action("GetPros")'
         });
 
-        $("#Style_Code").autocomplete({
-            source: '@Url.Action("GetStyle_code")'
-        });
-        $("#Style_Code").on("focus", function () {
-            $(this).tooltip("show");
-        }).tooltip({
-            placement: "top",
-            trigger: "focus",
-            title: "Style Code must be match value in Item Table."
-        });
+      
         $("#Style_Code").bind("change", function () {
             check_stylecode = validateMinMax("Style_Code", "result_Style_Code", rex_stylecode,8,50);
         });
@@ -1730,13 +1723,13 @@
                 $(this).css("background", "#fff");
             }
         });
-     
+
         $('input[readonly]').parent(".form-inline").each(function () {
             $(this).children("input").eq(1).css("background", "#e9ecef");
         });
 
         $("#edit_diamond").click(function () {
-            
+
             var check_mainID = true;
             var check_carat = true;
             var check_size = true;
@@ -2054,7 +2047,7 @@
                                 }
 
                             });
-                    });
+                        });
                     },
                     error: function (xhr, error, status) {
                         alert("Error: " + status);
@@ -2079,7 +2072,7 @@
             var hasOption = false;
 
             $("#modal_diamond .modal-body").empty();
-            $("#modal_diamond .modal-title").text("Edit Diamond Option");
+            $("#modal_diamond .modal-title").text("Create Diamond Option");
             $('#modal_diamond').modal('show');
             $.when($("#modal_diamond .modal-body").append(diamond_option)).done(function () {
                 readonlyInput();

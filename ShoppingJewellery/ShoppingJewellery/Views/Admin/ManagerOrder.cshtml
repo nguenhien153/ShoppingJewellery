@@ -1,0 +1,648 @@
+﻿@{
+    ViewBag.Title = "Item";
+    Layout = "~/Views/Layout/Admin/AdminLayout.cshtml";
+    Page.name = Session["username"];
+}
+<link href="~/Content/css/Admin/Boxx.css" rel="stylesheet" />
+<link href="~/Content/css/Admin/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="~/Content/css/Admin/select.dataTables.min.css" rel="stylesheet" />
+<link href="~/Content/css/Admin/buttons.dataTables.min.css" rel="stylesheet" />
+<link href="~/Content/css/Admin/responsive.dataTables.min.css" rel="stylesheet" />
+<link href="~/Content/bootstrap-4.0.0-dist/css/bootstrap-formhelpers.min.css" rel="stylesheet" />
+<link href="~/Content/css/Admin/forTable.css" rel="stylesheet" />
+<style>
+    table.dataTable thead .sorting_desc {
+        background-image: url('../../Content/images/Icon/Admin/sort_desc.png');
+    }
+
+    table.dataTable thead .sorting_asc {
+        background-image: url('../../Content/images/Icon/Admin/sort_asc.png');
+    }
+
+    table.dataTable thead .sorting {
+        background-image: url('../../Content/images/Icon/Admin/sort_both.png');
+    }
+
+    td.details-control {
+        background: url('../../Content/images/Icon/Admin/details_open.png') no-repeat center center;
+        cursor: pointer;
+    }
+
+    tr.shown td.details-control {
+        background: url('../../Content/images/Icon/Admin/details_close.png') no-repeat center center;
+        cursor: pointer;
+    }
+
+    table#table td {
+        word-break: break-all;
+    }
+
+    .report_result {
+        position: fixed;
+        z-index: 2002;
+        top: 10%;
+        left: 50%;
+        height: auto;
+    }
+
+        .report_result .image_report {
+            width: 30px;
+            margin-top: 5px;
+        }
+
+        .report_result p {
+            font-weight: 400;
+            line-height: 1.5;
+            color: #4cff00;
+            text-align: left;
+            background-color: #fff;
+        }
+
+    td.control::before {
+        border: 4px solid white !important;
+    }
+
+    .keepall {
+        word-break: keep-all;
+    }
+
+    .notbreakline {
+        white-space: nowrap;
+    }
+
+
+    .main_input {
+        border-right: none !important;
+        width: 80% !important;
+        border-bottom-right-radius: unset !important;
+        border-top-right-radius: unset !important;
+    }
+
+    .side_input {
+        width: 20% !important;
+        text-align: center !important;
+        border-left: none !important;
+        border-bottom-left-radius: unset !important;
+        border-top-left-radius: unset !important;
+    }
+</style>
+<div class="form-group col-12">
+    <div class="col-12 headerboxx">
+        <h4>Jewelery</h4>
+    </div>
+    <div class="boxx col-12">
+        <div style="overflow-x:auto;padding:0px 10px 15px 10px">
+            <div class="report_result ">
+                <img src="" class="image_report" />
+                <strong></strong>
+            </div>
+            <table class="table  table-striped hover  " id="table" style="width:100%; ">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th class="align-middle text-center" style="white-space:nowrap">First Name</th>
+                        <th class="align-middle text-center" style="white-space:nowrap">Last Name</th>
+                        <th class="align-middle text-center" style="white-space:nowrap">Phone</th>
+                        <th class="align-middle text-center" style="white-space:nowrap">Email</th>
+                        <th class="align-middle text-center" style="white-space:nowrap">Date Order</th>
+                        <th class="align-middle text-center" style="white-space:nowrap">Total</th>
+                        <th class="align-middle text-center" style="white-space:nowrap; ">Status</th>
+                        @*<th class="align-middle text-center" style="white-space:nowrap">City</th>
+                            <th class="align-middle text-center" style="white-space:nowrap">State/Province</th>
+                            <th class="align-middle text-center" style="white-space:nowrap">Zip/Postal</th>
+                            <th class="align-middle text-center" style="white-space:nowrap">Address</th>
+                            <th class="align-middle text-center" style="white-space:nowrap"></th>*@
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="selectRow" tabindex="-1" role="dialog" aria-hidden="true" on>
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h7 class="modal-title">
+                    <img src="~/Content/images/Icon/Admin/amount_Copy_3-512.png" style="width:30px" />
+                </h7>
+                <button type="button" class=" btn btn-danger close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p id="contentt"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade " id="model_common" tabindex="-1" role="dialog" aria-hidden="true" on>
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h7 class="modal-title"></h7>
+                <button type="button" class="btn btn-danger close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="loader" id="metal_load"></div>
+
+                <div id="OrderModal">
+                    <div class="" id="reportt2"></div>
+                    <form>
+                        <table style="width:100%">
+                            <tr>
+                                <td>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-12" for="FirstName">First Name</label>
+                                        <div class="col-md-12">
+                                            <input class="form-control text-box single-line" id="FirstName" maxlength="50" type="text" value="" required>
+                                            <span class="field-validation-valid text-danger" data-valmsg-for="FirstName" data-valmsg-replace="true" id="result_FirstName"></span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-12" for="Zip_Postal">Zip Postal</label>
+                                        <div class="col-md-12">
+                                            <input class="form-control text-box single-line" id="Zip_Postal" type="text" value="" required maxlength="6">
+                                            <span class="field-validation-valid text-danger" data-valmsg-for="Zip_Postal" data-valmsg-replace="true" id="result_Zip_Postal"></span>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-12" for="LastName">Last Name</label>
+                                        <div class="col-md-12">
+                                            <input class="form-control text-box single-line" id="LastName" type="text" value="" maxlength="50" required>
+                                            <span class="field-validation-valid text-danger" data-valmsg-for="LastName" data-valmsg-replace="true" id="result_LastName"></span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-12" for="Phone">Phone</label>
+                                        <div class="col-md-12">
+                                            <input type="text" class="form-control bfh-phone" id="Phone" data-country="Country" required>
+                                            <span class="field-validation-valid text-danger" data-valmsg-for="Phone" data-valmsg-replace="true" id="result_Phone"></span>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-12" for="Country">Country</label>
+                                        <div class="col-md-12">
+                                            <select id="Country" class="form-control bfh-countries" data-country="US" required onchange="GetValues()"></select>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-12" for="email">Email</label>
+                                        <div class="col-md-12">
+                                            <input class="form-control text-box single-line" id="email" maxlength="50" type="text" value="">
+                                            <span class="field-validation-valid text-danger" data-valmsg-for="email" data-valmsg-replace="true" id="result_email"></span>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-12" for="State_Province">State/Province</label>
+                                        <div class="col-md-12">
+                                            <select class="form-control bfh-states" data-country="Country" data-state="CA" id="State_Province" onchange="GetValuess()" required></select>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-12" for="Distance">Distance</label>
+                                        <div class="col-md-12 form-inline">
+                                            <input class="form-control  main_input" id="Distance" type="number" value="" readonly>
+                                            <input type="text" class="form-control side_input"   value="Km" disabled />
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-12" for="City">City</label>
+                                        <div class="col-md-12">
+                                            <input class="form-control text-box single-line" id="City" type="text" value="" required maxlength="50">
+                                            <span class="field-validation-valid text-danger" data-valmsg-for="City" data-valmsg-replace="true" id="result_City"></span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-12" for="ship_Fee">Ship Fee</label>
+                                        <div class="col-md-12 form-inline">
+                                            <input class="form-control  main_input" id="Ship Fee" type="text" value="" readonly>
+                                            <input type="text" class="form-control side_input"   value="Rs" disabled />
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-12" for="Address">Address</label>
+                                        <div class="col-md-12">
+                                            <input class="form-control text-box single-line" id="Address" type="text" value="" required maxlength="200">
+                                            <span class="field-validation-valid text-danger" data-valmsg-for="Address" data-valmsg-replace="true" id="result_Address"></span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-12" for="Total_brand">Total</label>
+                                        <div class="col-md-12">
+                                            <div class="form-inline">
+                                                <input class="form-control main_input" id="Total_brand" type="text" value="">
+                                                <input type="text" class="form-control side_input"  value="Rs" disabled />
+                                            </div>
+                                            <span class="field-validation-valid text-danger" data-valmsg-for="Total_brand" data-valmsg-replace="true" id="result_Total_brand"></span>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-12" for="Instruction_Optional">Instruction (Optional)</label>
+                                        <div class="col-md-12">
+                                            <textarea class="col-12 form-control text-box" maxlength="700" id="Instruction_Optional" rows="5" style=" height:194px"></textarea>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-12" for="Date_order">Date Order</label>
+                                        <div class="col-md-12">
+                                            <input class="form-control text-box single-line" id="Date_order" type="text" value="">
+                                            <span class="field-validation-valid text-danger" data-valmsg-for="Date_order" data-valmsg-replace="true" id="result_Date_order"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="control-label col-md-12" for="Status">Status</label>
+                                        <div class="col-md-12">
+                                            <select id="Status" class="form-control">
+                                                <option>Processing</option>
+                                                <option>Shipping</option>
+                                                <option>Cancel</option>
+                                                <option>Complete</option>
+                                            </select>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="modal-footer form-inline">
+                                        <button type="button" class="btn btn-success" id="Save">Save</button>
+                                        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                                    </div>
+                                </td>
+                            </tr>
+
+                        </table>
+                    </form>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="form-group">
+    <input type="hidden" id="address" value="">
+</div>
+<form id="reesult">
+    <input name="lat" id="lat" type="hidden" readonly>
+    <input name="lng" id="lng" type="hidden" readonly>
+</form>
+<script src="~/Content/js/Admin/forTable.js?15"></script>
+<script src="~/Content/js/Admin/jquery.dataTables.min.js"></script>
+<script src="~/Content/js/Admin/dataTables.select.min.js"></script>
+<script src="~/Content/js/Admin/dataTables.buttons.min.js"></script>
+<script src="~/Content/js/Admin/dataTables.responsive.min.js"></script>
+<script src="~/Content/JQuery/jquery.geocomplete.min.js"></script>
+<script src="~/Content/js/Admin/Password.js"></script>
+<script src='https://maps.googleapis.com/maps/api/js?key=AIzaSyDS-ue65Jx_HySaXRqnMehRbg67cMCL_xM&libraries=places'></script>
+<script src="~/Content/bootstrap-4.0.0-dist/js/bootstrap-formhelpers.min.js?2"></script>
+<script>
+    var admin = '@Session["admin"]';
+    var modalClone = $("#selectRow").clone();
+    var reportClone = $(".report_result").clone();
+    var id_order;
+
+    var re_mail = /^(([^<>()[\]\\.,;:\s@@\"]+(\.[^<>()[\]\\.,;:\s@@\"]+)*)|(\".+\"))@@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    var re_name = /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/;
+    var re_zip = /^\d{4,6}$/;
+    var re_address = /^[a-zA-Z0-9\s,'-]{4}[a-zA-Z0-9\s,'-]*$/;
+
+    function reportt(classdiv, classImg, srcImg, status, text) {
+        $("." + classdiv).addClass("alert-" + status + " alert form-inline");
+        $("." + classImg).attr("src", srcImg);
+        $("." + classdiv + " strong").append("&nbsp; &nbsp;  " + text);
+
+    }
+    function format(d) {
+        var fee = numberWithCommas(d.ship_Fee);
+        return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px; width:100%">' +
+            "<tr style='background-color:rgba(0,0,255,0.3)'>"+
+            "<th class='align-middle text-center' style='white-space:nowrap'>Country</th>" +
+            "<th class='align-middle text-center' style='white-space:nowrap'>City</th>" +
+            "<th class='align-middle text-center' style='white-space:nowrap'>State/Province</th>" +
+            "<th class='align-middle text-center' style='white-space:nowrap'>Address</th>" +
+            "<th class='align-middle text-center' style='white-space:nowrap'>Instruction</th>" +
+            "<th class='align-middle text-center' style='white-space:nowrap'>Zip/Postal</th>" +
+            "<th class='align-middle text-center' style='white-space:nowrap'>Distance</th>" +
+            "<th class='align-middle text-center' style='white-space:nowrap'>Ship Fee</th>" +
+            "</tr>"+
+            '<tr>' +
+            "<td class='align-middle text-center' style='word-break:keep-all'>" + d.Country + "</td>" +
+            "<td class='align-middle text-center' style='word-break:keep-all'>" + d.City + "</td>" +
+            "<td class='align-middle text-center' style='word-break:keep-all'>" + d.State_Province + "</td>" +
+            "<td class='align-middle text-center' style='word-break:keep-all'>" + d.Address + "</td>" +
+            "<td class='align-middle text-center' style='word-break:keep-all'>" + d.Instruction_Optional + "</td>" +
+            "<td class='align-middle text-center' style='word-break:keep-all'>" + d.Zip_Postal + "</td>" +
+            "<td class='align-middle text-center' style='word-break:keep-all'>" + d.Distance + "</td>" +
+            "<td class='align-middle text-center' style='word-break:keep-all'>" + fee + "</td>" +
+            '</tr>' +
+            '</table>'+'<hr style="border-top: 1.5px solid rgba(0,0,255,0.3)"/>';
+    }
+
+
+    var e = document.getElementById("Country");
+    var strUser = "United States";
+    var r = document.getElementById("State_Province");
+    var strUserr = "California";
+    var address;
+    var distanceee;
+    function GetValues() {
+        strUser = e.options[e.selectedIndex].text;
+        if (strUser == "United States") {
+            strUserr = "California";
+        } else {
+            strUserr = "";
+        }
+        address = strUserr.toString() + " , " + strUser.toString();
+        getLotutide(address);
+        var lat = $("#lat").val();
+        var lng = $("#lng").val();
+        if (lat != null || lng != null) {
+            distanceee = distance(19.0768261, 72.9988664, lat, lng);
+            $("#Distance").val(distanceee);
+        }
+    }
+    function GetValuess() {
+        strUserr = r.options[r.selectedIndex].text;
+        address = strUserr.toString() + " , " + strUser.toString();
+        getLotutide(address);
+        var lat = $("#lat").val();
+        var lng = $("#lng").val();
+        if (lat != null || lng != null) {
+            distanceee = distance(19.0768261, 72.9988664, lat, lng);
+            $("#Distance").val(distanceee);
+        }
+    }
+    function distance(lat1, lon1, lat2, lon2) {
+        var R = 6371; // km (change this constant to get miles)
+        var dLat = (lat2 - lat1) * Math.PI / 180;
+        var dLon = (lon2 - lon1) * Math.PI / 180;
+        var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+            Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+            Math.sin(dLon / 2) * Math.sin(dLon / 2);
+        var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        var d = R * c;
+        if (d > 1) return Math.round(d);
+        else if (d <= 1) return Math.round(d);
+        return d;
+    }
+    function getLotutide(addresse) {
+        $("#address").val(addresse);
+        $("#address").geocomplete({ details: "form#reesult" });
+        $("#address").trigger("geocode");
+    }
+
+
+    $(document).ready(function () {
+
+        $.ajax({
+            url: '/Admin/GetOrder',
+            contentType: JSON,
+            success: function (data) {
+                var table = $('#table').DataTable({
+                    "data": JSON.parse(data),
+                    "stateSave": true,
+                    "select": {
+                        "info": false
+                    },
+                    "columns": [
+                        {
+                            "className": 'details-control',
+                            "orderable": false,
+                            "data": null,
+                            "defaultContent": ''
+                        },
+                        {
+                            "data": "FirstName",
+                            "className": "align-middle text-center keepall",
+                        },
+                        {
+                            "data": "LastName",
+                            "className": "align-middle text-center keepall",
+                        },
+                        {
+                            "data": "Phone",
+                            "className": "align-middle text-center notbreakline",
+                            "render": function (mobNo) {
+                                var phone2 = mobNo.replace(/\s/g, '').length;
+
+                                var area, phone;
+                                if (phone2 == 11) {
+                                    area = mobNo.substring(0, 2);
+                                    phone = mobNo.substring(2);
+                                    area = "(+" + area + ")"
+                                    phone = phone.slice(0, 4) + " " + phone.slice(4, 7) + " " + phone.slice(7, 9);
+                                    mobNo = area + " " + phone;
+                                }
+                                if (phone2 == 10) {
+                                    area = mobNo.substring(0, 1);
+                                    phone = mobNo.substring(1);
+                                    area = "(+" + area + ")"
+                                    phone = phone.slice(0, 4) + " " + phone.slice(4, 7) + " " + phone.slice(7, 9);
+                                    mobNo = area + " " + phone;
+                                }
+                                if (phone2 == 12) {
+                                    area = mobNo.substring(0, 3);
+                                    phone = mobNo.substring(3);
+                                    area = "(+" + area + ")"
+                                    phone = phone.slice(0, 4) + " " + phone.slice(4, 7) + " " + phone.slice(7, 9);
+                                    mobNo = area + " " + phone;
+                                }
+                                return mobNo;
+                            }
+                        },
+                        {
+                            "data": "email",
+                            "className": "align-middle text-center notbreakline",
+                        },
+                        {
+                            "data": "Date_order",
+                            "className": "align-middle text-center notbreakline",
+                            "render": function (data) {
+                                var from = data.substring(0,10).split("-");
+                                return from[2]+"/"+from[1]+"/"+from[0];
+                            }
+                        },
+                        {
+                            "data": "Total_brand",
+                            "className": "align-middle text-center keepall",
+                            "render": function (data) {
+                                data = numberWithCommas(data);
+                                return data;
+                            }
+                        },
+                        {
+                            "data": "Status",
+                            "className": "align-middle text-center keepall",
+                        }
+                    ],
+                    "order": [[7, 'asc']]
+                });
+
+                new $.fn.dataTable.Buttons(table, {
+                    buttons: [
+                        {
+                            className: 'btn',
+                            attr: {
+                                title: 'Create Order',
+                                //id: 'copyButton',
+                            },
+                            text: '<img src="../Content/images/Icon/Admin/Product_Create.png" style="width:50px" />',
+                            action: function () {
+                                $("#model_common").modal("show");
+
+                                var check_Fname = false;
+                                var check_Lname = false;
+                                var check_country = false;
+                                var check_State = false;
+                                var check_City = false;
+                                var check_Address = false;
+                                var check_Zip = false;
+                                var check_Phone = false;
+                                var check_Email = false;
+                                var check_Distance = false;
+                                var check_ship = false;
+                                var check_Date = false;
+
+                                readonlyInput();
+
+
+                                $('#FirstName').bind("change", function () {
+                                    check_Fname = validateMinMax("FirstName", "result_FirstName", re_name,4,50);
+                                });
+                                $('#LastName').bind("change", function () {
+                                    check_Lname = validateMinMax("LastName", "result_LastName", re_name, 4, 50);
+                                });
+
+                                $("#email").bind("change", function () {
+                                    check_Email = validateMinMax("email", "result_email", re_mail,5,50);
+                                });
+                                $("#Zip_Postal").bind("change", function () {
+                                    check_Zip = validateMinMax("Zip_Postal", "result_Zip_Postal", re_zip,4,6);
+                                });
+
+                                $("#City").bind("change", function () {
+                                    check_City = validateMinMax("City", "result_City", re_name,4,50);
+                                });
+
+                                $("#Address").bind("change", function () {
+                                    check_Address = validateMinMax("Address", "result_Address", re_address,10,200);
+                                });
+
+                                $("#Save").click(function () {
+
+                                });
+                            }
+                        },
+                        {
+                            className: 'btn',
+                            attr: {
+                                title: 'Details Order',
+                                //id: 'copyButton',
+                            },
+                            text: '<img src="../Content/images/Icon/Admin/Prodcut_Details.png" style="width:50px" />',
+                            action: function () {
+
+                            },
+
+                        },
+                        {
+                            className: 'btn',
+                            attr: {
+                                title: 'Delete Order',
+                                id: 'DeleteItem',
+                            },
+                            text: '<img src="../Content/images/Icon/Admin/Product_Delete.png" style="width:50px" />',
+                            action: function () {
+                                if (admin != "SuperAdmin") {
+                                    return;
+                                }
+                            },
+
+                        }
+                    ]
+                });
+
+
+                table.buttons(0, null).container().prependTo(
+                    table.table().container()
+                );
+                remove_ClassButton();
+                table_inital("table");
+
+                $('#table tbody').on('click', 'td.details-control', function () {
+                    var tr = $(this).closest('tr');
+                    var row = table.row(tr);
+
+                    if (row.child.isShown()) {
+                        // This row is already open - close it
+                        row.child.hide();
+                        tr.removeClass('shown');
+                    }
+                    else {
+                        // Open this row
+                        row.child(format(row.data())).show();
+                        tr.addClass('shown');
+                    }
+                });
+
+                $('#table tbody').on('click', 'tr', function () {
+                    var row = table.row(this);
+                  id_order =  row.data().ID_Order;
+                });
+
+        //if (admin != "SuperAdmin") {
+        //    $("#DeleteItem").hide();
+        //}
+
+            },
+            error: function (xhr, error, status) {
+                alert("Erorr: " + status);
+            }
+        })
+
+    });
+</script>

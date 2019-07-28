@@ -31,11 +31,8 @@ namespace ShoppingJewellery.Models
         public virtual DbSet<JewelTypeMst> JewelTypeMsts { get; set; }
         public virtual DbSet<ProdMst> ProdMsts { get; set; }
         public virtual DbSet<ViewDisplayItem> ViewDisplayItems { get; set; }
-        public virtual DbSet<Image> Images { get; set; }
         public virtual DbSet<ViewFullItem> ViewFullItems { get; set; }
-        public virtual DbSet<ItemMst> ItemMsts { get; set; }
         public virtual DbSet<Payment> Payments { get; set; }
-        public virtual DbSet<Order_> Order_ { get; set; }
         public virtual DbSet<Feedback> Feedbacks { get; set; }
         public virtual DbSet<Inquiry> Inquiries { get; set; }
         public virtual DbSet<Order_Details> Order_Details { get; set; }
@@ -57,5 +54,8 @@ namespace ShoppingJewellery.Models
         public virtual DbSet<SimilarPrice> SimilarPrices { get; set; }
         public virtual DbSet<StoneView> StoneViews { get; set; }
         public virtual DbSet<ProductView> ProductViews { get; set; }
+        public virtual DbSet<Image> Images { get; set; }
+        public virtual DbSet<ItemMst> ItemMsts { get; set; }
+        public virtual DbSet<Order_> Order_ { get; set; }
     }
 }

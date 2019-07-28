@@ -227,7 +227,7 @@
                 '<button onclick="UserAddress_Edit()" class="btn edittt marginleft5px" style="margin-bottom: 10px;background: rgba(0,0,0,0)" data-toggle="tooltip" title="Edit Addresss" data-placement="bottom"><img src="/Content/images/Icon/Admin/ChildRow_Edit.png" style="width:35px "/></button>' +
                 '<button onclick="UserAddress_Delete()" class="btn deteleee marginleft5px" style="margin-bottom: 10px;background: rgba(0,0,0,0)" data-toggle="tooltip" title="Delete Address" data-placement="bottom"><img src="/Content/images/Icon/Admin/ChildRow_Delete.png" style="width:35px "/></button>';
         } else {
-            createe = '<button onclick="UserAddress_Edit()" class="btn edittt marginleft5px" style="margin-bottom: 10px;background: rgba(0,0,0,0)" data-toggle="tooltip" title="Edit Addresss" data-placement="bottom"><img src="/Content/images/Icon/Admin/ChildRow_Edit.png" style="width:35px "/></button>';
+            createe = "<a href='/Admin/UserAddress_Create?username=" + d.userID + "' class='btn createeed marginleft5px' style='margin-bottom: 10px' data-toggle='tooltip' title='Create Address' data-placement='bottom' ><img src='/Content/images/Icon/Admin/ChildRow_Create.png' style='width:35px'/></a>"+'<button onclick="UserAddress_Edit()" class="btn edittt marginleft5px" style="margin-bottom: 10px;background: rgba(0,0,0,0)" data-toggle="tooltip" title="Edit Addresss" data-placement="bottom"><img src="/Content/images/Icon/Admin/ChildRow_Edit.png" style="width:35px "/></button>';
         }
         for (var i = 0; i < d.Addresses1.length; i++) {
             if (d.Addresses1[i].Instruction_Optional === "") {
@@ -287,7 +287,7 @@
             method: 'post',
             dataType: 'json',
             success: function (data) {
-
+              
                 var table = $("#example").DataTable({
                     data: data,
                     "responsive": false,
@@ -332,8 +332,6 @@
                             "render": function (mobNo) {
                                 var phone2 = mobNo.replace(/\s/g, '').length;
                                 var area, phone;
-
-
                                 if (phone2 == 11) {
                                     area = mobNo.substring(0, 2);
                                     phone = mobNo.substring(2);
@@ -388,7 +386,7 @@
                             'sortable': false,
                             "render": function (password) {
                                 return "<div style'width:100%'>" +
-                                    "<input id='password' type='password' class='w3-input col-12' value='" + password + "'readonly  style='background: rgba(0,0,0,0);border-bottom:0;width:70%;text-overflow: ellipsis;'>" +
+                                    "<input type='password' class='w3-input col-12' value='" + password + "'readonly  style='background: rgba(0,0,0,0);border-bottom:0;width:70%;text-overflow: ellipsis;'>" +
                                     "<img src='../Content/images/Icon/Admin/Hide_Password.png' class='field-icon show_hide' onclick='show_hide(this)' />" +
                                     "</div>";
                             }
@@ -413,10 +411,8 @@
 
                 if (admin == "SuperAdmin")
                 {
-                    $(".createe").show();
                     $(".deletee").show();
                 } else {
-                    $(".createe").hide();
                     $(".deletee").hide();
                 }
 
@@ -430,6 +426,9 @@
                     userID = null;
                 });
                 $(".deletee").on("click", function () {
+                    if (admin != "SuperAdmin") {
+                        return;
+                    }
                     if (userID != null) {
                         $("#content_delete").text("Deleting an account will delete all account addresses. Are you sure?");
                         $("#delete_button").attr("href", "/Admin/UserAccount_Detele?username=" + userID.replace(/\s/g, ''));

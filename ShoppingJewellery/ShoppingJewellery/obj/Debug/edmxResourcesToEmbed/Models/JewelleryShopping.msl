@@ -67,15 +67,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Images">
-      <EntityTypeMapping TypeName="JewelleryShopping_dbModel.Image">
-        <MappingFragment StoreEntitySet="Image">
-          <ScalarProperty Name="No" ColumnName="No" />
-          <ScalarProperty Name="image1" ColumnName="image" />
-          <ScalarProperty Name="Style_Colde" ColumnName="Style_Colde" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="ViewFullItems">
       <EntityTypeMapping TypeName="JewelleryShopping_dbModel.ViewFullItem">
         <MappingFragment StoreEntitySet="ViewFullItem">
@@ -142,31 +133,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="ItemMsts">
-      <EntityTypeMapping TypeName="JewelleryShopping_dbModel.ItemMst">
-        <MappingFragment StoreEntitySet="ItemMst">
-          <ScalarProperty Name="Stone_Wt" ColumnName="Stone_Wt" />
-          <ScalarProperty Name="Img" ColumnName="Img" />
-          <ScalarProperty Name="Gold_Making" ColumnName="Gold_Making" />
-          <ScalarProperty Name="size" ColumnName="size" />
-          <ScalarProperty Name="MRP" ColumnName="MRP" />
-          <ScalarProperty Name="Tot_Making" ColumnName="Tot_Making" />
-          <ScalarProperty Name="Other_Making" ColumnName="Other_Making" />
-          <ScalarProperty Name="Stone_Making" ColumnName="Stone_Making" />
-          <ScalarProperty Name="Tot_Gross_Wt" ColumnName="Tot_Gross_Wt" />
-          <ScalarProperty Name="Net_Gold" ColumnName="Net_Gold" />
-          <ScalarProperty Name="JewelleryType_ID" ColumnName="JewelleryType_ID" />
-          <ScalarProperty Name="Prod_ID" ColumnName="Prod_ID" />
-          <ScalarProperty Name="Certify_ID" ColumnName="Certify_ID" />
-          <ScalarProperty Name="Prod_Quality" ColumnName="Prod_Quality" />
-          <ScalarProperty Name="Cat_ID" ColumnName="Cat_ID" />
-          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-          <ScalarProperty Name="Brand_ID" ColumnName="Brand_ID" />
-          <ScalarProperty Name="Pairs" ColumnName="Pairs" />
-          <ScalarProperty Name="Style_Code" ColumnName="Style_Code" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Payments">
       <EntityTypeMapping TypeName="JewelleryShopping_dbModel.Payment">
         <MappingFragment StoreEntitySet="Payment">
@@ -178,26 +144,6 @@
           <ScalarProperty Name="CardNumber" ColumnName="CardNumber" />
           <ScalarProperty Name="Method_Card" ColumnName="Method_Card" />
           <ScalarProperty Name="TypeCreditCard" ColumnName="TypeCreditCard" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Order_">
-      <EntityTypeMapping TypeName="JewelleryShopping_dbModel.Order_">
-        <MappingFragment StoreEntitySet="Order_">
-          <ScalarProperty Name="Date_order" ColumnName="Date_order" />
-          <ScalarProperty Name="Address" ColumnName="Address" />
-          <ScalarProperty Name="ID_Order" ColumnName="ID_Order" />
-          <ScalarProperty Name="Total_brand" ColumnName="Total_brand" />
-          <ScalarProperty Name="Status" ColumnName="Status" />
-          <ScalarProperty Name="Instruction_Optional" ColumnName="Instruction_Optional" />
-          <ScalarProperty Name="email" ColumnName="email" />
-          <ScalarProperty Name="Phone" ColumnName="Phone" />
-          <ScalarProperty Name="Zip_Postal" ColumnName="Zip_Postal" />
-          <ScalarProperty Name="State_Province" ColumnName="State_Province" />
-          <ScalarProperty Name="City" ColumnName="City" />
-          <ScalarProperty Name="Country" ColumnName="Country" />
-          <ScalarProperty Name="LastName" ColumnName="LastName" />
-          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -477,6 +423,63 @@
           <ScalarProperty Name="Tot_Gross_Wt" ColumnName="Tot_Gross_Wt" />
           <ScalarProperty Name="Quantity" ColumnName="Quantity" />
           <ScalarProperty Name="Style_Code" ColumnName="Style_Code" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Images">
+      <EntityTypeMapping TypeName="JewelleryShopping_dbModel.Image">
+        <MappingFragment StoreEntitySet="Image">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="No" ColumnName="No" />
+          <ScalarProperty Name="image1" ColumnName="image" />
+          <ScalarProperty Name="Style_Colde" ColumnName="Style_Colde" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ItemMsts">
+      <EntityTypeMapping TypeName="JewelleryShopping_dbModel.ItemMst">
+        <MappingFragment StoreEntitySet="ItemMst">
+          <ScalarProperty Name="Stone_Wt" ColumnName="Stone_Wt" />
+          <ScalarProperty Name="Img" ColumnName="Img" />
+          <ScalarProperty Name="Gold_Making" ColumnName="Gold_Making" />
+          <ScalarProperty Name="size" ColumnName="size" />
+          <ScalarProperty Name="MRP" ColumnName="MRP" />
+          <ScalarProperty Name="Tot_Making" ColumnName="Tot_Making" />
+          <ScalarProperty Name="Other_Making" ColumnName="Other_Making" />
+          <ScalarProperty Name="Stone_Making" ColumnName="Stone_Making" />
+          <ScalarProperty Name="Tot_Gross_Wt" ColumnName="Tot_Gross_Wt" />
+          <ScalarProperty Name="Net_Gold" ColumnName="Net_Gold" />
+          <ScalarProperty Name="JewelleryType_ID" ColumnName="JewelleryType_ID" />
+          <ScalarProperty Name="Prod_ID" ColumnName="Prod_ID" />
+          <ScalarProperty Name="Certify_ID" ColumnName="Certify_ID" />
+          <ScalarProperty Name="Prod_Quality" ColumnName="Prod_Quality" />
+          <ScalarProperty Name="Cat_ID" ColumnName="Cat_ID" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Brand_ID" ColumnName="Brand_ID" />
+          <ScalarProperty Name="Pairs" ColumnName="Pairs" />
+          <ScalarProperty Name="Style_Code" ColumnName="Style_Code" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Order_">
+      <EntityTypeMapping TypeName="JewelleryShopping_dbModel.Order_">
+        <MappingFragment StoreEntitySet="Order_">
+          <ScalarProperty Name="ship_Fee" ColumnName="ship_Fee" />
+          <ScalarProperty Name="Distance" ColumnName="Distance" />
+          <ScalarProperty Name="Date_order" ColumnName="Date_order" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="ID_Order" ColumnName="ID_Order" />
+          <ScalarProperty Name="Total_brand" ColumnName="Total_brand" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Instruction_Optional" ColumnName="Instruction_Optional" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Zip_Postal" ColumnName="Zip_Postal" />
+          <ScalarProperty Name="State_Province" ColumnName="State_Province" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Country" ColumnName="Country" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

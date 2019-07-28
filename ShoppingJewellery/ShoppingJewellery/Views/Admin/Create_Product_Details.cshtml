@@ -1,7 +1,8 @@
 ﻿
 @{
-    ViewBag.Title = "Create_Product_Details";
+    ViewBag.Title = "Create Product";
     Layout = "~/Views/Layout/Admin/AdminLayout.cshtml";
+    Page.name = Session["username"];
 }
 <link href="~/Content/css/Admin/Boxx.css" rel="stylesheet" />
 <link href="~/Content/css/Admin/jquery-ui.min.css?1" rel="stylesheet" />
@@ -194,9 +195,9 @@
                 <input id="Prod_Quality" name="Prod_Quality" type="hidden" value="0.00">
 
 
-           
-                        <input class="" id="size" name="size" type="hidden" value="5" readonly data-html="true">
-                     
+
+                <input class="" id="size" name="size" type="hidden" value="5" readonly data-html="true">
+
                 <div class="form-group">
                     <label class="control-label col-12" for="Quantity">Quantity</label>
                     <div class="col-12">
@@ -456,8 +457,6 @@
             check_pro = validateMinMax("Prod_ID", "result_Prod_ID", rex_ID, 4, 10);
         });
 
-       
-
         $("#Quantity").bind("change", function () {
             check_quan = validatelessthan0Int("Quantity", "result_Quantity");
         });
@@ -505,7 +504,7 @@
         $('#myForm').submit(function (event) {
             if (check_stylecode == false || check_pro == false || check_jew == false || check_cat == false || check_cer == false || check_bra == false  || check_quan == false || check_golw == false || check_stow == false || check_golm == false || check_stom == false || check_othm == false || check_mrp == false || check_img == false ) {
                 event.preventDefault();
-               
+
                 $("#report").replaceWith(report_stone.clone());
                     $("#report").append("<strong>Your Infor not valid. Please check against !!!</strong>");
                 $("#report").addClass("alert alert-warning col-11 m-auto");

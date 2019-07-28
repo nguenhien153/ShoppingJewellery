@@ -1,0 +1,522 @@
+﻿@model IEnumerable<ShoppingJewellery.Models.ProdMst>
+@{
+    ViewBag.Title = "Product Type Manager";
+    Layout = "~/Views/Layout/Admin/AdminLayout.cshtml";
+    Page.name = Session["username"];
+}
+
+<link href="~/Content/css/Admin/Boxx.css" rel="stylesheet" />
+<link href="~/Content/css/Admin/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="~/Content/css/Admin/select.dataTables.min.css" rel="stylesheet" />
+<link href="~/Content/css/Admin/buttons.dataTables.min.css" rel="stylesheet" />
+<link href="~/Content/css/Admin/forTable.css" rel="stylesheet" />
+<link href="~/Content/css/Admin/jquery-ui.min.css?1" rel="stylesheet" />
+<style>
+    .field-icon {
+        float: right;
+        margin-top: -27px;
+        margin-right: 46px;
+        position: relative;
+        z-index: 20;
+        width: 20px;
+    }
+    .ui-autocomplete {
+        z-index: 1510 !important;
+    }
+    table.dataTable thead .sorting_desc {
+        background-image: url('../../Content/images/Icon/Admin/sort_desc.png');
+    }
+
+    table.dataTable thead .sorting_asc {
+        background-image: url('../../Content/images/Icon/Admin/sort_asc.png');
+    }
+
+    table.dataTable thead .sorting {
+        background-image: url('../../Content/images/Icon/Admin/sort_both.png');
+    }
+
+    .report_result {
+        position: fixed;
+        z-index: 2002;
+        top: 10%;
+        left: 50%;
+        height: auto;
+    }
+
+        .report_result .image_report {
+            width: 30px;
+            margin-top: 5px;
+        }
+
+        .report_result p {
+            font-weight: 400;
+            line-height: 1.5;
+            color: #4cff00;
+            text-align: left;
+            background-color: #fff;
+        }
+
+    .loader {
+        border: 16px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 16px solid #3498db;
+        border-bottom: 16px solid #3498db;
+        width: 120px;
+        height: 120px;
+        -webkit-animation: spin 2s linear infinite; /* Safari */
+        animation: spin 2s linear infinite;
+        z-index: 2002;
+        margin: auto;
+    }
+    /* Safari */
+    @@-webkit-keyframes spin {
+        0% {
+            -webkit-transform: rotate(0deg);
+        }
+
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+
+    @@keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+</style>
+<div class="col-12 form-group m-auto">
+    <div class="col-12 headerboxx"><h4><strong>Product Type</strong></h4></div>
+    <div class="boxx col-12">
+        <div style="padding:10px 0 15px 0">
+            <div class="report_result" id="hien">
+                <img src="" class="image_report" />
+                <strong></strong>
+            </div>
+            <table class="table  table-striped hover  " id="table" style="width:100%; ">
+                <thead>
+                    <tr>
+                        <th class="text-center">ID</th>
+                        <th class="text-center">Name</th>
+                        <th class="text-center">Category ID</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="text-center">@item.Prod_ID</td>
+                            <td class="text-center">@item.Prod_Type</td>
+                            <td class="text-center">@item.Cat_ID</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="selectRow" tabindex="-1" role="dialog" aria-hidden="true" on>
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h7 class="modal-title">
+                    <img src="~/Content/images/Icon/Admin/amount_Copy_3-512.png" style="width:30px" />
+                </h7>
+                <button type="button" class=" btn btn-danger close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p id="contentt"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade " id="model_common" tabindex="-1" role="dialog" aria-hidden="true" on>
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h7 class="modal-title"></h7>
+                <button type="button" class="btn btn-danger close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Content/js/Admin/forTable.js?15"></script>
+<script src="~/Content/js/Admin/jquery.dataTables.min.js"></script>
+<script src="~/Content/js/Admin/dataTables.select.min.js"></script>
+<script src="~/Content/js/Admin/dataTables.buttons.min.js"></script>
+<script src="~/Content/js/Admin/Password.js"></script>
+<script src="~/Content/js/Admin/Text/modalforProduct.js?1"></script>
+<script src="~/Content/js/Admin/jquery-ui.min.js?1"></script>
+<script>
+    var admin = "@Session["admin"]";
+    var brand_id;
+    var brand_name;
+    var cat_id;
+    var modalClone = $("#selectRow").clone();
+    var reportClone = $("#hien").clone();
+    var modalCommon = $("#model_common").clone();
+    var rex_ID = /^[A-Z]{1}[A-z0-9]*$/;
+    var rex_name = /^[A-Z]+[A-z\s-,'.]*$/;
+
+    function reportt(classdiv, classImg, srcImg, status, text) {
+        $("." + classdiv).addClass("alert-" + status + " alert form-inline");
+        $("." + classImg).attr("src", srcImg);
+        $("." + classdiv + " strong").append("&nbsp; &nbsp;  " + text);
+
+    }
+
+    $(document).ready(function () {
+        var table = $('#table').DataTable({
+            "responsive": false,
+            "lengthChange": false,
+            "stateSave": true,
+            "order": [[0, 'asc']],
+            "select": {
+                "info": false
+            },
+
+        });
+        new $.fn.dataTable.Buttons(table, {
+            buttons: [
+                {
+                    className: 'btn',
+                    attr: {
+                        title: 'Create',
+                        //id: 'copyButton',
+                    },
+                    text: '<img src="../Content/images/Icon/Admin/ChildRow_Create.png" style="width:40px" />',
+                    action: function () {
+                        var bname = false;
+                        var bid = false;
+                        var bcat = false
+                        $("#model_common").replaceWith(modalCommon.clone());
+                        $("#model_common .modal-title ").text("Create Product Type");
+                        $("#model_common").modal("show");
+                        $.when($("#model_common .modal-body").append(producttype)).done(function () {
+                            var report = $("#report").clone();
+
+                            $("#model_common #Prod_Type").on("focus", function () {
+                                $(this).tooltip("show");
+                            }).tooltip({
+                                placement: "top",
+                                trigger: "focus",
+                                title: "Begin with letter Uppercase <br/> Not contain special character <br/> Max lenght: 50. Min lenght: 6"
+                            });
+                            $("#Prod_Type").bind("change", function () {
+                                bname = validateMinMax("Prod_Type", "result_Prod_Type", rex_name, 6, 50);
+                            });
+
+                            $("#model_common #Cat_ID").on("focus", function () {
+                                $(this).tooltip("show");
+                            }).tooltip({
+                                placement: "top",
+                                trigger: "focus",
+                                title: "Category ID must match the value in the Category table"
+                            });
+                            $("#Cat_ID").bind("change", function () {
+                                bcat = validateMinMax("Cat_ID", "result_Cat_ID", rex_ID, 4, 10);
+                            });
+                            $('#Cat_ID').autocomplete({
+                                source: '/Admin/GetCats'
+                            });
+
+                            $("#model_common #Prod_ID").on("focus", function () {
+                                $(this).tooltip("show");
+                            }).tooltip({
+                                placement: "top",
+                                trigger: "focus",
+                                title: "Begin with letter Uppercase <br/> Not contain special character <br/> Max lenght: 10. Min lenght: 4"
+                            });
+                            $("#Prod_ID").bind("change", function () {
+                                bid = validateMinMax("Prod_ID", "result_Prod_ID", rex_ID, 4, 10);
+                            });
+                            $("#Prod_ID").attr("readonly", false);
+
+                            $("#Save").click(function () {
+                                if (bname == true && bid == true && bcat == true) {
+                                    $.ajax({
+                                        url: '/Admin/Create_Pro',
+                                        type: 'post',
+                                        data: {
+                                            Prod_ID: $("#model_common #Prod_ID").val(),
+                                            Prod_Type: $("#model_common #Prod_Type").val(),
+                                            Cat_ID: $("#model_common #Cat_ID").val()
+                                        },
+                                        success: function (data) {
+                                            $(".report_result").replaceWith(reportClone.clone());
+                                            $("#model_common").modal('hide');
+                                            if (data == "success") {
+                                                $.when(reportt("report_result", "image_report", "/Content/images/Icon/Admin/icon_Success.png", "success", "Create Success")).done(function () {
+                                                    $(".report_result").show();
+                                                    setTimeout(function () {
+                                                        location.reload();
+                                                    }, 2000);
+                                                });
+                                            } else if (data == "false") {
+                                                $.when(reportt("report_result", "image_report", "/Content/images/Icon/Admin/icon_false.png", "danger", "Create False. ID has been exist !!!")).done(function () {
+                                                    $(".report_result").show();
+                                                    setTimeout(function () {
+                                                        $(".report_result").fadeOut(800);
+                                                    }, 2000);
+                                                });
+                                            } else if (data == "catFalse") {
+                                                $.when(reportt("report_result", "image_report", "/Content/images/Icon/Admin/icon_false.png", "danger", "Create False. Category ID not exist !!!")).done(function () {
+                                                    $(".report_result").show();
+                                                    setTimeout(function () {
+                                                        $(".report_result").fadeOut(800);
+                                                    }, 2000);
+                                                });
+                                            } else {
+                                                $.when(reportt("report_result", "image_report", "/Content/images/Icon/Admin/icon_false.png", "danger", "Create False. System Error !!!")).done(function () {
+                                                    $(".report_result").show();
+                                                    setTimeout(function () {
+                                                        $(".report_result").fadeOut(800);
+                                                    }, 2000);
+                                                });
+                                            }
+                                        },
+                                        error: function (xhr, s, status) {
+                                            alert("Error: " + status);
+                                        }
+                                    });
+                                } else {
+                                    $("#model_common #report").replaceWith(report.clone());
+                                    $("#model_common #report").append("<strong>Your Infor not valid. Please check against !!!</strong>");
+                                    $("#model_common #report").addClass("alert-warning col-12 alert");
+                                    setTimeout(function () {
+                                        $("#model_common #report").fadeOut(800);
+                                    }, 2500);
+                                }
+                            });
+                            $.when($("#model_common .loader").fadeOut(2000)).done(function () {
+                                $("#Save").text("Create");
+                                $("#brand_modal").fadeIn(1000);
+                            });
+                        });
+                    },
+                },
+                {
+                    className: 'btn',
+                    attr: {
+                        title: 'Edit',
+                        //id: 'copyButton',
+                    },
+                    text: '<img src="../Content/images/Icon/Admin/ChildRow_Edit.png" style="width:40px" />',
+                    action: function () {
+                        if (brand_name != null && brand_id != null && cat_id != null) {
+                            var bname = true;
+                            var bcat = true;
+                            $("#model_common").replaceWith(modalCommon.clone());
+                            $("#model_common .modal-title ").text("Edit Product Type");
+                            $("#model_common").modal("show");
+                            $.when($("#model_common .modal-body").append(producttype)).done(function () {
+                                var report = $("#report").clone();
+
+                                $("#model_common #Prod_Type ").val(brand_name);
+                                $("#model_common #Prod_Type").on("focus", function () {
+                                    $(this).tooltip("show");
+                                }).tooltip({
+                                    placement: "top",
+                                    trigger: "focus",
+                                    title: "Begin with letter Uppercase <br/> Not contain special character <br/> Max lenght: 50. Min lenght: 6"
+                                });
+                                $("#Prod_Type").bind("change", function () {
+                                    bname = validateMinMax("Prod_Type", "result_Prod_Type", rex_name, 6, 50);
+                                });
+
+                                $("#model_common #Cat_ID ").val(cat_id);
+                                $("#model_common #Cat_ID").on("focus", function () {
+                                    $(this).tooltip("show");
+                                }).tooltip({
+                                    placement: "top",
+                                    trigger: "focus",
+                                    title: "Category ID must match the value in the Category table"
+                                });
+                                $("#Cat_ID").bind("change", function () {
+                                    bcat = validateMinMax("Cat_ID", "result_Cat_ID", rex_ID, 4, 10);
+                                });
+                                $('#Cat_ID').autocomplete({
+                                    source: '/Admin/GetCats'
+                                });
+
+                                $("#model_common #Prod_ID ").val(brand_id);
+
+
+                                $("#Save").click(function () {
+                                    if (bname == true && bcat == true) {
+                                        $.ajax({
+                                            url: '/Admin/Edit_Pro',
+                                            type: 'post',
+                                            data: {
+                                                Prod_ID: $("#model_common #Prod_ID").val(),
+                                                Prod_Type: $("#model_common #Prod_Type").val(),
+                                                Cat_ID: $("#model_common #Cat_ID").val()
+                                            },
+                                            success: function (data) {
+                                                $("#model_common").modal('hide');
+                                                $(".report_result").replaceWith(reportClone.clone());
+                                                if (data == "success") {
+                                                    $.when(reportt("report_result", "image_report", "/Content/images/Icon/Admin/icon_Success.png", "success", "Edit Success")).done(function () {
+                                                        $(".report_result").show();
+                                                        setTimeout(function () {
+                                                            location.reload();
+                                                        }, 2000);
+                                                    });
+                                                } else if (data == "false") {
+                                                    $.when(reportt("report_result", "image_report", "/Content/images/Icon/Admin/icon_false.png", "danger", "Edit False")).done(function () {
+                                                        $(".report_result").show();
+                                                        setTimeout(function () {
+                                                            $(".report_result").fadeOut(800);
+                                                        }, 2000);
+                                                    });
+                                                } else if (data == "catFalse") {
+                                                    $.when(reportt("report_result", "image_report", "/Content/images/Icon/Admin/icon_false.png", "danger", "Edit False. Category ID not exist !!!")).done(function () {
+                                                        $(".report_result").show();
+                                                        setTimeout(function () {
+                                                            $(".report_result").fadeOut(800);
+                                                        }, 2000);
+                                                    });
+                                                } else {
+                                                    $.when(reportt("report_result", "image_report", "/Content/images/Icon/Admin/icon_false.png", "danger", "Edit False. System Error !!!")).done(function () {
+                                                        $(".report_result").show();
+                                                        setTimeout(function () {
+                                                            $(".report_result").fadeOut(800);
+                                                        }, 2000);
+                                                    });
+                                                }
+                                            },
+                                            error: function (xhr, s, status) {
+                                                alert("Error: " + status);
+                                            }
+                                        })
+                                    } else {
+                                        $("#report").replaceWith(report.clone());
+                                        $("#report").append("<strong>Your Infor not valid. Please check against !!!</strong>");
+                                        $("#report").addClass("alert-warning col-12 alert");
+                                        setTimeout(function () {
+                                            $("#report").fadeOut(800);
+                                        }, 2500);
+                                    }
+                                });
+
+                                $.when($("#model_common .loader").fadeOut(2000)).done(function () {
+                                    $("#brand_modal").fadeIn(1000);
+                                });
+                            });
+                        } else {
+                            $("#selectRow").replaceWith(modalClone.clone());
+                            $("#contentt").text("Please select account.");
+                            $('#selectRow').modal('show');
+                        }
+                    },
+                }, {
+                    className: 'btn',
+                    attr: {
+                        title: 'Delete',
+                        id: 'DeleteItem',
+                    },
+                    text: '<img src="../Content/images/Icon/Admin/ChildRow_Delete.png" style="width:40px" />',
+                    action: function () {
+                        if (admin != "SuperAdmin") {
+                            return;
+                        }
+                        $("#selectRow").replaceWith(modalClone.clone());
+
+                        if (brand_id != null && brand_name != null) {
+                            $("#selectRow .modal-title").empty();
+                            $("#selectRow .modal-title").text("Delete Product Type");
+                            $("#selectRow .modal-body").append("Delete Product Type ID: " + brand_id + "." + "<br/> Are you sure?");
+                            $("#selectRow .modal-footer").prepend('<button class="accept btn btn-success" id="detele_brand">Yes</button>');
+                            $("#selectRow .modal-footer").children("button").eq(1).text("No");
+                            $('#selectRow').modal('show');
+                            $("#detele_brand").click(function () {
+                                $.ajax({
+                                    url: '/Admin/Delete_Pro',
+                                    data: { id_item: brand_id },
+                                    type: "get",
+                                    success: function (data) {
+                                        $('#selectRow').modal('hide');
+                                        $(".report_result").replaceWith(reportClone.clone());
+                                        if (data == "success") {
+                                            $.when(reportt("report_result", "image_report", "/Content/images/Icon/Admin/icon_Success.png", "success", "Delete Success")).done(function () {
+                                                $(".report_result").show();
+                                                setTimeout(function () {
+                                                    location.reload();
+                                                }, 2000);
+
+                                            });
+                                        } else if (data == "false") {
+                                            $.when(reportt("report_result", "image_report", "/Content/images/Icon/Admin/icon_false.png", "danger", "Delete False. ID not exist !!!")).done(function () {
+                                                $(".report_result").show();
+                                                setTimeout(function () {
+                                                    $(".report_result").fadeOut(800);
+                                                }, 2000);
+                                            });
+                                        } else if (data == "referent") {
+                                            $.when(reportt("report_result", "image_report", "/Content/images/Icon/Admin/icon_false.png", "danger", "Delete False. The records are referenced from other tables")).done(function () {
+                                                $(".report_result").show();
+                                                setTimeout(function () {
+                                                    $(".report_result").fadeOut(800);
+                                                }, 2500);
+                                            });
+                                        } else {
+                                            $.when(reportt("report_result", "image_report", "/Content/images/Icon/Admin/icon_false.png", "danger", "Delete False. System Error !!!")).done(function () {
+                                                $(".report_result").show();
+                                                setTimeout(function () {
+                                                    $(".report_result").fadeOut(800);
+                                                }, 2500);
+
+                                            });
+                                        }
+                                    },
+                                    error: function (xhr, error, status) {
+                                        alert("Error: " + status);
+                                    }
+                                });
+                            });
+                        } else {
+                            $("#selectRow").replaceWith(modalClone.clone());
+                            $("#selectRow .modal-body").text("Please select option.");
+                            $('#selectRow').modal('show');
+                        }
+                    }
+                }
+            ]
+        });
+
+        table.buttons(0, null).container().prependTo(
+            table.table().container()
+        );
+        remove_ClassButton();
+        table_inital("table");
+
+        $('#table tbody').on('click', 'tr', function () {
+            brand_id = $(this).children("td").eq(0).text().replace(/\s/g,"");
+            brand_name = $(this).children("td").eq(1).text().replace(/\s/g, "");
+            cat_id = $(this).children("td").eq(2).text().replace(/\s/g, "");
+        });
+        if (admin != "SuperAdmin") {
+            $("#DeleteItem").hide();
+        }
+    });
+</script>
+
+
+

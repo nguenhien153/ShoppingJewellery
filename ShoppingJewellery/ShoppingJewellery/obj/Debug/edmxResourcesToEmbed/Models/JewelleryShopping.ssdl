@@ -131,17 +131,14 @@
     <Property Name="No" Type="int" Nullable="false" />
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'JewelleryShopping_db.dbo.Image' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="Image">
     <Key>
-      <PropertyRef Name="Style_Colde" />
-      <PropertyRef Name="image" />
-      <PropertyRef Name="No" />
+      <PropertyRef Name="ID" />
     </Key>
     <Property Name="Style_Colde" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="image" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="No" Type="int" Nullable="false" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
   </EntityType>
   <EntityType Name="Inquiry">
     <Key>
@@ -200,11 +197,13 @@ warning 6002: The table/view 'JewelleryShopping_db.dbo.Image' does not have a pr
     <Property Name="Phone" Type="varchar" MaxLength="20" Nullable="false" />
     <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="Instruction_Optional" Type="text" />
-    <Property Name="Status" Type="varchar" MaxLength="50" />
+    <Property Name="Status" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="Total_brand" Type="numeric" Precision="10" Scale="2" Nullable="false" />
     <Property Name="ID_Order" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Address" Type="nvarchar" MaxLength="200" Nullable="false" />
     <Property Name="Date_order" Type="date" Nullable="false" />
+    <Property Name="Distance" Type="int" Nullable="false" />
+    <Property Name="ship_Fee" Type="decimal" Precision="10" Scale="2" Nullable="false" />
   </EntityType>
   <EntityType Name="Order_Details">
     <Key>
@@ -634,7 +633,9 @@ warning 6002: The table/view 'JewelleryShopping_db.dbo.ViewFullItem' does not ha
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Image_ItemMst">
-    <End Role="ItemMst" Type="Self.ItemMst" Multiplicity="1" />
+    <End Role="ItemMst" Type="Self.ItemMst" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="Image" Type="Self.Image" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ItemMst">
@@ -714,18 +715,6 @@ warning 6002: The table/view 'JewelleryShopping_db.dbo.ViewFullItem' does not ha
       </Principal>
       <Dependent Role="JewelTypeMst">
         <PropertyRef Name="ID_Prod" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Order_Details_ItemMst">
-    <End Role="ItemMst" Type="Self.ItemMst" Multiplicity="1" />
-    <End Role="Order_Details" Type="Self.Order_Details" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ItemMst">
-        <PropertyRef Name="Style_Code" />
-      </Principal>
-      <Dependent Role="Order_Details">
-        <PropertyRef Name="Style_code" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -815,6 +804,7 @@ warning 6002: The table/view 'JewelleryShopping_db.dbo.ViewFullItem' does not ha
     <EntitySet Name="Feedback" EntityType="Self.Feedback" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="GoldKrtMst" EntityType="Self.GoldKrtMst" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="GoldMst" EntityType="Self.GoldMst" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Image" EntityType="Self.Image" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Inquiry" EntityType="Self.Inquiry" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ItemMst" EntityType="Self.ItemMst" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="JewelTypeMst" EntityType="Self.JewelTypeMst" Schema="dbo" store:Type="Tables" />
@@ -826,13 +816,6 @@ warning 6002: The table/view 'JewelleryShopping_db.dbo.ViewFullItem' does not ha
     <EntitySet Name="StoneMst" EntityType="Self.StoneMst" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="StoneQltyMst" EntityType="Self.StoneQltyMst" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UserRegMst" EntityType="Self.UserRegMst" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Image" EntityType="Self.Image" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [Image].[Style_Colde] AS [Style_Colde], 
-    [Image].[image] AS [image], 
-    [Image].[No] AS [No]
-    FROM [dbo].[Image] AS [Image]</DefiningQuery>
-    </EntitySet>
     <EntitySet Name="DiamonView" EntityType="Self.DiamonView" store:Type="Views" store:Schema="dbo">
       <DefiningQuery>SELECT 
     [DiamonView].[ID] AS [ID], 
@@ -1054,10 +1037,6 @@ warning 6002: The table/view 'JewelleryShopping_db.dbo.ViewFullItem' does not ha
     <AssociationSet Name="FK_JewelTypeMst_ProdMst" Association="Self.FK_JewelTypeMst_ProdMst">
       <End Role="ProdMst" EntitySet="ProdMst" />
       <End Role="JewelTypeMst" EntitySet="JewelTypeMst" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Order_Details_ItemMst" Association="Self.FK_Order_Details_ItemMst">
-      <End Role="ItemMst" EntitySet="ItemMst" />
-      <End Role="Order_Details" EntitySet="Order_Details" />
     </AssociationSet>
     <AssociationSet Name="FK_Order_Details_Order_" Association="Self.FK_Order_Details_Order_">
       <End Role="Order_" EntitySet="Order_" />

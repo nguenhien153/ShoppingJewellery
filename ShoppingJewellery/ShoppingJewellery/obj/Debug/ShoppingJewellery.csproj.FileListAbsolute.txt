@@ -73,3 +73,5 @@ F:\eProjectSem3\ShoppingJewellery\ShoppingJewellery\ShoppingJewellery\obj\Debug\
 F:\eProjectSem3\ShoppingJewellery\ShoppingJewellery\ShoppingJewellery\obj\Debug\ShoppingJewellery.csprojAssemblyReference.cache
 F:\eProjectSem3\ShoppingJewellery\ShoppingJewellery\ShoppingJewellery\bin\Comon.dll
 F:\eProjectSem3\ShoppingJewellery\ShoppingJewellery\ShoppingJewellery\bin\Comon.pdb
+F:\eProjectSem3\ShoppingJewellery\ShoppingJewellery\ShoppingJewellery\bin\Newtonsoft.Json.dll
+F:\eProjectSem3\ShoppingJewellery\ShoppingJewellery\ShoppingJewellery\bin\Newtonsoft.Json.xml

@@ -1,7 +1,8 @@
 ﻿@model IEnumerable<ShoppingJewellery.Models.ProductView>
 @{
-    ViewBag.Title = "Product";
+    ViewBag.Title = "Item";
     Layout = "~/Views/Layout/Admin/AdminLayout.cshtml";
+    Page.name = Session["username"];
 }
 <link href="~/Content/css/Admin/Boxx.css" rel="stylesheet" />
 <link href="~/Content/css/Admin/jquery.dataTables.min.css" rel="stylesheet" />
@@ -24,6 +25,7 @@
     table#table td {
         word-break: break-all;
     }
+
     .report_result {
         position: fixed;
         z-index: 2002;
@@ -49,24 +51,24 @@
     <div class="col-12 headerboxx">
         <h4>Jewelery</h4>
     </div>
-    <div class="boxx col-12" >
+    <div class="boxx col-12">
         <div style="overflow-x:auto;padding:0px 10px 15px 10px">
             <div class="report_result ">
                 <img src="" class="image_report" />
                 <strong></strong>
             </div>
-            <table class="table  table-striped hover " id="table" style="width:100%">
+            <table class="table  table-striped hover  " id="table" style="width:100%; ">
                 <thead>
                     <tr>
-                        <th class="align-middle">Style Code</th>
-                        <th class="align-middle">Image</th>
-                        <th class="align-middle">Total Weight</th>
-                        <th class="align-middle">Quantity</th>
-                        <th class="align-middle">Category</th>
-                        <th class="align-middle">Designer</th>
-                        <th class="align-middle">Certificate</th>
-                        <th class="align-middle">Product Type</th>
-                        <th class="align-middle">Jewelery Type</th>
+                        <th class="align-middle text-center">Style Code</th>
+                        <th class="align-middle text-center">Image</th>
+                        <th class="align-middle text-center">Total Weight</th>
+                        <th class="align-middle text-center">Quantity</th>
+                        <th class="align-middle text-center">Category</th>
+                        <th class="align-middle text-center">Designer</th>
+                        <th class="align-middle text-center">Certificate</th>
+                        <th class="align-middle text-center">Product Type</th>
+                        <th class="align-middle text-center">Jewelery Type</th>
                     </tr>
                 </thead>
 
@@ -74,17 +76,17 @@
                     @foreach (var item in Model)
                     {
                         <tr>
-                            <td class="align-middle">@item.Style_Code</td>
+                            <td class="align-middle text-center" style=" word-break: keep-all;">@item.Style_Code</td>
                             <td>
                                 <img src="~/Content/images/Product_Image/@item.Prod_Type/Img/@item.Img" style="width: 10vw" />
                             </td>
-                            <td class="align-middle">@item.Tot_Gross_Wt</td>
-                            <td class="align-middle">@item.Quantity</td>
-                            <td class="align-middle">@item.Cat_Name</td>
-                            <td class="align-middle">@item.Brand_Type</td>
-                            <td class="align-middle">@item.Certify_Type</td>
-                            <td class="align-middle">@item.Prod_Type</td>
-                            <td class="align-middle">@item.Jewellery_Type</td>
+                            <td class="align-middle text-center">@item.Tot_Gross_Wt</td>
+                            <td class="align-middle text-center">@item.Quantity</td>
+                            <td class="align-middle text-center">@item.Cat_Name</td>
+                            <td class="align-middle text-center">@item.Brand_Type</td>
+                            <td class="align-middle text-center">@item.Certify_Type</td>
+                            <td class="align-middle text-center">@item.Prod_Type</td>
+                            <td class="align-middle text-center" style=" word-break: keep-all;">@item.Jewellery_Type</td>
                         </tr>
                     }
                 </tbody>
@@ -149,7 +151,7 @@
                 },
                 dataSrc: 7
             },
-           
+
         });
         new $.fn.dataTable.Buttons(table, {
             buttons: [
@@ -157,7 +159,7 @@
                     className: 'btn',
                     attr: {
                         title: 'Create Item',
-                        //id: 'copyButton',   
+                        //id: 'copyButton',
                     },
                     text: '<img src="../Content/images/Icon/Admin/Product_Create.png" style="width:50px" />',
                     action: function () {
@@ -168,7 +170,7 @@
                     className: 'btn',
                     attr: {
                         title: 'Details Item',
-                        //id: 'copyButton',   
+                        //id: 'copyButton',
                     },
                     text: '<img src="../Content/images/Icon/Admin/Prodcut_Details.png" style="width:50px" />',
                     action: function () {
@@ -187,7 +189,7 @@
                     className: 'btn',
                     attr: {
                         title: 'Delete Item',
-                        id: 'DeleteItem',   
+                        id: 'DeleteItem',
                     },
                     text: '<img src="../Content/images/Icon/Admin/Product_Delete.png" style="width:50px" />',
                     action: function () {
@@ -199,7 +201,7 @@
 
                         if (style_code != null) {
                             $("#selectRow .modal-title").empty();
-                            $("#selectRow .modal-title").text("Delete Product");
+                            $("#selectRow .modal-title").text("Delete Item");
                             $("#selectRow .modal-body").append("Delete Style Code: " + style_code + "." + "<br/> Are you sure?");
                             $("#selectRow .modal-footer").prepend('<button class="accept btn btn-success" id="delete_product">Yes</button>');
                             $("#selectRow .modal-footer").children("button").eq(1).text("No");
@@ -214,7 +216,7 @@
                                         $('#selectRow').modal('hide');
                                         $(".report_result").replaceWith(reportClone.clone());
                                         if (data == "success") {
-                                            $.when(reportt("report_result", "image_report", "/Content/images/Icon/Admin/icon_Success.png", "success", "Delete Product Success")).done(function () {
+                                            $.when(reportt("report_result", "image_report", "/Content/images/Icon/Admin/icon_Success.png", "success", "Delete Item Success")).done(function () {
                                                 $(".report_result").show();
                                                 setTimeout(function () {
                                                     location.reload();
@@ -222,7 +224,7 @@
 
                                             });
                                         } else if (data == "false") {
-                                            $.when(reportt("report_result", "image_report", "/Content/images/Icon/Admin/icon_false.png", "danger", "Delete Product False")).done(function () {
+                                            $.when(reportt("report_result", "image_report", "/Content/images/Icon/Admin/icon_false.png", "danger", "Delete Item False")).done(function () {
                                                 $(".report_result").show();
                                                 setTimeout(function () {
                                                     location.reload();
@@ -277,6 +279,6 @@
             $("#DeleteItem").hide();
         }
 
-     
+
     });
 </script>

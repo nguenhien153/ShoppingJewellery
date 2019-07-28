@@ -116,7 +116,12 @@
             -webkit-appearance: none;
             margin: 0;
         }
-      
+
+        .ui-autocomplete {
+            max-height: 200px;
+            overflow-y: scroll;
+            overflow-x: hidden;
+        }
     </style>
 </head>
 <body>
@@ -132,7 +137,6 @@
         <div class="col-12 row initall">
             <div class="col-2" style="background-color:#263544;color:#ffffff;border-bottom-left-radius:25px;">
                 <br />
-                <h4>Hien</h4>
 
                 @*Home*@
                 <div class="btn-group col-12">
@@ -155,11 +159,16 @@
                 @*Item*@
                 <div class="btn-group col-12">
                     <button type="button" class="col-12 btn btn-primary dropdown-toggle margin_top5px" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Item
+                      Product
                     </button>
                     <div class="dropdown-menu col-12 text-center">
-                        <a class="btn btn-outline-primary col-11 " href="#">Manager Item</a>
-                        <a class="btn btn-outline-primary col-11 margin_top5px" href="#">User Account</a>
+                        <a class="btn btn-outline-primary col-11 " href="@Url.Action("Product","Admin")"> Item</a>
+                        <a class="btn btn-outline-primary col-11 margin_top5px" href="@Url.Action("ManagerImg","Admin")"> Image</a>
+                        <a class="btn btn-outline-primary col-11 margin_top5px" href="@Url.Action("BrandManager","Admin")"> Brand</a>
+                        <a class="btn btn-outline-primary col-11 margin_top5px" href="@Url.Action("CerManager","Admin")"> Certificate</a>
+                        <a class="btn btn-outline-primary col-11 margin_top5px" href="@Url.Action("CatManager","Admin")"> Category</a>
+                        <a class="btn btn-outline-primary col-11 margin_top5px" href="@Url.Action("ProManager","Admin")"> Product Type</a>
+                        <a class="btn btn-outline-primary col-11 margin_top5px" href="@Url.Action("JewManager","Admin")"> Jewelery Type</a>
                     </div>
                 </div>
 

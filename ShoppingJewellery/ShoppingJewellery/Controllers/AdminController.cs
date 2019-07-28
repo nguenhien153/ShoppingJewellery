@@ -1,8 +1,9 @@
-﻿using ShoppingJewellery.Models;
+﻿using Newtonsoft.Json;
+using ShoppingJewellery.Models;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity.Core;
 using System.Data.Entity.Infrastructure;
+using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -231,10 +232,6 @@ namespace ShoppingJewellery.Controllers
             {
                 return RedirectToAction("Login");
             }
-            if (!verifyAdmin())
-            {
-                return RedirectToAction("AdminAccount");
-            }
 
             int check = dao.CreateAdminAccount(admin);
             if (check == 0)
@@ -394,10 +391,7 @@ namespace ShoppingJewellery.Controllers
         [HttpPost]
         public ActionResult UserAddress_Create(Address add)
         {
-            if (!verifyAdmin())
-            {
-                return RedirectToAction("UserAccount");
-            }
+
 
             int check = dao.CreateUserAddress(add);
             if (check == 0)
@@ -488,11 +482,20 @@ namespace ShoppingJewellery.Controllers
         #region Product
         public ActionResult Product()
         {
+            if (!CheckLogin())
+            {
+                return RedirectToAction("Login");
+            }
             return View(dao.GetProduct());
         }
 
         public ActionResult Product_Details(string style_code)
         {
+            if (!CheckLogin())
+            {
+                return RedirectToAction("Login");
+            }
+
             if (string.IsNullOrWhiteSpace(style_code))
             {
                 return RedirectToAction("Product");
@@ -530,6 +533,12 @@ namespace ShoppingJewellery.Controllers
         [HttpPost]
         public ActionResult Product_Details(ItemMst item, HttpPostedFileBase imagefile, string Protype)
         {
+
+            if (!verifyAdmin())
+            {
+                return RedirectToAction("Product_Details");
+            }
+
             try
             {
                 int check;
@@ -538,13 +547,18 @@ namespace ShoppingJewellery.Controllers
                     string filename = Path.GetFileName(imagefile.FileName);
                     if (imagefile.ContentLength < 10485760)
                     {
-                        bool exists = Directory.Exists(Server.MapPath("/Content/images/Product_Image/" + Protype + "/Img"));
-                        if (!exists)
+                        if (Directory.Exists(Server.MapPath("/Content/images/Product_Image/" + Protype + "/Img")) == false)
                         {
                             Directory.CreateDirectory(Server.MapPath("/Content/images/Product_Image/" + Protype + "/Img"));
 
                         }
                         imagefile.SaveAs(Server.MapPath("/Content/images/Product_Image/" + Protype + "/Img/" + filename));
+                        string oldimg = dao.GetOldImageItem(item.Style_Code);
+                        if (System.IO.File.Exists(Server.MapPath("/Content/images/Product_Image/" + Protype + "/Img/" + oldimg))==true)
+                        {
+                            System.IO.File.Delete(Server.MapPath("/Content/images/Product_Image/" + Protype + "/Img/" + oldimg));
+                        }
+
                         check = dao.EditProdductInfor(item, filename);
                     }
                     else
@@ -595,6 +609,11 @@ namespace ShoppingJewellery.Controllers
                 }
                 return RedirectToAction("Product_Details", "Admin", new { style_code = item.Style_Code.Replace(" ", string.Empty) });
             }
+            catch (DbUpdateException)
+            {
+                Session["Product_Details"] = "fileFalse";
+                return RedirectToAction("Product_Details", "Admin", new { style_code = item.Style_Code.Replace(" ", string.Empty) });
+            }
             catch (Exception)
             {
 
@@ -605,12 +624,22 @@ namespace ShoppingJewellery.Controllers
 
         public ActionResult Create_Product_Details()
         {
+            if (!CheckLogin())
+            {
+                return RedirectToAction("Login");
+            }
+
             return View();
         }
 
         [HttpPost]
         public ActionResult Create_Product_Details(ItemMst item, HttpPostedFileBase imagefile)
         {
+            if (!verifyAdmin())
+            {
+                return RedirectToAction("Product");
+            }
+
             try
             {
                 string filename = Path.GetFileName(imagefile.FileName);
@@ -679,22 +708,39 @@ namespace ShoppingJewellery.Controllers
 
         public JsonResult Delete_ProductInfor(string stylecode)
         {
+            if (!CheckLogin())
+            {
+                RedirectToAction("Login");
+            }
+            if (!verifyAdmin())
+            {
+                RedirectToAction("Product");
+            }
             try
             {
                 using (JewelleryShopping_dbEntities dbb = new JewelleryShopping_dbEntities())
                 {
                     var item = dbb.ItemMsts.Find(stylecode);
-                    string Protype = dao.GetProtype(item.Prod_ID);
                     if (item != null)
                     {
-                        string rootFolder = "/Content/images/Product_Image/" + Protype + "/Img/" + item.Img;
-                        bool exists = System.IO.File.Exists(Server.MapPath(rootFolder));
-                        if (exists)
-                        {
-                           System.IO.File.Delete(Server.MapPath(rootFolder));
-                        }
+                        string Protype = dao.GetProtype(item.Prod_ID);
                         dbb.ItemMsts.Remove(item);
                         dbb.SaveChanges();
+                        string rootFolder = "/Content/images/Product_Image/" + Protype + "/Img/" + item.Img;
+                        string subRoot = "/Content/images/Product_Image/" + Protype + "/Image/" + item.Style_Code;
+                        if (System.IO.File.Exists(Server.MapPath(rootFolder))==true)
+                        {
+                            System.IO.File.Delete(Server.MapPath(rootFolder));
+                        }
+                        if (Directory.Exists(Server.MapPath(subRoot))==true)
+                        {
+                            DirectoryInfo di = new DirectoryInfo(Server.MapPath(subRoot));
+                            foreach (FileInfo file in di.GetFiles())
+                            {
+                                file.Delete();
+                            }
+                            Directory.Delete(Server.MapPath(subRoot));
+                        }
                         return Json("success", JsonRequestBehavior.AllowGet);
                     }
                     else
@@ -705,13 +751,13 @@ namespace ShoppingJewellery.Controllers
             }
             catch (IOException)
             {
-                return Json("filefalse");
+                return Json("filefalse", JsonRequestBehavior.AllowGet);
             }
             catch (Exception)
             {
                 return Json("systemfalse", JsonRequestBehavior.AllowGet);
             }
-        }
+            }
         #region Metal
 
         public ActionResult MetalOption(int id_item)
@@ -1092,9 +1138,772 @@ namespace ShoppingJewellery.Controllers
             item = db.DimQltySubMsts.Where(p => p.DimSubType_ID.Contains(term)).Select(i => i.DimSubType_ID.Replace(" ", string.Empty)).ToList();
             return Json(item, JsonRequestBehavior.AllowGet);
         }
+
         #endregion Autocomplete
 
         #endregion Product
+
+        #region brand
+        public ActionResult BrandManager()
+        {
+            if (!CheckLogin())
+            {
+                RedirectToAction("Login");
+            }
+            return View(dao.getBrands());
+        }
+
+        [HttpPost]
+        public JsonResult Edit_Brand(BrandMst brand)
+        {
+            if (!CheckLogin())
+            {
+                RedirectToAction("Login");
+            }
+
+            try
+            {
+                var check = dao.EdittBrand(brand);
+                if (check == 0)
+                {
+                    return Json("success");
+                }
+                else
+                {
+                    return Json("false");
+                }
+            }
+            catch (Exception)
+            {
+                return Json("systemFalse");
+            }
+        }
+
+        [HttpPost]
+        public JsonResult Create_Brand(BrandMst brand)
+        {
+            if (!CheckLogin())
+            {
+                RedirectToAction("Login");
+            }
+
+            try
+            {
+                var check = dao.CreateBrand(brand);
+                if (check == 0)
+                {
+                    return Json("success");
+                }
+                else
+                {
+                    return Json("false");
+                }
+            }
+
+            catch (Exception)
+            {
+                return Json("systemFalse");
+            }
+        }
+
+        public JsonResult Delete_Brand(string id_brand)
+        {
+            if (!CheckLogin())
+            {
+                RedirectToAction("Login");
+            }
+            if (!verifyAdmin())
+            {
+                RedirectToAction("BrandManager");
+            }
+            try
+            {
+                var check = dao.DeleteBrand(id_brand);
+                if (check == 0)
+                {
+                    return Json("success", JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    return Json("false", JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (DbUpdateException ex)
+            {
+                var sqlException = ex.GetBaseException() as SqlException;
+                if (sqlException != null)
+                {
+                    var number = sqlException.Number;
+
+                    if (number == 547)
+                    {
+                        return Json("referent", JsonRequestBehavior.AllowGet);
+                    }
+                }
+
+                return Json("systemFalse", JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception)
+            {
+                return Json("systemFalse", JsonRequestBehavior.AllowGet);
+            }
+        }
+        #endregion
+
+        #region cat
+        public ActionResult CatManager()
+        {
+            if (!CheckLogin())
+            {
+                RedirectToAction("Login");
+            }
+
+            return View(dao.getCat());
+        }
+
+        [HttpPost]
+        public JsonResult Edit_Cat(CatMst cat)
+        {
+            if (!CheckLogin())
+            {
+                RedirectToAction("Login");
+            }
+
+            try
+            {
+                var check = dao.EditCat(cat);
+                if (check == 0)
+                {
+                    return Json("success");
+                }
+                else
+                {
+                    return Json("false");
+                }
+            }
+            catch (Exception)
+            {
+                return Json("systemFalse");
+            }
+        }
+
+        [HttpPost]
+        public JsonResult Create_Cat(CatMst cat)
+        {
+            if (!CheckLogin())
+            {
+                RedirectToAction("Login");
+            }
+
+            try
+            {
+                var check = dao.CreateCat(cat);
+                if (check == 0)
+                {
+                    return Json("success");
+                }
+                else
+                {
+                    return Json("false");
+                }
+            }
+
+            catch (Exception)
+            {
+                return Json("systemFalse");
+            }
+        }
+
+        public JsonResult Delete_Cat(string id_item)
+        {
+            if (!CheckLogin())
+            {
+                RedirectToAction("Login");
+            }
+            if (!verifyAdmin())
+            {
+                RedirectToAction("CatManager");
+            }
+            try
+            {
+                var check = dao.DeleteCat(id_item);
+                if (check == 0)
+                {
+                    return Json("success", JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    return Json("false", JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (DbUpdateException ex)
+            {
+                var sqlException = ex.GetBaseException() as SqlException;
+                if (sqlException != null)
+                {
+                    var number = sqlException.Number;
+
+                    if (number == 547)
+                    {
+                        return Json("referent", JsonRequestBehavior.AllowGet);
+                    }
+                }
+
+                return Json("systemFalse", JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception)
+            {
+                return Json("systemFalse", JsonRequestBehavior.AllowGet);
+            }
+        }
+        #endregion
+
+        #region cer
+        public ActionResult CerManager()
+        {
+            if (!CheckLogin())
+            {
+                RedirectToAction("Login");
+            }
+
+            return View(dao.getCer());
+        }
+
+        [HttpPost]
+        public JsonResult Edit_Cer(CertifyMst cer)
+        {
+            if (!CheckLogin())
+            {
+                RedirectToAction("Login");
+            }
+
+            try
+            {
+                var check = dao.EditCer(cer);
+                if (check == 0)
+                {
+                    return Json("success");
+                }
+                else
+                {
+                    return Json("false");
+                }
+            }
+            catch (Exception)
+            {
+                return Json("systemFalse");
+            }
+        }
+
+        [HttpPost]
+        public JsonResult Create_Cer(CertifyMst cer)
+        {
+            if (!CheckLogin())
+            {
+                RedirectToAction("Login");
+            }
+
+            try
+            {
+                var check = dao.CreateCer(cer);
+                if (check == 0)
+                {
+                    return Json("success");
+                }
+                else
+                {
+                    return Json("false");
+                }
+            }
+
+            catch (Exception)
+            {
+                return Json("systemFalse");
+            }
+        }
+
+        public JsonResult Delete_Cer(string id_item)
+        {
+            if (!CheckLogin())
+            {
+                RedirectToAction("Login");
+            }
+            if (!verifyAdmin())
+            {
+                RedirectToAction("CerManager");
+            }
+            try
+            {
+                var check = dao.DeleteCer(id_item);
+                if (check == 0)
+                {
+                    return Json("success", JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    return Json("false", JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (DbUpdateException ex)
+            {
+                var sqlException = ex.GetBaseException() as SqlException;
+                if (sqlException != null)
+                {
+                    var number = sqlException.Number;
+
+                    if (number == 547)
+                    {
+                        return Json("referent", JsonRequestBehavior.AllowGet);
+                    }
+                }
+
+                return Json("systemFalse", JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception)
+            {
+                return Json("systemFalse", JsonRequestBehavior.AllowGet);
+            }
+        }
+        #endregion
+
+        #region pro
+        public ActionResult ProManager()
+        {
+            if (!CheckLogin())
+            {
+                RedirectToAction("Login");
+            }
+
+            return View(dao.getPro());
+        }
+
+        [HttpPost]
+        public JsonResult Edit_Pro(ProdMst pro)
+        {
+            if (!CheckLogin())
+            {
+                RedirectToAction("Login");
+            }
+
+            try
+            {
+                var check = dao.EditPro(pro);
+                if (check == 0)
+                {
+                    return Json("success");
+                }
+                else
+                {
+                    return Json("false");
+                }
+            }
+            catch (ArgumentNullException)
+            {
+                return Json("catFalse");
+            }
+            catch (Exception)
+            {
+                return Json("systemFalse");
+            }
+        }
+
+        [HttpPost]
+        public JsonResult Create_Pro(ProdMst pro)
+        {
+            if (!CheckLogin())
+            {
+                RedirectToAction("Login");
+            }
+
+            try
+            {
+                var check = dao.CreatePro(pro);
+                if (check == 0)
+                {
+                    return Json("success");
+                }
+                else
+                {
+                    return Json("false");
+                }
+            }
+            catch (ArgumentException)
+            {
+                return Json("catFalse");
+            }
+            catch (Exception)
+            {
+                return Json("systemFalse");
+            }
+        }
+
+        public JsonResult Delete_Pro(string id_item)
+        {
+            if (!CheckLogin())
+            {
+                RedirectToAction("Login");
+            }
+            if (!verifyAdmin())
+            {
+                RedirectToAction("ProManager");
+            }
+            try
+            {
+                var check = dao.DeletePro(id_item);
+                if (check == 0)
+                {
+                    return Json("success", JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    return Json("false", JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (DbUpdateException ex)
+            {
+                var sqlException = ex.GetBaseException() as SqlException;
+                if (sqlException != null)
+                {
+                    var number = sqlException.Number;
+
+                    if (number == 547)
+                    {
+                        return Json("referent", JsonRequestBehavior.AllowGet);
+                    }
+                }
+                return Json("systemFalse", JsonRequestBehavior.AllowGet);
+
+            }
+            catch (Exception)
+            {
+                return Json("systemFalse", JsonRequestBehavior.AllowGet);
+            }
+        }
+        #endregion pro
+
+        #region jew
+        public ActionResult JewManager()
+        {
+            if (!CheckLogin())
+            {
+                RedirectToAction("Login");
+            }
+
+            return View(dao.getJew());
+        }
+
+        [HttpPost]
+        public JsonResult Edit_Jew(JewelTypeMst jew)
+        {
+            if (!CheckLogin())
+            {
+                RedirectToAction("Login");
+            }
+
+            try
+            {
+                var check = dao.EditJew(jew);
+                if (check == 0)
+                {
+                    return Json("success");
+                }
+                else
+                {
+                    return Json("false");
+                }
+            }
+            catch (ArgumentNullException)
+            {
+                return Json("catFalse");
+            }
+            catch (Exception)
+            {
+                return Json("systemFalse");
+            }
+        }
+
+        [HttpPost]
+        public JsonResult Create_Jew(JewelTypeMst jew)
+        {
+            if (!CheckLogin())
+            {
+                RedirectToAction("Login");
+            }
+
+            try
+            {
+                var check = dao.CreateJew(jew);
+                if (check == 0)
+                {
+                    return Json("success");
+                }
+                else
+                {
+                    return Json("false");
+                }
+            }
+            catch (ArgumentException)
+            {
+                return Json("catFalse");
+            }
+            catch (Exception)
+            {
+                return Json("systemFalse");
+            }
+        }
+
+        public JsonResult Delete_Jew(string id_item)
+        {
+            if (!CheckLogin())
+            {
+                RedirectToAction("Login");
+            }
+            if (!verifyAdmin())
+            {
+                RedirectToAction("ProManager");
+            }
+            try
+            {
+                var check = dao.DeleteJew(id_item);
+                if (check == 0)
+                {
+                    return Json("success", JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    return Json("false", JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (DbUpdateException ex)
+            {
+                var sqlException = ex.GetBaseException() as SqlException;
+                if (sqlException != null)
+                {
+                    var number = sqlException.Number;
+
+                    if (number == 547)
+                    {
+                        return Json("referent", JsonRequestBehavior.AllowGet);
+                    }
+                }
+                return Json("systemFalse", JsonRequestBehavior.AllowGet);
+
+            }
+            catch (Exception)
+            {
+                return Json("systemFalse", JsonRequestBehavior.AllowGet);
+            }
+        }
+        #endregion jew
+
+        #region Img
+        public ActionResult ManagerImg()
+        {
+            if (!CheckLogin())
+            {
+                RedirectToAction("Login");
+            }
+
+            using (JewelleryShopping_dbEntities dbb = new JewelleryShopping_dbEntities())
+            {
+                var data = dao.GetImg();
+                List<ImageSub> image = new List<ImageSub>();
+                ImageSub temp;
+                if (data != null)
+                {
+                    foreach (Image item in data)
+                    {
+                        temp = new ImageSub();
+                        temp.imga = item;
+                        string id_pro = dbb.ItemMsts.Where(p => p.Style_Code.Replace(" ", string.Empty).ToLower().Equals(temp.imga.Style_Colde.Replace(" ", string.Empty).ToLower())).Select(p => p.Prod_ID).FirstOrDefault();
+                        if (id_pro != null)
+                        {
+                            string type = dbb.ProdMsts.Where(p => p.Prod_ID.Replace(" ", string.Empty).Equals(id_pro.Replace(" ", string.Empty))).Select(p => p.Prod_Type).FirstOrDefault();
+                            if (type != null)
+                            {
+                                temp.Product_Type = type;
+                            }
+                        }
+                        image.Add(temp);
+                    }
+                }
+                return View(image);
+            }
+        }
+
+        [HttpPost]
+        public JsonResult CreateImg(Image img)
+        {
+            if (!CheckLogin())
+            {
+                RedirectToAction("Login");
+            }
+            try
+            {
+                var uniqueName = "";
+                if (Request.Files["imagefile"] != null)
+                {
+                    var file = Request.Files["imagefile"];
+                    if (file.ContentLength < 10485760 && file.FileName != "")
+                    {
+                        var ext = Path.GetExtension(file.FileName);
+                        uniqueName = Guid.NewGuid().ToString() + ext;
+                        string product_type = dao.GetProductTypeByStyleCode(img.Style_Colde);
+                        img.image1 = uniqueName;
+                        dao.CreateImage(img);
+
+                        if (Directory.Exists(Server.MapPath("/Content/images/Product_Image/" + product_type + "/Image/"+img.Style_Colde)) == false)
+                        {
+                            Directory.CreateDirectory(Server.MapPath("/Content/images/Product_Image/" + product_type + "/Image/"+ img.Style_Colde));
+                        }
+                        file.SaveAs(Server.MapPath("/Content/images/Product_Image/" + product_type + "/Image/" + img.Style_Colde+"/" + uniqueName));
+                        return Json("success");
+                    }
+                    else
+                    {
+                        return Json("fileFalse");
+                    }
+                }
+                else
+                {
+                    return Json("fileFalse");
+                }
+            }
+            catch (ArgumentException)
+            {
+                return Json("stylecodeFalse");
+            }
+            catch (DbUpdateException)
+            {
+                return Json("Noexist");
+            }
+            catch (Exception)
+            {
+                return Json("systemError");
+            }
+        }
+
+        [HttpPost]
+        public JsonResult EditImg(Image img)
+        {
+            if (!CheckLogin())
+            {
+                RedirectToAction("Login");
+            }
+            try
+            {
+                var uniqueName = "";    
+                int check;
+                if (Request.Files["imagefile"] != null)
+                {
+                    var file = Request.Files["imagefile"];
+                    if (file.ContentLength < 10485760 && file.FileName != "")
+                    {
+                        string oldStyle = dao.GetOldStyleCode(img.ID);
+                        string oldimage = dao.GetOldImage(img.ID);
+                        string product_type = dao.GetProductTypeByStyleCode(img.Style_Colde);
+
+                        var ext = Path.GetExtension(file.FileName);
+                        uniqueName = Guid.NewGuid().ToString() + ext;
+                        img.image1 = uniqueName;
+                        check = dao.ImageEdit(img);
+
+                        if (Directory.Exists(Server.MapPath("/Content/images/Product_Image/" + product_type + "/Image/" + img.Style_Colde)) == false)
+                        {
+                            Directory.CreateDirectory(Server.MapPath("/Content/images/Product_Image/" + product_type + "/Image/" + img.Style_Colde));
+                        }
+                        file.SaveAs(Server.MapPath("/Content/images/Product_Image/" + product_type + "/Image/" + img.Style_Colde + "/" + uniqueName));
+
+                        if (System.IO.File.Exists(Server.MapPath("/Content/images/Product_Image/" + product_type + "/Image/" + oldStyle + "/" + oldimage)) == true)
+                        {
+                            System.IO.File.Delete(Server.MapPath("/Content/images/Product_Image/" + product_type + "/Image/" + oldStyle + "/" + oldimage));
+                        }
+                      
+
+                    }
+                    else
+                    {
+                        return Json("fileFalse");
+                    }
+                }
+                else
+                {
+                    check = dao.ImageEdit(img);
+                }
+                if (check == 0)
+                {
+                    return Json("success");
+                }
+                else
+                {
+                    return Json("false");
+                }
+            }
+            catch (ArgumentException)
+            {
+                return Json("stylecodeFalse");
+            }
+            catch (DbUpdateException)
+            {
+                return Json("Noexist");
+            }
+            catch (Exception)
+            {
+                return Json("systemError");
+            }
+        }
+
+        [HttpPost]
+        public JsonResult DeleteImg(int id_item, string Style_Colde, string filename)
+        {
+            if (!CheckLogin())
+            {
+                RedirectToAction("Login");
+            }
+            if (!verifyAdmin())
+            {
+                RedirectToAction("ManagerImg");
+            }
+            try
+            {
+                int check = dao.ImageDelete(id_item);
+                if (check == 0)
+                {
+                    string product_type = dao.GetProductTypeByStyleCode(Style_Colde);
+                    if (System.IO.File.Exists(Server.MapPath("/Content/images/Product_Image/" + product_type + "/Image/" + Style_Colde + "/" + filename)) == true)
+                    {
+                        System.IO.File.Delete(Server.MapPath("/Content/images/Product_Image/" + product_type + "/Image/" + Style_Colde + "/" + filename));
+                    }
+                    return Json("success");
+                }
+                else
+                {
+                    return Json("false");
+                }
+            }
+            catch (IOException)
+            {
+                return Json("fileFalse");
+            }
+            catch (Exception)
+            {
+                return Json("systemFalse");
+            }
+        }
+        #endregion Img
+
+        #region order
+
+        public ActionResult ManagerOrder()
+        {
+            return View();
+        }
+        public JsonResult GetOrder()
+        {
+            var json = JsonConvert.SerializeObject(dao.GetOrder());
+            return Json(json,JsonRequestBehavior.AllowGet);
+        }
+        #endregion order
     }
 
 }

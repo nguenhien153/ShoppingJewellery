@@ -102,8 +102,8 @@
                                     <td class="align-middle">
                                         Supporter
                                     </td>
-                                    <td >
-                                        <a class="btn " data-toggle="tooltip" title="Change Password" data-placement="bottom" href="@Url.Action("Change_Password","Admin",new { username = item.Username })"><img src="~/Content/images/Icon/Admin/Icon_ChangePassword.png" style="width:35px"/> </a>
+                                    <td>
+                                        <a class="btn " data-toggle="tooltip" title="Change Password" data-placement="bottom" href="@Url.Action("Change_Password","Admin",new { username = item.Username })"><img src="~/Content/images/Icon/Admin/Icon_ChangePassword.png" style="width:35px" /> </a>
                                     </td>
                                 </tr>
                             }
@@ -168,7 +168,7 @@
                 "responsive": false,
                 "pageLength": 10,
                 "stateSave": true,
-
+                    "order": [[2, 'asc']],
                 "select": {
                     "info": false
                 },
@@ -186,7 +186,7 @@
 
             });
             AddButton("table", "/Content/images/Icon/Admin/Icon_Create.png", "/Content/images/Icon/Admin/Icon_ChangePassword.png", "/Content/images/Icon/Admin/Icon_Remove.png", "Create Account", "Change Password", "Delete Account", "/Admin/Create_New_AdminAccount");
-          
+
 
             $('#table tbody').on('click', 'tr', function () {
                 username = $(this).children("td").eq(0).text();

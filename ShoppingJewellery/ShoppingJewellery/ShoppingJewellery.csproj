@@ -50,6 +50,9 @@
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.ServiceModel" />
@@ -122,6 +125,7 @@
     <Content Include="Content\css\Admin\jquery-ui.css" />
     <Content Include="Content\css\Admin\jquery-ui.min.css" />
     <Content Include="Content\css\Admin\Login.css" />
+    <Content Include="Content\css\Admin\responsive.dataTables.min.css" />
     <Content Include="Content\css\Admin\rowGroup.dataTables.min.css" />
     <Content Include="Content\css\Admin\select.dataTables.min.css" />
     <Content Include="Content\css\Admin\table_admin.css" />
@@ -257,6 +261,7 @@
     <Content Include="Content\js\Admin\jquery-ui.js" />
     <Content Include="Content\js\Admin\jquery-ui.min.js" />
     <Content Include="Content\js\Admin\jquery.js" />
+    <Content Include="Content\js\Admin\dataTables.responsive.min.js" />
     <Content Include="Content\js\Admin\Text\modalforProduct.js" />
     <Content Include="Content\js\Admin\Password.js" />
     <Content Include="Content\js\Admin\dataTables.buttons.min.js" />
@@ -316,6 +321,8 @@
     <Content Include="Views\Layout\Mail\send_paymentsuccess.html" />
     <Content Include="Views\Layout\Mail\veriify_checkorder.html" />
     <Content Include="Views\Layout\Mail\verify_mail.html" />
+    <Content Include="Views\Test\ddd.html" />
+    <Content Include="Views\Test\index.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -434,11 +441,9 @@
     <Compile Include="Models\StoneView.cs">
       <DependentUpon>JewelleryShopping.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\UploadClass.cs" />
     <Compile Include="Models\UserRegMst.cs">
       <DependentUpon>JewelleryShopping.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Validatee.cs" />
     <Compile Include="Models\ViewDisplayItem.cs">
       <DependentUpon>JewelleryShopping.tt</DependentUpon>
     </Compile>
@@ -501,7 +506,6 @@
     <Content Include="Views\OrderCart\GetOrder.cshtml" />
     <Content Include="Views\Layout\Product\LayoutListProduct.cshtml" />
     <Content Include="Views\Layout\Admin\AdminLayout.cshtml" />
-    <Content Include="Views\Test\Index.cshtml" />
     <Content Include="Views\Admin\Login.cshtml" />
     <Content Include="Views\Admin\AdminAccount.cshtml" />
     <Content Include="Views\Admin\HomeAdmin.cshtml" />
@@ -520,6 +524,14 @@
     <Content Include="Views\Admin\Product_Details.cshtml" />
     <Content Include="Views\Test\Index3.cshtml" />
     <Content Include="Views\Admin\Create_Product_Details.cshtml" />
+    <Content Include="Views\Admin\BrandManager.cshtml" />
+    <Content Include="Views\Admin\CatManager.cshtml" />
+    <Content Include="Views\Admin\CerManager.cshtml" />
+    <Content Include="Views\Admin\ProManager.cshtml" />
+    <Content Include="Views\Admin\JewManager.cshtml" />
+    <Content Include="Views\Admin\ManagerImg.cshtml" />
+    <Content Include="Views\Admin\ManagerOrder.cshtml" />
+    <Content Include="Views\Test\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

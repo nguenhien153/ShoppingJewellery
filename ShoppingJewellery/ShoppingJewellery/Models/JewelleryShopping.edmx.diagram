@@ -13,23 +13,12 @@
         <AssociationConnector Association="JewelleryShopping_dbModel.FK_ProdMst_CatMst" />
         <AssociationConnector Association="JewelleryShopping_dbModel.FK_DisplayCommonPro_ProdMst" />
         <AssociationConnector Association="JewelleryShopping_dbModel.FK_JewelTypeMst_ProdMst" />
-        <EntityTypeShape EntityType="JewelleryShopping_dbModel.Image" Width="1.5" PointX="9.75" PointY="29.875" />
         <EntityTypeShape EntityType="JewelleryShopping_dbModel.ViewFullItem" Width="1.5" PointX="14.75" PointY="8.75" />
-        <EntityTypeShape EntityType="JewelleryShopping_dbModel.ItemMst" Width="1.5" PointX="7.5" PointY="10" />
-        <AssociationConnector Association="JewelleryShopping_dbModel.FK_ItemMst_CatMst" />
-        <AssociationConnector Association="JewelleryShopping_dbModel.FK_Image_ItemMst" />
-        <AssociationConnector Association="JewelleryShopping_dbModel.FK_ItemMst_JewelTypeMst" />
-        <AssociationConnector Association="JewelleryShopping_dbModel.FK_ItemMst_ProdMst" />
         <EntityTypeShape EntityType="JewelleryShopping_dbModel.Payment" Width="1.5" PointX="12.75" PointY="24" />
-        <EntityTypeShape EntityType="JewelleryShopping_dbModel.Order_" Width="1.5" PointX="10.5" PointY="20.125" />
-        <AssociationConnector Association="JewelleryShopping_dbModel.FK_Payment_Order_" />
         <EntityTypeShape EntityType="JewelleryShopping_dbModel.Feedback" Width="1.5" PointX="14" PointY="1.125" />
         <EntityTypeShape EntityType="JewelleryShopping_dbModel.Inquiry" Width="1.5" PointX="16.625" PointY="4.25" />
         <EntityTypeShape EntityType="JewelleryShopping_dbModel.Order_Details" Width="1.5" PointX="12.75" PointY="11.625" />
-        <AssociationConnector Association="JewelleryShopping_dbModel.FK_Order_Details_ItemMst" />
-        <AssociationConnector Association="JewelleryShopping_dbModel.FK_Order_Details_Order_" />
         <EntityTypeShape EntityType="JewelleryShopping_dbModel.BrandMst" Width="1.5" PointX="5.25" PointY="16.75" />
-        <AssociationConnector Association="JewelleryShopping_dbModel.FK_ItemMst_BrandMst" />
         <EntityTypeShape EntityType="JewelleryShopping_dbModel.CertifyMst" Width="1.5" PointX="5.25" PointY="7.375" />
         <EntityTypeShape EntityType="JewelleryShopping_dbModel.Delivery" Width="1.5" PointX="12.75" PointY="18" />
         <EntityTypeShape EntityType="JewelleryShopping_dbModel.DimQltyMst" Width="1.5" PointX="7.5" PointY="3.75" />
@@ -37,9 +26,6 @@
         <EntityTypeShape EntityType="JewelleryShopping_dbModel.GoldKrtMst" Width="1.5" PointX="7.5" PointY="17.5" />
         <EntityTypeShape EntityType="JewelleryShopping_dbModel.Receiver" Width="1.5" PointX="12.75" PointY="21.125" />
         <EntityTypeShape EntityType="JewelleryShopping_dbModel.StoneQltyMst" Width="1.5" PointX="7.5" PointY="20.5" />
-        <AssociationConnector Association="JewelleryShopping_dbModel.FK_ItemMst_CertifyMst" />
-        <AssociationConnector Association="JewelleryShopping_dbModel.FK_Delivery_Order_" />
-        <AssociationConnector Association="JewelleryShopping_dbModel.FK_Receiver_Order_" />
         <EntityTypeShape EntityType="JewelleryShopping_dbModel.UserRegMst" Width="1.5" PointX="11.75" PointY="2.625" />
         <AssociationConnector Association="JewelleryShopping_dbModel.FK_Feedback_UserRegMst" />
         <EntityTypeShape EntityType="JewelleryShopping_dbModel.Address" Width="1.5" PointX="14" PointY="4.25" />
@@ -49,11 +35,25 @@
         <EntityTypeShape EntityType="JewelleryShopping_dbModel.StoneMst" Width="1.5" PointX="9.75" PointY="15.75" />
         <AssociationConnector Association="JewelleryShopping_dbModel.FK_DimMst_DimQltyMst" />
         <AssociationConnector Association="JewelleryShopping_dbModel.FK_DimMst_DimQltySubMst" />
-        <AssociationConnector Association="JewelleryShopping_dbModel.FK_DimMst_ItemMst" />
         <AssociationConnector Association="JewelleryShopping_dbModel.FK_GoldMst_GoldKrtMst" />
-        <AssociationConnector Association="JewelleryShopping_dbModel.FK_GoldMst_ItemMst" />
-        <AssociationConnector Association="JewelleryShopping_dbModel.FK_StoneMst_ItemMst" />
         <AssociationConnector Association="JewelleryShopping_dbModel.FK_StoneMst_StoneQltyMst" />
+        <EntityTypeShape EntityType="JewelleryShopping_dbModel.Image" Width="1.5" PointX="9.75" PointY="0.75" />
+        <EntityTypeShape EntityType="JewelleryShopping_dbModel.ItemMst" Width="1.5" PointX="7.5" PointY="10.5" />
+        <AssociationConnector Association="JewelleryShopping_dbModel.FK_ItemMst_BrandMst" />
+        <AssociationConnector Association="JewelleryShopping_dbModel.FK_ItemMst_CatMst" />
+        <AssociationConnector Association="JewelleryShopping_dbModel.FK_ItemMst_CertifyMst" />
+        <AssociationConnector Association="JewelleryShopping_dbModel.FK_DimMst_ItemMst" />
+        <AssociationConnector Association="JewelleryShopping_dbModel.FK_GoldMst_ItemMst" />
+        <AssociationConnector Association="JewelleryShopping_dbModel.FK_Image_ItemMst" />
+        <AssociationConnector Association="JewelleryShopping_dbModel.FK_ItemMst_JewelTypeMst" />
+        <AssociationConnector Association="JewelleryShopping_dbModel.FK_ItemMst_ProdMst" />
+        <AssociationConnector Association="JewelleryShopping_dbModel.FK_Order_Details_ItemMst" />
+        <AssociationConnector Association="JewelleryShopping_dbModel.FK_StoneMst_ItemMst" />
+        <EntityTypeShape EntityType="JewelleryShopping_dbModel.Order_" Width="1.5" PointX="10.5" PointY="19.75" />
+        <AssociationConnector Association="JewelleryShopping_dbModel.FK_Delivery_Order_" />
+        <AssociationConnector Association="JewelleryShopping_dbModel.FK_Order_Details_Order_" />
+        <AssociationConnector Association="JewelleryShopping_dbModel.FK_Payment_Order_" />
+        <AssociationConnector Association="JewelleryShopping_dbModel.FK_Receiver_Order_" />
         </Diagram>
       <Diagram DiagramId="960facf52ee0461ea2469bac6fd90377" Name="Diagram3" >
         <EntityTypeShape EntityType="JewelleryShopping_dbModel.ViewDisplayItem" Width="1.5" PointX="0.75" PointY="0.75" />

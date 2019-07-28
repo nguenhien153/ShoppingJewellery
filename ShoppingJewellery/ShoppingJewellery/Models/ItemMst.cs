@@ -17,10 +17,10 @@ namespace ShoppingJewellery.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public ItemMst()
         {
-            this.Images = new HashSet<Image>();
-            this.Order_Details = new HashSet<Order_Details>();
             this.DimMsts = new HashSet<DimMst>();
             this.GoldMsts = new HashSet<GoldMst>();
+            this.Images = new HashSet<Image>();
+            this.Order_Details = new HashSet<Order_Details>();
             this.StoneMsts = new HashSet<StoneMst>();
         }
     
@@ -44,19 +44,19 @@ namespace ShoppingJewellery.Models
         public string Img { get; set; }
         public decimal Stone_Wt { get; set; }
     
+        public virtual BrandMst BrandMst { get; set; }
         public virtual CatMst CatMst { get; set; }
+        public virtual CertifyMst CertifyMst { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DimMst> DimMsts { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<GoldMst> GoldMsts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Image> Images { get; set; }
         public virtual JewelTypeMst JewelTypeMst { get; set; }
         public virtual ProdMst ProdMst { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order_Details> Order_Details { get; set; }
-        public virtual BrandMst BrandMst { get; set; }
-        public virtual CertifyMst CertifyMst { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DimMst> DimMsts { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<GoldMst> GoldMsts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StoneMst> StoneMsts { get; set; }
     }

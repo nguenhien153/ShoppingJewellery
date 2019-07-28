@@ -7,6 +7,8 @@ using System.Data.SqlClient;
 using System.Configuration;
 using System.Collections.Generic;
 using System;
+using System.Web.Script.Serialization;
+using Newtonsoft.Json;
 
 namespace ShoppingJewellery.Controllers
 {
@@ -16,7 +18,14 @@ namespace ShoppingJewellery.Controllers
         // GET: Test
         public ActionResult Index()
         {
-            return View(db.UserRegMsts.ToList());
+            return View();
+        }
+
+        public JsonResult HienHo(string hien)
+        {
+            var order = db.Order_.ToList();
+            var json = JsonConvert.SerializeObject(order);
+            return Json(json);
         }
 
         public JsonResult GetBrand(string brandid)

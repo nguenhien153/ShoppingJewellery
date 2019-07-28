@@ -24,7 +24,7 @@ namespace ShoppingJewellery.Models
         public int No { get; set; }
         public int ID { get; set; }
     
-        public virtual ItemMst ItemMst { get; set; }
         public virtual StoneQltyMst StoneQltyMst { get; set; }
+        public virtual ItemMst ItemMst { get; set; }
     }
 }

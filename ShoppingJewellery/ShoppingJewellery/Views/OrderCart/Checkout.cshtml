@@ -90,8 +90,8 @@
                     <label class="control-label col-md-3" for="Instruction_Optional">Instruction (Optional)</label>
                     <div class="col-md-12">
                         <textarea class="col-12 form-control text-box" maxlength="700" id="Instruction_Optional" name="Instruction_Optional" rows="5"></textarea>
-
                     </div>
+
                     <br />
                     <div class="col-12">
                         <span><strong>Address Accuracy</strong></span><br />
@@ -129,7 +129,7 @@
     <input name="lng" id="lng" type="hidden" readonly>
 </form>
 <script src="~/Content/JQuery/jquery-1.11.1.min.js"></script>
-<script src="~/Content/bootstrap-4.0.0-dist/js/bootstrap-formhelpers.min.js"></script>
+<script src="~/Content/bootstrap-4.0.0-dist/js/bootstrap-formhelpers.min.js?2"></script>
 <script src="~/Content/JQuery/jquery.geocomplete.min.js"></script>
 <script src='https://maps.googleapis.com/maps/api/js?key=AIzaSyDS-ue65Jx_HySaXRqnMehRbg67cMCL_xM&libraries=places'></script>
 <script src="~/Content/JQuery/jquery.session.js"></script>
@@ -196,13 +196,12 @@
         } else {
             strUserr = "";
         }
-        address = $("#Address").val().toString() + " , " + $("#City").val().toString() + " , " + strUserr.toString() + " , " + strUser.toString();
+        address =  strUserr.toString() + " , " + strUser.toString();
         getLotutide(address);
-
     }
     function GetValuess() {
         strUserr = r.options[r.selectedIndex].text;
-        address = $("#Address").val().toString() + " , " + $("#City").val().toString() + " , " + strUserr.toString() + " , " + strUser.toString();
+        address = strUserr.toString() + " , " + strUser.toString();
         getLotutide(address);
 
     }
@@ -263,6 +262,7 @@
                 alert("Can't Find Your Address. Please Check Again !!!");
             } else {
                 distanceee = distance(19.0768261, 72.9988664, lat, lng);
+             
               // $("#calDistance").val(distanceee);
                 $.session.set("Distance", distanceee);
                 //alert($.session.get("Distance"));
@@ -284,14 +284,9 @@
         });
         $("#City").bind("change", function () {
             checkcity = validate("City", "result_city", re_name);
-            address = $("#Address").val().toString() + " , " + $("#City").val().toString() + " , " + strUserr.toString() + " , " + strUser.toString();
-            getLotutide(address);
-
         });
         $("#Address").bind("change", function () {
             checkaddress = validate("Address", "result_address", re_address);
-            address = $("#Address").val().toString() + " , " + $("#City").val().toString() + " , " + strUserr.toString() + " , " + strUser.toString();
-            getLotutide(address);
         });
     });
 </script>

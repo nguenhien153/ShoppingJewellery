@@ -214,7 +214,6 @@ namespace ShoppingJewellery.Models
         }
         // end User Account
 
-
         // User Address 
         public int CreateUserAddress(Address add)
         {
@@ -517,7 +516,6 @@ namespace ShoppingJewellery.Models
             }
         }
 
-
         public ItemMst GetItem_Pro(string style_code)
         {
             using (JewelleryShopping_dbEntities dbb = new JewelleryShopping_dbEntities())
@@ -533,6 +531,21 @@ namespace ShoppingJewellery.Models
             {
                 var item = dbb.ProdMsts.Where(p => p.Prod_ID.Equals(Prod_ID)).FirstOrDefault<ProdMst>();
                 return item;
+            }
+        }
+
+        public string GetOldImageItem(string stype)
+        {
+            using (JewelleryShopping_dbEntities dbb = new JewelleryShopping_dbEntities())
+            {
+                if (dbb.ItemMsts.Any(p=>p.Style_Code.Replace(" ",string.Empty).ToLower().Equals(stype.Replace(" ",string.Empty).ToLower()))==true)
+                {
+                    return dbb.ItemMsts.Find(stype).Img;
+                }
+                else
+                {
+                    throw new DbUpdateException();
+                }
             }
         }
 
@@ -870,6 +883,485 @@ namespace ShoppingJewellery.Models
 
         #endregion Product
 
+        #region brand
+        public List<BrandMst> getBrands()
+        {
+            using (JewelleryShopping_dbEntities dbb = new JewelleryShopping_dbEntities())
+            {
+                var brand = dbb.BrandMsts.ToList();
+                return brand;
+            }
+        }
+
+        public int EdittBrand(BrandMst brand)
+        {
+            using (JewelleryShopping_dbEntities dbb = new JewelleryShopping_dbEntities())
+            {
+                var item = dbb.BrandMsts.Find(brand.Brand_ID);
+                if (item != null)
+                {
+                    item.Brand_Type = brand.Brand_Type;
+                    dbb.SaveChanges();
+                    return 0;
+                }
+                else
+                {
+                    return 1;
+                }
+            }
+        }
+
+        public int CreateBrand(BrandMst brand)
+        {
+            using (JewelleryShopping_dbEntities dbb = new JewelleryShopping_dbEntities())
+            {
+                var item = dbb.BrandMsts.Find(brand.Brand_ID);
+                if (item == null)
+                {
+                    dbb.BrandMsts.Add(brand);
+                    dbb.SaveChanges();
+                    return 0;
+                }
+                else
+                {
+                    return 1;
+                }
+            }
+        }
+
+        public int DeleteBrand(string id)
+        {
+            using (JewelleryShopping_dbEntities dbb = new JewelleryShopping_dbEntities())
+            {
+                var item = dbb.BrandMsts.Find(id);
+                if (item != null)
+                {
+                    dbb.BrandMsts.Remove(item);
+                    dbb.SaveChanges();
+                    return 0;
+                }
+                else
+                {
+                    return 1;
+                }
+
+            }
+        }
+        #endregion brand
+
+        #region cat
+        public List<CatMst> getCat()
+        {
+            using (JewelleryShopping_dbEntities dbb = new JewelleryShopping_dbEntities())
+            {
+                var cat = dbb.CatMsts.ToList();
+                return cat;
+            }
+        }
+
+        public int EditCat(CatMst cat)
+        {
+            using (JewelleryShopping_dbEntities dbb = new JewelleryShopping_dbEntities())
+            {
+                var item = dbb.CatMsts.Find(cat.Cat_ID);
+                if (item != null)
+                {
+                    item.Cat_Name = cat.Cat_Name;
+                    dbb.SaveChanges();
+                    return 0;
+                }
+                else
+                {
+                    return 1;
+                }
+            }
+        }
+
+        public int CreateCat(CatMst cat)
+        {
+            using (JewelleryShopping_dbEntities dbb = new JewelleryShopping_dbEntities())
+            {
+                var item = dbb.CatMsts.Find(cat.Cat_ID);
+                if (item == null)
+                {
+                    dbb.CatMsts.Add(cat);
+                    dbb.SaveChanges();
+                    return 0;
+                }
+                else
+                {
+                    return 1;
+                }
+            }
+        }
+
+        public int DeleteCat(string id)
+        {
+            using (JewelleryShopping_dbEntities dbb = new JewelleryShopping_dbEntities())
+            {
+                var item = dbb.CatMsts.Find(id);
+                if (item != null)
+                {
+                    dbb.CatMsts.Remove(item);
+                    dbb.SaveChanges();
+                    return 0;
+                }
+                else
+                {
+                    return 1;
+                }
+
+            }
+        }
+        #endregion cat
+
+        #region cer
+        public List<CertifyMst> getCer()
+        {
+            using (JewelleryShopping_dbEntities dbb = new JewelleryShopping_dbEntities())
+            {
+                var cer = dbb.CertifyMsts.ToList();
+                return cer;
+            }
+        }
+
+        public int EditCer(CertifyMst cer)
+        {
+            using (JewelleryShopping_dbEntities dbb = new JewelleryShopping_dbEntities())
+            {
+                var item = dbb.CertifyMsts.Find(cer.Certify_ID);
+                if (item != null)
+                {
+                   
+                    item.Certify_Type = cer.Certify_Type;
+                    dbb.SaveChanges();
+                    return 0;
+                }
+                else
+                {
+                    return 1;
+                }
+            }
+        }
+
+        public int CreateCer(CertifyMst cer)
+        {
+            using (JewelleryShopping_dbEntities dbb = new JewelleryShopping_dbEntities())
+            {
+                var item = dbb.CertifyMsts.Find(cer.Certify_ID);
+                if (item == null)
+                {
+                    dbb.CertifyMsts.Add(cer);
+                    dbb.SaveChanges();
+                    return 0;
+                }
+                else
+                {
+                    return 1;
+                }
+            }
+        }
+
+        public int DeleteCer(string id)
+        {
+            using (JewelleryShopping_dbEntities dbb = new JewelleryShopping_dbEntities())
+            {
+                var item = dbb.CertifyMsts.Find(id);
+                if (item != null)
+                {
+                    dbb.CertifyMsts.Remove(item);
+                    dbb.SaveChanges();
+                    return 0;
+                }
+                else
+                {
+                    return 1;
+                }
+
+            }
+        }
+        #endregion cer
+
+        #region pro
+        public List<ProdMst> getPro()
+        {
+            using (JewelleryShopping_dbEntities dbb = new JewelleryShopping_dbEntities())
+            {
+                var pro = dbb.ProdMsts.ToList();
+                return pro;
+            }
+        }
+
+        public int EditPro(ProdMst pro)
+        {
+            using (JewelleryShopping_dbEntities dbb = new JewelleryShopping_dbEntities())
+            {
+                var item = dbb.ProdMsts.Find(pro.Prod_ID);
+                if (item != null)
+                {
+                    if (dbb.CatMsts.Any(p=>p.Cat_ID.Replace(" ",string.Empty).Equals(pro.Cat_ID))== false)
+                    {
+                        throw new ArgumentNullException();
+                    }
+                    else
+                    {
+                        item.Cat_ID = pro.Cat_ID;
+                    }
+                    item.Prod_Type = pro.Prod_Type;
+                    dbb.SaveChanges();
+                    return 0;
+                }
+                else
+                {
+                    return 1;
+                }
+            }
+        }
+
+        public int CreatePro(ProdMst pro)
+        {
+            using (JewelleryShopping_dbEntities dbb = new JewelleryShopping_dbEntities())
+            {
+                var item = dbb.ProdMsts.Find(pro.Prod_ID);
+                if (item == null)
+                {
+                    if (dbb.CatMsts.Any(p=>p.Cat_ID.Replace(" ",string.Empty).Equals(pro.Cat_ID))== false)
+                    {
+                        throw new ArgumentException();
+                    }
+                    dbb.ProdMsts.Add(pro);
+                    dbb.SaveChanges();
+                    return 0;
+                }
+                else
+                {
+                    return 1;
+                }
+            }
+        }
+
+        public int DeletePro(string id)
+        {
+            using (JewelleryShopping_dbEntities dbb = new JewelleryShopping_dbEntities())
+            {
+                var item = dbb.ProdMsts.Find(id);
+                if (item != null)
+                {
+                    dbb.ProdMsts.Remove(item);
+                    dbb.SaveChanges();
+                    return 0;
+                }
+                else
+                {
+                    return 1;
+                }
+
+            }
+        }
+        #endregion cer
+
+        #region jew
+        public List<JewelTypeMst> getJew()
+        {
+            using (JewelleryShopping_dbEntities dbb = new JewelleryShopping_dbEntities())
+            {
+                var jew = dbb.JewelTypeMsts.ToList();
+                return jew;
+            }
+        }
+
+        public int EditJew(JewelTypeMst jew)
+        {
+            using (JewelleryShopping_dbEntities dbb = new JewelleryShopping_dbEntities())
+            {
+                var item = dbb.JewelTypeMsts.Find(jew.JewelTypeMst1);
+                if (item != null)
+                {
+                   
+                    if (dbb.ProdMsts.Any(p => p.Prod_ID.Replace(" ", string.Empty).Equals(jew.ID_Prod)) == false)
+                    {
+                        throw new ArgumentNullException();
+                    }
+                    else
+                    {
+                        item.ID_Prod = jew.ID_Prod;
+                    }
+                    item.Jewellery_Type = jew.Jewellery_Type;
+                    dbb.SaveChanges();
+                    return 0;
+                }
+                else
+                {
+                    return 1;
+                }
+            }
+        }
+
+        public int CreateJew(JewelTypeMst jew)
+        {
+            using (JewelleryShopping_dbEntities dbb = new JewelleryShopping_dbEntities())
+            {
+                var item = dbb.JewelTypeMsts.Find(jew.JewelTypeMst1);
+                if (item == null)
+                {
+                    if (dbb.ProdMsts.Any(p => p.Prod_ID.Replace(" ", string.Empty).Equals(jew.ID_Prod)) == false)
+                    {
+                        throw new ArgumentException();
+                    }
+                    dbb.JewelTypeMsts.Add(jew);
+                    dbb.SaveChanges();
+                    return 0;
+                }
+                else
+                {
+                    return 1;
+                }
+            }
+        }
+
+        public int DeleteJew(string id)
+        {
+            using (JewelleryShopping_dbEntities dbb = new JewelleryShopping_dbEntities())
+            {
+                var item = dbb.JewelTypeMsts.Find(id);
+                if (item != null)
+                {
+                    dbb.JewelTypeMsts.Remove(item);
+                    dbb.SaveChanges();
+                    return 0;
+                }
+                else
+                {
+                    return 1;
+                }
+
+            }
+        }
+        #endregion jew
+
+        #region Img
+
+        public List<Image> GetImg()
+        {
+            using (JewelleryShopping_dbEntities dbb = new JewelleryShopping_dbEntities())
+            {
+                List<Image> img = dbb.Images.ToList();
+                return img;
+            }
+        }
+        
+        public void CreateImage(Image img)
+        {
+            using (JewelleryShopping_dbEntities dbb = new JewelleryShopping_dbEntities())
+            {
+                if (dbb.ItemMsts.Any(p=>p.Style_Code.Replace(" ",string.Empty).ToLower().Equals(img.Style_Colde.Replace(" ",string.Empty).ToLower()))==false)
+                {
+                    throw new ArgumentException();
+                }
+                if (dbb.Images.Any(p => p.Style_Colde.Replace(" ", string.Empty).ToLower().Equals(img.Style_Colde.Replace(" ", string.Empty).ToLower()) && p.No == img.No) == true)
+                {
+                    throw new DbUpdateException();
+                }
+                dbb.Images.Add(img);
+                dbb.SaveChanges();
+            }
+        }
+
+        public string GetProductTypeByStyleCode(string stylecode)
+        {
+            using (JewelleryShopping_dbEntities dbb = new JewelleryShopping_dbEntities())
+            {
+                if (dbb.ItemMsts.Any(p=>p.Style_Code.Replace(" ",string.Empty).ToLower().Equals(stylecode.Replace(" ",string.Empty).ToLower()))==true)
+                {
+                    string id = dbb.ItemMsts.Find(stylecode).Prod_ID;
+                    string type = dbb.ProdMsts.Find(id).Prod_Type;
+                    return type;
+                }
+                else
+                {
+                    throw new ArgumentException();
+                }
+            }
+        }
+        
+        public string GetOldImage(int id)
+        {
+            using (JewelleryShopping_dbEntities dbb = new JewelleryShopping_dbEntities())
+            {
+                return dbb.Images.Find(id).image1;
+            }
+        }
+        public string GetOldStyleCode(int id)
+        {
+            using (JewelleryShopping_dbEntities dbb = new JewelleryShopping_dbEntities())
+            {
+                return dbb.Images.Find(id).Style_Colde;
+            }
+        }
+        public int ImageEdit(Image img)
+        {
+            using (JewelleryShopping_dbEntities dbb = new JewelleryShopping_dbEntities())
+            {
+                var item = dbb.Images.Find(img.ID);
+                if (item !=null)
+                {
+                    if (dbb.ItemMsts.Any(p=>p.Style_Code.Replace(" ",string.Empty).ToLower().Equals(img.Style_Colde.Replace(" ",string.Empty)))==false)
+                    {
+                        throw new ArgumentException();
+                    }
+                    if (img.No !=item.No)
+                    {
+                        if (dbb.Images.Any(p => p.Style_Colde.Replace(" ", string.Empty).ToLower().Equals(img.Style_Colde.Replace(" ", string.Empty).ToLower()) && p.No == img.No) == true)
+                        {
+                            throw new DbUpdateException();
+                        }
+                    }
+
+                    item.Style_Colde = img.Style_Colde;
+                    item.No = img.No;
+                    if (img.image1 != null)
+                    {
+                        item.image1 = img.image1;
+                    }
+                    dbb.SaveChanges();
+                    return 0;
+                }
+                else
+                {
+                    return 1;
+                }
+            }
+        }
+
+        public int ImageDelete(int id)
+        {
+            using (JewelleryShopping_dbEntities dbb = new JewelleryShopping_dbEntities())
+            {
+                var item = dbb.Images.Find(id);
+                if (item !=null)
+                {
+                    dbb.Images.Remove(item);
+                    dbb.SaveChanges();
+                    return 0;
+                }
+                else
+                {
+                    return 1;
+                }
+            }
+        }
+        #endregion Img
+
+        #region Order
+
+        public List<Order_> GetOrder()
+        {
+            using (JewelleryShopping_dbEntities dbb = new JewelleryShopping_dbEntities())
+            {
+                return dbb.Order_.ToList();
+            }
+        }
+        #endregion Order
     }
 
     public class Details_Product
@@ -879,6 +1371,12 @@ namespace ShoppingJewellery.Models
         public List<GoldView> gold_option { get; set; }
         public List<StoneView> stone_option { get; set; }
         public List<DimMst> diamond_option { get; set; }
+    }
+
+    public class ImageSub
+    {
+        public string Product_Type { get; set; }
+        public Image imga { get; set; }
     }
     public class Objeect
     {
@@ -908,4 +1406,5 @@ namespace ShoppingJewellery.Models
         public string NorR { get; set; }
         public string default_address { get; set; }
     }
+
 }
